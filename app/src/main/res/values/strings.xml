@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">design</string>
+
+    <string-array name="educ_attain">
+        <item>None</item>
+        <item>Primary</item>
+        <item>Secondary</item>
+        <item>College/University</item>
+        <item>Undergraduate</item>
+    </string-array>
+</resources>
