@@ -49,6 +49,7 @@ public class InfoFragment extends Fragment {
             public void onNothingSelected(AdapterView <?> parent) {
             }
             //TODO comment
+            //from gwapongharjin
         });
         return v;
     }
