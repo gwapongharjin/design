@@ -48,6 +48,7 @@ public class InfoFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView <?> parent) {
             }
+            //TODO comment
         });
         return v;
     }
