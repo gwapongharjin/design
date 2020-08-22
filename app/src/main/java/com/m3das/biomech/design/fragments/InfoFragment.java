@@ -48,8 +48,6 @@ public class InfoFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView <?> parent) {
             }
-            //TODO comment
-            //from gwapongharjin agin 123
         });
         return v;
     }
