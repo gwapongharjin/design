@@ -22,8 +22,9 @@ public class ViewDataActivity extends AppCompatActivity {
 
         TextView tvResult = findViewById(R.id.tvResultVD);
 
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2/test/")
+                .baseUrl("http://10.0.68.100/test/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
