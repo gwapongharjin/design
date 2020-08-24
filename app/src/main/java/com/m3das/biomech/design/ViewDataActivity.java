@@ -20,7 +20,7 @@ public class ViewDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_data_activity);
 
-        final TextView tvResult = findViewById(R.id.tvResultVD);
+        TextView tvResult = findViewById(R.id.tvResultVD);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2/test/")
