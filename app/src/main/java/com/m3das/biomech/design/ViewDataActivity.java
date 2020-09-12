@@ -27,6 +27,8 @@ public class ViewDataActivity extends AppCompatActivity {
                 .baseUrl("http://10.0.2.2/test/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+ 
+
 
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 

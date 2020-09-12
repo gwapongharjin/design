@@ -323,6 +323,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:entries="@array/agency"
             app:layout_constraintEnd_toEndOf="@+id/spinner8"
             app:layout_constraintStart_toStartOf="@+id/spinner8"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
