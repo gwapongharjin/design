@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import com.m3das.biomech.design.fragments.DataFragment;
 import com.m3das.biomech.design.fragments.InfoFragment;
-import com.m3das.biomech.design.fragments.MachinesFragment;
+import com.m3das.biomech.design.fragments.MachineListFragment;
 import com.m3das.biomech.design.fragments.MapFragment;
 import com.m3das.biomech.design.fragments.QrCodeFragment;
 
@@ -27,7 +27,7 @@ private int numTabs;
             case 1:
                 return new InfoFragment();
             case 2:
-                return new MachinesFragment();
+                return new MachineListFragment();
             case 3:
                 return new DataFragment();
             case 4:

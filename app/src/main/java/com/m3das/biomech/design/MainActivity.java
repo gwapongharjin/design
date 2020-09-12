@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         pagerAdapter = new PageAdapter(getSupportFragmentManager(), tabLayoutMain.getTabCount());
         viewPager.setAdapter(pagerAdapter);
 
-        tabLayoutMain.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayoutMain.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());

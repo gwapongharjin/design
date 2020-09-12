@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B71C1C"
-    tools:context=".fragments.DataFragment" >
+    android:background="#880E4F"
+    tools:context=".fragments.DataFragment">
 
     <Button
         android:id="@+id/btnView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="View Data"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btnUpload"
         app:layout_constraintHorizontal_bias="0.0"

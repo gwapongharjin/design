@@ -2,10 +2,80 @@
     <string name="app_name">design</string>
 
     <string-array name="educ_attain">
-        <item>None</item>
-        <item>Primary</item>
-        <item>Secondary</item>
-        <item>College/University</item>
-        <item>Undergraduate</item>
+        <item></item>
+        <item>NOT APPLICABLE</item>
+        <item>PRIMARY</item>
+        <item>SECONDARY</item>
+        <item>TERTIARY</item>
+        <item>POST GRADUATE</item>
+        <item>DIPLOMA</item>
+        <item>VOCATIONAL TECHNICAL</item>
     </string-array>
+
+    <string-array name="machine_types_sugarcane">
+        <item></item>
+        <item>TWO WHEEL TRACTOR</item>
+        <item>FOUR WHEEL TRACTOR</item>
+        <item>MECHANICAL PLANTER</item>
+        <item>HARVESTERS</item>
+        <item>WATER PUMP</item>
+        <item>LOADERS</item>
+        <item> INFIELD HAULERS</item>
+    </string-array>
+
+    <string-array name="ownership">
+        <item></item>
+        <item>Owned</item>
+        <item>Rented</item>
+    </string-array>
+
+    <string-array name="Implements">
+        <item>Implement 1</item>
+        <item>Implement 2</item>
+        <item>Implement 3</item>
+        <item>Implement 4</item>
+        <item>Implement 5</item>
+        <item>Implement 6</item>
+        <item>Implement 7</item>
+        <item>Implement 8</item>
+    </string-array>
+
+    <string-array name="contact_number">
+        <item></item>
+        <item>NOT APPLICABLE</item>
+        <item>MOBILE NUMBER</item>
+        <item>TELEPHONE NUMBER</item>
+    </string-array>
+
+    <string-array name="ownership_type">
+        <item></item>
+        <item>OWNER</item>
+        <item>OPERATOR OF MACHINE</item>
+        <item>MANAGER OF TRANSLOADING ZONE</item>
+        <item>FARM MANAGER or OIC</item>
+        <item>REPRESENTATIVE of LGU</item>
+        <item>REPRESENTATIVE of COOPERATIVE</item>
+        <item>REPRESENTATIVE of FARMER\'S ASSOCIATION</item>
+        <item>OTHERS</item>
+    </string-array>
+
+    <string-array name="ownership_of_machine">
+        <item></item>
+        <item>PRIVATELY OWNED</item>
+        <item>COOPERATIVE/ASSOCIATION GRANT</item>
+        <item>COOPERATIVE/ASSOCIATION DONATION</item>
+        <item>CUSTOM PROVIDER DONATION</item>
+        <item>LGU DONATION</item>
+    </string-array>
+<string-array name="agency">
+    <item></item>
+    <item>DEPARTMENT OF AGRICULTURE (DA)</item>
+    <item>DEPARTMENT OF AGRARIAN REFORM (DAR)</item>
+    <item>SUGAR REGULATORY ADMINISTRATION (SRA)</item>
+    <item>OTHERS, SPECIFY</item>
+
+</string-array>
+    <string name="title_activity_get_location">Map</string>
+    <string name="title_activity_location_maps">Map</string>
+
 </resources>

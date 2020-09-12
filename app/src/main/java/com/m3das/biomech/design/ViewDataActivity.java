@@ -24,7 +24,7 @@ public class ViewDataActivity extends AppCompatActivity {
 
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.68.100/test/")
+                .baseUrl("http://10.0.2.2/test/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
