@@ -3,6 +3,7 @@ package com.m3das.biomech.design;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ public class LocationMapsActivity extends FragmentActivity implements OnMapReady
     private ArrayList<String> permissionsRejected = new ArrayList<>();
     private ArrayList<String> permissions = new ArrayList<>();
     private final static int ALL_PERMISSIONS_RESULT = 101;
-    private FloatingActionButton floatingActionButton;
+    private FloatingActionButton fabGetLoc, fabSaveLoc;
     LocationTrack locationTrack;
 
     @Override
@@ -53,8 +54,10 @@ public class LocationMapsActivity extends FragmentActivity implements OnMapReady
             if (permissionsToRequest.size() > 0)
                 requestPermissions(permissionsToRequest.toArray(new String[permissionsToRequest.size()]), ALL_PERMISSIONS_RESULT);
         }
-        floatingActionButton = findViewById(R.id.fabGetLocation);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        fabGetLoc = findViewById(R.id.fabGetLocation);
+        fabSaveLoc = findViewById(R.id.fabSaveLocation);
+
+        fabGetLoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -80,6 +83,25 @@ public class LocationMapsActivity extends FragmentActivity implements OnMapReady
                     locationTrack.showSettingsAlert();
                 }
 
+            }
+        });
+
+        fabSaveLoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                locationTrack = new LocationTrack(LocationMapsActivity.this);
+
+                double longitude = locationTrack.getLongitude();
+                double latitude = locationTrack.getLatitude();
+
+                String strLat = String.format("%.8f", latitude);
+                String strLong = String.format("%.8f", longitude);
+
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("strLat", strLat);
+                resultIntent.putExtra("StrLong", strLong);
+                LocationMapsActivity.this.setResult(RESULT_OK, resultIntent);
+                LocationMapsActivity.this.finish();
             }
         });
     }
@@ -134,6 +156,7 @@ public class LocationMapsActivity extends FragmentActivity implements OnMapReady
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
 
             case ALL_PERMISSIONS_RESULT:
