@@ -40,15 +40,13 @@ public class MachineListFragment extends Fragment {
     }
     private MachineListViewModel machineListViewModel;
     public static final int ADD_NOTE_REQUEST = 1123;
-
+    public static final int EDIT_NOTE_REQUEST = 2;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
 
-        //machineListViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory()).get(MachineListViewModel.class);
-        //machineListViewModel = ViewModelProviders.of(this.getActivity()).get(MachineListViewModel.class);
 
 
         View v =  inflater.inflate(R.layout.machine_list_fragment, container, false);
@@ -60,12 +58,26 @@ public class MachineListFragment extends Fragment {
         MachineAdapter machineAdapter = new MachineAdapter();
         recyclerView.setAdapter(machineAdapter);
 
+
         machineListViewModel = new ViewModelProvider(this).get(MachineListViewModel.class);
 
         machineListViewModel.getAllMachines().observe(getActivity(), new Observer<List<Machines>>() {
             @Override
             public void onChanged(List<Machines> machines) {
                 machineAdapter.setMachinesList(machines);
+            }
+        });
+
+        machineAdapter.setOnItemClickListener(new MachineAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Machines machines) {
+                Intent intent = new Intent(getContext(), AddMachineActivity.class);
+                intent.putExtra(AddMachineActivity.EXTRA_ID, machines.getId());
+                intent.putExtra(AddMachineActivity.EXTRA_MACHINE_TYPE, machines.getMachine_type());
+                intent.putExtra(AddMachineActivity.EXTRA_MACHINE_QRCODE, machines.getMachine_qrcode());
+                intent.putExtra(AddMachineActivity.EXTRA_LAT, machines.getMachine_latitude());
+                intent.putExtra(AddMachineActivity.EXTRA_LONG, machines.getMachine_longitude());
+                startActivityForResult(intent, EDIT_NOTE_REQUEST);
             }
         });
 
@@ -101,7 +113,24 @@ public class MachineListFragment extends Fragment {
             machineListViewModel.insert(machines);
             Log.d("Is note saved", "Note Saved" + machineType);
             Toast.makeText(getActivity(), "Note saved", Toast.LENGTH_SHORT).show();
-        } else {
+        }
+        else if (requestCode == EDIT_NOTE_REQUEST && resultCode == Activity.RESULT_OK) {
+            int id = data.getIntExtra(AddMachineActivity.EXTRA_ID, -1);
+            if (id == -1){
+                Toast.makeText(getActivity(), "Note can't be updated", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String machineType = data.getStringExtra(AddMachineActivity.EXTRA_MACHINE_TYPE);
+            String machineQRCode = data.getStringExtra(AddMachineActivity.EXTRA_MACHINE_QRCODE);
+            String latitude = data.getStringExtra(AddMachineActivity.EXTRA_LAT);
+            String longitude = data.getStringExtra(AddMachineActivity.EXTRA_LONG);
+            Machines machines = new Machines(machineType, machineQRCode, latitude, longitude, "asdasdasdas");
+            machines.setId(id);
+            machineListViewModel.update(machines);
+            Toast.makeText(getActivity(), "Note updated", Toast.LENGTH_SHORT).show();
+        }
+        else {
             Toast.makeText(getActivity(), "Note not saved", Toast.LENGTH_SHORT).show();
             Log.d("Is note saved", "Note Not Saved");
         }

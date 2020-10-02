@@ -15,11 +15,14 @@
     <string-array name="machine_types_sugarcane">
         <item>TWO WHEEL TRACTOR</item>
         <item>FOUR WHEEL TRACTOR</item>
-        <item>MECHANICAL PLANTER</item>
+        <item>BOOM SPRAYER</item>
+        <item>CANE GRAB LOADERS</item>
+        <item>DITCHER</item>
         <item>HARVESTERS</item>
+        <item>INFIELD HAULERS</item>
         <item>WATER PUMP</item>
-        <item>LOADERS</item>
-        <item> INFIELD HAULERS</item>
+
+
     </string-array>
 
     <string-array name="ownership">

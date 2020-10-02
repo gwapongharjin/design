@@ -23,6 +23,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -43,6 +44,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.stream.IntStream;
 
 public class AddMachineActivity extends AppCompatActivity {
 ImageButton camera, gallery, getLocation, btnScanQR;
@@ -51,6 +53,14 @@ ImageView selectedImage;
 EditText edtQRCode;
 TextView tvCoordinates, tvMultSpin;
 Spinner spinMachineType;
+public static final int TWOWHEELTRACTOR = 0;
+public static final int FOURWHEELTRACTOR = 1;
+public static final int BOOMSPRAYER = 2;
+public static final int CANEGRABLOADERS = 3;
+public static final int DITCHER = 4;
+public static final int HARVESTERS = 5;
+public static final int INFIELDHAULERS = 6;
+public static final int WATERPUMP = 7;
 public static final int CAMERA_PERM_CODE = 101;
 public static final int CAMERA_REQUEST_CODE = 102;
 public static final int GALLERY_REQUEST_CODE = 105;
@@ -60,6 +70,7 @@ private String resLat, resLong;
     public static final String EXTRA_MACHINE_QRCODE = "EXTRA_MACHINE_QRCODE";
     public static final String EXTRA_LAT = "EXTRA_LAT";
     public static final String EXTRA_LONG = "EXTRA_LONG";
+    public static final String  EXTRA_ID = "EXTRA_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +117,29 @@ private String resLat, resLong;
             startActivityForResult(intent, LOCATION_REQUEST_CODE);
         });
 
+        Intent intent = getIntent();
+
+        if(intent.hasExtra(EXTRA_ID)){
+            int position = -1;
+            setTitle("Editing Machine");
+            String [] arr = getResources().getStringArray(R.array.machine_types_sugarcane);
+
+            for (int i=0;i<arr.length;i++) {
+                if (arr[i].equals(intent.getStringExtra(EXTRA_MACHINE_TYPE))) {
+                    position = i;
+                    break;
+                }
+            }
+            Log.d("Position", "Position is: " +intent.getStringExtra(EXTRA_MACHINE_TYPE) + " " + position);
+            spinMachineType.setSelection(position);
+            edtQRCode.setText(intent.getStringExtra(EXTRA_MACHINE_QRCODE));
+            tvCoordinates.setText("Lat: " + intent.getStringExtra(EXTRA_LAT) + " Long: " + intent.getStringExtra(EXTRA_LONG));
+
+        }
+        else {
+            setTitle("Adding Machine");
+        }
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -138,15 +172,19 @@ private String resLat, resLong;
             data.putExtra(EXTRA_MACHINE_QRCODE, machineQRCode);
             data.putExtra(EXTRA_LAT, latitude);
             data.putExtra(EXTRA_LONG, longitude);
+
+            int id = getIntent().getIntExtra(EXTRA_ID,-1);
+            if(id != -1){
+                data.putExtra(EXTRA_ID, id);
+            }
+
             setResult(RESULT_OK, data);
             finish();
-
-
-
-
         }
 
     }
+
+
         private Bitmap scale(Bitmap bitmap, int maxWidth, int maxHeight) {
         // Determine the constrained dimension, which determines both dimensions.
         int width;
