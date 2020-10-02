@@ -12,7 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,8 +30,13 @@ import com.m3das.biomech.design.viewmodels.InfoViewModel;
 public class InfoFragment extends Fragment {
 
     private InfoViewModel mViewModel;
-    private Spinner spinner;
+    private Spinner spinner, profile;
     private TextView textView;
+    private ImageButton toTop;
+    private Switch aSwitch;
+    private DatePicker datePicker;
+    private EditText addressResp, nameResp;
+    private RadioButton rbMale, rbFemale;
     public static InfoFragment newInstance() {
         return new InfoFragment();
     }
@@ -33,8 +46,55 @@ public class InfoFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.info_fragment, container, false);
 
-        spinner = (Spinner)v.findViewById(R.id.spinner);
-        textView = (TextView)v.findViewById(R.id.textView3);
+        spinner = v.findViewById(R.id.spinner);
+        profile = v.findViewById(R.id.spinProfile);
+        textView = v.findViewById(R.id.textView3);
+        toTop = v.findViewById(R.id.btnToTop);
+        aSwitch = v.findViewById(R.id.switchEditSave);
+        datePicker = v.findViewById(R.id.datePicker);
+        addressResp = v.findViewById(R.id.edtAddress);
+        nameResp = v.findViewById(R.id.edtNameResp);
+        rbMale = v.findViewById(R.id.radioButton);
+        rbFemale = v.findViewById(R.id.radioButton2);
+
+
+
+
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    aSwitch.setText("Saved");
+                    spinner.setEnabled(false);
+                    profile.setEnabled(false);
+                    datePicker.setEnabled(false);
+                    addressResp.setEnabled(false);
+                    nameResp.setEnabled(false);
+                    rbMale.setEnabled(false);
+                    rbFemale.setEnabled(false);
+
+
+                }
+                else{
+                    aSwitch.setText("Edit");
+                    spinner.setEnabled(true);
+                    profile.setEnabled(true);
+                    datePicker.setEnabled(true);
+                    addressResp.setEnabled(true);
+                    nameResp.setEnabled(true);
+                    rbMale.setEnabled(true);
+                    rbFemale.setEnabled(true);
+                }
+            }
+        });
+
+        toTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ScrollView scrollView = v.findViewById(R.id.scrollViewInfo);
+                scrollView.setScrollY(0);
+            }
+        });
 
 
 
@@ -42,7 +102,6 @@ public class InfoFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String tutorialsName = parent.getItemAtPosition(position).toString();
-                Toast.makeText(parent.getContext(), "Selected: " + tutorialsName,          Toast.LENGTH_SHORT).show();
                 textView.setText(tutorialsName);
             }
             @Override

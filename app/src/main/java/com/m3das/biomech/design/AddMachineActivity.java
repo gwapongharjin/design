@@ -9,7 +9,6 @@ import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -24,16 +23,18 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anurag.multiselectionspinner.MultiSpinner;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
+import com.m3das.biomech.design.viewmodels.MachineListViewModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -48,66 +49,105 @@ ImageButton camera, gallery, getLocation, btnScanQR;
 String currentPhotoPath;
 ImageView selectedImage;
 EditText edtQRCode;
-TextView tvCoordinates;
+TextView tvCoordinates, tvMultSpin;
+Spinner spinMachineType;
 public static final int CAMERA_PERM_CODE = 101;
 public static final int CAMERA_REQUEST_CODE = 102;
 public static final int GALLERY_REQUEST_CODE = 105;
 public static final int LOCATION_REQUEST_CODE = 127;
-
 private String resLat, resLong;
+    public static final String EXTRA_MACHINE_TYPE = "EXTRA_MACHINE_TYPE";
+    public static final String EXTRA_MACHINE_QRCODE = "EXTRA_MACHINE_QRCODE";
+    public static final String EXTRA_LAT = "EXTRA_LAT";
+    public static final String EXTRA_LONG = "EXTRA_LONG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_machine_activity);
 
-        camera = (ImageButton) findViewById(R.id.btnCamera);
-        gallery = (ImageButton) findViewById(R.id.btnGallery);
-        selectedImage = (ImageView) findViewById(R.id.imgMachine);
-        getLocation = (ImageButton) findViewById(R.id.btnGetLocation);
 
-        edtQRCode = (EditText) findViewById(R.id.edtQRCode);
-        btnScanQR = (ImageButton) findViewById(R.id.btnScanQRCode);
-        tvCoordinates = (TextView) findViewById(R.id.tvCoordinates);
+
+        camera = findViewById(R.id.btnCamera);
+        gallery = findViewById(R.id.btnGallery);
+        selectedImage = findViewById(R.id.imgMachine);
+        getLocation = findViewById(R.id.btnGetLocation);
+        tvMultSpin = findViewById(R.id.tvmultispin);
+        edtQRCode = findViewById(R.id.edtQRCode);
+        btnScanQR = findViewById(R.id.btnScanQRCodeMach);
+        tvCoordinates = findViewById(R.id.tvCoordinates);
+        spinMachineType = findViewById(R.id.spinMachineType);
+        Button btnSave = findViewById(R.id.btnSaveNewMachine);
 
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                askCameraPermission();
+                AddMachineActivity.this.askCameraPermission();
                 Toast.makeText(AddMachineActivity.this, "Camera Clicked", Toast.LENGTH_SHORT).show();
             }
         });
-        gallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent gallery = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(gallery, GALLERY_REQUEST_CODE);
+        gallery.setOnClickListener(view -> {
+            Intent gallery = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(gallery, GALLERY_REQUEST_CODE);
 
-                Toast.makeText(AddMachineActivity.this, "Gallery Clicked", Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(AddMachineActivity.this, "Gallery Clicked", Toast.LENGTH_SHORT).show();
         });
 
-        btnScanQR.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AddMachineActivity.this, ScanBarcodeActivity.class);
-                startActivityForResult(intent,0);
-                Toast.makeText(AddMachineActivity.this, "Scanning QR", Toast.LENGTH_SHORT).show();
-            }
+        btnScanQR.setOnClickListener(view -> {
+            AddMachineActivity.this.askCameraPermission();
+            Intent intent = new Intent(AddMachineActivity.this, ScanBarcodeActivity.class);
+            startActivityForResult(intent,0);
+            Toast.makeText(AddMachineActivity.this, "Scanning QR", Toast.LENGTH_SHORT).show();
         });
 
-        getLocation.setOnClickListener(new View.OnClickListener() {
+        getLocation.setOnClickListener(view -> {
+            Toast.makeText(AddMachineActivity.this, "Map Clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(view.getContext(), LocationMapsActivity.class);
+            startActivityForResult(intent, LOCATION_REQUEST_CODE);
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AddMachineActivity.this, "Map Clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(view.getContext(), LocationMapsActivity.class);
-                startActivityForResult(intent, LOCATION_REQUEST_CODE);
+                saveNote();
             }
         });
 
     }
 
-    private Bitmap scale(Bitmap bitmap, int maxWidth, int maxHeight) {
+    public static boolean isNullOrEmpty(String str) {
+        if(str != null && !str.isEmpty())
+        {
+            return false;
+        }
+        return true;
+    }
+    private void saveNote() {
+        String machineType = spinMachineType.getSelectedItem().toString();
+        String machineQRCode = edtQRCode.getText().toString();
+        String latitude = resLat;
+        String longitude = resLong;
+
+        if (machineType.trim().isEmpty() || machineQRCode.trim().isEmpty() || isNullOrEmpty(resLat) ||isNullOrEmpty(resLong)) {
+            Toast.makeText(this, "Incomplete Data", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(this, "Type: " + machineType +" QR Code: " + machineQRCode + " Latitude: " + latitude + " Longitude: "+longitude, Toast.LENGTH_LONG).show();
+            Intent data = new Intent();
+            data.putExtra(EXTRA_MACHINE_TYPE, machineType);
+            data.putExtra(EXTRA_MACHINE_QRCODE, machineQRCode);
+            data.putExtra(EXTRA_LAT, latitude);
+            data.putExtra(EXTRA_LONG, longitude);
+            setResult(RESULT_OK, data);
+            finish();
+
+
+
+
+        }
+
+    }
+        private Bitmap scale(Bitmap bitmap, int maxWidth, int maxHeight) {
         // Determine the constrained dimension, which determines both dimensions.
         int width;
         int height;
@@ -178,7 +218,7 @@ private String resLat, resLong;
         if(requestCode == LOCATION_REQUEST_CODE && resultCode == RESULT_OK && data !=null){
             resLat = data.getStringExtra("strLat");
             resLong = data.getStringExtra("StrLong");
-            tvCoordinates.setText("Lat: " + resLat + "Long: " + resLong);
+            tvCoordinates.setText("Lat: " + resLat + " Long: " + resLong);
         }
 
         if (requestCode == GALLERY_REQUEST_CODE) {
@@ -275,3 +315,5 @@ private String resLat, resLong;
     }
 
 }
+
+

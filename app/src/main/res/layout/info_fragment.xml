@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollViewInfo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -12,19 +13,6 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tvPrelim"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Preliminary Information"
-            android:textColor="@android:color/primary_text_light"
-            android:textSize="26sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,11 +20,11 @@
             android:text="Date"
             android:textColor="@android:color/primary_text_light"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/datePicker1"
-            app:layout_constraintTop_toBottomOf="@+id/tvPrelim" />
+            app:layout_constraintStart_toStartOf="@+id/datePicker"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <DatePicker
-            android:id="@+id/datePicker1"
+            android:id="@+id/datePicker"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
@@ -50,32 +38,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            android:layout_marginBottom="16dp"
-            android:text="Save"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
-
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="0dp"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:entries="@array/educ_attain"
             android:spinnerMode="dropdown"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/spinner3"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/datePicker1"
-            app:layout_constraintTop_toBottomOf="@+id/tvEduc"
-            app:layout_constraintVertical_bias="0.15" />
+            app:layout_constraintStart_toStartOf="@+id/datePicker"
+            app:layout_constraintTop_toBottomOf="@+id/tvEduc" />
 
         <TextView
             android:id="@+id/tvEduc"
@@ -102,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@+id/spinner4"
+            app:layout_constraintStart_toStartOf="@+id/spinProfile"
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <RadioButton
@@ -128,7 +101,7 @@
             android:text="Sex"
             android:textColor="@android:color/primary_text_light"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
+            app:layout_constraintStart_toStartOf="@+id/edtNameResp"
             app:layout_constraintTop_toBottomOf="@+id/editTextNumber2" />
 
         <TextView
@@ -151,7 +124,7 @@
             android:textColor="@android:color/primary_text_light"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/tvDate"
-            app:layout_constraintTop_toBottomOf="@+id/datePicker1" />
+            app:layout_constraintTop_toBottomOf="@+id/datePicker" />
 
         <Spinner
             android:id="@+id/spinner3"
@@ -160,8 +133,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="64dp"
             android:entries="@array/contact_number"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPostalAddress"
-            app:layout_constraintStart_toStartOf="@+id/spinner4"
+            app:layout_constraintEnd_toEndOf="@+id/edtAddress"
+            app:layout_constraintStart_toStartOf="@+id/spinProfile"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <EditText
@@ -174,21 +147,21 @@
             android:inputType="number"
             android:maxLength="3"
             app:layout_constraintEnd_toEndOf="@+id/radioGroup"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPostalAddress"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPostalAddress" />
+            app:layout_constraintStart_toStartOf="@+id/edtAddress"
+            app:layout_constraintTop_toBottomOf="@+id/edtAddress" />
 
         <Spinner
-            android:id="@+id/spinner4"
+            android:id="@+id/spinProfile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:entries="@array/ownership_type"
-            app:layout_constraintEnd_toEndOf="@+id/datePicker1"
-            app:layout_constraintStart_toStartOf="@+id/datePicker1"
+            app:layout_constraintEnd_toEndOf="@+id/datePicker"
+            app:layout_constraintStart_toStartOf="@+id/datePicker"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/edtNameResp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -196,19 +169,41 @@
             android:hint="NAME"
             android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/spinner4" />
+            app:layout_constraintTop_toBottomOf="@+id/spinProfile" />
 
         <EditText
-            android:id="@+id/editTextTextPostalAddress"
+            android:id="@+id/edtAddress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:ems="10"
             android:hint="ADDRESS"
             android:inputType="textPostalAddress"
-            app:layout_constraintEnd_toEndOf="@+id/spinner4"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+            app:layout_constraintEnd_toEndOf="@+id/spinProfile"
+            app:layout_constraintStart_toStartOf="@+id/edtNameResp"
+            app:layout_constraintTop_toBottomOf="@+id/edtNameResp" />
+
+        <ImageButton
+            android:id="@+id/btnToTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_outline_arrow_upward_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+        <Switch
+            android:id="@+id/switchEditSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

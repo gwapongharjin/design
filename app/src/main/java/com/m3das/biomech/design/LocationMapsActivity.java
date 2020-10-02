@@ -57,52 +57,43 @@ public class LocationMapsActivity extends FragmentActivity implements OnMapReady
         fabGetLoc = findViewById(R.id.fabGetLocation);
         fabSaveLoc = findViewById(R.id.fabSaveLocation);
 
-        fabGetLoc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        fabGetLoc.setOnClickListener(view -> {
 
-                locationTrack = new LocationTrack(LocationMapsActivity.this);
+            locationTrack = new LocationTrack(LocationMapsActivity.this);
 
-
-                if (locationTrack.canGetLocation()) {
-
-
-                    double longitude = locationTrack.getLongitude();
-                    double latitude = locationTrack.getLatitude();
-                    double accuracy = locationTrack.getAccuracy();
-
-                    Toast.makeText(getApplicationContext(), "Longitude:" + Double.toString(longitude) + "\nLatitude:" + Double.toString(latitude) + "\nAccuracy:"+Double.toString(accuracy), Toast.LENGTH_SHORT).show();
-                    mMap.clear();
-                    LatLng loc = new LatLng(latitude, longitude);
-                    mMap.addMarker(new MarkerOptions().position(loc).title("My Current Location"));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
-
-                } else {
-
-                    locationTrack.showSettingsAlert();
-                }
-
-            }
-        });
-
-        fabSaveLoc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                locationTrack = new LocationTrack(LocationMapsActivity.this);
-
+            if (locationTrack.canGetLocation()) {
                 double longitude = locationTrack.getLongitude();
                 double latitude = locationTrack.getLatitude();
+                double accuracy = locationTrack.getAccuracy();
 
-                String strLat = String.format("%.8f", latitude);
-                String strLong = String.format("%.8f", longitude);
+                Toast.makeText(getApplicationContext(), "Longitude:" + Double.toString(longitude) + "\nLatitude:" + Double.toString(latitude) + "\nAccuracy:"+Double.toString(accuracy), Toast.LENGTH_SHORT).show();
 
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("strLat", strLat);
-                resultIntent.putExtra("StrLong", strLong);
-                LocationMapsActivity.this.setResult(RESULT_OK, resultIntent);
-                LocationMapsActivity.this.finish();
+                mMap.clear();
+                LatLng loc = new LatLng(latitude, longitude);
+                mMap.addMarker(new MarkerOptions().position(loc).title("My Current Location"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
+            } else {
+
+                locationTrack.showSettingsAlert();
             }
+
+        });
+
+        fabSaveLoc.setOnClickListener(view -> {
+            locationTrack = new LocationTrack(LocationMapsActivity.this);
+
+            double longitude = locationTrack.getLongitude();
+            double latitude = locationTrack.getLatitude();
+
+            String strLat = String.format("%.8f", latitude);
+            String strLong = String.format("%.8f", longitude);
+
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("strLat", strLat);
+            resultIntent.putExtra("StrLong", strLong);
+            LocationMapsActivity.this.setResult(RESULT_OK, resultIntent);
+            LocationMapsActivity.this.finish();
         });
     }
         /**

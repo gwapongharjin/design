@@ -19,16 +19,10 @@
         app:tabRippleColor="#827717">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabMap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Map" />
-
-        <com.google.android.material.tabs.TabItem
             android:id="@+id/tabInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Information" />
+            android:text="Profile" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabMachines"
@@ -37,16 +31,23 @@
             android:text="Machines" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabImplements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Implements" />
+
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/tabData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Data" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabQR"
+            android:id="@+id/tabMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="QR Code" />
+            android:text="Map" />
+
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager

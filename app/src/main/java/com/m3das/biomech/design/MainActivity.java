@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         tabInfo = findViewById(R.id.tabInfo);
         tabMachines = findViewById(R.id.tabMachines);
         tabData = findViewById(R.id.tabData);
-        tabQR = findViewById(R.id.tabQR);
+        tabQR = findViewById(R.id.tabImplements);
         tabLayoutMain = findViewById(R.id.tabLayoutMain);
         viewPager = findViewById(R.id.viewpager);
     }

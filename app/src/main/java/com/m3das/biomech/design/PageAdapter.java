@@ -8,7 +8,7 @@ import com.m3das.biomech.design.fragments.DataFragment;
 import com.m3das.biomech.design.fragments.InfoFragment;
 import com.m3das.biomech.design.fragments.MachineListFragment;
 import com.m3das.biomech.design.fragments.MapFragment;
-import com.m3das.biomech.design.fragments.QrCodeFragment;
+import com.m3das.biomech.design.fragments.ImplementsFragment;
 
 public class PageAdapter extends FragmentPagerAdapter {
 private int numTabs;
@@ -23,15 +23,15 @@ private int numTabs;
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new MapFragment();
-            case 1:
                 return new InfoFragment();
-            case 2:
+            case 1:
                 return new MachineListFragment();
+            case 2:
+                return new ImplementsFragment();
             case 3:
                 return new DataFragment();
             case 4:
-                return new QrCodeFragment();
+                return new MapFragment();
             default:
                 return null;
         }
