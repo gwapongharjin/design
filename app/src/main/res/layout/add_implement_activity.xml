@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddImplementActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutImplement1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtQRCodeImp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:ems="10"
+                android:hint="QR CODE"
+                android:inputType="text"
+                app:layout_constraintStart_toStartOf="@+id/tvSelectMachine"
+                app:layout_constraintTop_toBottomOf="@+id/spinImplementType" />
+
+            <ImageButton
+                android:id="@+id/btnScanQRCodeImp"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/edtQRCodeImp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/edtQRCodeImp"
+                app:layout_constraintTop_toTopOf="@+id/edtQRCodeImp"
+                app:srcCompat="@drawable/ic_outline_center_focus_strong_24" />
+
+            <TextView
+                android:id="@+id/tvImplementType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:text="Select Implement Type"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Spinner
+                android:id="@+id/spinImplementType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:entries="@array/implements1"
+                app:layout_constraintEnd_toEndOf="@+id/btnScanQRCodeImp"
+                app:layout_constraintStart_toStartOf="@+id/tvImplementType"
+                app:layout_constraintTop_toBottomOf="@+id/tvImplementType" />
+
+            <TextView
+                android:id="@+id/tvSelectMachine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Machine Using this Implement"
+                app:layout_constraintStart_toStartOf="@+id/tvImplementType"
+                app:layout_constraintTop_toBottomOf="@+id/edtQRCodeImp" />
+
+            <Spinner
+                android:id="@+id/spinMachineUsing"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/btnScanQRCodeImp"
+                app:layout_constraintStart_toStartOf="@+id/spinImplementType"
+                app:layout_constraintTop_toBottomOf="@+id/tvSelectMachine" />
+
+            <TextView
+                android:id="@+id/tvOperations2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Operations"
+                app:layout_constraintStart_toStartOf="@+id/tvSelectMachine"
+                app:layout_constraintTop_toBottomOf="@+id/spinMachineUsing" />
+
+            <CheckBox
+                android:id="@+id/cbLandClearing2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="LAND CLEARING"
+                app:layout_constraintEnd_toEndOf="@+id/cbPrePlanting2"
+                app:layout_constraintStart_toStartOf="@+id/spinMachineUsing"
+                app:layout_constraintTop_toBottomOf="@+id/tvOperations2" />
+
+            <CheckBox
+                android:id="@+id/cbPrePlanting2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="PRE-PLANTING"
+                app:layout_constraintEnd_toEndOf="@+id/cbPlanting2"
+                app:layout_constraintStart_toStartOf="@+id/cbLandClearing2"
+                app:layout_constraintTop_toBottomOf="@+id/cbLandClearing2" />
+
+            <CheckBox
+                android:id="@+id/cbPlanting2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="PLANTING"
+                app:layout_constraintEnd_toEndOf="@+id/cbFertilizer2"
+                app:layout_constraintStart_toStartOf="@+id/cbPrePlanting2"
+                app:layout_constraintTop_toBottomOf="@+id/cbPrePlanting2" />
+
+            <CheckBox
+                android:id="@+id/cbFertilizer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FERTILIZER APPLICATION"
+                app:layout_constraintStart_toStartOf="@+id/cbPlanting2"
+                app:layout_constraintTop_toBottomOf="@+id/cbPlanting2" />
+
+            <CheckBox
+                android:id="@+id/cbPesticide2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="PESTICIDE APPLICATION"
+                app:layout_constraintEnd_toEndOf="@+id/cbFertilizer2"
+                app:layout_constraintStart_toStartOf="@+id/cbFertilizer2"
+                app:layout_constraintTop_toBottomOf="@+id/cbFertilizer2" />
+
+            <CheckBox
+                android:id="@+id/cbIrriDrain2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="IRRIGATION &amp; DRAINAGE"
+                app:layout_constraintEnd_toEndOf="@+id/cbPesticide2"
+                app:layout_constraintStart_toStartOf="@+id/cbPesticide2"
+                app:layout_constraintTop_toBottomOf="@+id/cbPesticide2" />
+
+            <CheckBox
+                android:id="@+id/cbCultivation2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="CULTIVATION"
+                app:layout_constraintEnd_toEndOf="@+id/cbIrriDrain2"
+                app:layout_constraintStart_toStartOf="@+id/cbIrriDrain2"
+                app:layout_constraintTop_toBottomOf="@+id/cbIrriDrain2" />
+
+            <CheckBox
+                android:id="@+id/cbRatooning2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="RATOONING"
+                app:layout_constraintEnd_toEndOf="@+id/cbCultivation2"
+                app:layout_constraintStart_toStartOf="@+id/cbCultivation2"
+                app:layout_constraintTop_toBottomOf="@+id/cbCultivation2" />
+
+            <CheckBox
+                android:id="@+id/cbHarvestMach2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="HARVEST"
+                app:layout_constraintEnd_toEndOf="@+id/cbRatooning2"
+                app:layout_constraintStart_toStartOf="@+id/cbRatooning2"
+                app:layout_constraintTop_toBottomOf="@+id/cbRatooning2" />
+
+            <CheckBox
+                android:id="@+id/cbPostHarvestMach2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="POST HARVEST"
+                app:layout_constraintEnd_toEndOf="@+id/cbHarvestMach2"
+                app:layout_constraintStart_toStartOf="@+id/cbHarvestMach2"
+                app:layout_constraintTop_toBottomOf="@+id/cbHarvestMach2" />
+
+            <CheckBox
+                android:id="@+id/cbHaulingMach2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="HAULING"
+                app:layout_constraintEnd_toEndOf="@+id/cbPostHarvestMach2"
+                app:layout_constraintStart_toStartOf="@+id/cbPostHarvestMach2"
+                app:layout_constraintTop_toBottomOf="@+id/cbPostHarvestMach2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutImplementSpecs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutImplement4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <EditText
+                android:id="@+id/edtYearAcquiredImp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:ems="10"
+                android:hint="Year Acquired"
+                android:inputType="number"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Condition"
+                app:layout_constraintStart_toStartOf="@+id/edtYearAcquiredImp"
+                app:layout_constraintTop_toBottomOf="@+id/edtYearAcquiredImp" />
+
+            <Spinner
+                android:id="@+id/spinner13"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:entries="@array/condition"
+                app:layout_constraintEnd_toEndOf="@+id/edtYearAcquiredImp"
+                app:layout_constraintStart_toStartOf="@+id/edtYearAcquiredImp"
+                app:layout_constraintTop_toBottomOf="@+id/tvCondition" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Location"
+                app:layout_constraintStart_toStartOf="@+id/tvCondition"
+                app:layout_constraintTop_toBottomOf="@+id/spinner13" />
+
+            <Spinner
+                android:id="@+id/spinner16"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:entries="@array/location"
+                app:layout_constraintEnd_toEndOf="@+id/spinner13"
+                app:layout_constraintStart_toStartOf="@+id/spinner13"
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+            <ImageView
+                android:id="@+id/imgMachineImp"
+                android:layout_width="300dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="32dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner16"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <ImageButton
+                android:id="@+id/btnCameraImp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@+id/imgMachineImp"
+                app:layout_constraintTop_toBottomOf="@+id/imgMachineImp"
+                app:srcCompat="@drawable/ic_outline_camera_alt_24" />
+
+            <ImageButton
+                android:id="@+id/btnGalleryImp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/btnCameraImp"
+                app:layout_constraintEnd_toEndOf="@+id/imgMachineImp"
+                app:layout_constraintTop_toTopOf="@+id/btnCameraImp"
+                app:srcCompat="@drawable/ic_outline_photo_album_24" />
+
+            <ImageButton
+                android:id="@+id/btnGetLocationImp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="42dp"
+                app:layout_constraintEnd_toEndOf="@+id/btnGalleryImp"
+                app:layout_constraintTop_toBottomOf="@+id/btnGalleryImp"
+                app:srcCompat="@drawable/ic_outline_map_24" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="42dp"
+                android:text="Location of Machine"
+                app:layout_constraintStart_toStartOf="@+id/btnCameraImp"
+                app:layout_constraintTop_toBottomOf="@+id/btnCameraImp" />
+
+            <TextView
+                android:id="@+id/tvCoordinatesImp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LAT, LONG"
+                android:textColor="#E53935"
+                app:layout_constraintStart_toStartOf="@+id/textView21"
+                app:layout_constraintTop_toBottomOf="@+id/btnGetLocationImp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</ScrollView>

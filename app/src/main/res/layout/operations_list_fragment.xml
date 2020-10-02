@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".OperationsListFragment" >
+
+    <TextView
+        android:id="@+id/tvOperations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="Operations"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/cbLandClearing"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="LAND CLEARING"
+        app:layout_constraintBottom_toTopOf="@+id/cbPrePlanting"
+        app:layout_constraintEnd_toEndOf="@+id/cbFertilizer"
+        app:layout_constraintStart_toStartOf="@+id/cbFertilizer"
+        app:layout_constraintTop_toBottomOf="@+id/tvOperations" />
+
+    <CheckBox
+        android:id="@+id/cbPrePlanting"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="PRE-PLANTING"
+        app:layout_constraintBottom_toTopOf="@+id/cbPlanting"
+        app:layout_constraintEnd_toEndOf="@+id/cbFertilizer"
+        app:layout_constraintStart_toStartOf="@+id/cbFertilizer"
+        app:layout_constraintTop_toBottomOf="@+id/cbLandClearing" />
+
+    <CheckBox
+        android:id="@+id/cbPlanting"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="PLANTING"
+        app:layout_constraintBottom_toTopOf="@+id/cbFertilizer"
+        app:layout_constraintEnd_toEndOf="@+id/cbFertilizer"
+        app:layout_constraintStart_toStartOf="@+id/cbFertilizer"
+        app:layout_constraintTop_toBottomOf="@+id/cbPrePlanting" />
+
+    <CheckBox
+        android:id="@+id/cbFertilizer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="FERTILIZER APPLICATION"
+        app:layout_constraintBottom_toTopOf="@+id/cbPesticide"
+        app:layout_constraintStart_toStartOf="@+id/tvOperations"
+        app:layout_constraintTop_toBottomOf="@+id/cbPlanting" />
+
+    <CheckBox
+        android:id="@+id/cbPesticide"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="PESTICIDE APPLICATION"
+        app:layout_constraintBottom_toTopOf="@+id/cbIrriDrain"
+        app:layout_constraintEnd_toEndOf="@+id/cbFertilizer"
+        app:layout_constraintStart_toStartOf="@+id/cbFertilizer"
+        app:layout_constraintTop_toBottomOf="@+id/cbFertilizer" />
+
+    <CheckBox
+        android:id="@+id/cbIrriDrain"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="IRRIGATION &amp; DRAINAGE"
+        app:layout_constraintBottom_toTopOf="@+id/cbCultivation"
+        app:layout_constraintEnd_toEndOf="@+id/cbFertilizer"
+        app:layout_constraintStart_toStartOf="@+id/cbPesticide"
+        app:layout_constraintTop_toBottomOf="@+id/cbPesticide" />
+
+    <CheckBox
+        android:id="@+id/cbCultivation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="CULTIVATION"
+        app:layout_constraintEnd_toEndOf="@+id/cbFertilizer"
+        app:layout_constraintStart_toStartOf="@+id/cbIrriDrain"
+        app:layout_constraintTop_toBottomOf="@+id/cbIrriDrain" />
+
+    <CheckBox
+        android:id="@+id/cbRatooning"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="RATOONING"
+        app:layout_constraintBottom_toTopOf="@+id/cbHarvestMach"
+        app:layout_constraintEnd_toEndOf="@+id/cbCultivation"
+        app:layout_constraintStart_toStartOf="@+id/cbCultivation"
+        app:layout_constraintTop_toBottomOf="@+id/cbCultivation" />
+
+    <CheckBox
+        android:id="@+id/cbHarvestMach"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="HARVEST"
+        app:layout_constraintBottom_toTopOf="@+id/cbPostHarvestMach"
+        app:layout_constraintEnd_toEndOf="@+id/cbRatooning"
+        app:layout_constraintStart_toStartOf="@+id/cbRatooning"
+        app:layout_constraintTop_toBottomOf="@+id/cbRatooning" />
+
+    <CheckBox
+        android:id="@+id/cbPostHarvestMach"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="POST HARVEST"
+        app:layout_constraintBottom_toTopOf="@+id/cbHaulingMach"
+        app:layout_constraintEnd_toEndOf="@+id/cbHarvestMach"
+        app:layout_constraintStart_toStartOf="@+id/cbHarvestMach"
+        app:layout_constraintTop_toBottomOf="@+id/cbHarvestMach" />
+
+    <CheckBox
+        android:id="@+id/cbHaulingMach"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="HAULING"
+        app:layout_constraintEnd_toEndOf="@+id/cbPostHarvestMach"
+        app:layout_constraintStart_toStartOf="@+id/cbPostHarvestMach"
+        app:layout_constraintTop_toBottomOf="@+id/cbPostHarvestMach" />
+</androidx.constraintlayout.widget.ConstraintLayout>
