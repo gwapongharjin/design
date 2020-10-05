@@ -20,11 +20,11 @@
             android:text="Date"
             android:textColor="@android:color/primary_text_light"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/datePicker"
+            app:layout_constraintStart_toStartOf="@+id/dpDateOfSurvey"
             app:layout_constraintTop_toTopOf="parent" />
 
         <DatePicker
-            android:id="@+id/datePicker"
+            android:id="@+id/dpDateOfSurvey"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
@@ -47,7 +47,7 @@
             android:spinnerMode="dropdown"
             app:layout_constraintEnd_toEndOf="@+id/spinner3"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/datePicker"
+            app:layout_constraintStart_toStartOf="@+id/dpDateOfSurvey"
             app:layout_constraintTop_toBottomOf="@+id/tvEduc" />
 
         <TextView
@@ -124,7 +124,7 @@
             android:textColor="@android:color/primary_text_light"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/tvDate"
-            app:layout_constraintTop_toBottomOf="@+id/datePicker" />
+            app:layout_constraintTop_toBottomOf="@+id/dpDateOfSurvey" />
 
         <Spinner
             android:id="@+id/spinner3"
@@ -156,8 +156,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:entries="@array/ownership_type"
-            app:layout_constraintEnd_toEndOf="@+id/datePicker"
-            app:layout_constraintStart_toStartOf="@+id/datePicker"
+            app:layout_constraintEnd_toEndOf="@+id/dpDateOfSurvey"
+            app:layout_constraintStart_toStartOf="@+id/dpDateOfSurvey"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
         <EditText

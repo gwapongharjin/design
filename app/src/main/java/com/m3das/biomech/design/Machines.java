@@ -10,15 +10,32 @@ public class Machines {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private String machine_type;
     private String machine_qrcode;
+//    private String date_of_survey;
+//    private String profile_of_respondent;
+//    private String name_of_respondent;
+//    private String address;
+//    private String age;
+//    private String sex;
+//    private String mobile_number;
+//    private String telephone_number;
+//    private String educational_attainment;
+//    private String location_of_machine;
+    private String machine_type;
+//    private String brand_of_machine;
+//    private String model_of_machine;
+//    private String rated_power;
+//    private String service_area;
+//    private String average_operating_hours;
+//    private String average_operating_days;
+//    private String type_of_ownership;
     private String machine_latitude;
     private String machine_longitude;
     private String machine_image_base64;
 
-    public Machines(String machine_type, String machine_qrcode, String machine_latitude, String machine_longitude, String machine_image_base64) {
-        this.machine_type = machine_type;
+    public Machines(String machine_qrcode, String machine_type, String machine_latitude, String machine_longitude, String machine_image_base64) {
         this.machine_qrcode = machine_qrcode;
+        this.machine_type = machine_type;
         this.machine_latitude = machine_latitude;
         this.machine_longitude = machine_longitude;
         this.machine_image_base64 = machine_image_base64;
@@ -27,6 +44,7 @@ public class Machines {
     public void setId(int id) {
         this.id = id;
     }
+
     public int getId() {return id;}
 
     public String getMachine_type() {
@@ -48,4 +66,5 @@ public class Machines {
     public String getMachine_image_base64() {
         return machine_image_base64;
     }
+
 }

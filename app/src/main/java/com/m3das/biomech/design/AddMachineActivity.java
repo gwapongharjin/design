@@ -23,8 +23,8 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -32,10 +32,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.anurag.multiselectionspinner.MultiSpinner;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
-import com.m3das.biomech.design.viewmodels.MachineListViewModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -43,50 +41,41 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.stream.IntStream;
 
-public class AddMachineActivity extends AppCompatActivity {
-ImageButton camera, gallery, getLocation, btnScanQR;
-String currentPhotoPath;
-ImageView selectedImage;
-EditText edtQRCode;
-TextView tvCoordinates, tvMultSpin;
-Spinner spinMachineType;
-public static final int TWOWHEELTRACTOR = 0;
-public static final int FOURWHEELTRACTOR = 1;
-public static final int BOOMSPRAYER = 2;
-public static final int CANEGRABLOADERS = 3;
-public static final int DITCHER = 4;
-public static final int HARVESTERS = 5;
-public static final int INFIELDHAULERS = 6;
-public static final int WATERPUMP = 7;
+public class AddMachineActivity extends AppCompatActivity{
+private ImageButton camera, gallery, getLocation, btnScanQR;
+private String currentPhotoPath;
+private ImageView selectedImage;
+private EditText edtQRCode;
+private TextView tvLat, tvLong;
+private Spinner spinMachineType;
+private DatePicker dateOfSurvey;
+private String resLat, resLong;
 public static final int CAMERA_PERM_CODE = 101;
 public static final int CAMERA_REQUEST_CODE = 102;
 public static final int GALLERY_REQUEST_CODE = 105;
 public static final int LOCATION_REQUEST_CODE = 127;
-private String resLat, resLong;
-    public static final String EXTRA_MACHINE_TYPE = "EXTRA_MACHINE_TYPE";
-    public static final String EXTRA_MACHINE_QRCODE = "EXTRA_MACHINE_QRCODE";
-    public static final String EXTRA_LAT = "EXTRA_LAT";
-    public static final String EXTRA_LONG = "EXTRA_LONG";
-    public static final String  EXTRA_ID = "EXTRA_ID";
+public static final String EXTRA_MACHINE_TYPE = "EXTRA_MACHINE_TYPE";
+public static final String EXTRA_MACHINE_QRCODE = "EXTRA_MACHINE_QRCODE";
+public static final String EXTRA_LAT = "EXTRA_LAT";
+public static final String EXTRA_LONG = "EXTRA_LONG";
+public static final String  EXTRA_ID = "EXTRA_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_machine_activity);
 
-
-
         camera = findViewById(R.id.btnCamera);
         gallery = findViewById(R.id.btnGallery);
         selectedImage = findViewById(R.id.imgMachine);
         getLocation = findViewById(R.id.btnGetLocation);
-        tvMultSpin = findViewById(R.id.tvmultispin);
         edtQRCode = findViewById(R.id.edtQRCode);
         btnScanQR = findViewById(R.id.btnScanQRCodeMach);
-        tvCoordinates = findViewById(R.id.tvCoordinates);
+        tvLat = findViewById(R.id.tvLat);
+        tvLong = findViewById(R.id.tvLong);
         spinMachineType = findViewById(R.id.spinMachineType);
         Button btnSave = findViewById(R.id.btnSaveNewMachine);
 
@@ -130,10 +119,12 @@ private String resLat, resLong;
                     break;
                 }
             }
-            Log.d("Position", "Position is: " +intent.getStringExtra(EXTRA_MACHINE_TYPE) + " " + position);
-            spinMachineType.setSelection(position);
-            edtQRCode.setText(intent.getStringExtra(EXTRA_MACHINE_QRCODE));
-            tvCoordinates.setText("Lat: " + intent.getStringExtra(EXTRA_LAT) + " Long: " + intent.getStringExtra(EXTRA_LONG));
+
+           Log.d("Position", "Position is: " +intent.getStringExtra(EXTRA_MACHINE_TYPE) + " " + position);
+           spinMachineType.setSelection(position);
+           edtQRCode.setText(intent.getStringExtra(EXTRA_MACHINE_QRCODE));
+           tvLat.setText( intent.getStringExtra(EXTRA_LAT));
+           tvLong.setText(intent.getStringExtra(EXTRA_LONG));
 
         }
         else {
@@ -149,6 +140,7 @@ private String resLat, resLong;
 
     }
 
+
     public static boolean isNullOrEmpty(String str) {
         if(str != null && !str.isEmpty())
         {
@@ -157,28 +149,36 @@ private String resLat, resLong;
         return true;
     }
     private void saveNote() {
+        int day = 0,month = 0 , year = 0;
         String machineType = spinMachineType.getSelectedItem().toString();
         String machineQRCode = edtQRCode.getText().toString();
-        String latitude = resLat;
-        String longitude = resLong;
+//        day =  dateOfSurvey.getDayOfMonth();
+//        month = dateOfSurvey.getMonth();
+//        year = dateOfSurvey.getYear();
+        String date = month + "/" + day + "/" + year;
+        String latitude = tvLat.getText().toString();
+        String longitude = tvLong.getText().toString();
 
-        if (machineType.trim().isEmpty() || machineQRCode.trim().isEmpty() || isNullOrEmpty(resLat) ||isNullOrEmpty(resLong)) {
+        if (machineType.trim().isEmpty() ||
+                machineQRCode.trim().isEmpty() ||
+                isNullOrEmpty(latitude) ||
+                isNullOrEmpty(longitude)) {
             Toast.makeText(this, "Incomplete Data", Toast.LENGTH_SHORT).show();
         }
         else {
             Toast.makeText(this, "Type: " + machineType +" QR Code: " + machineQRCode + " Latitude: " + latitude + " Longitude: "+longitude, Toast.LENGTH_LONG).show();
-            Intent data = new Intent();
-            data.putExtra(EXTRA_MACHINE_TYPE, machineType);
-            data.putExtra(EXTRA_MACHINE_QRCODE, machineQRCode);
-            data.putExtra(EXTRA_LAT, latitude);
-            data.putExtra(EXTRA_LONG, longitude);
+            Intent dataAddMachine = new Intent();
+            dataAddMachine.putExtra(EXTRA_MACHINE_TYPE, machineType);
+            dataAddMachine.putExtra(EXTRA_MACHINE_QRCODE, machineQRCode);
+            dataAddMachine.putExtra(EXTRA_LAT, latitude);
+            dataAddMachine.putExtra(EXTRA_LONG, longitude);
 
             int id = getIntent().getIntExtra(EXTRA_ID,-1);
             if(id != -1){
-                data.putExtra(EXTRA_ID, id);
+                dataAddMachine.putExtra(EXTRA_ID, id);
             }
 
-            setResult(RESULT_OK, data);
+            setResult(RESULT_OK, dataAddMachine);
             finish();
         }
 
@@ -256,7 +256,8 @@ private String resLat, resLong;
         if(requestCode == LOCATION_REQUEST_CODE && resultCode == RESULT_OK && data !=null){
             resLat = data.getStringExtra("strLat");
             resLong = data.getStringExtra("StrLong");
-            tvCoordinates.setText("Lat: " + resLat + " Long: " + resLong);
+            tvLat.setText(resLat);
+            tvLong.setText(resLong);
         }
 
         if (requestCode == GALLERY_REQUEST_CODE) {

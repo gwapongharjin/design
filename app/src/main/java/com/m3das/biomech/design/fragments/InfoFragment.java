@@ -2,12 +2,14 @@ package com.m3das.biomech.design.fragments;
 
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +19,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.m3das.biomech.design.AddMachineActivity;
 import com.m3das.biomech.design.R;
 import com.m3das.biomech.design.viewmodels.InfoViewModel;
 
@@ -37,9 +38,12 @@ public class InfoFragment extends Fragment {
     private DatePicker datePicker;
     private EditText addressResp, nameResp;
     private RadioButton rbMale, rbFemale;
+    public static final String EXTRA_DATE = "EXTRA_DATE";
+
     public static InfoFragment newInstance() {
         return new InfoFragment();
     }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -51,13 +55,11 @@ public class InfoFragment extends Fragment {
         textView = v.findViewById(R.id.textView3);
         toTop = v.findViewById(R.id.btnToTop);
         aSwitch = v.findViewById(R.id.switchEditSave);
-        datePicker = v.findViewById(R.id.datePicker);
+        datePicker = v.findViewById(R.id.dpDateOfSurvey);
         addressResp = v.findViewById(R.id.edtAddress);
         nameResp = v.findViewById(R.id.edtNameResp);
         rbMale = v.findViewById(R.id.radioButton);
         rbFemale = v.findViewById(R.id.radioButton2);
-
-
 
 
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -72,10 +74,13 @@ public class InfoFragment extends Fragment {
                     nameResp.setEnabled(false);
                     rbMale.setEnabled(false);
                     rbFemale.setEnabled(false);
+                    Intent datainfo = new Intent();
+                    String date = datePicker.getMonth()+"/"+datePicker.getDayOfMonth()+"/"+datePicker.getYear();
 
 
-                }
-                else{
+
+
+                } else {
                     aSwitch.setText("Edit");
                     spinner.setEnabled(true);
                     profile.setEnabled(true);
@@ -97,17 +102,19 @@ public class InfoFragment extends Fragment {
         });
 
 
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String tutorialsName = parent.getItemAtPosition(position).toString();
                 textView.setText(tutorialsName);
             }
+
             @Override
-            public void onNothingSelected(AdapterView <?> parent) {
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
+
         return v;
     }
 
@@ -118,5 +125,6 @@ public class InfoFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(InfoViewModel.class);
         // TODO: Use the ViewModel
     }
+
 
 }

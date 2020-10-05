@@ -26,4 +26,7 @@ public interface MachinesDAO {
     @Query("SELECT * FROM Machines ORDER BY id DESC")
     LiveData<List<Machines>> getAllMachines();
 
+    @Query("SELECT id,machine_qrcode FROM Machines ORDER BY id DESC")
+    LiveData<List<Machines>> getListofMachines();
+
 }

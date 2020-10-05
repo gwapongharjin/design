@@ -7,6 +7,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.app.Activity;
@@ -25,6 +27,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -40,6 +43,7 @@ import com.m3das.biomech.design.implementfragments.GrabLoadersFragment;
 import com.m3das.biomech.design.implementfragments.MainImplementFragment;
 import com.m3das.biomech.design.implementfragments.MechHarvestFragment;
 import com.m3das.biomech.design.implementfragments.MechPlanterFragment;
+import com.m3das.biomech.design.viewmodels.ImplementViewModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -47,11 +51,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class AddImplementActivity extends AppCompatActivity {
 
-    private Spinner selectFrag;
+    private Spinner selectFrag, spinMachineUsing;
     ImageButton camera, gallery, getLocation, btnScanQR;
     String currentPhotoPath;
     ImageView selectedImage;
@@ -62,6 +68,7 @@ public class AddImplementActivity extends AppCompatActivity {
     public static final int GALLERY_REQUEST_CODE = 105;
     public static final int LOCATION_REQUEST_CODE = 127;
     private String resLat, resLong;
+    private ImplementViewModel implementViewModel;
 
 
     @Override
@@ -77,6 +84,15 @@ public class AddImplementActivity extends AppCompatActivity {
         edtQRCode = findViewById(R.id.edtQRCodeImp);
         btnScanQR = findViewById(R.id.btnScanQRCodeImp);
         tvCoordinates = findViewById(R.id.tvCoordinatesImp);
+        spinMachineUsing = findViewById(R.id.spinMachineUsing);
+
+        implementViewModel = new ViewModelProvider(this).get(ImplementViewModel.class);
+        implementViewModel.getListOfMachines().observe(this, new Observer<List<Machines>>() {
+            @Override
+            public void onChanged(List<Machines> machines) {
+            }
+        });
+
 
         camera.setOnClickListener(new View.OnClickListener() {
             @Override

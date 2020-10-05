@@ -46,9 +46,6 @@ public class MachineListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-
-
-
         View v =  inflater.inflate(R.layout.machine_list_fragment, container, false);
 
         recyclerView = v.findViewById(R.id.recyclerViewML);
@@ -57,7 +54,6 @@ public class MachineListFragment extends Fragment {
 
         MachineAdapter machineAdapter = new MachineAdapter();
         recyclerView.setAdapter(machineAdapter);
-
 
         machineListViewModel = new ViewModelProvider(this).get(MachineListViewModel.class);
 
@@ -82,7 +78,6 @@ public class MachineListFragment extends Fragment {
         });
 
         floatingActionButton = v.findViewById(R.id.floatingActionButtonMachAdd);
-
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,7 +103,7 @@ public class MachineListFragment extends Fragment {
             String machineQRCode = data.getStringExtra(AddMachineActivity.EXTRA_MACHINE_QRCODE);
             String latitude = data.getStringExtra(AddMachineActivity.EXTRA_LAT);
             String longitude = data.getStringExtra(AddMachineActivity.EXTRA_LONG);
-            Machines machines = new Machines(machineType, machineQRCode, latitude, longitude, "asdasdasdas");
+            Machines machines = new Machines(machineQRCode,machineType, latitude, longitude, "asdasdasdas");
 
             machineListViewModel.insert(machines);
             Log.d("Is note saved", "Note Saved" + machineType);
@@ -125,7 +120,7 @@ public class MachineListFragment extends Fragment {
             String machineQRCode = data.getStringExtra(AddMachineActivity.EXTRA_MACHINE_QRCODE);
             String latitude = data.getStringExtra(AddMachineActivity.EXTRA_LAT);
             String longitude = data.getStringExtra(AddMachineActivity.EXTRA_LONG);
-            Machines machines = new Machines(machineType, machineQRCode, latitude, longitude, "asdasdasdas");
+            Machines machines = new Machines(machineQRCode,machineType, latitude, longitude, "asdasdasdas");
             machines.setId(id);
             machineListViewModel.update(machines);
             Toast.makeText(getActivity(), "Note updated", Toast.LENGTH_SHORT).show();
@@ -136,4 +131,5 @@ public class MachineListFragment extends Fragment {
         }
 
     }
+
 }

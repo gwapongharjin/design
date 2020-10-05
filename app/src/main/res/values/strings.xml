@@ -1,6 +1,22 @@
 <resources>
     <string name="app_name">design</string>
+    <string name="privacy_statement">Your privacy and trust are important to us. This privacy statement explains the data that M3DAS processes, how M3DAS processes it, and for what purposes.
+        \n\nWhat personal information are we collecting?
+        \nWe only collect the minimum amount of personal information for this survey such as your name, address, and contact information for the purpose of validation and tracking of agricultural machineries. The survey will only be asking sensitive information such as age, and educational attainment for the purpose of profiling the respondents of the survey and will not be disclosed without the respondent’s consent for the latter’s protection and safety. Any data acquired ensures that these are securely connected to the M3DAS server through SSL encryption.
+        \n\nHow do we plan to use the responses and who are authorized to access them?\n
+        The survey is conducted solely for the purpose of research involving mechanization resource mapping, monitoring, and data analysis which will be utilized for mechanization planning, implementation, and policy data generation for government departments and LGUs.
+        The only authorized entities who have access with the data provided are the Center for Agri-Fisheries and Biosystems Mechanization (BIOMECH), University of the Philippines Los Baños (UPLB), and the Department of Science and Technology - Philippine Council for Agriculture, Aquatic and Natural Resources Research and Development (DOST-PCAARRD). Any other affiliates or concerned organizations will need to submit a written letter of consent from authorized entities before any access to the data, , except for the processed data in web map format made public. How respondents can access their responses? All data collected from respondents are processed which include, but not limited to, geo-tagged machines, available horsepower (hp), machines for custom hiring, and suitability of machines in an area. Some of these data are presented in a web map format that is accessible for public use e.g. government departments, agencies, institutions, LGUs, and state universities for the purpose of research, and planning and development.
+        \n\nHow can respondents contact us?
+        \n\nIf you have a privacy concern, complaint or questions please contact us through the following contact address:
+        \n\nM3DAS Project, Center for Agri-Fisheries and Biosystems Mechanization (BIOMECH), College of Engineering and Agro-Industrial Technology (CEAT), University of the Philippines Los Baños (UPLB), College, Laguna, Philippines 4030.  \n\nEmail : biomech.m3das@gmail.com\nTelephone: +63 (049) 536 2686.</string>
 
+    <string name="consent_statement">The purpose of this research project is to collect data for the mechanization resource mapping, monitoring, and data analysis (M3DAS) which will be conducted by the Center for Agri-Fisheries and Biosystems Mechanization (BIOMECH) of the University of the Philippines Los Baños (UPLB). The Initiator (BIOMECH) of this survey is solely responsible for its contents and the responses will be used by the survey Initiator only for the purpose identified by the Initiator.
+        Your participation in this survey is voluntary.  You are invited to participate because you are either an owner of a farm, garage, machine, processing plant, or transloading zone; an operator of farm machine; a manager of a transloading zone; a farm manager or an officer in charge for the farm; and a representative of a cooperative,  LGU, or a farmer’s association. You may also choose not to participate. If you decide to participate, please provide responsible responses, refrain from using any inappropriate language, and refrain from including any confidential information belonging to you or another party.
+        If you are asked to reveal any sensitive information that is not included in this survey by the enumerator, you may choose to withdraw at any time. If you do not participate in this research study or if you withdraw from participating any time, you will not be penalized. The duration of the survey is at least 30 minutes. Your responses are subjected to the privacy statement of the organization for your information, protection, and safety.
+        All data based on your responses are subjected to confidentiality, therefore any processed data from the survey will not be able to personally identify you. The results will be used solely for research and development purposes, if you have any questions about the research study, please contact the address found in the privacy statement.
+            \n\nBy clicking on “Proceed to Survey” button below indicates that:</string>
+    <string name="consent_part2">• You have read, understood, and agree to the privacy statement of the organization.
+            \n• You have read, understood, and agree to allow the authorized entities to collect and process personal information about and/or relating to you that you agreed to respond in this survey form.</string>
     <string-array name="educ_attain">
         <item></item>
         <item>NOT APPLICABLE</item>
@@ -21,8 +37,43 @@
         <item>HARVESTERS</item>
         <item>INFIELD HAULERS</item>
         <item>WATER PUMP</item>
+    </string-array>
 
-
+    <string-array name="fourwheeltractorbrands">
+        <item></item>
+        <item>AGRINDO</item>
+        <item>BRANSON</item>
+        <item>CASE IH</item>
+        <item>DEUTZ-FAHR</item>
+        <item>EUROTRAC</item>
+        <item>FARM ROVER</item>
+        <item>FIAT</item>
+        <item>FORD</item>
+        <item>FORDSON</item>
+        <item>FOTON</item>
+        <item>GLOBAL FARM</item>
+        <item>INTERNATIONAL HARVESTER IH</item>
+        <item>ISEKI</item>
+        <item>ITMCO</item>
+        <item>JOHN DEERE</item>
+        <item>KAMOL</item>
+        <item>KIOTI</item>
+        <item>KUBOTA</item>
+        <item>LANDINI</item>
+        <item>LEYLAND</item>
+        <item>LOVOL</item>
+        <item>LS</item>
+        <item>MAHINDRA</item>
+        <item>MASSEY FERGUSON</item>
+        <item>MC CORMICK</item>
+        <item>NEW HOLLAND</item>
+        <item>PREET</item>
+        <item>SHUHE</item>
+        <item>SONALIKA</item>
+        <item>VALTRA</item>
+        <item>WEITAI</item>
+        <item>YANMAR</item>
+        <item>SPECIFY</item>
     </string-array>
 
     <string-array name="ownership">
@@ -73,12 +124,17 @@
         <item>OTHERS</item>
     </string-array>
 
+    <string-array name="condition_when_bought">
+        <item></item>
+        <item>BRAND NEW</item>
+        <item>SECONDHAND</item>
+        <item>RECONDITIONED</item>
+    </string-array>
     <string-array name="ownership_of_machine">
         <item>PRIVATELY OWNED</item>
-        <item>COOPERATIVE/ASSOCIATION GRANT</item>
-        <item>COOPERATIVE/ASSOCIATION DONATION</item>
-        <item>CUSTOM PROVIDER DONATION</item>
-        <item>LGU DONATION</item>
+        <item>COOPERATIVE/ASSOCIATION</item>
+        <item>CUSTOM PROVIDER</item>
+        <item>LGU</item>
     </string-array>
 
     <string-array name="agency">
@@ -117,5 +173,8 @@
     <string name="ok">ok</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_privacy_and_consent">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>

@@ -13,12 +13,13 @@ import java.util.List;
 
 public class MachinesRepository {
     private MachinesDAO machinesDAO;
-    private LiveData<List<Machines>> allMachines;
+    private LiveData<List<Machines>> allMachines, listOfMachines;
 
     public MachinesRepository(Application application){
         MachinesDatabase database = MachinesDatabase.getInstance(application);
         machinesDAO = database.machinesDAO();
         allMachines = machinesDAO.getAllMachines();
+        listOfMachines = machinesDAO.getListofMachines();
     }
 
     public void insert(Machines machines) {
@@ -33,6 +34,10 @@ public class MachinesRepository {
 
     public LiveData<List<Machines>> getAllMachines(){
         return allMachines;
+    }
+
+    public LiveData<List<Machines>> getListOfMachines(){
+        return listOfMachines;
     }
 
     public static class InsertMachineAsyncTask extends AsyncTask<Machines, Void, Void>{
