@@ -10,13 +10,14 @@
         android:id="@+id/tabLayoutMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tabGravity="fill"
-        app:tabIndicatorColor="#B71C1C"
+        app:tabIndicatorColor="@color/colorAccent"
         app:tabMode="scrollable"
-        app:tabRippleColor="#827717">
+        app:tabRippleColor="@color/M3DASMain">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabInfo"

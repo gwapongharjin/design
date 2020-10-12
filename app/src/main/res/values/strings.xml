@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">design</string>
+    <string name="app_name">M3DAS</string>
     <string name="privacy_statement">Your privacy and trust are important to us. This privacy statement explains the data that M3DAS processes, how M3DAS processes it, and for what purposes.
         \n\nWhat personal information are we collecting?
         \nWe only collect the minimum amount of personal information for this survey such as your name, address, and contact information for the purpose of validation and tracking of agricultural machineries. The survey will only be asking sensitive information such as age, and educational attainment for the purpose of profiling the respondents of the survey and will not be disclosed without the respondent’s consent for the latter’s protection and safety. Any data acquired ensures that these are securely connected to the M3DAS server through SSL encryption.
@@ -28,15 +28,25 @@
         <item>VOCATIONAL TECHNICAL</item>
     </string-array>
 
-    <string-array name="machine_types_sugarcane">
-        <item>TWO WHEEL TRACTOR</item>
-        <item>FOUR WHEEL TRACTOR</item>
+    <string-array name="machine_types">
+        <item></item>
+        <item>2 WHEEL TRACTOR</item>
+        <item>4 WHEEL TRACTOR</item>
         <item>BOOM SPRAYER</item>
-        <item>CANE GRAB LOADERS</item>
-        <item>DITCHER</item>
-        <item>HARVESTERS</item>
-        <item>INFIELD HAULERS</item>
+        <item>CANE GRAB LOADER</item>
+        <item>COMBINE HARVESTER	</item>
+        <item>DRYER</item>
+        <item>HARVESTER</item>
+        <item>INFIELD HAULER</item>
+        <item>MECHANICAL PLANTER</item>
+        <item>MILL</item>
+        <item>PICKER</item>
+        <item>POWER SPRAYER</item>
+        <item>REAPER</item>
+        <item>SHELLER</item>
+        <item>THRESHER</item>
         <item>WATER PUMP</item>
+
     </string-array>
 
     <string-array name="fourwheeltractorbrands">
@@ -77,10 +87,21 @@
     </string-array>
 
     <string-array name="ownership">
+        <item></item>
         <item>Owned</item>
         <item>Rented</item>
     </string-array>
-
+    <string-array name="type_of_tubewells">
+        <item></item>
+        <item>SHALLOW TUBEWELL</item>
+        <item>DEEP WELL</item>
+    </string-array>
+    <string-array name="purchasing_method">
+        <item></item>
+        <item>PURCHASED</item>
+        <item>GRANT</item>
+        <item>DONATION</item>
+    </string-array>
     <string-array name="implements1">
         <item></item>
         <item>CANE GRAB LOADERS</item>
@@ -108,12 +129,14 @@
     </string-array>
 
     <string-array name="contact_number">
+        <item></item>
         <item>NOT APPLICABLE</item>
         <item>MOBILE NUMBER</item>
         <item>TELEPHONE NUMBER</item>
     </string-array>
 
     <string-array name="ownership_type">
+        <item></item>
         <item>OWNER</item>
         <item>OPERATOR OF MACHINE</item>
         <item>MANAGER OF TRANSLOADING ZONE</item>
@@ -123,7 +146,14 @@
         <item>REPRESENTATIVE of FARMER\'S ASSOCIATION</item>
         <item>OTHERS</item>
     </string-array>
-
+    <string-array name="subowner">
+        <item></item>
+        <item>FARM</item>
+        <item>GARAGE</item>
+        <item>MACHINE</item>
+        <item>PROCESSING PLANT</item>
+        <item>TRANSLOADING ZONE</item>
+    </string-array>
     <string-array name="condition_when_bought">
         <item></item>
         <item>BRAND NEW</item>
@@ -131,6 +161,7 @@
         <item>RECONDITIONED</item>
     </string-array>
     <string-array name="ownership_of_machine">
+        <item></item>
         <item>PRIVATELY OWNED</item>
         <item>COOPERATIVE/ASSOCIATION</item>
         <item>CUSTOM PROVIDER</item>
@@ -138,6 +169,7 @@
     </string-array>
 
     <string-array name="agency">
+        <item></item>
         <item>DEPARTMENT OF AGRICULTURE (DA)</item>
         <item>DEPARTMENT OF AGRARIAN REFORM (DAR)</item>
         <item>SUGAR REGULATORY ADMINISTRATION (SRA)</item>
@@ -146,26 +178,53 @@
     </string-array>
 
     <string-array name="condition">
-        <item>FUNCTIONAL</item>
+        <item></item>
+        <item>FUNCTIONAL USED</item>
+        <item>FUNCTIONAL UNUSED</item>
         <item>NON-FUNCTIONAL</item>
     </string-array>
 
     <string-array name="functionality">
+        <item></item>
         <item>USED</item>
         <item>UNUSED</item>
     </string-array>
 
+    <string-array name="rent_availablity">
+        <item></item>
+        <item>WITHIN BARANGAY</item>
+        <item>OUTSIDE BARANGAY</item>
+    </string-array>
+
     <string-array name="location">
+        <item></item>
         <item>GARAGE</item>
         <item>FIELD</item>
         <item>TRANSLOADING ZONE</item>
     </string-array>
+    <string-array name="type_of_mill">
+        <item></item>
+        <item>MOBILE</item>
+        <item>STATIONARY</item>
+    </string-array>
     <string-array name="problems_unused">
+        <item></item>
         <item>THE MACHINE IS NOT SUITABLE TO THE CONDITIONS OF THE AREA</item>
         <item>NO ONE IS SKILLED ENOUGH TO OPERATE THE MACHINE</item>
         <item>CUSTOM HIRING RATE OF MACHINE IS TOO HIGH</item>
         <item>THE MACHINE WAS NOT TURNED OVER TO THE BENEFICIARIES</item>
         <item>OTHERS, SPECIFY</item>
+    </string-array>
+    <string-array name="custom_rate_units">
+        <item></item>
+        <item>PHP/HOUR</item>
+        <item>PHP/HECTARE</item>
+        <item>SPECIFY</item>
+    </string-array>
+    <string-array name="yes_no">
+        <item></item>
+        <item>YES</item>
+        <item>NO</item>
     </string-array>
 
     <string name="title_activity_get_location">Map</string>

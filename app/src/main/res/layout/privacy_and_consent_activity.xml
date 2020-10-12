@@ -16,17 +16,21 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/svPrivacyAndConsent"
         app:layout_constraintEnd_toEndOf="@+id/svPrivacyAndConsent"
-        app:layout_constraintStart_toStartOf="@+id/svPrivacyAndConsent" />
+        app:layout_constraintStart_toStartOf="@+id/svPrivacyAndConsent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btnProceed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/custom_button"
         android:text="PROCEED"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/svPrivacyAndConsent"
-        app:layout_constraintTop_toBottomOf="@+id/svPrivacyAndConsent"
-        android:background="@drawable/custom_button"/>
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svPrivacyAndConsent" />
 
     <com.m3das.biomech.design.CustomScroll
         android:id="@+id/svPrivacyAndConsent"

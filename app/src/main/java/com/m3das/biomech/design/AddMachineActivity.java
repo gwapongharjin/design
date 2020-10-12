@@ -3,12 +3,14 @@ package com.m3das.biomech.design;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -20,9 +22,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.InputFilter;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -32,6 +36,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidbuts.multispinnerfilter.KeyPairBoolData;
+import com.androidbuts.multispinnerfilter.MultiSpinnerListener;
+import com.androidbuts.multispinnerfilter.MultiSpinnerSearch;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 
@@ -41,18 +48,22 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class AddMachineActivity extends AppCompatActivity{
 private ImageButton camera, gallery, getLocation, btnScanQR;
 private String currentPhotoPath;
 private ImageView selectedImage;
-private EditText edtQRCode;
-private TextView tvLat, tvLong;
-private Spinner spinMachineType;
+private EditText edtQRCode, edtCapacity, edtAveYield, edtNumLoads, edtRate, edtAveOpHours, edtAveOpDays;
+private TextView tvLat, tvLong, tvTypeOfMill, tvBrand, tvOwnership, tvTypeOfTubewells;
+private Spinner spinMachineType, spinRentProv, spinRentMun, spinTypeOfMill, spinTypeofTubeWells;
 private DatePicker dateOfSurvey;
 private String resLat, resLong;
+private MultiSpinnerSearch multiSpinnerSearch, multspinRentBrgy;
+private ConstraintLayout.LayoutParams paramstvBrand, paramstvOwnership, paramsedtCapacity, paramsedtNumLoads, paramsedtAveYield, paramsedtRate, paramstvTypeTubewells;
 public static final int CAMERA_PERM_CODE = 101;
 public static final int CAMERA_REQUEST_CODE = 102;
 public static final int GALLERY_REQUEST_CODE = 105;
@@ -78,6 +89,45 @@ public static final String  EXTRA_ID = "EXTRA_ID";
         tvLong = findViewById(R.id.tvLong);
         spinMachineType = findViewById(R.id.spinMachineType);
         Button btnSave = findViewById(R.id.btnSaveNewMachine);
+        multiSpinnerSearch = findViewById(R.id.multspinProblemsUnused);
+        multspinRentBrgy = findViewById(R.id.multispinRentBrgy);
+        spinRentMun = findViewById(R.id.spinRentMunicipality);
+        spinRentProv = findViewById(R.id.spinRentProvince);
+        tvTypeOfMill = findViewById(R.id.tvTypeMill);
+        spinTypeOfMill = findViewById(R.id.spinTypeMill);
+        tvBrand = findViewById(R.id.tvBrand);
+        edtCapacity = findViewById(R.id.edtCapacity);
+        tvOwnership = findViewById(R.id.tvOwnership);
+        edtAveYield = findViewById(R.id.edtAveYield);
+        edtNumLoads = findViewById(R.id.edtNumberOfLoads);
+        edtRate = findViewById(R.id.edtRate);
+        tvTypeOfTubewells = findViewById(R.id.tvTypeOfTubewells);
+        spinTypeofTubeWells = findViewById(R.id.spinTypeOfTubewells);
+        edtAveOpDays = findViewById(R.id.edtAverageOperatingDays);
+        edtAveOpHours = findViewById(R.id.edtAverageOperatingHours);
+
+        edtAveOpHours.setFilters(new InputFilter[]{ new MinMaxFilter( "0" , "24" )});
+        edtAveOpDays.setFilters(new InputFilter[]{ new MinMaxFilter("1", "31")});
+
+        paramstvBrand = (ConstraintLayout.LayoutParams) tvBrand.getLayoutParams();
+
+
+        tvTypeOfMill.setVisibility(View.INVISIBLE);
+        spinTypeOfMill.setVisibility(View.INVISIBLE);
+        tvTypeOfTubewells.setVisibility(View.INVISIBLE);
+        spinTypeofTubeWells.setVisibility(View.INVISIBLE);
+
+        paramstvBrand.topToBottom = R.id.edtQRCode;
+        paramstvBrand.topMargin = (int) pxFromDp(this, 32);;
+        tvBrand.setLayoutParams(paramstvBrand);
+
+
+
+
+        spinRentProv.setPrompt("Select Province");
+        spinRentMun.setPrompt("Select Municipality");
+        multspinRentBrgy.setHintText("Select Barangays");
+        multiSpinnerSearch.setHintText("Select Problems...");
 
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +161,7 @@ public static final String  EXTRA_ID = "EXTRA_ID";
         if(intent.hasExtra(EXTRA_ID)){
             int position = -1;
             setTitle("Editing Machine");
-            String [] arr = getResources().getStringArray(R.array.machine_types_sugarcane);
+            String [] arr = getResources().getStringArray(R.array.machine_types);
 
             for (int i=0;i<arr.length;i++) {
                 if (arr[i].equals(intent.getStringExtra(EXTRA_MACHINE_TYPE))) {
@@ -138,8 +188,292 @@ public static final String  EXTRA_ID = "EXTRA_ID";
             }
         });
 
+        spinMachineType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                machineSelect(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        multiSpinnerSearch.setItems(pairingOfList(Arrays.asList(getResources().getStringArray(R.array.problems_unused))), new MultiSpinnerListener() {
+            @Override
+            public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+                for (int i = 0; i < selectedItems.size(); i++) {
+                    Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+                }
+            }
+        });
+
+        multspinRentBrgy.setItems(pairingOfList(Arrays.asList(getResources().getStringArray(R.array.aklan_all_brgy))), new MultiSpinnerListener() {
+            @Override
+            public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+                for (int i = 0; i < selectedItems.size(); i++) {
+                    Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+                }
+            }
+        });
+    }
+    public static float pxFromDp(final Context context, final float dp) {
+        return dp * context.getResources().getDisplayMetrics().density;
     }
 
+    public List<KeyPairBoolData> pairingOfList(List<String> stringList){
+        final List<KeyPairBoolData> listArray1 = new ArrayList<>();
+        List<String> list = stringList;
+        for (int i = 0; i < list.size(); i++) {
+            KeyPairBoolData h = new KeyPairBoolData();
+            h.setId(i + 1);
+            h.setName(list.get(i));
+            listArray1.add(h);
+        }
+        return listArray1;
+    }
+    private void machineSelect(int position){
+        String machineType = spinMachineType.getItemAtPosition(position).toString();
+
+
+        switch (machineType){
+            case "2 WHEEL TRACTOR":
+            case "4 WHEEL TRACTOR":
+                tvTypeOfMill.setVisibility(View.INVISIBLE);
+                spinTypeOfMill.setVisibility(View.INVISIBLE);
+                edtCapacity.setVisibility(View.INVISIBLE);
+                tvTypeOfTubewells.setVisibility(View.INVISIBLE);
+                spinTypeofTubeWells.setVisibility(View.INVISIBLE);
+                edtAveYield.setVisibility(View.INVISIBLE);
+                edtNumLoads.setVisibility(View.INVISIBLE);
+                edtRate.setVisibility(View.INVISIBLE);
+                getParams(1);
+                break;
+            case "BOOM SPRAYER":
+            case "POWER SPRAYER":
+                tvTypeOfMill.setVisibility(View.INVISIBLE);
+                spinTypeOfMill.setVisibility(View.INVISIBLE);
+                tvTypeOfTubewells.setVisibility(View.INVISIBLE);
+                spinTypeofTubeWells.setVisibility(View.INVISIBLE);
+                edtAveYield.setVisibility(View.INVISIBLE);
+                edtNumLoads.setVisibility(View.INVISIBLE);
+                edtRate.setVisibility(View.INVISIBLE);
+                edtCapacity.setVisibility(View.VISIBLE);
+                edtCapacity.setHint("Tank Capacity (in L)");
+                getParams(2);
+                break;
+            case "CANE GRAB LOADER":
+                tvTypeOfMill.setVisibility(View.INVISIBLE);
+                spinTypeOfMill.setVisibility(View.INVISIBLE);
+                tvTypeOfTubewells.setVisibility(View.INVISIBLE);
+                spinTypeofTubeWells.setVisibility(View.INVISIBLE);
+                edtAveYield.setVisibility(View.INVISIBLE);
+                edtRate.setVisibility(View.INVISIBLE);
+                edtCapacity.setVisibility(View.VISIBLE);
+                edtNumLoads.setVisibility(View.VISIBLE);
+                edtCapacity.setHint("Loading Capacity (in tons/load)");
+                getParams(3);
+                break;
+            case "COMBINE HARVESTER":
+                tvTypeOfMill.setVisibility(View.INVISIBLE);
+                spinTypeOfMill.setVisibility(View.INVISIBLE);
+                tvTypeOfTubewells.setVisibility(View.INVISIBLE);
+                spinTypeofTubeWells.setVisibility(View.INVISIBLE);
+                edtNumLoads.setVisibility(View.INVISIBLE);
+                edtRate.setVisibility(View.INVISIBLE);
+                edtCapacity.setVisibility(View.VISIBLE);
+                edtAveYield.setVisibility(View.VISIBLE);
+                edtCapacity.setHint("Capacity (in ha/h)");
+                edtAveYield.setHint("Average Yield (in ton cannes/ha)");
+                getParams(4);
+                break;
+            case "HARVESTER":
+                tvTypeOfMill.setVisibility(View.INVISIBLE);
+                spinTypeOfMill.setVisibility(View.INVISIBLE);
+                tvTypeOfTubewells.setVisibility(View.INVISIBLE);
+                spinTypeofTubeWells.setVisibility(View.INVISIBLE);
+                edtNumLoads.setVisibility(View.INVISIBLE);
+                edtRate.setVisibility(View.INVISIBLE);
+                edtCapacity.setVisibility(View.VISIBLE);
+                edtAveYield.setVisibility(View.VISIBLE);
+                edtCapacity.setHint("Capacity (in ha/h)");
+                edtAveYield.setHint("Average Yield (in ton/ha)");
+                getParams(4);
+                break;
+            case "DRYER":
+                tvTypeOfMill.setVisibility(View.INVISIBLE);
+                spinTypeOfMill.setVisibility(View.INVISIBLE);
+                tvTypeOfTubewells.setVisibility(View.INVISIBLE);
+                spinTypeofTubeWells.setVisibility(View.INVISIBLE);
+                edtAveYield.setVisibility(View.INVISIBLE);
+                edtNumLoads.setVisibility(View.INVISIBLE);
+                edtCapacity.setVisibility(View.VISIBLE);
+                edtRate.setVisibility(View.VISIBLE);
+                edtCapacity.setHint("Loading Capacity (in kg/h)");
+                edtRate.setHint("Drying Rate (in tons/h)");
+                getParams(5);
+                break;
+            case "INFIELD HAULER":
+                tvTypeOfMill.setVisibility(View.INVISIBLE);
+                spinTypeOfMill.setVisibility(View.INVISIBLE);
+                tvTypeOfTubewells.setVisibility(View.INVISIBLE);
+                spinTypeofTubeWells.setVisibility(View.INVISIBLE);
+                edtAveYield.setVisibility(View.INVISIBLE);
+                edtNumLoads.setVisibility(View.INVISIBLE);
+                edtRate.setVisibility(View.INVISIBLE);
+                edtCapacity.setVisibility(View.VISIBLE);
+                edtCapacity.setHint("Capacity (in tons/load)");
+                getParams(2);
+                break;
+            case "MECHANICAL PLANTER":
+            case "REAPER":
+            case "PICKER":
+                tvTypeOfMill.setVisibility(View.INVISIBLE);
+                spinTypeOfMill.setVisibility(View.INVISIBLE);
+                tvTypeOfTubewells.setVisibility(View.INVISIBLE);
+                spinTypeofTubeWells.setVisibility(View.INVISIBLE);
+                edtAveYield.setVisibility(View.INVISIBLE);
+                edtNumLoads.setVisibility(View.INVISIBLE);
+                edtRate.setVisibility(View.INVISIBLE);
+                edtCapacity.setVisibility(View.VISIBLE);
+                edtCapacity.setHint("Capacity (in ha/h)");
+                getParams(2);
+                break;
+            case "MILL":
+                tvTypeOfMill.setVisibility(View.VISIBLE);
+                spinTypeOfMill.setVisibility(View.VISIBLE);
+                tvTypeOfTubewells.setVisibility(View.INVISIBLE);
+                spinTypeofTubeWells.setVisibility(View.INVISIBLE);
+                edtAveYield.setVisibility(View.INVISIBLE);
+                edtNumLoads.setVisibility(View.INVISIBLE);
+                edtRate.setVisibility(View.VISIBLE);
+                edtCapacity.setVisibility(View.VISIBLE);
+                edtCapacity.setHint("Capacity (in kg)");
+                edtRate.setHint("Milling Rate (in tons/h)");
+                getParams(7);
+                break;
+            case "SHELLER":
+                tvTypeOfMill.setVisibility(View.INVISIBLE);
+                spinTypeOfMill.setVisibility(View.INVISIBLE);
+                tvTypeOfTubewells.setVisibility(View.INVISIBLE);
+                spinTypeofTubeWells.setVisibility(View.INVISIBLE);
+                edtAveYield.setVisibility(View.INVISIBLE);
+                edtNumLoads.setVisibility(View.INVISIBLE);
+                edtRate.setVisibility(View.VISIBLE);
+                edtCapacity.setVisibility(View.VISIBLE);
+                edtCapacity.setHint("Capacity (in kg)");
+                edtRate.setHint("Shelling Rate (in tons/h)");
+                getParams(5);
+                break;
+            case "THRESHER":
+                tvTypeOfMill.setVisibility(View.INVISIBLE);
+                spinTypeOfMill.setVisibility(View.INVISIBLE);
+                tvTypeOfTubewells.setVisibility(View.INVISIBLE);
+                spinTypeofTubeWells.setVisibility(View.INVISIBLE);
+                edtAveYield.setVisibility(View.INVISIBLE);
+                edtNumLoads.setVisibility(View.INVISIBLE);
+                edtRate.setVisibility(View.VISIBLE);
+                edtCapacity.setVisibility(View.VISIBLE);
+                edtCapacity.setHint("Capacity (in kg)");
+                edtRate.setHint("Threshing Rate (in tons/h)");
+                getParams(5);
+                break;
+            case "WATER PUMP":
+                tvTypeOfMill.setVisibility(View.INVISIBLE);
+                spinTypeOfMill.setVisibility(View.INVISIBLE);
+                edtAveYield.setVisibility(View.INVISIBLE);
+                edtNumLoads.setVisibility(View.INVISIBLE);
+                edtRate.setVisibility(View.INVISIBLE);
+                edtCapacity.setVisibility(View.VISIBLE);
+                tvTypeOfTubewells.setVisibility(View.VISIBLE);
+                spinTypeofTubeWells.setVisibility(View.VISIBLE);
+                edtCapacity.setHint("Capacity (in L/s)");
+                getParams(6);
+                break;
+            default:
+                tvTypeOfMill.setVisibility(View.INVISIBLE);
+                spinTypeOfMill.setVisibility(View.INVISIBLE);
+                tvTypeOfTubewells.setVisibility(View.INVISIBLE);
+                spinTypeofTubeWells.setVisibility(View.INVISIBLE);
+                edtAveYield.setVisibility(View.INVISIBLE);
+                edtNumLoads.setVisibility(View.INVISIBLE);
+                edtRate.setVisibility(View.INVISIBLE);
+                edtCapacity.setVisibility(View.VISIBLE);
+                getParams(2);
+                break;
+        }
+    }
+
+    private void getParams(int input){
+        int type = 0;
+        int topMargin = (int) pxFromDp(this, 32);
+
+        paramstvOwnership = (ConstraintLayout.LayoutParams) tvOwnership.getLayoutParams();
+        paramsedtCapacity = (ConstraintLayout.LayoutParams) edtCapacity.getLayoutParams();
+        paramsedtNumLoads = (ConstraintLayout.LayoutParams) edtNumLoads.getLayoutParams();
+        paramsedtAveYield = (ConstraintLayout.LayoutParams) edtAveYield.getLayoutParams();
+        paramsedtRate = (ConstraintLayout.LayoutParams) edtRate.getLayoutParams();
+        paramstvTypeTubewells = (ConstraintLayout.LayoutParams) tvTypeOfTubewells.getLayoutParams();
+
+        type = input;
+
+        switch (type){
+            case 1:
+            default:
+                paramstvBrand.topToBottom = R.id.edtQRCode;
+                paramstvOwnership.topToBottom = R.id.tvSubInputDays;
+                break;
+            case 2:
+                paramstvBrand.topToBottom = R.id.edtQRCode;
+                paramstvOwnership.topToBottom = R.id.edtCapacity;
+                paramsedtCapacity.topToBottom = R.id.tvSubInputDays;
+                break;
+            case 3:
+                paramstvBrand.topToBottom = R.id.edtQRCode;
+                paramstvOwnership.topToBottom = R.id.edtNumberOfLoads;
+                paramsedtCapacity.topToBottom =R.id.tvSubInputDays;
+                paramsedtNumLoads.topToBottom = R.id.edtCapacity;
+                break;
+            case 4:
+                paramstvBrand.topToBottom = R.id.edtQRCode;
+                paramstvOwnership.topToBottom = R.id.edtAveYield;
+                paramsedtCapacity.topToBottom =R.id.tvSubInputDays;
+                paramsedtAveYield.topToBottom = R.id.edtCapacity;
+                break;
+            case 5:
+                paramstvBrand.topToBottom = R.id.edtQRCode;
+                paramstvOwnership.topToBottom = R.id.edtRate;
+                paramsedtCapacity.topToBottom =R.id.tvSubInputDays;
+                paramsedtRate.topToBottom = R.id.edtCapacity;
+                break;
+            case 6 :
+                paramstvTypeTubewells.topToBottom = R.id.edtQRCode;
+                paramstvBrand.topToBottom = R.id.spinTypeOfTubewells;
+                paramstvOwnership.topToBottom = R.id.edtCapacity;
+                paramsedtCapacity.topToBottom = R.id.tvSubInputDays;
+                break;
+            case 7 :
+                paramstvBrand.topToBottom = R.id.spinTypeMill;
+                paramstvOwnership.topToBottom = R.id.edtRate;
+                paramsedtCapacity.topToBottom =R.id.tvSubInputDays;
+                paramsedtRate.topToBottom = R.id.edtCapacity;
+                break;
+        }
+
+        paramstvBrand.topMargin = topMargin;
+        paramstvOwnership.topMargin = topMargin;
+        paramsedtCapacity.topMargin = topMargin;
+        paramsedtNumLoads.topMargin = topMargin;
+        paramsedtAveYield.topMargin = topMargin;
+        paramsedtRate.topMargin = topMargin;
+
+        tvBrand.setLayoutParams(paramstvBrand);
+        tvOwnership.setLayoutParams(paramstvOwnership);
+        edtCapacity.setLayoutParams(paramsedtCapacity);
+        edtNumLoads.setLayoutParams(paramsedtNumLoads);
+        edtAveYield.setLayoutParams(paramsedtAveYield);
+    }
 
     public static boolean isNullOrEmpty(String str) {
         if(str != null && !str.isEmpty())

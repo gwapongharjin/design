@@ -5,76 +5,114 @@
     android:id="@+id/scrollViewInfo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@drawable/gradient_background"
     tools:context=".fragments.InfoFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tvDate"
+            android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            android:text="Date"
-            android:textColor="@android:color/primary_text_light"
+            android:text="Profile of Respondent"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/dpDateOfSurvey"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <DatePicker
-            android:id="@+id/dpDateOfSurvey"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"
-            android:calendarTextColor="@android:color/primary_text_light"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            android:yearListSelectorColor="#000000"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+            app:layout_constraintTop_toBottomOf="@+id/switchEditSave" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinProfile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_spinner"
+            android:entries="@array/ownership_type"
+            app:layout_constraintEnd_toStartOf="@+id/switchEditSave"
+            app:layout_constraintStart_toStartOf="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <EditText
+            android:id="@+id/edtSpecifyProfile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:entries="@array/educ_attain"
-            android:spinnerMode="dropdown"
-            app:layout_constraintEnd_toEndOf="@+id/spinner3"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/dpDateOfSurvey"
-            app:layout_constraintTop_toBottomOf="@+id/tvEduc" />
+            android:background="@drawable/custom_edit_text"
+            android:hint="Specify Profile of Respondent"
+            app:layout_constraintEnd_toEndOf="@+id/spinProfile"
+            app:layout_constraintStart_toStartOf="@+id/spinProfile"
+            app:layout_constraintTop_toBottomOf="@+id/spinProfile" />
 
-        <TextView
-            android:id="@+id/tvEduc"
+        <com.androidbuts.multispinnerfilter.MultiSpinnerSearch
+            android:id="@+id/multspinOwner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_spinner"
+            app:layout_constraintEnd_toEndOf="@+id/spinProfile"
+            app:layout_constraintStart_toStartOf="@+id/spinProfile"
+            app:layout_constraintTop_toBottomOf="@+id/spinProfile" />
+
+        <EditText
+            android:id="@+id/edtNameResp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Educational Attainment"
-            android:textColor="@android:color/primary_text_light"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/spinner3" />
+            android:background="@drawable/custom_edit_text"
+            android:ems="10"
+            android:hint="NAME"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="@+id/spinProfile"
+            app:layout_constraintStart_toStartOf="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/spinProfile" />
+
+        <EditText
+            android:id="@+id/edtAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/custom_edit_text"
+            android:ems="10"
+            android:hint="ADDRESS"
+            android:inputType="textPostalAddress"
+            app:layout_constraintEnd_toEndOf="@+id/spinProfile"
+            app:layout_constraintStart_toStartOf="@+id/edtNameResp"
+            app:layout_constraintTop_toBottomOf="@+id/edtNameResp" />
+
+        <EditText
+            android:id="@+id/edtAGE"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/custom_edit_text"
+            android:ems="10"
+            android:hint="AGE"
+            android:inputType="number"
+            android:maxLength="3"
+            app:layout_constraintEnd_toEndOf="@+id/radioGroup"
+            app:layout_constraintStart_toStartOf="@+id/edtAddress"
+            app:layout_constraintTop_toBottomOf="@+id/edtAddress" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="educ attain relative"
-            app:layout_constraintEnd_toEndOf="@+id/spinner"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+            android:layout_marginTop="32dp"
+            android:text="Sex"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/edtNameResp"
+            app:layout_constraintTop_toBottomOf="@+id/edtAGE" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:background="@drawable/custom_no_padding"
             app:layout_constraintStart_toStartOf="@+id/spinProfile"
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
@@ -87,22 +125,11 @@
 
             <RadioButton
                 android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:text="Female"
                 android:textAlignment="center" />
         </RadioGroup>
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Sex"
-            android:textColor="@android:color/primary_text_light"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/edtNameResp"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber2" />
 
         <TextView
             android:id="@+id/textView4"
@@ -110,100 +137,117 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="Contact Number"
-            android:textColor="@android:color/primary_text_light"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@id/radioGroup" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Profile of Respondent"
-            android:textColor="@android:color/primary_text_light"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/tvDate"
-            app:layout_constraintTop_toBottomOf="@+id/dpDateOfSurvey" />
-
-        <Spinner
-            android:id="@+id/spinner3"
+        <com.androidbuts.multispinnerfilter.MultiSpinnerSearch
+            android:id="@+id/multspinContactNumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="64dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_spinner"
             android:entries="@array/contact_number"
             app:layout_constraintEnd_toEndOf="@+id/edtAddress"
             app:layout_constraintStart_toStartOf="@+id/spinProfile"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <EditText
-            android:id="@+id/editTextNumber2"
+            android:id="@+id/edtMobileNumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="AGE"
-            android:inputType="number"
-            android:maxLength="3"
-            app:layout_constraintEnd_toEndOf="@+id/radioGroup"
-            app:layout_constraintStart_toStartOf="@+id/edtAddress"
-            app:layout_constraintTop_toBottomOf="@+id/edtAddress" />
+            android:hint="Mobile Number"
+            android:inputType="phone"
+            android:maxLength="11"
+            app:layout_constraintEnd_toEndOf="@+id/multspinContactNumber"
+            app:layout_constraintStart_toStartOf="@+id/multspinContactNumber"
+            app:layout_constraintTop_toBottomOf="@+id/multspinContactNumber" />
 
-        <Spinner
-            android:id="@+id/spinProfile"
+        <EditText
+            android:id="@+id/edtMobileNumber2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:entries="@array/ownership_type"
-            app:layout_constraintEnd_toEndOf="@+id/dpDateOfSurvey"
-            app:layout_constraintStart_toStartOf="@+id/dpDateOfSurvey"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-        <EditText
-            android:id="@+id/edtNameResp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="NAME"
-            android:inputType="textPersonName"
-            app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/spinProfile" />
+            android:hint="Mobile Number 2"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtMobileNumber"
+            app:layout_constraintStart_toStartOf="@+id/edtMobileNumber"
+            app:layout_constraintTop_toBottomOf="@+id/edtMobileNumber" />
 
         <EditText
-            android:id="@+id/edtAddress"
+            android:id="@+id/edtTelephoneNumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="ADDRESS"
-            android:inputType="textPostalAddress"
-            app:layout_constraintEnd_toEndOf="@+id/spinProfile"
-            app:layout_constraintStart_toStartOf="@+id/edtNameResp"
-            app:layout_constraintTop_toBottomOf="@+id/edtNameResp" />
+            android:hint="Telephone Number"
+            android:inputType="phone"
+            android:maxLength="8"
+            app:layout_constraintEnd_toEndOf="@+id/multspinContactNumber"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/multspinContactNumber"
+            app:layout_constraintTop_toBottomOf="@+id/edtMobileNumber2" />
 
-        <ImageButton
-            android:id="@+id/btnToTop"
+        <EditText
+            android:id="@+id/edtTelephoneNumber2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
+            android:ems="10"
+            android:hint="Telephone Number 2"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtTelephoneNumber"
+            app:layout_constraintStart_toStartOf="@+id/edtTelephoneNumber"
+            app:layout_constraintTop_toBottomOf="@+id/edtTelephoneNumber" />
+
+        <TextView
+            android:id="@+id/tvEduc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_outline_arrow_upward_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+            android:layout_marginTop="32dp"
+            android:text="Educational Attainment"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/multspinContactNumber" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_no_padding"
+            android:entries="@array/educ_attain"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="@+id/multspinContactNumber"
+            app:layout_constraintStart_toStartOf="@+id/multspinContactNumber"
+            app:layout_constraintTop_toBottomOf="@+id/tvEduc" />
 
         <Switch
             android:id="@+id/switchEditSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:text="Edit"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="provinces">
+        <item>CAPIZ</item>
+        <item>AKLAN</item>
+        <item>ILOILO</item>
+        <item>ANTIQUE</item>
+        <item>NEGROS OCCIDENTAL</item>
+        <item>BATANGAS</item>
+        <item>NEGROS ORIENTAL</item>
+        <item>BUKIDNON</item>
+    </string-array>
+
+    <string-array name="capiz_mun">
+        <item>	Not Applicable	</item>
+        <item>	Cuartero	</item>
+        <item>	Dao	</item>
+        <item>	Dumalag	</item>
+        <item>	Dumarao	</item>
+        <item>	Ivisan	</item>
+        <item>	Jamindan	</item>
+        <item>	Ma-ayon	</item>
+        <item>	Mambusao	</item>
+        <item>	Panay	</item>
+        <item>	Panitan	</item>
+        <item>	Pilar	</item>
+        <item>	Pontevedra	</item>
+        <item>	President Roxas	</item>
+        <item>	Roxas City (Capital)	</item>
+        <item>	Sapi-an	</item>
+        <item>	Sigma	</item>
+        <item>	Tapaz	</item>
+    </string-array>
+
+    <string-array name="aklan_mun">
+        <item>	Altavas	</item>
+        <item>	Balete	</item>
+        <item>	Banga	</item>
+        <item>	Batan	</item>
+        <item>	Buruanga	</item>
+        <item>	Ibajay	</item>
+        <item>	Kalibo	</item>
+        <item>	Lezo	</item>
+        <item>	Libacao	</item>
+        <item>	Madalag	</item>
+        <item>	Makato	</item>
+        <item>	Malay	</item>
+        <item>	Malinao	</item>
+        <item>	Nabas	</item>
+        <item>	New Washington	</item>
+        <item>	Numancia	</item>
+        <item>	Tangalan	</item>
+    </string-array>
+
+    <string-array name="iloilo_mun">
+        <item>	Not Applicable	</item>
+        <item>	Ajuy	</item>
+        <item>	Alimodian	</item>
+        <item>	Anilao	</item>
+        <item>	Badiangan	</item>
+        <item>	Balasan	</item>
+        <item>	Banate	</item>
+        <item>	Barotac Nuevo	</item>
+        <item>	Barotac Viejo	</item>
+        <item>	Batad	</item>
+        <item>	Bingawan	</item>
+        <item>	Cabatuan	</item>
+        <item>	Calinog	</item>
+        <item>	Carles	</item>
+        <item>	Conception	</item>
+        <item>	Dingle	</item>
+        <item>	Duenas	</item>
+        <item>	Dumangas	</item>
+        <item>	Estancia	</item>
+        <item>	Guimbal	</item>
+        <item>	Igbaras	</item>
+        <item>	Janiuay	</item>
+        <item>	Lambunao	</item>
+        <item>	Leganes	</item>
+        <item>	Lemery	</item>
+        <item>	Leon	</item>
+        <item>	Maasin	</item>
+        <item>	Miagao	</item>
+        <item>	Mina	</item>
+        <item>	New Lucena	</item>
+        <item>	Oton	</item>
+        <item>	City of Passi	</item>
+        <item>	Pavia	</item>
+        <item>	Pototan	</item>
+        <item>	San Dionisio	</item>
+        <item>	San Enrique	</item>
+        <item>	San Joaquin	</item>
+        <item>	San Miguel	</item>
+        <item>	San Rafael	</item>
+        <item>	Santa Barbara	</item>
+        <item>	Sara	</item>
+        <item>	Tigbauan	</item>
+        <item>	Tubungan	</item>
+        <item>	Zarraga	</item>
+        <item>	Iloilo City (Capital)	</item>
+    </string-array>
+
+    <string-array name="aklan_all_brgy">
+        <item>	Cabangila	</item>
+        <item>	Cabugao	</item>
+        <item>	Catmon	</item>
+        <item>	Dalipdip	</item>
+        <item>	Ginictan	</item>
+        <item>	Linayasan	</item>
+        <item>	Lumaynay	</item>
+        <item>	Lupo	</item>
+        <item>	Man-up	</item>
+        <item>	Odiong	</item>
+        <item>	Poblacion	</item>
+        <item>	Quinasay-an	</item>
+        <item>	Talon	</item>
+        <item>	Tibiao	</item>
+        <item>	Aranas	</item>
+        <item>	Arcangel	</item>
+        <item>	Calizo	</item>
+        <item>	Cortes	</item>
+        <item>	Feliciano	</item>
+        <item>	Fulgencio	</item>
+        <item>	Guanko	</item>
+        <item>	Morales	</item>
+        <item>	Oquendo	</item>
+        <item>	Poblacion	</item>
+        <item>	Agbanawan	</item>
+        <item>	Bacan	</item>
+        <item>	Badiangan	</item>
+        <item>	Cerrudo	</item>
+        <item>	Cupang	</item>
+        <item>	Daguitan	</item>
+        <item>	Daja Norte	</item>
+        <item>	Daja Sur	</item>
+        <item>	Dingle	</item>
+        <item>	Jumarap	</item>
+        <item>	Lapnag	</item>
+        <item>	Libas	</item>
+        <item>	Linabuan Sur	</item>
+        <item>	Mambog	</item>
+        <item>	Mangan	</item>
+        <item>	Muguing	</item>
+        <item>	Pagsanghan	</item>
+        <item>	Palale	</item>
+        <item>	Poblacion	</item>
+        <item>	Polo	</item>
+        <item>	Polocate	</item>
+        <item>	San Isidro	</item>
+        <item>	Sibalew	</item>
+        <item>	Sigcay	</item>
+        <item>	Taba-ao	</item>
+        <item>	Tabayon	</item>
+        <item>	Tinapuay	</item>
+        <item>	Torralba	</item>
+        <item>	Ugsod	</item>
+        <item>	Venturanza	</item>
+        <item>	Ambolong	</item>
+        <item>	Angas	</item>
+        <item>	Bay-ang	</item>
+        <item>	Cabugao	</item>
+        <item>	Caiyang	</item>
+        <item>	Camaligan	</item>
+        <item>	Camanci	</item>
+        <item>	Ipil	</item>
+        <item>	Lalab	</item>
+        <item>	Lupit	</item>
+        <item>	Magpag-ong	</item>
+        <item>	Magubahay	</item>
+        <item>	Mambuquiao	</item>
+        <item>	Man-up	</item>
+        <item>	Mandong	</item>
+        <item>	Napti	</item>
+        <item>	Palay	</item>
+        <item>	Poblacion	</item>
+        <item>	Songcolan	</item>
+        <item>	Tabon	</item>
+        <item>	Alegria	</item>
+        <item>	Bagongbayan	</item>
+        <item>	Balusbos	</item>
+        <item>	Bel-is	</item>
+        <item>	Cabugan	</item>
+        <item>	El Progreso	</item>
+        <item>	Habana	</item>
+        <item>	Katipunan	</item>
+        <item>	Mayapay	</item>
+        <item>	Nazareth	</item>
+        <item>	Panilongan	</item>
+        <item>	Poblacion	</item>
+        <item>	Santander	</item>
+        <item>	Tag-osip	</item>
+        <item>	Tigum	</item>
+        <item>	Agbago	</item>
+        <item>	Agdugayan	</item>
+        <item>	Antipolo	</item>
+        <item>	Aparicio	</item>
+        <item>	Aquino	</item>
+        <item>	Aslum	</item>
+        <item>	Bagacay	</item>
+        <item>	Batuan	</item>
+        <item>	Buenavista	</item>
+        <item>	Bugtongbato	</item>
+        <item>	Cabugao	</item>
+        <item>	Capilijan	</item>
+        <item>	Colongcolong	</item>
+        <item>	Laguinbanua	</item>
+        <item>	Mabusao	</item>
+        <item>	Malindog	</item>
+        <item>	Maloco	</item>
+        <item>	Mina-a	</item>
+        <item>	Monlaque	</item>
+        <item>	Naile	</item>
+        <item>	Naisud	</item>
+        <item>	Naligusan	</item>
+        <item>	Ondoy	</item>
+        <item>	Poblacion	</item>
+        <item>	Polo	</item>
+        <item>	Regador	</item>
+        <item>	Rivera	</item>
+        <item>	Rizal	</item>
+        <item>	San Isidro	</item>
+        <item>	San Jose	</item>
+        <item>	Santa Cruz	</item>
+        <item>	Tagbaya	</item>
+        <item>	Tul-ang	</item>
+        <item>	Unat	</item>
+        <item>	Yawan	</item>
+        <item>	Andagaw	</item>
+        <item>	Bachaw Norte	</item>
+        <item>	Bachaw Sur	</item>
+        <item>	Briones	</item>
+        <item>	Buswang New	</item>
+        <item>	Buswang Old	</item>
+        <item>	Caano	</item>
+        <item>	Estancia	</item>
+        <item>	Linabuan Norte	</item>
+        <item>	Mabilo	</item>
+        <item>	Mobo	</item>
+        <item>	Nalook	</item>
+        <item>	Poblacion	</item>
+        <item>	Pook	</item>
+        <item>	Tigayon	</item>
+        <item>	Tinigaw	</item>
+        <item>	Agcawilan	</item>
+        <item>	Bagto	</item>
+        <item>	Bugasongan	</item>
+        <item>	Carugdog	</item>
+        <item>	Cogon	</item>
+        <item>	Ibao	</item>
+        <item>	Mina	</item>
+        <item>	Poblacion	</item>
+        <item>	Santa Cruz	</item>
+        <item>	Santa Cruz Bigaa	</item>
+        <item>	Silakat-Nonok	</item>
+        <item>	Tayhawan	</item>
+        <item>	Agmailig	</item>
+        <item>	Alfonso XII	</item>
+        <item>	Batobato	</item>
+        <item>	Bonza	</item>
+        <item>	Calacabian	</item>
+        <item>	Calamcan	</item>
+        <item>	Can-Awan	</item>
+        <item>	Casit-an	</item>
+        <item>	Dalagsa-an	</item>
+        <item>	Guadalupe	</item>
+        <item>	Janlud	</item>
+        <item>	Julita	</item>
+        <item>	Luctoga	</item>
+        <item>	Magugba	</item>
+        <item>	Manika	</item>
+        <item>	Ogsip	</item>
+        <item>	Ortega	</item>
+        <item>	Oyang	</item>
+        <item>	Pampango	</item>
+        <item>	Pinonoy	</item>
+        <item>	Poblacion	</item>
+        <item>	Rivera	</item>
+        <item>	Rosal	</item>
+        <item>	Sibalew	</item>
+        <item>	Alaminos	</item>
+        <item>	Alas-as	</item>
+        <item>	Bacyang	</item>
+        <item>	Balactasan	</item>
+        <item>	Cabangahan	</item>
+        <item>	Cabilawan	</item>
+        <item>	Catabana	</item>
+        <item>	Dit-Ana	</item>
+        <item>	Galicia	</item>
+        <item>	Guinatu-an	</item>
+        <item>	Logohon	</item>
+        <item>	Mamba	</item>
+        <item>	Maria Cristina	</item>
+        <item>	Medina	</item>
+        <item>	Mercedes	</item>
+        <item>	Napnot	</item>
+        <item>	Pang-itan	</item>
+        <item>	Paningayan	</item>
+        <item>	Panipiason	</item>
+        <item>	Poblacion	</item>
+        <item>	San Jose	</item>
+        <item>	Singay	</item>
+        <item>	Talangban	</item>
+        <item>	Talimagao	</item>
+        <item>	Tigbawan	</item>
+        <item>	Agbalogo	</item>
+        <item>	Aglucay	</item>
+        <item>	Alibagon	</item>
+        <item>	Bagong Barrio	</item>
+        <item>	Baybay	</item>
+        <item>	Cabatanga	</item>
+        <item>	Cajilo	</item>
+        <item>	Calangcang	</item>
+        <item>	Calimbajan	</item>
+        <item>	Castillo	</item>
+        <item>	Cayangwan	</item>
+        <item>	Dumga	</item>
+        <item>	Libang	</item>
+        <item>	Mantiguib	</item>
+        <item>	Poblacion	</item>
+        <item>	Tibiawan	</item>
+        <item>	Tina	</item>
+        <item>	Tugas	</item>
+        <item>	Argao	</item>
+        <item>	Balabag	</item>
+        <item>	Balusbus	</item>
+        <item>	Cabulihan	</item>
+        <item>	Caticlan	</item>
+        <item>	Cogon	</item>
+        <item>	Cubay Norte	</item>
+        <item>	Cubay Sur	</item>
+        <item>	Dumlog	</item>
+        <item>	Manoc-Manoc	</item>
+        <item>	Motag	</item>
+        <item>	Naasog	</item>
+        <item>	Nabaoy	</item>
+        <item>	Napaan	</item>
+        <item>	Poblacion	</item>
+        <item>	Sambiray	</item>
+        <item>	Yapak	</item>
+        <item>	Banaybanay	</item>
+        <item>	Biga-a	</item>
+        <item>	Bulabud	</item>
+        <item>	Cabayugan	</item>
+        <item>	Capataga	</item>
+        <item>	Cogon	</item>
+        <item>	Dangcalan	</item>
+        <item>	Kinalangay Nuevo	</item>
+        <item>	Kinalangay Viejo	</item>
+        <item>	Lilo-an	</item>
+        <item>	Malandayon	</item>
+        <item>	Manhanip	</item>
+        <item>	Navitas	</item>
+        <item>	Osman	</item>
+        <item>	Poblacion	</item>
+        <item>	Rosario	</item>
+        <item>	San Dimas	</item>
+        <item>	San Ramon	</item>
+        <item>	San Roque	</item>
+        <item>	Sipac	</item>
+        <item>	Sugnod	</item>
+        <item>	Tambuan	</item>
+        <item>	Tigpalas	</item>
+        <item>	Alimbo-Baybay	</item>
+        <item>	Buenafortuna	</item>
+        <item>	Buenasuerte	</item>
+        <item>	Buenavista	</item>
+        <item>	Gibon	</item>
+        <item>	Habana	</item>
+        <item>	Laserna	</item>
+        <item>	Libertad	</item>
+        <item>	Magallanes	</item>
+        <item>	Matabana	</item>
+        <item>	Nagustan	</item>
+        <item>	Pawa	</item>
+        <item>	Pinatuad	</item>
+        <item>	Poblacion	</item>
+        <item>	Rizal	</item>
+        <item>	Solido	</item>
+        <item>	Tagororoc	</item>
+        <item>	Toledo	</item>
+        <item>	Unidos	</item>
+        <item>	Union	</item>
+        <item>	Candelaria	</item>
+        <item>	Cawayan	</item>
+        <item>	Dumaguit	</item>
+        <item>	Fatima	</item>
+        <item>	Guinbaliwan	</item>
+        <item>	Jalas	</item>
+        <item>	Jugas	</item>
+        <item>	Lawa-an	</item>
+        <item>	Mabilo	</item>
+        <item>	Mataphao	</item>
+        <item>	Ochando	</item>
+        <item>	Pinamuk-an	</item>
+        <item>	Poblacion	</item>
+        <item>	Polo	</item>
+        <item>	Puis	</item>
+        <item>	Tambak	</item>
+        <item>	Albasan	</item>
+        <item>	Aliputos	</item>
+        <item>	Badio	</item>
+        <item>	Bubog	</item>
+        <item>	Bulwang	</item>
+        <item>	Camanci Norte	</item>
+        <item>	Camanci Sur	</item>
+        <item>	Dongon East	</item>
+        <item>	Dongon West	</item>
+        <item>	Joyao-Joyao	</item>
+        <item>	Laguinbanua East	</item>
+        <item>	Laguinbanua West	</item>
+        <item>	Marianos	</item>
+        <item>	Navitas	</item>
+        <item>	Poblacion	</item>
+        <item>	Pusiw	</item>
+        <item>	Tabangka	</item>
+        <item>	Afga	</item>
+        <item>	Baybay	</item>
+        <item>	Dapdap	</item>
+        <item>	Dumatad	</item>
+        <item>	Jawili	</item>
+        <item>	Lanipga	</item>
+        <item>	Napatag	</item>
+        <item>	Panayakan	</item>
+        <item>	Poblacion	</item>
+        <item>	Pudiot	</item>
+        <item>	Tagas	</item>
+        <item>	Tamalagon	</item>
+        <item>	Tamokoe	</item>
+        <item>	Tondog	</item>
+        <item>	Vivo	</item>
+    </string-array>
+</resources>

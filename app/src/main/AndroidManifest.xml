@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PrivacyAndConsentActivity"></activity>
+        <activity android:name=".CropSelectActivity"></activity>
+        <activity android:name=".PrivacyAndConsentActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".AddImplementActivity" />
         <!--
