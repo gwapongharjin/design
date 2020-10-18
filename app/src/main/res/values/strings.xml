@@ -26,6 +26,7 @@
         <item>POST GRADUATE</item>
         <item>DIPLOMA</item>
         <item>VOCATIONAL TECHNICAL</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="machine_types">
@@ -46,7 +47,18 @@
         <item>SHELLER</item>
         <item>THRESHER</item>
         <item>WATER PUMP</item>
+    </string-array>
 
+    <string-array name="machine_types_sugarcane">
+        <item></item>
+        <item>2 WHEEL TRACTOR</item>
+        <item>4 WHEEL TRACTOR</item>
+        <item>BOOM SPRAYER</item>
+        <item>CANE GRAB LOADER</item>
+        <item>DITCHER</item>
+        <item>HARVESTER</item>
+        <item>INFIELD HAULER</item>
+       <item>WATER PUMP</item>
     </string-array>
 
     <string-array name="fourwheeltractorbrands">
@@ -173,7 +185,7 @@
         <item>DEPARTMENT OF AGRICULTURE (DA)</item>
         <item>DEPARTMENT OF AGRARIAN REFORM (DAR)</item>
         <item>SUGAR REGULATORY ADMINISTRATION (SRA)</item>
-        <item>OTHERS, SPECIFY</item>
+        <item>OTHERS</item>
 
     </string-array>
 
@@ -183,7 +195,9 @@
         <item>FUNCTIONAL UNUSED</item>
         <item>NON-FUNCTIONAL</item>
     </string-array>
-
+<string-array name="blank">
+    <item></item>
+</string-array>
     <string-array name="functionality">
         <item></item>
         <item>USED</item>
@@ -213,7 +227,14 @@
         <item>NO ONE IS SKILLED ENOUGH TO OPERATE THE MACHINE</item>
         <item>CUSTOM HIRING RATE OF MACHINE IS TOO HIGH</item>
         <item>THE MACHINE WAS NOT TURNED OVER TO THE BENEFICIARIES</item>
-        <item>OTHERS, SPECIFY</item>
+        <item>OTHERS</item>
+    </string-array>
+    <string-array name="problems_nonfunctional">
+        <item></item>
+        <item>FOR REPAIR</item>
+        <item>TOO OLD, UNREPAIRABLE</item>
+        <item>OBSOLETE</item>
+        <item>OTHERS</item>
     </string-array>
     <string-array name="custom_rate_units">
         <item></item>

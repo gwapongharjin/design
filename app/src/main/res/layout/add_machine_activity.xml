@@ -31,7 +31,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/custom_spinner"
-                android:entries="@array/machine_types"
+                android:entries="@array/machine_types_sugarcane"
                 app:layout_constraintEnd_toEndOf="@+id/btnScanQRCodeMach"
                 app:layout_constraintStart_toStartOf="@+id/textView5"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -132,6 +132,19 @@
                 app:layout_constraintStart_toStartOf="@+id/spinMachineType"
                 app:layout_constraintTop_toBottomOf="@+id/tvBrand" />
 
+            <EditText
+                android:id="@+id/edtOtherBrand"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_edit_text"
+                android:ems="10"
+                android:hint="Specify Brand"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/spinBrand"
+                app:layout_constraintStart_toStartOf="@+id/spinBrand"
+                app:layout_constraintTop_toBottomOf="@+id/spinBrand" />
+
             <TextView
                 android:id="@+id/tvModel"
                 android:layout_width="wrap_content"
@@ -153,7 +166,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvModel" />
 
             <EditText
-                android:id="@+id/edtPatedPower"
+                android:id="@+id/edtOtherModel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_edit_text"
+                android:ems="10"
+                android:hint="Specify Model"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/spinBrand"
+                app:layout_constraintStart_toStartOf="@+id/spinBrand"
+                app:layout_constraintTop_toBottomOf="@+id/spinModel" />
+
+            <EditText
+                android:id="@+id/edtRatedPower"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -172,9 +198,9 @@
                 android:background="@drawable/custom_edit_text"
                 android:hint="Service Area (in Ha)"
                 android:inputType="numberDecimal"
-                app:layout_constraintEnd_toEndOf="@+id/edtPatedPower"
-                app:layout_constraintStart_toStartOf="@+id/edtPatedPower"
-                app:layout_constraintTop_toBottomOf="@+id/edtPatedPower" />
+                app:layout_constraintEnd_toEndOf="@+id/edtRatedPower"
+                app:layout_constraintStart_toStartOf="@+id/edtRatedPower"
+                app:layout_constraintTop_toBottomOf="@+id/edtRatedPower" />
 
             <EditText
                 android:id="@+id/edtAverageOperatingHours"
@@ -185,7 +211,7 @@
                 android:ems="10"
                 android:hint="Average Operating Hours"
                 android:inputType="numberDecimal"
-                app:layout_constraintStart_toStartOf="@+id/edtPatedPower"
+                app:layout_constraintStart_toStartOf="@+id/edtRatedPower"
                 app:layout_constraintTop_toBottomOf="@+id/edtServiceArea" />
 
             <TextView
@@ -282,6 +308,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/custom_spinner"
                 android:entries="@array/ownership_of_machine"
                 app:layout_constraintEnd_toEndOf="@+id/spinMachineType"
                 app:layout_constraintStart_toStartOf="@+id/spinModel"
@@ -292,6 +319,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/custom_spinner"
                 android:entries="@array/purchasing_method"
                 app:layout_constraintEnd_toEndOf="@+id/spinOwnership"
                 app:layout_constraintStart_toStartOf="@+id/spinOwnership"
@@ -302,10 +330,24 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/custom_spinner"
                 android:entries="@array/agency"
                 app:layout_constraintEnd_toEndOf="@+id/spinOwnership"
                 app:layout_constraintStart_toStartOf="@+id/spinOwnership"
                 app:layout_constraintTop_toBottomOf="@+id/spinPurchGrantDono" />
+
+            <EditText
+                android:id="@+id/edtOtherAgency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_edit_text"
+                android:ems="10"
+                android:hint="Specify Agency"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="@+id/spinBrand"
+                app:layout_constraintStart_toStartOf="@+id/spinBrand"
+                app:layout_constraintTop_toBottomOf="@+id/spinAgency" />
 
             <EditText
                 android:id="@+id/edtNameOfOwnerOrOrganization"
@@ -317,19 +359,26 @@
                 android:hint="Name of Owner/Organization"
                 android:inputType="textPersonName"
                 app:layout_constraintStart_toStartOf="@+id/edtCapacity"
-                app:layout_constraintTop_toBottomOf="@+id/spinAgency" />
+                app:layout_constraintTop_toBottomOf="@+id/spinOwnership" />
 
-            <EditText
-                android:id="@+id/edtYearAcquired"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/tvYearAvquired"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:background="@drawable/custom_edit_text"
-                android:ems="10"
-                android:hint="Year Acquired"
-                android:inputType="number"
-                app:layout_constraintStart_toStartOf="@+id/edtNameOfOwnerOrOrganization"
+                android:text="Year Acquired"
+                app:layout_constraintStart_toStartOf="@+id/tvOwnership"
                 app:layout_constraintTop_toBottomOf="@+id/edtNameOfOwnerOrOrganization" />
+
+            <Spinner
+                android:id="@+id/spinYearAcquired"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_spinner"
+                app:layout_constraintEnd_toEndOf="@+id/tvOwnership"
+                app:layout_constraintStart_toStartOf="@+id/spinPurchGrantDono"
+                app:layout_constraintTop_toBottomOf="@+id/tvYearAvquired" />
 
             <TextView
                 android:id="@+id/tvConditionAcquired"
@@ -337,14 +386,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="Condition when Aquired"
-                app:layout_constraintStart_toStartOf="@+id/edtYearAcquired"
-                app:layout_constraintTop_toBottomOf="@+id/edtYearAcquired" />
+                app:layout_constraintStart_toStartOf="@+id/tvOwnership"
+                app:layout_constraintTop_toBottomOf="@+id/spinYearAcquired" />
 
             <Spinner
                 android:id="@+id/spinConditionAcquired"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/custom_spinner"
                 android:entries="@array/condition_when_bought"
                 app:layout_constraintEnd_toEndOf="@+id/spinAgency"
                 app:layout_constraintStart_toStartOf="@+id/spinAgency"
@@ -409,13 +459,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/spinCustomUnit" />
 
             <TextView
-                android:id="@+id/tvAvailability"
+                android:id="@+id/tvMachineAvailability"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="Machine Availability"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
-                app:layout_constraintTop_toBottomOf="@+id/edtCustomRateUnit" />
+                app:layout_constraintTop_toBottomOf="@+id/spinRental" />
 
             <Spinner
                 android:id="@+id/spinAvailability"
@@ -423,15 +473,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/custom_spinner"
+                android:entries="@array/rent_availablity"
                 app:layout_constraintEnd_toEndOf="@+id/spinRental"
                 app:layout_constraintStart_toStartOf="@+id/edtCustomRateUnit"
-                app:layout_constraintTop_toBottomOf="@+id/tvAvailability" />
+                app:layout_constraintTop_toBottomOf="@+id/tvMachineAvailability" />
 
             <Spinner
                 android:id="@+id/spinRentProvince"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:background="@drawable/custom_spinner"
                 android:entries="@array/provinces"
                 app:layout_constraintEnd_toEndOf="@+id/spinAvailability"
                 app:layout_constraintStart_toStartOf="@+id/spinAvailability"
@@ -442,6 +494,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/custom_spinner"
                 app:layout_constraintEnd_toEndOf="@+id/spinRentProvince"
                 app:layout_constraintStart_toStartOf="@+id/spinRentProvince"
                 app:layout_constraintTop_toBottomOf="@id/spinRentProvince" />
@@ -451,6 +504,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/custom_spinner"
                 app:layout_constraintEnd_toEndOf="@+id/spinRentMunicipality"
                 app:layout_constraintStart_toStartOf="@+id/spinRentMunicipality"
                 app:layout_constraintTop_toBottomOf="@id/spinRentMunicipality" />
@@ -461,17 +515,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="Present Condition"
-                app:layout_constraintStart_toStartOf="@+id/tvAvailability"
-                app:layout_constraintTop_toBottomOf="@+id/multispinRentBrgy" />
+                app:layout_constraintStart_toStartOf="@+id/tvMachineAvailability"
+                app:layout_constraintTop_toBottomOf="@+id/spinAvailability" />
 
             <Spinner
                 android:id="@+id/spinConditionPresent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/custom_spinner"
                 android:entries="@array/condition"
-                app:layout_constraintEnd_toEndOf="@+id/spinAgency"
-                app:layout_constraintStart_toStartOf="@+id/spinAgency"
+                app:layout_constraintEnd_toEndOf="@+id/spinConditionAcquired"
+                app:layout_constraintStart_toStartOf="@+id/spinConditionAcquired"
                 app:layout_constraintTop_toBottomOf="@+id/tvConditionPresent" />
 
 
@@ -480,29 +535,26 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/custom_spinner"
                 app:hintText="Multi Item Selection"
                 app:layout_constraintEnd_toEndOf="@+id/spinConditionPresent"
                 app:layout_constraintStart_toStartOf="@+id/spinConditionPresent"
                 app:layout_constraintTop_toBottomOf="@+id/spinConditionPresent" />
 
-            <TextView
-                android:id="@+id/tvFunctionality"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="Functionality"
-                app:layout_constraintStart_toStartOf="@+id/tvConditionPresent"
-                app:layout_constraintTop_toBottomOf="@+id/multspinProblemsUnused" />
-
-            <Spinner
-                android:id="@+id/spinFunctionality"
+            <EditText
+                android:id="@+id/edtOtherProblems"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:entries="@array/functionality"
-                app:layout_constraintEnd_toEndOf="@+id/spinConditionPresent"
-                app:layout_constraintStart_toStartOf="@+id/spinConditionPresent"
-                app:layout_constraintTop_toBottomOf="@+id/tvFunctionality" />
+                android:background="@drawable/custom_edit_text"
+                android:ems="10"
+                android:hint="Specify Problems"
+                android:inputType="textMultiLine"
+                android:maxLength="2000"
+                android:maxLines="2"
+                app:layout_constraintEnd_toEndOf="@id/spinAvailability"
+                app:layout_constraintStart_toStartOf="@id/spinAvailability"
+                app:layout_constraintTop_toBottomOf="@id/multspinProblemsUnused" />
 
             <TextView
                 android:id="@+id/tvLocationOfMachine"
@@ -510,17 +562,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="Location"
-                app:layout_constraintStart_toStartOf="@+id/tvFunctionality"
-                app:layout_constraintTop_toBottomOf="@+id/spinFunctionality" />
+                app:layout_constraintStart_toStartOf="@+id/tvConditionPresent"
+                app:layout_constraintTop_toBottomOf="@+id/spinConditionPresent" />
 
             <Spinner
                 android:id="@+id/spinLocationOfMachine"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/custom_spinner"
                 android:entries="@array/location"
-                app:layout_constraintEnd_toEndOf="@+id/spinFunctionality"
-                app:layout_constraintStart_toStartOf="@+id/spinFunctionality"
+                app:layout_constraintEnd_toEndOf="@+id/spinAvailability"
+                app:layout_constraintStart_toStartOf="@+id/spinAvailability"
                 app:layout_constraintTop_toBottomOf="@+id/tvLocationOfMachine" />
 
             <TextView
@@ -537,6 +590,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/custom_spinner"
+                android:entries="@array/provinces"
                 app:layout_constraintEnd_toEndOf="@+id/spinLocationOfMachine"
                 app:layout_constraintStart_toStartOf="@+id/spinLocationOfMachine"
                 app:layout_constraintTop_toBottomOf="@+id/tvProvince" />
@@ -555,6 +610,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/custom_spinner"
                 app:layout_constraintEnd_toEndOf="@+id/spinProvince"
                 app:layout_constraintStart_toStartOf="@+id/spinProvince"
                 app:layout_constraintTop_toBottomOf="@+id/tvMunicipality" />
@@ -568,11 +624,12 @@
                 app:layout_constraintStart_toStartOf="@+id/tvMunicipality"
                 app:layout_constraintTop_toBottomOf="@+id/spinMunicipality" />
 
-            <Spinner
-                android:id="@+id/spinBrgy"
+            <com.androidbuts.multispinnerfilter.SingleSpinnerSearch
+                android:id="@+id/singlespinBrgy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/custom_spinner"
                 app:layout_constraintEnd_toEndOf="@+id/spinMunicipality"
                 app:layout_constraintStart_toStartOf="@+id/spinMunicipality"
                 app:layout_constraintTop_toBottomOf="@+id/tvBrgy" />
@@ -586,6 +643,15 @@
                 android:textColor="#E53935"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <ImageButton
+                android:id="@+id/btnCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/imgMachine"
+                app:layout_constraintTop_toBottomOf="@+id/imgMachine"
+                app:srcCompat="@drawable/ic_outline_camera_alt_24" />
 
             <ImageButton
                 android:id="@+id/btnGetLocation"
@@ -616,15 +682,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/imgMachine"
                 app:srcCompat="@drawable/ic_outline_photo_album_24" />
 
-            <ImageButton
-                android:id="@+id/btnCamera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="@+id/imgMachine"
-                app:layout_constraintTop_toBottomOf="@+id/imgMachine"
-                app:srcCompat="@drawable/ic_outline_camera_alt_24" />
-
             <ImageView
                 android:id="@+id/imgMachine"
                 android:layout_width="300dp"
@@ -633,7 +690,7 @@
                 android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinBrgy"
+                app:layout_constraintTop_toBottomOf="@+id/singlespinBrgy"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView

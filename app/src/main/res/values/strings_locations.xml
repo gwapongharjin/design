@@ -101,6 +101,157 @@
         <item>	Iloilo City (Capital)	</item>
     </string-array>
 
+    <string-array name="antique_mun">
+        MUN_ANTIQUE
+        <item>	Not Applicable	</item>
+        <item>	Anini-y	</item>
+        <item>	Barbaza	</item>
+        <item>	Belison	</item>
+        <item>	Bugasong	</item>
+        <item>	Caluya	</item>
+        <item>	Culasi	</item>
+        <item>	Hamtic	</item>
+        <item>	Laua-an	</item>
+        <item>	Libertad	</item>
+        <item>	Pandan	</item>
+        <item>	Patnongon	</item>
+        <item>	San Jose de Buenavista	</item>
+        <item>	San Remigio	</item>
+        <item>	Sebaste	</item>
+        <item>	Sibalom	</item>
+        <item>	Tibiao	</item>
+        <item>	Tobias Fornier	</item>
+        <item>	Valderama	</item>
+    </string-array>
+
+    <string-array name="negros_occidental_mun">
+        <item>	Not Applicable	</item>
+        <item>	Bago City	</item>
+        <item>	Binalbagan	</item>
+        <item>	Cadiz City	</item>
+        <item>	Calatrava	</item>
+        <item>	Candoni	</item>
+        <item>	Cauayan	</item>
+        <item>	Enrique B. Magalona (Saravia)	</item>
+        <item>	City of Escalante	</item>
+        <item>	City of Himamaylan	</item>
+        <item>	Hinigaran	</item>
+        <item>	Hinoba-an (Asia)	</item>
+        <item>	Ilog	</item>
+        <item>	Isabela	</item>
+        <item>	City of Kabankalan	</item>
+        <item>	La Carlota City	</item>
+        <item>	La Castellana	</item>
+        <item>	Manapla	</item>
+        <item>	Moises Padilla (Magallon)	</item>
+        <item>	Murcia	</item>
+        <item>	Pontevedra	</item>
+        <item>	Pulupandan	</item>
+        <item>	Sagay City	</item>
+        <item>	San Carlos City	</item>
+        <item>	San Enrique	</item>
+        <item>	Silay City	</item>
+        <item>	City of Sipalay	</item>
+        <item>	City of Talisay	</item>
+        <item>	Toboso	</item>
+        <item>	Valladolid	</item>
+        <item>	City of Victorias	</item>
+        <item>	Salvador Benedicto	</item>
+        <item>	Bacolod City (Capital)	</item>
+    </string-array>
+
+    <string-array name="batangas_mun">
+        MUN_BATANGAS
+        <item>	Agoncillo	</item>
+        <item>	Alitagtag 	</item>
+        <item>	Balayan	</item>
+        <item>	Balete 	</item>
+        <item>	Batangas City	</item>
+        <item>	Bauan	</item>
+        <item>	Calaca	</item>
+        <item>	Calatagan	</item>
+        <item>	Cuenca	</item>
+        <item>	Ibaan	</item>
+        <item>	Laurel	</item>
+        <item>	Lemery	</item>
+        <item>	Lian	</item>
+        <item>	Lipa City	</item>
+        <item>	Lobo	</item>
+        <item>	Mabini	</item>
+        <item>	Malvar	</item>
+        <item>	Mataasnakahoy	</item>
+        <item>	Nasugbu	</item>
+        <item>	Padre Garcia	</item>
+        <item>	Rosario	</item>
+        <item>	San Jose	</item>
+        <item>	San Juan	</item>
+        <item>	San Luis	</item>
+        <item>	San Nicolas	</item>
+        <item>	San Pascual	</item>
+        <item>	Sta. Teresita	</item>
+        <item>	Sto. Tomas	</item>
+        <item>	Taal	</item>
+        <item>	Talisay 	</item>
+        <item>	Tanauan City	</item>
+        <item>	Taysan	</item>
+        <item>	Tingloy	</item>
+        <item>	Tuy	</item>
+    </string-array>
+    
+    <string-array name="negros_oriental_mun">
+        MUN_NEGROS_ORI
+        <item>	Amlayan (Ayuquitan)	</item>
+        <item>	Ayungon	</item>
+        <item>	Bacong	</item>
+        <item>	Bais City	</item>
+        <item>	Basay	</item>
+        <item>	City of Bayawan (Tulong)	</item>
+        <item>	Bindoy (Payabon)	</item>
+        <item>	Canlaon City	</item>
+        <item>	Dauin	</item>
+        <item>	Dumaguete City	</item>
+        <item>	City of Guihulngan	</item>
+        <item>	Jimalalud	</item>
+        <item>	La Libertad	</item>
+        <item>	Mabinay	</item>
+        <item>	Manjuyod	</item>
+        <item>	Pamplona	</item>
+        <item>	San Jose	</item>
+        <item>	Santa Catalina	</item>
+        <item>	Siaton	</item>
+        <item>	Sibulan	</item>
+        <item>	City of Tanjay	</item>
+        <item>	Tayasan	</item>
+        <item>	Valencia (Luzurriaga)	</item>
+        <item>	Vallehermoso	</item>
+        <item>	Zamboanguita	</item>
+    </string-array>
+
+    <string-array name="bukidnon_mun">
+        <item>	Baungon	</item>
+        <item>	Damulog	</item>
+        <item>	Dangcagan	</item>
+        <item>	Don Carlos	</item>
+        <item>	Impasug-Ong	</item>
+        <item>	Kadingilan	</item>
+        <item>	Kalilangan	</item>
+        <item>	Kibawe	</item>
+        <item>	Kitaotao	</item>
+        <item>	Lantapan	</item>
+        <item>	Libona	</item>
+        <item>	City of Malaybalay	</item>
+        <item>	Malitbog	</item>
+        <item>	Manolo Fortich	</item>
+        <item>	Maramag	</item>
+        <item>	Pangantucan	</item>
+        <item>	Quezon	</item>
+        <item>	San Fernando	</item>
+        <item>	Sumilao	</item>
+        <item>	Talakag	</item>
+        <item>	City of Valencia	</item>
+        <item>	Cabanglasan	</item>
+    </string-array>
+
     <string-array name="aklan_all_brgy">
         <item>	Cabangila	</item>
         <item>	Cabugao	</item>

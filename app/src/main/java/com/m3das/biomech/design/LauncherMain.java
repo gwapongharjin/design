@@ -18,7 +18,7 @@ public class LauncherMain extends AppCompatActivity {
         constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), PrivacyAndConsentActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CropSelectActivity.class);
                 startActivity(intent);
             }
         });

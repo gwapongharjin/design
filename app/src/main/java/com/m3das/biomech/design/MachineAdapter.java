@@ -63,6 +63,7 @@ public class MachineAdapter extends RecyclerView.Adapter<MachineAdapter.MachineH
                     }
                 }
             });
+
         }
 
     }

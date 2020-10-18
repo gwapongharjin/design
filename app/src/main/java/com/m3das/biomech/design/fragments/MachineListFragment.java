@@ -73,6 +73,8 @@ public class MachineListFragment extends Fragment {
             }
         });
 
+
+
         floatingActionButton = v.findViewById(R.id.floatingActionButtonMachAdd);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override

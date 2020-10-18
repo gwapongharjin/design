@@ -219,7 +219,7 @@
             app:layout_constraintTop_toBottomOf="@+id/multspinContactNumber" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinEduc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -247,7 +247,17 @@
             android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+            app:layout_constraintTop_toBottomOf="@+id/spinEduc" />
+
+        <Button
+            android:id="@+id/btnClearSave"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="@drawable/custom_button"
+            android:text="New Profile"
+            app:layout_constraintBottom_toTopOf="@+id/textView6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

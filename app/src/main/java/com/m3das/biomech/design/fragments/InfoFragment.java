@@ -3,7 +3,10 @@ package com.m3das.biomech.design.fragments;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,16 +18,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidbuts.multispinnerfilter.KeyPairBoolData;
 import com.androidbuts.multispinnerfilter.MultiSpinnerListener;
 import com.androidbuts.multispinnerfilter.MultiSpinnerSearch;
+import com.m3das.biomech.design.PrivacyAndConsentActivity;
 import com.m3das.biomech.design.R;
 import com.m3das.biomech.design.viewmodels.InfoViewModel;
 
@@ -40,6 +46,7 @@ public class InfoFragment extends Fragment {
     private Switch aSwitch;
     private EditText addressResp, nameResp, mobileNum, telNum, mobileNum2, telNum2, age, edtSpecifyPofile;
     private RadioButton rbMale, rbFemale;
+    Button btnSave;
     private ConstraintLayout constraintLayout;
     private MultiSpinnerSearch multspinOwner, multspinContact;
     public static final String EXTRA_DATE = "EXTRA_DATE";
@@ -55,7 +62,7 @@ public class InfoFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.info_fragment, container, false);
 
-        spinner = v.findViewById(R.id.spinner);
+        spinner = v.findViewById(R.id.spinEduc);
         aSwitch = v.findViewById(R.id.switchEditSave);
         addressResp = v.findViewById(R.id.edtAddress);
         nameResp = v.findViewById(R.id.edtNameResp);
@@ -72,14 +79,9 @@ public class InfoFragment extends Fragment {
         edtSpecifyPofile = v.findViewById(R.id.edtSpecifyProfile);
         spinProfile = v.findViewById(R.id.spinProfile);
         multspinContact = v.findViewById(R.id.multspinContactNumber);
+        btnSave = v.findViewById(R.id.btnClearSave);
 
-
-        mobileNum.setVisibility(v.INVISIBLE);
-        telNum.setVisibility(v.INVISIBLE);
-        mobileNum2.setVisibility(v.INVISIBLE);
-        telNum2.setVisibility(v.INVISIBLE);
-        multspinOwner.setVisibility(v.INVISIBLE);
-        edtSpecifyPofile.setVisibility(v.INVISIBLE);
+        hideByDefaultViews();
 
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -94,8 +96,11 @@ public class InfoFragment extends Fragment {
                     rbFemale.setEnabled(false);
                     multspinContact.setEnabled(false);
                     mobileNum.setEnabled(false);
+                    mobileNum2.setEnabled(false);
                     telNum.setEnabled(false);
+                    telNum2.setEnabled(false);
                     age.setEnabled(false);
+                    btnSave.setEnabled(false);
 
                 } else {
                     aSwitch.setText("Edit");
@@ -107,9 +112,42 @@ public class InfoFragment extends Fragment {
                     rbFemale.setEnabled(true);
                     multspinContact.setEnabled(true);
                     mobileNum.setEnabled(true);
+                    mobileNum2.setEnabled(false);
                     telNum.setEnabled(true);
+                    telNum2.setEnabled(true);
                     age.setEnabled(true);
+                    btnSave.setEnabled(true);
                 }
+            }
+        });
+
+
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                Intent intent = new Intent(getContext(), PrivacyAndConsentActivity.class);
+                                startActivity(intent);
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
+
+
             }
         });
 
@@ -131,63 +169,62 @@ public class InfoFragment extends Fragment {
                 String pos = "";
                 for (int i = 0; i < selectedItems.size(); i++) {
                     //Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-                     pos = pos +" "+selectedItems.get(i).getName();
+                    pos = pos + " " + selectedItems.get(i).getName();
                 }
-                    ConstraintLayout.LayoutParams paramsTvEduc = (ConstraintLayout.LayoutParams) tvEduc.getLayoutParams();
-                    ConstraintLayout.LayoutParams paramsTelNum = (ConstraintLayout.LayoutParams) telNum.getLayoutParams();
+                ConstraintLayout.LayoutParams paramsTvEduc = (ConstraintLayout.LayoutParams) tvEduc.getLayoutParams();
+                ConstraintLayout.LayoutParams paramsTelNum = (ConstraintLayout.LayoutParams) telNum.getLayoutParams();
 
-                if (pos.contains("TELEPHONE NUMBER") || pos.contains("MOBILE NUMBER") && !pos.contains("NOT APPLICABLE")) {
-                        if (pos.contains("TELEPHONE NUMBER") && pos.contains("MOBILE NUMBER")) {
-                            Log.d("MULT SPIN BOTH", pos);
+                if (pos.contains("TELEPHONE NUMBER") || pos.contains("MOBILE NUMBER")) {
+                    if (pos.contains("TELEPHONE NUMBER") && pos.contains("MOBILE NUMBER")) {
+                        Log.d("MULT SPIN BOTH", pos);
+                        telNum.setVisibility(View.VISIBLE);
+                        telNum2.setVisibility(View.VISIBLE);
+                        mobileNum.setVisibility(View.VISIBLE);
+                        mobileNum2.setVisibility(View.VISIBLE);
+                        paramsTvEduc.topToBottom = R.id.edtTelephoneNumber2;
+                        paramsTelNum.topToBottom = R.id.edtMobileNumber2;
+                    } else {
+                        if (pos.contains("TELEPHONE NUMBER")) {
+                            Log.d("MULT SPIN TL", pos);
                             telNum.setVisibility(View.VISIBLE);
                             telNum2.setVisibility(View.VISIBLE);
+                            mobileNum.setVisibility(View.INVISIBLE);
+                            mobileNum2.setVisibility(View.INVISIBLE);
+                            paramsTelNum.topToBottom = R.id.multspinContactNumber;
+                            paramsTvEduc.topToBottom = R.id.edtTelephoneNumber2;
+                        } else if (pos.contains("MOBILE NUMBER")) {
+                            Log.d("MULT SPIN MB", pos);
                             mobileNum.setVisibility(View.VISIBLE);
                             mobileNum2.setVisibility(View.VISIBLE);
-                            paramsTvEduc.topToBottom = R.id.edtTelephoneNumber2;
+                            telNum.setVisibility(View.INVISIBLE);
+                            telNum2.setVisibility(View.INVISIBLE);
                             paramsTelNum.topToBottom = R.id.edtMobileNumber2;
+                            paramsTvEduc.topToBottom = R.id.edtMobileNumber2;
                         }
-                        else {
-                            if (pos.contains("TELEPHONE NUMBER")) {
-                                Log.d("MULT SPIN TL", pos);
-                                telNum.setVisibility(View.VISIBLE);
-                                telNum2.setVisibility(View.VISIBLE);
-                                mobileNum.setVisibility(View.INVISIBLE);
-                                mobileNum2.setVisibility(View.INVISIBLE);
-                                paramsTelNum.topToBottom = R.id.multspinContactNumber;
-                                paramsTvEduc.topToBottom = R.id.edtTelephoneNumber2;
-                            } else if (pos.contains("MOBILE NUMBER")) {
-                                Log.d("MULT SPIN MB", pos);
-                                mobileNum.setVisibility(View.VISIBLE);
-                                mobileNum2.setVisibility(View.VISIBLE);
-                                telNum.setVisibility(View.INVISIBLE);
-                                telNum2.setVisibility(View.INVISIBLE);
-                                paramsTelNum.topToBottom = R.id.edtMobileNumber2;
-                                paramsTvEduc.topToBottom = R.id.edtMobileNumber2;
-                            }
-                        }
-
-                    } else if (pos.contains("NOT APPLICABLE")) {
-                        Log.d("MULT SPIN NA", pos);
-                        mobileNum.setVisibility(View.INVISIBLE);
-                        mobileNum2.setVisibility(View.INVISIBLE);
-                        telNum.setVisibility(View.INVISIBLE);
-                        telNum2.setVisibility(View.INVISIBLE);
-                        paramsTelNum.topToBottom = R.id.edtMobileNumber2;
-                        paramsTvEduc.topToBottom = R.id.multspinContactNumber;
-                    } else {
-                        Log.d("MULT SPIN ELSE", pos);
-                        telNum.setVisibility(View.INVISIBLE);
-                        telNum2.setVisibility(View.INVISIBLE);
-                        mobileNum.setVisibility(View.INVISIBLE);
-                        mobileNum2.setVisibility(View.INVISIBLE);
-                        paramsTelNum.topToBottom = R.id.edtMobileNumber2;
-                        paramsTvEduc.topToBottom = R.id.multspinContactNumber;
-
                     }
-                    paramsTvEduc.topMargin = (int) pxFromDp(getContext(), 32);
-                    paramsTelNum.topMargin = (int) pxFromDp(getContext(), 32);
-                    telNum.setLayoutParams(paramsTelNum);
-                    tvEduc.setLayoutParams(paramsTvEduc);
+
+                } else if (pos.contains("NOT APPLICABLE")) {
+                    Log.d("MULT SPIN NA", pos);
+                    mobileNum.setVisibility(View.INVISIBLE);
+                    mobileNum2.setVisibility(View.INVISIBLE);
+                    telNum.setVisibility(View.INVISIBLE);
+                    telNum2.setVisibility(View.INVISIBLE);
+                    paramsTelNum.topToBottom = R.id.edtMobileNumber2;
+                    paramsTvEduc.topToBottom = R.id.multspinContactNumber;
+                } else {
+                    Log.d("MULT SPIN ELSE", pos);
+                    telNum.setVisibility(View.INVISIBLE);
+                    telNum2.setVisibility(View.INVISIBLE);
+                    mobileNum.setVisibility(View.INVISIBLE);
+                    mobileNum2.setVisibility(View.INVISIBLE);
+                    paramsTelNum.topToBottom = R.id.edtMobileNumber2;
+                    paramsTvEduc.topToBottom = R.id.multspinContactNumber;
+
+                }
+                paramsTvEduc.topMargin = (int) pxFromDp(getContext(), 32);
+                paramsTelNum.topMargin = (int) pxFromDp(getContext(), 32);
+                telNum.setLayoutParams(paramsTelNum);
+                tvEduc.setLayoutParams(paramsTvEduc);
             }
         });
 
@@ -242,6 +279,15 @@ public class InfoFragment extends Fragment {
         }
         params.topMargin = (int) pxFromDp(getContext(), 32);
         nameResp.setLayoutParams(params);
+    }
+
+    private void hideByDefaultViews() {
+        mobileNum.setVisibility(View.INVISIBLE);
+        telNum.setVisibility(View.INVISIBLE);
+        mobileNum2.setVisibility(View.INVISIBLE);
+        telNum2.setVisibility(View.INVISIBLE);
+        multspinOwner.setVisibility(View.INVISIBLE);
+        edtSpecifyPofile.setVisibility(View.INVISIBLE);
     }
 
     public static float pxFromDp(final Context context, final float dp) {
