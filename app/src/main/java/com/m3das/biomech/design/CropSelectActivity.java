@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class CropSelectActivity extends AppCompatActivity {
+    public int cropSelected = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class CropSelectActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                cropSelected = 1;
             }
         });
         rice.setOnClickListener(new View.OnClickListener() {
@@ -32,6 +34,7 @@ public class CropSelectActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                cropSelected = 2;
             }
         });
         sugarcane.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +42,7 @@ public class CropSelectActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                cropSelected = 3;
             }
         });
 

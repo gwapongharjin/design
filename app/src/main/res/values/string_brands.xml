@@ -471,217 +471,235 @@
         <item>	ISABELO	</item>
         <item>	MEGA ISABELO	</item>
         <item>	SUPERMASA	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="aims_models_2wheel_tractors">
         <item></item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="apt_models_2wheel_tractors">
         <item></item>
         <item>	WR652	</item>
         <item>	WR653	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="bowa_models_2wheel_tractors">
         <item></item>
         <item>	MT-921G	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
 
     </string-array>
 
     <string-array name="buffalo_models_2wheel_tractors">
         <item></item>
         <item>	BHT-001	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="dua_models_2wheel_tractors">
         <item></item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="farm_master_models_2wheel_tractors">
         <item></item>
         <item>	FMHT-60C	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="kapitan_models_2wheel_tractors">
         <item></item>
         <item>	1001	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="kasama_harabas_models_2wheel_tractors">
         <item></item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="kato_models_2wheel_tractors">
         <item></item>
         <item>	KPT86-B	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="kelly_models_2wheel_tractors">
         <item></item>
         <item>	KHT	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="kuliglig_models_2wheel_tractors">
         <item></item>
         <item>	SK-106	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="long_foong_models_2wheel_tractors">
         <item></item>
         <item>	WR801	</item>
         <item>	WR652	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="mitsubomar_models_2wheel_tractors">
         <item></item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="nichino_models_2wheel_tractors">
         <item></item>
         <item>	IE-102	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="sumo_plus_models_2wheel_tractors">
         <item></item>
         <item>	SPHT-60	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="super_models_2wheel_tractors">
         <item></item>
         <item>	SFT01	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="tibay_kuliglig_models_2wheel_tractors">
         <item></item>
         <item>	TK-01	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="triple_j_models_2wheel_tractors">
         <item></item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="west_wind_models_2wheel_tractors">
         <item></item>
         <item>	STA-201	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="blumax_models_water_pump">
+        <item></item>
         <item>	BXD-100-P	</item>
         <item>	BXD-80P	</item>
         <item>	BXD-80P	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="briggs_stratton_models_water_pump">
+        <item></item>
         <item>	WP3-65	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="comet_models_water_pump">
+        <item></item>
         <item>	TCM-4B	</item>
         <item>	TCM-4A	</item>
         <item>	TCM 4H	</item>
         <item>	TDCV-4	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="eagle_models_water_pump">
+        <item></item>
         <item>NS100</item>
         <item>EC100</item>
         <item>NS-80</item>
         <item>EC80</item>
         <item>NS-50</item>
         <item>EC50</item>
-        <item>SPECIFY</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="extreme_models_water_pump">
+        <item></item>
         <item>4X4 PACKING TYPE</item>
-        <item>SPECIFY</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="gaudi_models_water_pump">
+        <item></item>
         <item>	GDW-929S-6	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="grundfos_models_water_pump">
+        <item></item>
         <item>	CRIF15-01	</item>
         <item>	SQF 2.2-2	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="hakata_models_water_pump">
+        <item></item>
         <item>	D50KB	</item>
         <item>	D80KB	</item>
         <item>	D100KB	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="hinoki_models_water_pump">
+        <item></item>
         <item>	HP80D	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="honda_models_water_pump">
+        <item></item>
         <item>WB30XH</item>
         <item>WB20XH</item>
         <item>SPEECIFY</item>
     </string-array>
 
     <string-array name="innova_models_water_pump">
+        <item></item>
         <item>NVC-15</item>
         <item>NVC-22</item>
-        <item>SPECIFY</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="ishii_models_water_pump">
+        <item></item>
         <item>IW-407</item>
-        <item>SPECIFY</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="kaiao_models_water_pump">
+        <item></item>
         <item>KDP40</item>
         <item>KDP20</item>
         <item>KDP30</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="kama_models_water_pump">
+        <item></item>
         <item>KDP20</item>
         <item>KDP40</item>
+        <item>OTHERS</item>
     </string-array>
-    
+
     <string-array name="kaito_models_water_pump">
+        <item></item>
         <item>	TS-100	</item>
         <item>	4X4 PACKING TYPE	</item>
         <item>	4X4 MS	</item>
         <item>	NS100	</item>
         <item>	3X3 MS	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="kato_models_water_pump">
+        <item></item>
         <item>	KCS-40	</item>
         <item>	KCS40-E	</item>
         <item>	KDP100	</item>
@@ -691,69 +709,81 @@
         <item>	KC30 3X3	</item>
         <item>	KDP50 2X2	</item>
         <item>	KT50	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="kenbo_models_water_pump">
+        <item></item>
         <item>	KBP20	</item>
         <item>	KBP30	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="kiataco_models_water_pump">
+        <item></item>
         <item>	TS-100	</item>
         <item>	4X4 PACKING TYPE	</item>
         <item>	4X4 MS	</item>
         <item>	NS100	</item>
         <item>	3X3 MS	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="launtop_models_water_pump">
+        <item></item>
         <item>LTP50C</item>
         <item>LTP80C</item>
-        <item>SPECIFY</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="lorentz_models_water_pump">
+        <item></item>
         <item>PS 1200HR-14</item>
-        <item>SPECIFY</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="maxipro_models_water_pump">
+        <item></item>
         <item>CP-200L</item>
-        <item>SPECIFY</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="miyata_models_water_pump">
+        <item></item>
         <item>NS100</item>
         <item>RBP-305</item>
-        <item>SPECIFY</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="motorstar_models_water_pump">
+        <item></item>
         <item>MS50 2X2</item>
         <item>MS50 3X3</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="nittoo_models_water_pump">
+        <item></item>
         <item>TS100</item>
         <item>NS100</item>
-        <item>SPECIFY</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="okama_models_water_pump">
+        <item></item>
         <item>KDP3</item>
-        <item>SPECIFY</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="platinum_models_water_pump">
+        <item></item>
         <item>PT5.5 HP</item>>
-<item>PT6.5 HP</item>
-        <item>SPECIFY</item>
+        <item>PT6.5 HP</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="robin_models_water_pump">
+        <item></item>
         <item>	RPX206	</item>
         <item>	RP205	</item>
         <item>	RP203	</item>
@@ -761,71 +791,144 @@
         <item>	RP305	</item>
         <item>	RP306	</item>
         <item>	PTG305	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="sakai_models_water_pump">
+        <item></item>
         <item>	NS80	</item>
         <item>	2X2 MECHANICAL TYPE	</item>
         <item>	3X3 PACKING STYLE	</item>
         <item>	4X4 MECHANICAL SEAL	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="solar_pump_models_water_pump">
+        <item></item>
         <item>	4PSP2-3	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="sumo_models_water_pump">
+        <item></item>
         <item>	SD100M	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="super_kasama_models_water_pump">
+        <item></item>
         <item>	KDP40	</item>
         <item>	KDP30	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="taro_models_water_pump">
+        <item></item>
         <item>	4X4 MS	</item>
         <item>	4X4 PT	</item>
         <item>	3X3 MS	</item>
         <item>	3X3 PT	</item>
         <item>	2X2 MS	</item>
         <item>	2X2  PT	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="tay_models_water_pump">
+        <item></item>
         <item>NS100</item>
-        <item>SPECIFY</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="tsurumi_models_water_pump">
+        <item></item>
         <item>	TE5-80R	</item>
         <item>	TE5-50R	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="vikyno_models_water_pump">
+        <item></item>
         <item>DTS3</item>
-        <item>SPECIFY</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="yamada_models_water_pump">
+        <item></item>
         <item>	DPW50	</item>
         <item>	DHP50	</item>
         <item>	DPW80	</item>
         <item>	DHP80	</item>
         <item>	DPW-100	</item>
-        <item>	SPECIFY	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
     <string-array name="yamaha_models_water_pump">
+        <item></item>
         <item>YP30G</item>
-        <item>SPECIFY</item>
+        <item>OTHERS</item>
+    </string-array>
+
+    <string-array name="cameco_models_harvester">
+        <item></item>
+        <item>	3510	</item>
+        <item>	OTHERS	</item>
+    </string-array>
+
+    <string-array name="case_ih_models_harvester">
+        <item></item>
+        <item>	A4000	</item>
+        <item>	A7000	</item>
+        <item>	A7700	</item>
+        <item>	A8010	</item>
+        <item>	A8810	</item>
+        <item>	OTHERS	</item>
+    </string-array>
+
+    <string-array name="caterpillar_models_harvester">
+        <item></item>
+        <item>	OTHERS	</item>
+    </string-array>
+
+    <string-array name="esmech_models_harvester">
+        <item></item>
+        <item>	7000	</item>
+        <item>	OTHERS	</item>
+    </string-array>
+
+    <string-array name="ford_models_harvester">
+        <item></item>
+        <item>	OTHERS	</item>
+    </string-array>
+
+    <string-array name="john_deere_models_harvester">
+        <item></item>
+        <item>	CH 570	</item>
+        <item>	CH 330	</item>
+        <item>	3520	</item>
+        <item>	OTHERS	</item>
+    </string-array>
+
+    <string-array name="kubota_models_harvester">
+        <item></item>
+        <item>	OTHERS	</item>
+    </string-array>
+
+    <string-array name="shaktiman_models_harvester">
+        <item></item>
+        <item>	3737	</item>
+        <item>	OTHERS	</item>
+    </string-array>
+
+    <string-array name="toft_models_harvester">
+        <item></item>
+        <item>	6000	</item>
+        <item>	OTHERS	</item>
+    </string-array>
+
+    <string-array name="yanmar_models_harvester">
+        <item></item>
+        <item>	HS2000	</item>
+        <item>	OTHERS	</item>
     </string-array>
 
 </resources>

@@ -16,23 +16,39 @@ public class MachineListViewModel extends AndroidViewModel {
     // TODO: Implement the ViewModel
     public MachinesRepository repository;
     public LiveData<List<Machines>> allMachines;
+    private final LiveData<List<Machines>> listOfMachines, machinesID;
+    String idOfMachine;
 
-    public MachineListViewModel(@NonNull Application application){
+    public MachineListViewModel(@NonNull Application application) {
         super(application);
         repository = new MachinesRepository(application);
         allMachines = repository.getAllMachines();
+        listOfMachines = repository.getListOfMachines();
+        machinesID = repository.getMachineID(idOfMachine);
     }
-    public void insert(Machines machines){
+
+    public void insert(Machines machines) {
         repository.insert(machines);
     }
-    public void update(Machines machines){
+
+    public void update(Machines machines) {
         repository.update(machines);
     }
-    public void delete(Machines machines){
+
+    public void delete(Machines machines) {
         repository.delete(machines);
     }
-    public LiveData<List<Machines>> getAllMachines(){
+
+    public LiveData<List<Machines>> getAllMachines() {
         return allMachines;
+    }
+
+    public LiveData<List<Machines>> getListOfMachines() {
+        return listOfMachines;
+    }
+
+    public LiveData<List<Machines>> getMachineID(String getID){
+        return machinesID;
     }
 
 }

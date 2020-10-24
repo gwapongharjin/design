@@ -30,7 +30,7 @@ public class DataFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.data_fragment, container, false);
-        button = (Button) v.findViewById(R.id.btnView);
+        button = v.findViewById(R.id.btnView);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -4,7 +4,8 @@ import android.text.InputFilter;
 import android.text.Spanned;
 
 public class MinMaxFilter implements InputFilter {
-    private int mIntMin , mIntMax ;
+    private final int mIntMin;
+    private final int mIntMax ;
     public MinMaxFilter ( int minValue , int maxValue) {
         this . mIntMin = minValue ;
         this . mIntMax = maxValue ;

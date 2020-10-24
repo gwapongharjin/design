@@ -64,7 +64,7 @@ public class MainImplementFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.main_implement_fragment, container, false);
 
-        fieldCapacity = (TextView) v.findViewById(R.id.tvFieldCapacityImp);
+        fieldCapacity = v.findViewById(R.id.tvFieldCapacityImp);
 
         return  v;
     }

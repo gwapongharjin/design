@@ -30,7 +30,6 @@
     </string-array>
 
     <string-array name="machine_types">
-        <item></item>
         <item>2 WHEEL TRACTOR</item>
         <item>4 WHEEL TRACTOR</item>
         <item>BOOM SPRAYER</item>
@@ -59,6 +58,33 @@
         <item>HARVESTER</item>
         <item>INFIELD HAULER</item>
        <item>WATER PUMP</item>
+    </string-array>
+
+    <string-array name="machine_types_corn">
+        <item></item>
+        <item>	2 WHEEL TRACTOR	</item>
+        <item>	4 WHEEL TRACTOR	</item>
+        <item>	MECHANICAL PLANTER	</item>
+        <item>	COMBINE-HARVESTER	</item>
+        <item>	WATER PUMP	</item>
+        <item>	SHELLER	</item>
+        <item>	PICKER	</item>
+        <item>	MILL	</item>
+        <item>	POWER SPRAYER	</item>
+    </string-array>
+
+    <string-array name="machine_types_rice">
+        <item></item>
+        <item>	2 WHEEL TRACTOR	</item>
+        <item>	4 WHEEL TRACTOR	</item>
+        <item>	MECHANICAL PLANTER	</item>
+        <item>	COMBINE-HARVESTER	</item>
+        <item>	WATER PUMP	</item>
+        <item>	THRESHER	</item>
+        <item>	DRYER	</item>
+        <item>	MILL	</item>
+        <item>	REAPER	</item>
+        <item>	POWER SPRAYER	</item>
     </string-array>
 
     <string-array name="fourwheeltractorbrands">

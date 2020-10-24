@@ -47,6 +47,6 @@ public class CustomScroll extends ScrollView {
     //Event listener.
 
     public interface OnBottomReachedListener {
-        public void onBottomReached();
+        void onBottomReached();
     }
 }

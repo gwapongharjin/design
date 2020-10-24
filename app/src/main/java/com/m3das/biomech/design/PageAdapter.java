@@ -11,7 +11,7 @@ import com.m3das.biomech.design.fragments.MapFragment;
 import com.m3das.biomech.design.fragments.ImplementsFragment;
 
 public class PageAdapter extends FragmentPagerAdapter {
-private int numTabs;
+private final int numTabs;
 
     public PageAdapter(@NonNull FragmentManager fm, int numOfTabs) {
         super(fm, numOfTabs);

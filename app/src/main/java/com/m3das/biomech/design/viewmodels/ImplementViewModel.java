@@ -14,13 +14,15 @@ import java.util.List;
 
 public class ImplementViewModel extends AndroidViewModel {
     public MachinesRepository repository;
-    public LiveData<List<Machines>> allMachines, listOfMachines;
+    public LiveData<List<Machines>> listOfMachines;
     public ImplementViewModel(@NonNull Application application) {
         super(application);
         repository = new MachinesRepository(application);
         listOfMachines = repository.getListOfMachines();
     }
+
     public LiveData<List<Machines>> getListOfMachines(){
-    return listOfMachines;
+        return listOfMachines;
     }
+
 }

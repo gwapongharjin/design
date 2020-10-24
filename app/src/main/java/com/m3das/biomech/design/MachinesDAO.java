@@ -1,4 +1,4 @@
-package com.m3das.biomech.design.viewmodels;
+package com.m3das.biomech.design;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -28,5 +28,8 @@ public interface MachinesDAO {
 
     @Query("SELECT id,machine_qrcode FROM Machines ORDER BY id DESC")
     LiveData<List<Machines>> getListofMachines();
+
+    @Query("SELECT * FROM Machines WHERE id = :getID")
+    LiveData<List<Machines>> getMachineID(String getID);
 
 }

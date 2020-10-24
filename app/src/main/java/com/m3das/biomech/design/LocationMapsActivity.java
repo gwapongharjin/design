@@ -26,8 +26,8 @@ public class LocationMapsActivity extends FragmentActivity implements OnMapReady
 
     private GoogleMap mMap;
     private ArrayList<String> permissionsToRequest;
-    private ArrayList<String> permissionsRejected = new ArrayList<>();
-    private ArrayList<String> permissions = new ArrayList<>();
+    private final ArrayList<String> permissionsRejected = new ArrayList<>();
+    private final ArrayList<String> permissions = new ArrayList<>();
     private final static int ALL_PERMISSIONS_RESULT = 27;
     private FloatingActionButton fabGetLoc, fabSaveLoc;
     LocationTrack locationTrack;
@@ -66,7 +66,7 @@ public class LocationMapsActivity extends FragmentActivity implements OnMapReady
                 double latitude = locationTrack.getLatitude();
                 double accuracy = locationTrack.getAccuracy();
 
-                Toast.makeText(getApplicationContext(), "Longitude:" + Double.toString(longitude) + "\nLatitude:" + Double.toString(latitude) + "\nAccuracy:"+Double.toString(accuracy), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Longitude:" + longitude + "\nLatitude:" + latitude + "\nAccuracy:"+ accuracy, Toast.LENGTH_SHORT).show();
 
                 mMap.clear();
                 LatLng loc = new LatLng(latitude, longitude);

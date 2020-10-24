@@ -1,9 +1,12 @@
 package com.m3das.biomech.design;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +19,6 @@ public class MachineAdapter extends RecyclerView.Adapter<MachineAdapter.MachineH
 
     private List<Machines> machinesList = new ArrayList<>();
     private OnItemClickListener listener;
-
     @NonNull
     @Override
     public MachineHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,6 +34,8 @@ public class MachineAdapter extends RecyclerView.Adapter<MachineAdapter.MachineH
         holder.Type.setText(currentMachine.getMachine_type());
         holder.QRCode.setText(currentMachine.getMachine_qrcode());
         holder.LatLong.setText(currentMachine.getMachine_latitude() + ", " + currentMachine.getMachine_longitude());
+
+
     }
 
     @Override
@@ -45,8 +49,15 @@ public class MachineAdapter extends RecyclerView.Adapter<MachineAdapter.MachineH
         notifyDataSetChanged();
     }
 
+    public Machines getMachineAt(int position){
+        return machinesList.get(position);
+    }
+
     class MachineHolder extends RecyclerView.ViewHolder {
-        private TextView LatLong, Type, QRCode;
+        private final TextView LatLong;
+        private final TextView Type;
+        private final TextView QRCode;
+
 
         public MachineHolder(View itemView) {
             super(itemView);
@@ -63,7 +74,6 @@ public class MachineAdapter extends RecyclerView.Adapter<MachineAdapter.MachineH
                     }
                 }
             });
-
         }
 
     }
@@ -75,4 +85,6 @@ public class MachineAdapter extends RecyclerView.Adapter<MachineAdapter.MachineH
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
+
+
 }

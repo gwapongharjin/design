@@ -7,9 +7,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -44,6 +46,7 @@ import com.androidbuts.multispinnerfilter.SingleSpinnerListener;
 import com.androidbuts.multispinnerfilter.SingleSpinnerSearch;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
+import com.m3das.biomech.design.viewmodels.MachineListViewModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -69,25 +72,41 @@ public class AddMachineActivity extends AppCompatActivity {
     private Spinner spinMachineType, spinRentProv, spinRentMun, spinTypeOfMill, spinRental, spinCustomUnit, spinAvailability, spinConditionPresent,
             spinTypeofTubeWells, spinOwnership, spinPurchGrantDono, spinAgency, spinProvince, spinMunicipality, spinBrand, spinModel, spinYearAcquired;
     private DatePicker dateOfSurvey;
-    private String resLat, resLong;
+    private String resLat, resLong, encodedImage, mCurrentPhotoPath;
+    ;
     private MultiSpinnerSearch multspinProblemsUnused, multspinRentBrgy;
     private SingleSpinnerSearch singlespinBarangay, singlespinYearAcquired;
     private ConstraintLayout.LayoutParams paramstvBrand, paramstvOwnership, paramsedtCapacity, paramsedtNumLoads, paramstvConditionPresent, paramstvLocation, paramstvModel, paramsedtRatedPower,
             paramsedtAveYield, paramsedtRate, paramstvTypeTubewells, paramsedtNameOfOwnerOrg, paramstvMachineAvailability;
+    private MachineListViewModel machineListViewModel;
     public static final int CAMERA_PERM_CODE = 101;
     public static final int CAMERA_REQUEST_CODE = 102;
     public static final int GALLERY_REQUEST_CODE = 105;
     public static final int LOCATION_REQUEST_CODE = 127;
+    public static final int WRITE_PERM_CODE = 279;
     public static final String EXTRA_MACHINE_TYPE = "EXTRA_MACHINE_TYPE";
     public static final String EXTRA_MACHINE_QRCODE = "EXTRA_MACHINE_QRCODE";
     public static final String EXTRA_LAT = "EXTRA_LAT";
     public static final String EXTRA_LONG = "EXTRA_LONG";
     public static final String EXTRA_ID = "EXTRA_ID";
+    public static final String EXTRA_IMG = "EXTRA_IMG";
+    public static final String EXTRA_MACHINE_DB = "EXTRA_MACHINR_DB";
+    static Uri capturedImageUri = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_machine_activity);
+
+        askCameraPermission();
+
+        if (checkPermission()) {
+            // Code for above or equal 23 API Oriented Device
+            // Your Permission granted already .Do next code
+        } else {
+            requestPermission(); // Code for permission
+        }
+        machineListViewModel = new ViewModelProvider(this).get(MachineListViewModel.class);
 
         smallMargin = (int) pxFromDp(this, 8);
         bigMargin = (int) pxFromDp(this, 32);
@@ -130,18 +149,28 @@ public class AddMachineActivity extends AppCompatActivity {
         spinYearAcquired.setAdapter(adapter);
 
 
-        spinRentProv.setPrompt("Select Province");
-        spinRentMun.setPrompt("Select Municipality");
         multspinRentBrgy.setHintText("Select Barangays");
         multspinProblemsUnused.setHintText("Select Problems...");
 
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddMachineActivity.this.askCameraPermission();
-                Toast.makeText(AddMachineActivity.this, "Camera Clicked", Toast.LENGTH_SHORT).show();
+
+
+                ContentValues values = new ContentValues();
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                String imageFileName = "JPEG_" + timeStamp + "_";
+                values.put(MediaStore.Images.Media.TITLE, imageFileName);
+                values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera");
+                capturedImageUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                //Camera intent
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, capturedImageUri);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+
             }
         });
+
         gallery.setOnClickListener(view -> {
             Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(gallery, GALLERY_REQUEST_CODE);
@@ -149,7 +178,6 @@ public class AddMachineActivity extends AppCompatActivity {
         });
 
         btnScanQR.setOnClickListener(view -> {
-            AddMachineActivity.this.askCameraPermission();
             Intent intent = new Intent(AddMachineActivity.this, ScanBarcodeActivity.class);
             startActivityForResult(intent, 0);
             Toast.makeText(AddMachineActivity.this, "Scanning QR", Toast.LENGTH_SHORT).show();
@@ -165,15 +193,8 @@ public class AddMachineActivity extends AppCompatActivity {
 
         if (intent.hasExtra(EXTRA_ID)) {
             int position = -1;
-//            setTitle("Editing Machine");
-//            String[] arr = getResources().getStringArray(R.array.machine_types);
-//              for (int i = 0; i < arr.length; i++) {
-//                if (arr[i].equals(intent.getStringExtra(EXTRA_MACHINE_TYPE))) {
-//                    position = i;
-//                    break;
-//                }
-//            }
             String compareMachineType = intent.getStringExtra(EXTRA_MACHINE_TYPE);
+
             ArrayAdapter<CharSequence> adaptercompare = ArrayAdapter.createFromResource(this, R.array.machine_types_sugarcane, android.R.layout.simple_spinner_item);
             adaptercompare.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             if (compareMachineType != null) {
@@ -185,6 +206,11 @@ public class AddMachineActivity extends AppCompatActivity {
             edtQRCode.setText(intent.getStringExtra(EXTRA_MACHINE_QRCODE));
             tvLat.setText(intent.getStringExtra(EXTRA_LAT));
             tvLong.setText(intent.getStringExtra(EXTRA_LONG));
+
+            Log.d("Extra IMG value", Variable.getStringImage());
+            byte[] decodedString = Base64.decode(Variable.getStringImage(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            selectedImage.setImageBitmap(decodedByte);
 
         } else {
             setTitle("Adding Machine");
@@ -351,6 +377,30 @@ public class AddMachineActivity extends AppCompatActivity {
         });
     }
 
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        if (checkPermission()) {
+            // Code for above or equal 23 API Oriented Device
+            // Your Permission granted already .Do next code
+        } else {
+            requestPermission(); // Code for permission
+        }
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  // prefix
+                ".jpg",         // suffix
+                storageDir      // directory
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        return image;
+    }
+
     public static float pxFromDp(final Context context, final float dp) {
         return dp * context.getResources().getDisplayMetrics().density;
     }
@@ -391,6 +441,10 @@ public class AddMachineActivity extends AppCompatActivity {
                         break;
                     case "WATER PUMP":
                         sortingBrandWaterPump(pos);
+                        break;
+
+                    case "HARVESTER":
+                        sortingBrandHarvester(pos);
                         break;
                     default:
                         break;
@@ -711,6 +765,54 @@ public class AddMachineActivity extends AppCompatActivity {
         spinModel.setAdapter(dataAdapter);
     }
 
+    private void sortingBrandHarvester(String position) {
+        List<String> stringListModelHarvester;
+
+
+        switch (position) {
+
+            case "CAMECO":
+                stringListModelHarvester = Arrays.asList(getResources().getStringArray(R.array.cameco_models_harvester));
+                break;
+            case "CASE IH":
+                stringListModelHarvester = Arrays.asList(getResources().getStringArray(R.array.case_ih_models_harvester));
+                break;
+            case "CATERPILLAR":
+                stringListModelHarvester = Arrays.asList(getResources().getStringArray(R.array.caterpillar_models_harvester));
+                break;
+            case "ESMECH":
+                stringListModelHarvester = Arrays.asList(getResources().getStringArray(R.array.esmech_models_harvester));
+                break;
+            case "FORD":
+                stringListModelHarvester = Arrays.asList(getResources().getStringArray(R.array.ford_models_harvester));
+                break;
+            case "JOHN DEERE":
+                stringListModelHarvester = Arrays.asList(getResources().getStringArray(R.array.john_deere_models_harvester));
+                break;
+            case "KUBOTA":
+                stringListModelHarvester = Arrays.asList(getResources().getStringArray(R.array.kubota_models_harvester));
+                break;
+            case "SHAKTIMAN":
+                stringListModelHarvester = Arrays.asList(getResources().getStringArray(R.array.shaktiman_models_harvester));
+                break;
+            case "TOFT":
+                stringListModelHarvester = Arrays.asList(getResources().getStringArray(R.array.toft_models_harvester));
+                break;
+            case "YANMAR":
+                stringListModelHarvester = Arrays.asList(getResources().getStringArray(R.array.yanmar_models_harvester));
+                break;
+            default:
+                stringListModelHarvester = Arrays.asList(getResources().getStringArray(R.array.specify_only_brand_boom_sprayer_cane_grab_infield));
+                break;
+
+
+        }
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, stringListModelHarvester);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinModel.setAdapter(dataAdapter);
+    }
+
     private void modelSelect(int position) {
         String pos = spinModel.getItemAtPosition(position).toString();
 
@@ -788,6 +890,7 @@ public class AddMachineActivity extends AppCompatActivity {
         switch (pos) {
             case "FUNCTIONAL USED":
                 multspinProblemsUnused.setVisibility(View.INVISIBLE);
+                edtOtherProblems.setVisibility(View.INVISIBLE);
                 paramstvLocation.topToBottom = R.id.spinConditionPresent;
                 break;
             case "FUNCTIONAL UNUSED":
@@ -1228,10 +1331,7 @@ public class AddMachineActivity extends AppCompatActivity {
     }
 
     public static boolean isNullOrEmpty(String str) {
-        if (str != null && !str.isEmpty()) {
-            return false;
-        }
-        return true;
+        return str == null || str.isEmpty();
     }
 
     private void saveNote() {
@@ -1241,6 +1341,7 @@ public class AddMachineActivity extends AppCompatActivity {
         String date = month + "/" + day + "/" + year;
         String latitude = tvLat.getText().toString();
         String longitude = tvLong.getText().toString();
+        String image = encodedImage;
 
         if (machineType.trim().isEmpty() ||
                 machineQRCode.trim().isEmpty() ||
@@ -1250,13 +1351,19 @@ public class AddMachineActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Type: " + machineType + " QR Code: " + machineQRCode + " Latitude: " + latitude + " Longitude: " + longitude, Toast.LENGTH_LONG).show();
             Intent dataAddMachine = new Intent();
-            dataAddMachine.putExtra(EXTRA_MACHINE_TYPE, machineType);
-            dataAddMachine.putExtra(EXTRA_MACHINE_QRCODE, machineQRCode);
-            dataAddMachine.putExtra(EXTRA_LAT, latitude);
-            dataAddMachine.putExtra(EXTRA_LONG, longitude);
+//            dataAddMachine.putExtra(EXTRA_MACHINE_TYPE, machineType);
+//            dataAddMachine.putExtra(EXTRA_MACHINE_QRCODE, machineQRCode);
+//            dataAddMachine.putExtra(EXTRA_LAT, latitude);
+//            dataAddMachine.putExtra(EXTRA_LONG, longitude);
+//            dataAddMachine.putExtra(EXTRA_IMG, image);
+
+            Machines machines = new Machines(machineQRCode, machineType, latitude, longitude, image);
+            machineListViewModel.insert(machines);
 
             int id = getIntent().getIntExtra(EXTRA_ID, -1);
             if (id != -1) {
+                machines.setId(id);
+                machineListViewModel.update(machines);
                 dataAddMachine.putExtra(EXTRA_ID, id);
             }
 
@@ -1302,7 +1409,7 @@ public class AddMachineActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
         } else {
-            dispatchTakePictureIntent();
+            //TODO ADD PICTURE INTENT
         }
 
     }
@@ -1312,26 +1419,65 @@ public class AddMachineActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == CAMERA_PERM_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                dispatchTakePictureIntent();
+                //TODO ADD PICTURE INTENT
             } else {
                 Toast.makeText(this, "Camera Permission is Required to Use camera.", Toast.LENGTH_SHORT).show();
             }
+        } else if (requestCode == WRITE_PERM_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.e("value", "Write Permission granted");
+            } else {
+                Log.e("value", "Write Permission not granted");
+            }
+
         }
     }
+
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(AddMachineActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (result == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void requestPermission() {
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(AddMachineActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            Toast.makeText(AddMachineActivity.this, "NECESITAMOS QUE NOS CONCEDAS LOS PERMISOS DE ALMACENAMIENTO PARA GUARDAR NOTICIAS O RADIOS COMO FAVORITOS.", Toast.LENGTH_LONG).show();
+        } else {
+            ActivityCompat.requestPermissions(AddMachineActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_PERM_CODE);
+        }
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                File f = new File(currentPhotoPath);
-                selectedImage.setImageURI(Uri.fromFile(f));
-                Log.d("tag", "Absolute Url of Image is " + Uri.fromFile(f));
+//                File f = new File(currentPhotoPath);
+//                selectedImage.setImageURI(Uri.fromFile(f));
+//                Log.d("tag", "Absolute Url of Image is " + Uri.fromFile(f));
+//
+//                Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//                Uri contentUri = Uri.fromFile(f);
+//                mediaScanIntent.setData(contentUri);
+//                this.sendBroadcast(mediaScanIntent);
+                Bitmap bitmap = null;
 
-                Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                Uri contentUri = Uri.fromFile(f);
-                mediaScanIntent.setData(contentUri);
-                this.sendBroadcast(mediaScanIntent);
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), capturedImageUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap = scale(bitmap, 1080, 1920);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                byte[] imgInByte = byteArrayOutputStream.toByteArray();
+                encodedImage = Base64.encodeToString(imgInByte, Base64.DEFAULT);
+                selectedImage.setImageBitmap(bitmap);
             }
 
         }
@@ -1362,10 +1508,11 @@ public class AddMachineActivity extends AppCompatActivity {
 
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                bitmap = scale(bitmap, 720, 1280);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+//                bitmap = scale(bitmap, 576, 1024);
+                bitmap = scale(bitmap, 1080, 1920);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                 byte[] imgInByte = byteArrayOutputStream.toByteArray();
-                String encodedImg = Base64.encodeToString(imgInByte, Base64.DEFAULT);
+                encodedImage = Base64.encodeToString(imgInByte, Base64.DEFAULT);
                 selectedImage.setImageBitmap(bitmap);
             }
 
@@ -1384,53 +1531,6 @@ public class AddMachineActivity extends AppCompatActivity {
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-/*    private String getFileExt(Uri contentUri) {
-        ContentResolver c = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(c.getType(contentUri));
-    }*/
-
-
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-//        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        currentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
-
-
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-
-            }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.biomech.design.",//TODO ADD AUTHORITY
-                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
-            }
         }
     }
 

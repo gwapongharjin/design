@@ -44,6 +44,7 @@ import com.m3das.biomech.design.implementfragments.MainImplementFragment;
 import com.m3das.biomech.design.implementfragments.MechHarvestFragment;
 import com.m3das.biomech.design.implementfragments.MechPlanterFragment;
 import com.m3das.biomech.design.viewmodels.ImplementViewModel;
+import com.m3das.biomech.design.viewmodels.MachineListViewModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -68,8 +69,8 @@ public class AddImplementActivity extends AppCompatActivity {
     public static final int GALLERY_REQUEST_CODE = 105;
     public static final int LOCATION_REQUEST_CODE = 127;
     private String resLat, resLong;
-    private ImplementViewModel implementViewModel;
-
+    private MachineListViewModel machineListViewModel;
+    private List machinesListFromMachines = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,13 +87,13 @@ public class AddImplementActivity extends AppCompatActivity {
         tvCoordinates = findViewById(R.id.tvCoordinatesImp);
         spinMachineUsing = findViewById(R.id.spinMachineUsing);
 
-        implementViewModel = new ViewModelProvider(this).get(ImplementViewModel.class);
-        implementViewModel.getListOfMachines().observe(this, new Observer<List<Machines>>() {
+        machineListViewModel = new ViewModelProvider(this).get(MachineListViewModel.class);
+        machineListViewModel.getListOfMachines().observe(this, new Observer<List<Machines>>() {
             @Override
             public void onChanged(List<Machines> machines) {
+
             }
         });
-
 
         camera.setOnClickListener(new View.OnClickListener() {
             @Override

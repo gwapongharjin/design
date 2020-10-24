@@ -10,7 +10,7 @@ public class Machines {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private String machine_qrcode;
+    private final String machine_qrcode;
 //    private String date_of_survey;
 //    private String profile_of_respondent;
 //    private String name_of_respondent;
@@ -21,7 +21,7 @@ public class Machines {
 //    private String telephone_number;
 //    private String educational_attainment;
 //    private String location_of_machine;
-    private String machine_type;
+    private final String machine_type;
 //    private String brand_of_machine;
 //    private String model_of_machine;
 //    private String rated_power;
@@ -29,9 +29,9 @@ public class Machines {
 //    private String average_operating_hours;
 //    private String average_operating_days;
 //    private String type_of_ownership;
-    private String machine_latitude;
-    private String machine_longitude;
-    private String machine_image_base64;
+    private final String machine_latitude;
+    private final String machine_longitude;
+    private final String machine_image_base64;
 
     public Machines(String machine_qrcode, String machine_type, String machine_latitude, String machine_longitude, String machine_image_base64) {
         this.machine_qrcode = machine_qrcode;
