@@ -84,6 +84,7 @@ public class AddMachineActivity extends AppCompatActivity {
     private SingleSpinnerSearch singleSpinnerSearch
             //singlespinBarangay
             ;
+    private Intent intentFromDb;
     private ConstraintLayout.LayoutParams paramstvBrand, paramstvOwnership, paramsedtCapacity, paramsedtNumLoads, paramstvConditionPresent, paramstvLocation, paramstvModel, paramsedtRatedPower,
             paramsedtAveYield, paramsedtRate, paramstvTypeTubewells, paramsedtNameOfOwnerOrg, paramstvMachineAvailability;
     private MachineListViewModel machineListViewModel;
@@ -462,6 +463,7 @@ public class AddMachineActivity extends AppCompatActivity {
     private void editItemSelected(Intent intent1) {
         int position = -1;
 
+        intentFromDb = intent1;
         Intent intent = intent1;
 
         String stringCompare = intent.getStringExtra(EXTRA_MACHINE_TYPE);
@@ -769,16 +771,17 @@ public class AddMachineActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinModel.setAdapter(dataAdapter);
 
-        Intent intent = getIntent();
-        int pos =0;
-        if (intent.hasExtra(EXTRA_ID)){
-            String stringCompare = intent.getStringExtra(EXTRA_MODEL);
+        Intent intent = intentFromDb;
+        int pos = 0;
+        if (intent != null && intent.hasExtra(EXTRA_ID)) {
+
+            String stringCompare = intent.getStringExtra(EXTRA_BRAND);
 
             if (!isNullOrEmpty(stringCompare)) {
-                 pos = dataAdapter.getPosition(stringCompare);
+                pos = dataAdapter.getPosition(stringCompare);
             }
+            spinModel.setSelection(pos);
         }
-        spinModel.setSelection(pos);
 
     }
 
@@ -857,16 +860,17 @@ public class AddMachineActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinModel.setAdapter(dataAdapter);
 
-        Intent intent = getIntent();
-        int pos =0;
-        if (intent.hasExtra(EXTRA_ID)){
-            String stringCompare = intent.getStringExtra(EXTRA_MODEL);
+        Intent intent = intentFromDb;
+        int pos = 0;
+        if (intent != null && intent.hasExtra(EXTRA_ID)) {
+
+            String stringCompare = intent.getStringExtra(EXTRA_BRAND);
 
             if (!isNullOrEmpty(stringCompare)) {
                 pos = dataAdapter.getPosition(stringCompare);
             }
+            spinModel.setSelection(pos);
         }
-        spinModel.setSelection(pos);
     }
 
     private void sortingBrandWaterPump(String position) {
@@ -993,16 +997,17 @@ public class AddMachineActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinModel.setAdapter(dataAdapter);
 
-        Intent intent = getIntent();
-        int pos =0;
-        if (intent.hasExtra(EXTRA_ID)){
-            String stringCompare = intent.getStringExtra(EXTRA_MODEL);
+        Intent intent = intentFromDb;
+        int pos = 0;
+        if (intent != null && intent.hasExtra(EXTRA_ID)) {
+
+            String stringCompare = intent.getStringExtra(EXTRA_BRAND);
 
             if (!isNullOrEmpty(stringCompare)) {
                 pos = dataAdapter.getPosition(stringCompare);
             }
+            spinModel.setSelection(pos);
         }
-        spinModel.setSelection(pos);
     }
 
     private void sortingBrandHarvester(String position) {
@@ -1051,16 +1056,17 @@ public class AddMachineActivity extends AppCompatActivity {
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, stringListModelHarvester);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinModel.setAdapter(dataAdapter);
-        Intent intent = getIntent();
-        int pos =0;
-        if (intent.hasExtra(EXTRA_ID)){
-            String stringCompare = intent.getStringExtra(EXTRA_MODEL);
+        Intent intent = intentFromDb;
+        int pos = 0;
+        if (intent != null && intent.hasExtra(EXTRA_ID)) {
+
+            String stringCompare = intent.getStringExtra(EXTRA_BRAND);
 
             if (!isNullOrEmpty(stringCompare)) {
                 pos = dataAdapter.getPosition(stringCompare);
             }
+            spinModel.setSelection(pos);
         }
-        spinModel.setSelection(pos);
     }
 
     private void modelSelect(int position) {
@@ -1135,7 +1141,7 @@ public class AddMachineActivity extends AppCompatActivity {
     private void problemsUnused(int position) {
         String pos = spinConditionPresent.getItemAtPosition(position).toString();
         List<KeyPairBoolData> selectedProb = pairingOfList(Arrays.asList(getResources().getStringArray(R.array.blank)));
-        int stringArray = 0;
+        Integer stringArray = R.array.blank;
 
         switch (pos) {
             case "FUNCTIONAL USED":
@@ -1456,15 +1462,16 @@ public class AddMachineActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinBrand.setAdapter(dataAdapter);
 
-        Intent intent = getIntent();
-        if (intent.hasExtra(EXTRA_ID)){
+        Intent intent = intentFromDb;
+        if (intent != null && intent.hasExtra(EXTRA_ID)) {
+
             String stringCompare = intent.getStringExtra(EXTRA_BRAND);
 
             if (!isNullOrEmpty(stringCompare)) {
                 position = dataAdapter.getPosition(stringCompare);
             }
+            spinBrand.setSelection(position);
         }
-        spinBrand.setSelection(position);
 
 
     }
