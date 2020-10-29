@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.fragment.app.FragmentActivity;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -18,7 +20,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
+
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
@@ -30,6 +34,7 @@ public class LocationMapsActivity extends FragmentActivity implements OnMapReady
     private final ArrayList<String> permissions = new ArrayList<>();
     private final static int ALL_PERMISSIONS_RESULT = 27;
     private FloatingActionButton fabGetLoc, fabSaveLoc;
+    private Double latitude, longitude, accuracy;
     LocationTrack locationTrack;
 
     @Override
@@ -57,16 +62,20 @@ public class LocationMapsActivity extends FragmentActivity implements OnMapReady
         fabGetLoc = findViewById(R.id.fabGetLocation);
         fabSaveLoc = findViewById(R.id.fabSaveLocation);
 
+        longitude = Double.NaN;
+        latitude = Double.NaN;
+        accuracy = Double.NaN;
+
         fabGetLoc.setOnClickListener(view -> {
 
             locationTrack = new LocationTrack(LocationMapsActivity.this);
 
             if (locationTrack.canGetLocation()) {
-                double longitude = locationTrack.getLongitude();
-                double latitude = locationTrack.getLatitude();
-                double accuracy = locationTrack.getAccuracy();
+                longitude = locationTrack.getLongitude();
+                latitude = locationTrack.getLatitude();
+                accuracy = locationTrack.getAccuracy();
 
-                Toast.makeText(getApplicationContext(), "Longitude:" + longitude + "\nLatitude:" + latitude + "\nAccuracy:"+ accuracy, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Longitude:" + longitude + "\nLatitude:" + latitude + "\nAccuracy:" + accuracy, Toast.LENGTH_SHORT).show();
 
                 mMap.clear();
                 LatLng loc = new LatLng(latitude, longitude);
@@ -81,22 +90,26 @@ public class LocationMapsActivity extends FragmentActivity implements OnMapReady
         });
 
         fabSaveLoc.setOnClickListener(view -> {
-            locationTrack = new LocationTrack(LocationMapsActivity.this);
 
-            double longitude = locationTrack.getLongitude();
-            double latitude = locationTrack.getLatitude();
+            if (latitude.isNaN() && longitude.isNaN() && accuracy.isNaN()) {
+                Toast.makeText(this,"Please get your location first before saving",Toast.LENGTH_SHORT).show();
+            } else {
+                String strLat = String.format("%.8f", latitude);
+                String strLong = String.format("%.8f", longitude);
+                String strAcc = String.format("%8f", accuracy);
 
-            String strLat = String.format("%.8f", latitude);
-            String strLong = String.format("%.8f", longitude);
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("strLat", strLat);
+                resultIntent.putExtra("StrLong", strLong);
+                resultIntent.putExtra("StrAcc", strAcc);
+                LocationMapsActivity.this.setResult(RESULT_OK, resultIntent);
+                LocationMapsActivity.this.finish();
+            }
 
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra("strLat", strLat);
-            resultIntent.putExtra("StrLong", strLong);
-            LocationMapsActivity.this.setResult(RESULT_OK, resultIntent);
-            LocationMapsActivity.this.finish();
         });
     }
-        /**
+
+    /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera. In this case,
@@ -105,7 +118,6 @@ public class LocationMapsActivity extends FragmentActivity implements OnMapReady
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-
 
 
     @Override

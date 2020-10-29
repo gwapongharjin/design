@@ -27,6 +27,7 @@ public class CropSelectActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 cropSelected = 1;
+//                Variable.setCrop(cropSelected);
             }
         });
         rice.setOnClickListener(new View.OnClickListener() {
@@ -35,6 +36,7 @@ public class CropSelectActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 cropSelected = 2;
+//                Variable.setCrop(cropSelected);
             }
         });
         sugarcane.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +45,7 @@ public class CropSelectActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 cropSelected = 3;
+//                Variable.setCrop(cropSelected);
             }
         });
 

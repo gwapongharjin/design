@@ -1,4 +1,4 @@
-package com.m3das.biomech.design.fragments;
+ package com.m3das.biomech.design.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -88,13 +88,52 @@ public class MachineListFragment extends Fragment {
             @Override
             public void onItemClick(Machines machines) {
                 Intent intent = new Intent(getContext(), AddMachineActivity.class);
+
                 intent.putExtra(AddMachineActivity.EXTRA_ID, machines.getId());
                 intent.putExtra(AddMachineActivity.EXTRA_MACHINE_TYPE, machines.getMachine_type());
+                intent.putExtra(AddMachineActivity.EXTRA_TYPE_TUBEWELLS, machines.getType_tubewells());
+                intent.putExtra(AddMachineActivity.EXTRA_TYPE_MILL, machines.getType_mill());
+                intent.putExtra(AddMachineActivity.EXTRA_DATE_TIME, machines.getDate_of_survey());
+                intent.putExtra(AddMachineActivity.EXTRA_BRAND, machines.getMachine_brand());
+                intent.putExtra(AddMachineActivity.EXTRA_BRAND_SPECIFY, machines.getMachine_brand_specify());
+                intent.putExtra(AddMachineActivity.EXTRA_MODEL, machines.getMachine_model());
+                intent.putExtra(AddMachineActivity.EXTRA_MODEL_SPECIFY, machines.getMachine_model_specify());
+                intent.putExtra(AddMachineActivity.EXTRA_RATED_POWER, machines.getRated_power());
+                intent.putExtra(AddMachineActivity.EXTRA_SERVICE_AREA, machines.getService_area());
+                intent.putExtra(AddMachineActivity.EXTRA_AVE_OP_HOURS, machines.getAve_op_hours());
+                intent.putExtra(AddMachineActivity.EXTRA_AVE_OP_DAYS, machines.getAve_op_days());
+                intent.putExtra(AddMachineActivity.EXTRA_CAPACITY, machines.getCapacity());
+                intent.putExtra(AddMachineActivity.EXTRA_AVE_YIELD, machines.getAve_yield());
+                intent.putExtra(AddMachineActivity.EXTRA_NUM_LOADS, machines.getNum_loads());
+                intent.putExtra(AddMachineActivity.EXTRA_RATE, machines.getNum_loads());
+                intent.putExtra(AddMachineActivity.EXTRA_OWNERSHIP, machines.getOwnership());
+                intent.putExtra(AddMachineActivity.EXTRA_PURCH_GRANT_DONO, machines.getPurch_grant_dono());
+                intent.putExtra(AddMachineActivity.EXTRA_AGENCY, machines.getAgency());
+                intent.putExtra(AddMachineActivity.EXTRA_AGENCY_SPECIFY, machines.getAgency_specify());
+                intent.putExtra(AddMachineActivity.EXTRA_NAME_OWNER, machines.getName_owner());
+                intent.putExtra(AddMachineActivity.EXTRA_YEAR_ACQUIRED, machines.getYear_acquired());
+                intent.putExtra(AddMachineActivity.EXTRA_CONDITION_ACQUIRED, machines.getCondition_acquired());
+                intent.putExtra(AddMachineActivity.EXTRA_RENTAL, machines.getRental());
+                intent.putExtra(AddMachineActivity.EXTRA_CUSTOM_RATE, machines.getCustom_rate());
+                intent.putExtra(AddMachineActivity.EXTRA_CUSTOM_UNIT, machines.getCustom_unit());
+                intent.putExtra(AddMachineActivity.EXTRA_CUSTOM_UNIT_SPECIFY, machines.getSpecify_custom_unit());
+                intent.putExtra(AddMachineActivity.EXTRA_AVAILABILITY, machines.getAvailability());
+                intent.putExtra(AddMachineActivity.EXTRA_RENT_PROV, machines.getRent_prov());
+                intent.putExtra(AddMachineActivity.EXTRA_RENT_MUN, machines.getRent_mun());
+                intent.putExtra(AddMachineActivity.EXTRA_RENT_BRGY, machines.getRent_brgy());
+                intent.putExtra(AddMachineActivity.EXTRA_CONDITION, machines.getCondition());
+                intent.putExtra(AddMachineActivity.EXTRA_PROBLEMS, machines.getProblems());
+                intent.putExtra(AddMachineActivity.EXTRA_PROBLEMS_SPECIFY, machines.getSpecify_problems());
+                intent.putExtra(AddMachineActivity.EXTRA_LOCATION, machines.getLocation());
+                intent.putExtra(AddMachineActivity.EXTRA_PROV, machines.getProv());
+                intent.putExtra(AddMachineActivity.EXTRA_MUN, machines.getMun());
+                intent.putExtra(AddMachineActivity.EXTRA_BRGY, machines.getBrgy());
                 intent.putExtra(AddMachineActivity.EXTRA_MACHINE_QRCODE, machines.getMachine_qrcode());
                 intent.putExtra(AddMachineActivity.EXTRA_LAT, machines.getMachine_latitude());
                 intent.putExtra(AddMachineActivity.EXTRA_LONG, machines.getMachine_longitude());
-//                intent.putExtra(AddMachineActivity.EXTRA_IMG, machines.getMachine_image_base64());
                 Variable.setStringImage(machines.getMachine_image_base64());
+                intent.putExtra(AddMachineActivity.EXTRA_ACC, machines.getAccuracy());
+
                 startActivityForResult(intent, EDIT_NOTE_REQUEST);
             }
         });
@@ -164,15 +203,59 @@ public class MachineListFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_NOTE_REQUEST && resultCode == Activity.RESULT_OK) {
-//            String machineType = data.getStringExtra(AddMachineActivity.EXTRA_MACHINE_TYPE);
-//            String machineQRCode = data.getStringExtra(AddMachineActivity.EXTRA_MACHINE_QRCODE);
-//            String latitude = data.getStringExtra(AddMachineActivity.EXTRA_LAT);
-//            String longitude = data.getStringExtra(AddMachineActivity.EXTRA_LONG);
-//            String imageString = data.getStringExtra(AddMachineActivity.EXTRA_IMG);
-//            Machines machines = new Machines(machineQRCode, machineType, latitude, longitude, imageString);
 
-//            machineListViewModel.insert(machines);
-//            Log.d("Is note saved", "Note Saved" + machineType);
+            String machineType = data.getStringExtra(AddMachineActivity.EXTRA_MACHINE_TYPE);
+            String machineQRCode = data.getStringExtra(AddMachineActivity.EXTRA_MACHINE_QRCODE);
+            String datesurvey = data.getStringExtra(AddMachineActivity.EXTRA_DATE_TIME);
+            String brand = data.getStringExtra(AddMachineActivity.EXTRA_BRAND);
+            String brand_specify = data.getStringExtra(AddMachineActivity.EXTRA_BRAND_SPECIFY);
+            String model = data.getStringExtra(AddMachineActivity.EXTRA_MODEL);
+            String model_specify = data.getStringExtra(AddMachineActivity.EXTRA_MODEL_SPECIFY);
+            String rated_power = data.getStringExtra(AddMachineActivity.EXTRA_RATED_POWER);
+            String service_area = data.getStringExtra(AddMachineActivity.EXTRA_SERVICE_AREA);
+            String ave_op_hours = data.getStringExtra(AddMachineActivity.EXTRA_AVE_OP_HOURS);
+            String ave_op_days = data.getStringExtra(AddMachineActivity.EXTRA_AVE_OP_DAYS);
+            String capacity = data.getStringExtra(AddMachineActivity.EXTRA_CAPACITY);
+            String ave_yield = data.getStringExtra(AddMachineActivity.EXTRA_AVE_YIELD);
+            String num_loads = data.getStringExtra(AddMachineActivity.EXTRA_NUM_LOADS);
+            String rate = data.getStringExtra(AddMachineActivity.EXTRA_RATE);
+            String ownership = data.getStringExtra(AddMachineActivity.EXTRA_OWNERSHIP);
+            String purch_grant_dono = data.getStringExtra(AddMachineActivity.EXTRA_PURCH_GRANT_DONO);
+            String agency = data.getStringExtra(AddMachineActivity.EXTRA_AGENCY);
+            String agency_specify = data.getStringExtra(AddMachineActivity.EXTRA_AGENCY_SPECIFY);
+            String name_owner = data.getStringExtra(AddMachineActivity.EXTRA_NAME_OWNER);
+            String year_acquired = data.getStringExtra(AddMachineActivity.EXTRA_YEAR_ACQUIRED);
+            String condition_acquired = data.getStringExtra(AddMachineActivity.EXTRA_CONDITION_ACQUIRED);
+            String rental = data.getStringExtra(AddMachineActivity.EXTRA_RENTAL);
+            String custom_rate = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_RATE);
+            String custom_unit = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_UNIT);
+            String custom_unit_specify = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_UNIT_SPECIFY);
+            String availablity = data.getStringExtra(AddMachineActivity.EXTRA_AVAILABILITY);
+            String rent_prov = data.getStringExtra(AddMachineActivity.EXTRA_RENT_PROV);
+            String rent_mun = data.getStringExtra(AddMachineActivity.EXTRA_RENT_MUN);
+            String rent_brgy = data.getStringExtra(AddMachineActivity.EXTRA_RENT_BRGY);
+            String condition = data.getStringExtra(AddMachineActivity.EXTRA_CONDITION);
+            String problems = data.getStringExtra(AddMachineActivity.EXTRA_PROBLEMS);
+            String problems_specify = data.getStringExtra(AddMachineActivity.EXTRA_PROBLEMS_SPECIFY);
+            String location = data.getStringExtra(AddMachineActivity.EXTRA_LOCATION);
+            String prov = data.getStringExtra(AddMachineActivity.EXTRA_PROV);
+            String mun = data.getStringExtra(AddMachineActivity.EXTRA_MUN);
+            String brgy = data.getStringExtra(AddMachineActivity.EXTRA_BRGY);
+            String latitude = data.getStringExtra(AddMachineActivity.EXTRA_LAT);
+            String longitude = data.getStringExtra(AddMachineActivity.EXTRA_LONG);
+            String imageString = Variable.getStringImage();
+            String accuracy = data.getStringExtra(AddMachineActivity.EXTRA_ACC);
+            String tubewells =data.getStringExtra(AddMachineActivity.EXTRA_TYPE_TUBEWELLS);
+            String type_mill = data.getStringExtra(AddMachineActivity.EXTRA_TYPE_MILL);
+
+            Machines machines = new Machines(machineType,tubewells,type_mill, machineQRCode, datesurvey, brand, brand_specify, model, model_specify, rated_power, service_area, ave_op_hours,
+                    ave_op_days, capacity, ave_yield, num_loads, rate, ownership, purch_grant_dono, agency, agency_specify, name_owner, year_acquired, condition_acquired,
+                    rental, custom_rate, custom_unit, custom_unit_specify, availablity, rent_prov, rent_mun, rent_brgy, condition, problems, problems_specify, location,
+                    prov, mun, brgy, latitude, longitude, imageString, accuracy);
+            
+            machineListViewModel.insert(machines);
+
+            Log.d("Is note saved", "Note Saved" + machineType);
             Toast.makeText(getActivity(), "Note saved", Toast.LENGTH_SHORT).show();
         } else if (requestCode == EDIT_NOTE_REQUEST && resultCode == Activity.RESULT_OK) {
             int id = data.getIntExtra(AddMachineActivity.EXTRA_ID, -1);
@@ -181,14 +264,58 @@ public class MachineListFragment extends Fragment {
                 return;
             }
 
-//            String machineType = data.getStringExtra(AddMachineActivity.EXTRA_MACHINE_TYPE);
-//            String machineQRCode = data.getStringExtra(AddMachineActivity.EXTRA_MACHINE_QRCODE);
-//            String latitude = data.getStringExtra(AddMachineActivity.EXTRA_LAT);
-//            String longitude = data.getStringExtra(AddMachineActivity.EXTRA_LONG);
-//            String imageString = data.getStringExtra(AddMachineActivity.EXTRA_IMG);
-//            Machines machines = new Machines(machineQRCode, machineType, latitude, longitude, imageString);
-//            machines.setId(id);
-//            machineListViewModel.update(machines);
+            String machineType = data.getStringExtra(AddMachineActivity.EXTRA_MACHINE_TYPE);
+            String machineQRCode = data.getStringExtra(AddMachineActivity.EXTRA_MACHINE_QRCODE);
+            String datesurvey = data.getStringExtra(AddMachineActivity.EXTRA_DATE_TIME);
+            String brand = data.getStringExtra(AddMachineActivity.EXTRA_BRAND);
+            String brand_specify = data.getStringExtra(AddMachineActivity.EXTRA_BRAND_SPECIFY);
+            String model = data.getStringExtra(AddMachineActivity.EXTRA_MODEL);
+            String model_specify = data.getStringExtra(AddMachineActivity.EXTRA_MODEL_SPECIFY);
+            String rated_power = data.getStringExtra(AddMachineActivity.EXTRA_RATED_POWER);
+            String service_area = data.getStringExtra(AddMachineActivity.EXTRA_SERVICE_AREA);
+            String ave_op_hours = data.getStringExtra(AddMachineActivity.EXTRA_AVE_OP_HOURS);
+            String ave_op_days = data.getStringExtra(AddMachineActivity.EXTRA_AVE_OP_DAYS);
+            String capacity = data.getStringExtra(AddMachineActivity.EXTRA_CAPACITY);
+            String ave_yield = data.getStringExtra(AddMachineActivity.EXTRA_AVE_YIELD);
+            String num_loads = data.getStringExtra(AddMachineActivity.EXTRA_NUM_LOADS);
+            String rate = data.getStringExtra(AddMachineActivity.EXTRA_RATE);
+            String ownership = data.getStringExtra(AddMachineActivity.EXTRA_OWNERSHIP);
+            String purch_grant_dono = data.getStringExtra(AddMachineActivity.EXTRA_PURCH_GRANT_DONO);
+            String agency = data.getStringExtra(AddMachineActivity.EXTRA_AGENCY);
+            String agency_specify = data.getStringExtra(AddMachineActivity.EXTRA_AGENCY_SPECIFY);
+            String name_owner = data.getStringExtra(AddMachineActivity.EXTRA_NAME_OWNER);
+            String year_acquired = data.getStringExtra(AddMachineActivity.EXTRA_YEAR_ACQUIRED);
+            String condition_acquired = data.getStringExtra(AddMachineActivity.EXTRA_CONDITION_ACQUIRED);
+            String rental = data.getStringExtra(AddMachineActivity.EXTRA_RENTAL);
+            String custom_rate = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_RATE);
+            String custom_unit = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_UNIT);
+            String custom_unit_specify = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_UNIT_SPECIFY);
+            String availablity = data.getStringExtra(AddMachineActivity.EXTRA_AVAILABILITY);
+            String rent_prov = data.getStringExtra(AddMachineActivity.EXTRA_RENT_PROV);
+            String rent_mun = data.getStringExtra(AddMachineActivity.EXTRA_RENT_MUN);
+            String rent_brgy = data.getStringExtra(AddMachineActivity.EXTRA_RENT_BRGY);
+            String condition = data.getStringExtra(AddMachineActivity.EXTRA_CONDITION);
+            String problems = data.getStringExtra(AddMachineActivity.EXTRA_PROBLEMS);
+            String problems_specify = data.getStringExtra(AddMachineActivity.EXTRA_PROBLEMS_SPECIFY);
+            String location = data.getStringExtra(AddMachineActivity.EXTRA_LOCATION);
+            String prov = data.getStringExtra(AddMachineActivity.EXTRA_PROV);
+            String mun = data.getStringExtra(AddMachineActivity.EXTRA_MUN);
+            String brgy = data.getStringExtra(AddMachineActivity.EXTRA_BRGY);
+            String latitude = data.getStringExtra(AddMachineActivity.EXTRA_LAT);
+            String longitude = data.getStringExtra(AddMachineActivity.EXTRA_LONG);
+            String imageString = Variable.getStringImage();
+            String accuracy = data.getStringExtra(AddMachineActivity.EXTRA_ACC);
+            String tubewells =data.getStringExtra(AddMachineActivity.EXTRA_TYPE_TUBEWELLS);
+            String type_mill = data.getStringExtra(AddMachineActivity.EXTRA_TYPE_MILL);
+
+            Machines machines = new Machines(machineType,tubewells,type_mill, machineQRCode, datesurvey, brand, brand_specify, model, model_specify, rated_power, service_area, ave_op_hours,
+                    ave_op_days, capacity, ave_yield, num_loads, rate, ownership, purch_grant_dono, agency, agency_specify, name_owner, year_acquired, condition_acquired,
+                    rental, custom_rate, custom_unit, custom_unit_specify, availablity, rent_prov, rent_mun, rent_brgy, condition, problems, problems_specify, location,
+                    prov, mun, brgy, latitude, longitude, imageString, accuracy);
+
+            machines.setId(id);
+
+            machineListViewModel.update(machines);
             Toast.makeText(getActivity(), "Note updated", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getActivity(), "Note not saved", Toast.LENGTH_SHORT).show();

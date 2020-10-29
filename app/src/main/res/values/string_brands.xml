@@ -931,4 +931,474 @@
         <item>	OTHERS	</item>
     </string-array>
 
+    <string-array name="all_machine_brands">
+        <item></item>
+        <item>	ACT	</item>
+        <item>	ACT-PHILMECH	</item>
+        <item>	AGC	</item>
+        <item>	AGRINDO	</item>
+        <item>	AIMS	</item>
+        <item>	AMCC	</item>
+        <item>	APT	</item>
+        <item>	BARANGAY	</item>
+        <item>	BLUMAX	</item>
+        <item>	BOWA	</item>
+        <item>	BRANSON	</item>
+        <item>	BRIGGS AND STRATTON	</item>
+        <item>	BUFFALO	</item>
+        <item>	CAMECO	</item>
+        <item>	CASE IH	</item>
+        <item>	CATERPILLAR	</item>
+        <item>	COMET	</item>
+        <item>	D.U.A	</item>
+        <item>	DEUTZ-FAHR	</item>
+        <item>	EAGLE	</item>
+        <item>	EMERALD	</item>
+        <item>	ESMECH	</item>
+        <item>	EUROTRAC	</item>
+        <item>	EXTREME	</item>
+        <item>	FARM MASTER	</item>
+        <item>	FARM ROVER	</item>
+        <item>	FIAT	</item>
+        <item>	FORD	</item>
+        <item>	FORDSON	</item>
+        <item>	FOTON	</item>
+        <item>	FT	</item>
+        <item>	GAUDI	</item>
+        <item>	GLOBAL FARM	</item>
+        <item>	GMCC	</item>
+        <item>	GRUNDFOS	</item>
+        <item>	GT	</item>
+        <item>	HAKATA	</item>
+        <item>	HINOKI	</item>
+        <item>	HONDA	</item>
+        <item>	INNOVA	</item>
+        <item>	INTERNATIONAL HARVESTER IH	</item>
+        <item>	ISEKI	</item>
+        <item>	ISHII	</item>
+        <item>	ITMCO	</item>
+        <item>	JOHN DEERE	</item>
+        <item>	KAIAO	</item>
+        <item>	KAITO	</item>
+        <item>	KAMA	</item>
+        <item>	KAMOL	</item>
+        <item>	KAPITAN	</item>
+        <item>	KASAMA HARABAS	</item>
+        <item>	KATO	</item>
+        <item>	KELLY	</item>
+        <item>	KENBO	</item>
+        <item>	KIOTI	</item>
+        <item>	KITACO	</item>
+        <item>	KUBOTA	</item>
+        <item>	KUBOTA	</item>
+        <item>	KUHN	</item>
+        <item>	KULIGLIG	</item>
+        <item>	LAKAS KULIGLIG	</item>
+        <item>	LANDINI	</item>
+        <item>	LAUNTOP	</item>
+        <item>	LEYLAND	</item>
+        <item>	LONG FOONG	</item>
+        <item>	LORENTZ	</item>
+        <item>	LOVOL	</item>
+        <item>	LS	</item>
+        <item>	MAHINDRA	</item>
+        <item>	MASSEY FERGUSON	</item>
+        <item>	MAXIPRO	</item>
+        <item>	MC CORMICK	</item>
+        <item>	MITSUBOMAR	</item>
+        <item>	MIYATA	</item>
+        <item>	MOTORSTAR	</item>
+        <item>	NEW HOLLAND	</item>
+        <item>	NICHINO	</item>
+        <item>	NITTOO	</item>
+        <item>	OKAMA	</item>
+        <item>	PLATINUM	</item>
+        <item>	PREET	</item>
+        <item>	RICE MASTER	</item>
+        <item>	ROBIN	</item>
+        <item>	RU	</item>
+        <item>	SAKAI	</item>
+        <item>	SHAKTIMAN	</item>
+        <item>	SHUHE	</item>
+        <item>	SOLAR PUMP	</item>
+        <item>	SONALIKA	</item>
+        <item>	SUKI	</item>
+        <item>	SUMO	</item>
+        <item>	SUMO PLUS	</item>
+        <item>	SUPER	</item>
+        <item>	SUPER KASAMA	</item>
+        <item>	TAMARAW	</item>
+        <item>	TARO	</item>
+        <item>	TAY	</item>
+        <item>	TIBAY KULIGLIG	</item>
+        <item>	TOFT	</item>
+        <item>	TRIPLE J	</item>
+        <item>	TSURUMI	</item>
+        <item>	TUBAL-AMDP-FSTP	</item>
+        <item>	VALTRA	</item>
+        <item>	VIKYNO	</item>
+        <item>	WEITAI	</item>
+        <item>	WEST WIND	</item>
+        <item>	WESTWIND	</item>
+        <item>	YAMADA	</item>
+        <item>	YAMAHA	</item>
+        <item>	YANMAR	</item>
+        <item>	ZOOMLION	</item>
+        <item>OTHERS</item>
+    </string-array>
+
+    <string-array name="all_models_machines">
+        <item></item>
+        <item>	96	</item>
+        <item>	120	</item>
+        <item>	125	</item>
+        <item>	165	</item>
+        <item>	185	</item>
+        <item>	245	</item>
+        <item>	270	</item>
+        <item>	272	</item>
+        <item>	279	</item>
+        <item>	399	</item>
+        <item>	454	</item>
+        <item>	470	</item>
+        <item>	590	</item>
+        <item>	595	</item>
+        <item>	599	</item>
+        <item>	600	</item>
+        <item>	824	</item>
+        <item>	1001	</item>
+        <item>	1164	</item>
+        <item>	1501	</item>
+        <item>	1640	</item>
+        <item>	1660	</item>
+        <item>	1801	</item>
+        <item>	1820	</item>
+        <item>	2002	</item>
+        <item>	2201	</item>
+        <item>	2202	</item>
+        <item>	3140	</item>
+        <item>	3510	</item>
+        <item>	3520	</item>
+        <item>	3737	</item>
+        <item>	4000	</item>
+        <item>	5000	</item>
+        <item>	5018	</item>
+        <item>	5077	</item>
+        <item>	6000	</item>
+        <item>	6049	</item>
+        <item>	6600	</item>
+        <item>	6610	</item>
+        <item>	6640	</item>
+        <item>	7000	</item>
+        <item>	7210	</item>
+        <item>	7610	</item>
+        <item>	7710	</item>
+        <item>	7810	</item>
+        <item>	8100	</item>
+        <item>	8210	</item>
+        <item>	8260	</item>
+        <item>	8606	</item>
+        <item>	9000	</item>
+        <item>	9049	</item>
+        <item>	9210	</item>
+        <item>	9500	</item>
+        <item>	10520	</item>
+        <item>	10T	</item>
+        <item>	2X2  PT	</item>
+        <item>	2X2 MECHANICAL TYPE	</item>
+        <item>	2X2 MS	</item>
+        <item>	2Z-430	</item>
+        <item>	2ZF-4B	</item>
+        <item>	30-40 TPD	</item>
+        <item>	345XL	</item>
+        <item>	3630R	</item>
+        <item>	3X3 MS	</item>
+        <item>	3X3 PACKING STYLE	</item>
+        <item>	3X3 PT	</item>
+        <item>	4LZT-4.0ZD	</item>
+        <item>	4PSP2-3	</item>
+        <item>	4X4 MECHANICAL SEAL	</item>
+        <item>	4X4 MS	</item>
+        <item>	4X4 PACKING TYPE	</item>
+        <item>	4X4 PT	</item>
+        <item>	4YZP-4X	</item>
+        <item>	545XL	</item>
+        <item>	5825R	</item>
+        <item>	5HYD-12	</item>
+        <item>	5HYD-5	</item>
+        <item>	6T	</item>
+        <item>	8T	</item>
+        <item>	A4000	</item>
+        <item>	A7000	</item>
+        <item>	A7700	</item>
+        <item>	A8010	</item>
+        <item>	A8810	</item>
+        <item>	AF88 (4LZ-2G)	</item>
+        <item>	AG001/CCM	</item>
+        <item>	AGROFARM 95CDT	</item>
+        <item>	AGROLUX 85	</item>
+        <item>	AGROLUX 95	</item>
+        <item>	ALL AROUND 25HP	</item>
+        <item>	AP24	</item>
+        <item>	AW70V	</item>
+        <item>	B100 MAX	</item>
+        <item>	B2420D	</item>
+        <item>	BHT-001	</item>
+        <item>	BXD-100-P	</item>
+        <item>	BXD-80P	</item>
+        <item>	C100MAX	</item>
+        <item>	C110MAX	</item>
+        <item>	C95 MAX	</item>
+        <item>	CE-22AF	</item>
+        <item>	CH 330	</item>
+        <item>	CH 570	</item>
+        <item>	CK70	</item>
+        <item>	CM 50	</item>
+        <item>	CM100	</item>
+        <item>	CM250	</item>
+        <item>	CP-200L	</item>
+        <item>	CRIF15-01	</item>
+        <item>	D100KB	</item>
+        <item>	D50KB	</item>
+        <item>	D80KB	</item>
+        <item>	DC60	</item>
+        <item>	DC70	</item>
+        <item>	DEXTA 32HP	</item>
+        <item>	DHP50	</item>
+        <item>	DHP80	</item>
+        <item>	DI-35	</item>
+        <item>	DI-42	</item>
+        <item>	DI-60RX	</item>
+        <item>	DI-745 III	</item>
+        <item>	DI-750 III	</item>
+        <item>	DI-75X	</item>
+        <item>	DP480	</item>
+        <item>	DP488	</item>
+        <item>	DPW-100	</item>
+        <item>	DPW50	</item>
+        <item>	DPW80	</item>
+        <item>	DS3510	</item>
+        <item>	DS4110-HS	</item>
+        <item>	DS4510-HS	</item>
+        <item>	DT 100	</item>
+        <item>	DT 115	</item>
+        <item>	DT 125	</item>
+        <item>	DT 130	</item>
+        <item>	DT 50	</item>
+        <item>	DT 8860	</item>
+        <item>	DT 90	</item>
+        <item>	DTS3	</item>
+        <item>	DUO60	</item>
+        <item>	EC100	</item>
+        <item>	EC50	</item>
+        <item>	EC80	</item>
+        <item>	EF393T	</item>
+        <item>	EF514T 	</item>
+        <item>	EF725T	</item>
+        <item>	ERP60	</item>
+        <item>	ERP60D	</item>
+        <item>	ES-30E1	</item>
+        <item>	F42R	</item>
+        <item>	FARM MAJOR 42HP	</item>
+        <item>	FARMALL 100JX	</item>
+        <item>	FARMALL 125A	</item>
+        <item>	FARMALL JX75T	</item>
+        <item>	FMHT-60C	</item>
+        <item>	FORDSON F 20HP	</item>
+        <item>	FORDSON N 21HP	</item>
+        <item>	FR4135	</item>
+        <item>	FR4145	</item>
+        <item>	FT454	</item>
+        <item>	FT904	</item>
+        <item>	GDW-929S-6	</item>
+        <item>	GY4L-0.9B	</item>
+        <item>	HP80D	</item>
+        <item>	HS2000	</item>
+        <item>	IE-102	</item>
+        <item>	ISABELO	</item>
+        <item>	ITM 240	</item>
+        <item>	ITM 285	</item>
+        <item>	ITM 399	</item>
+        <item>	ITM 475	</item>
+        <item>	ITM 485	</item>
+        <item>	ITM 800	</item>
+        <item>	ITM 950	</item>
+        <item>	IW-407	</item>
+        <item>	JD5045	</item>
+        <item>	JD5715	</item>
+        <item>	JD6110B	</item>
+        <item>	JD6525	</item>
+        <item>	JD6603	</item>
+        <item>	JEEP CORN HUSKER SHELLER	</item>
+        <item>	JX95	</item>
+        <item>	KBP20	</item>
+        <item>	KBP30	</item>
+        <item>	KC30 3X3	</item>
+        <item>	KC40	</item>
+        <item>	KCS-40	</item>
+        <item>	KCS40-E	</item>
+        <item>	KDP100	</item>
+        <item>	KDP20	</item>
+        <item>	KDP3	</item>
+        <item>	KDP30	</item>
+        <item>	KDP40	</item>
+        <item>	KDP50 2X2	</item>
+        <item>	KHT	</item>
+        <item>	KMP1015M	</item>
+        <item>	KMT 40	</item>
+        <item>	KPT86-B	</item>
+        <item>	KSP30	</item>
+        <item>	KSP40	</item>
+        <item>	KT50	</item>
+        <item>	L2402	</item>
+        <item>	L3608	</item>
+        <item>	LH 5001M GOLD	</item>
+        <item>	LK-300	</item>
+        <item>	LTP50C	</item>
+        <item>	LTP80C	</item>
+        <item>	LXT100	</item>
+        <item>	LXT80	</item>
+        <item>	M108S	</item>
+        <item>	M9540D	</item>
+        <item>	MAJOR 27HP	</item>
+        <item>	MARKIII	</item>
+        <item>	MCM 3050	</item>
+        <item>	MEGA ISABELO	</item>
+        <item>	MF 2515	</item>
+        <item>	MF 2615	</item>
+        <item>	MF 390 XTRA	</item>
+        <item>	MF 4708	</item>
+        <item>	MF 5709	</item>
+        <item>	MF 7600	</item>
+        <item>	MF445 XTRA	</item>
+        <item>	MF455 XTRA	</item>
+        <item>	MF460 XTRA	</item>
+        <item>	MF470XTRA	</item>
+        <item>	MF5710	</item>
+        <item>	MMP-0.5	</item>
+        <item>	MMP-2.0	</item>
+        <item>	MMP-E	</item>
+        <item>	MMP-EM1	</item>
+        <item>	MPRM 3.0	</item>
+        <item>	MS50 2X2	</item>
+        <item>	MS50 3X3	</item>
+        <item>	MT573	</item>
+        <item>	MT-921G	</item>
+        <item>	NEW MAJOR 38HP	</item>
+        <item>	NS100	</item>
+        <item>	NS-50	</item>
+        <item>	NS80	</item>
+        <item>	NS-80	</item>
+        <item>	NSPU-68CMD	</item>
+        <item>	NVC-15	</item>
+        <item>	NVC-22	</item>
+        <item>	PF48	</item>
+        <item>	PLANTER 3M	</item>
+        <item>	POWER MAJOR 52HP	</item>
+        <item>	PP40	</item>
+        <item>	PS 1200HR-14	</item>
+        <item>	PT5.5 HP	</item>
+        <item>	PT6.5 HP	</item>
+        <item>	PTG207	</item>
+        <item>	PTG305	</item>
+        <item>	R 8860	</item>
+        <item>	RBP-305	</item>
+        <item>	RC25 GP	</item>
+        <item>	RGO-60	</item>
+        <item>	RICE THRESHER	</item>
+        <item>	RME	</item>
+        <item>	RP203	</item>
+        <item>	RP205	</item>
+        <item>	RP305	</item>
+        <item>	RP306	</item>
+        <item>	RPC-1A	</item>
+        <item>	RPX206	</item>
+        <item>	RR4B	</item>
+        <item>	RX 35	</item>
+        <item>	RX 42	</item>
+        <item>	RX 47	</item>
+        <item>	RX 50	</item>
+        <item>	RX 60	</item>
+        <item>	RX 745 III	</item>
+        <item>	RX 750 III	</item>
+        <item>	SD100M	</item>
+        <item>	SFT01	</item>
+        <item>	SH404	</item>
+        <item>	SK-106	</item>
+        <item>	SPHT-60	</item>
+        <item>	SPW-48C	</item>
+        <item>	SQF 2.2-2	</item>
+        <item>	STA-201	</item>
+        <item>	STA-302	</item>
+        <item>	SUPER DEXTA 39HP	</item>
+        <item>	SUPER MAJOR 54HP	</item>
+        <item>	SUPERMASA	</item>
+        <item>	SX95	</item>
+        <item>	T110MAX	</item>
+        <item>	TA3304	</item>
+        <item>	TA3504	</item>
+        <item>	TA3704	</item>
+        <item>	TAM 100	</item>
+        <item>	TAM 1500	</item>
+        <item>	TAM 150-B	</item>
+        <item>	TAM 2000	</item>
+        <item>	TB 504	</item>
+        <item>	TC38R	</item>
+        <item>	TCM 4H	</item>
+        <item>	TCM-4A	</item>
+        <item>	TCM-4B	</item>
+        <item>	TD 90	</item>
+        <item>	TD 90D	</item>
+        <item>	TD5.100	</item>
+        <item>	TD5.90	</item>
+        <item>	TD6.120	</item>
+        <item>	TD6.125	</item>
+        <item>	TD904	</item>
+        <item>	TDCV-4	</item>
+        <item>	TE5-50R	</item>
+        <item>	TE5-80R	</item>
+        <item>	TK-01	</item>
+        <item>	TS 6030	</item>
+        <item>	TS 6140	</item>
+        <item>	TS100	</item>
+        <item>	TS-100	</item>
+        <item>	TS1004	</item>
+        <item>	TS1104	</item>
+        <item>	TS1209	</item>
+        <item>	TS354	</item>
+        <item>	TS404	</item>
+        <item>	TS454	</item>
+        <item>	TS504	</item>
+        <item>	TS904	</item>
+        <item>	TT35	</item>
+        <item>	TT55	</item>
+        <item>	TW 10	</item>
+        <item>	TW 15	</item>
+        <item>	TW 20	</item>
+        <item>	TW 5	</item>
+        <item>	TW25	</item>
+        <item>	VP6D	</item>
+        <item>	WB20XH	</item>
+        <item>	WB30XH	</item>
+        <item>	WP3-65	</item>
+        <item>	WR652	</item>
+        <item>	WR653	</item>
+        <item>	WR801	</item>
+        <item>	WT 60	</item>
+        <item>	WT 75	</item>
+        <item>	WT 90RX	</item>
+        <item>	XP8084	</item>
+        <item>	XP8101	</item>
+        <item>	XU6158	</item>
+        <item>	XU6168	</item>
+        <item>	YEL-3000H	</item>
+        <item>	YM351A	</item>
+        <item>	YM357A	</item>
+        <item>	YP30G	</item>
+        <item>	YTO X1204	</item>
+        <item>	YTO X454	</item>
+        <item>	YTO X904	</item>
+        <item>OTHERS</item>
+    </string-array>
+
 </resources>
