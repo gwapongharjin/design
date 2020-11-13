@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:layout_goneMarginStart="8dp"
-    android:layout_marginTop="8dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tvMacineQRCodeItem"
+            android:id="@+id/tvImplmentQRCodeItem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="R06ILOM00001"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#0D47A1"
-            app:layout_constraintBottom_toTopOf="@+id/tvMachineLatLongItem"
+            app:layout_constraintBottom_toTopOf="@+id/tvImplementLatLongItem"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvMachineTypeItem"
+            app:layout_constraintStart_toEndOf="@+id/tvImplementTypeItem"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvMachineTypeItem"
+            android:id="@+id/tvImplementTypeItem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_toStartOf="@+id/tvMacineQRCodeItem"
@@ -33,33 +30,39 @@
             android:maxLines="2"
             android:text="COMBINE-HARVESTER"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintEnd_toStartOf="@+id/tvMacineQRCodeItem"
+            app:layout_constraintEnd_toStartOf="@id/tvImplmentQRCodeItem"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvMachineLatLongItem"
+            android:id="@+id/tvImplementLatLongItem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvMacineQRCodeItem"
-            android:layout_toEndOf="@id/tvMachineTypeItem"
             android:maxLines="1"
             android:text="LatLong"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tvMachineTypeItem"
-            app:layout_constraintTop_toBottomOf="@+id/tvMachineTypeItem" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvImplementTypeItem" />
 
         <TextView
-            android:id="@+id/tvNameRespitemC"
+            android:id="@+id/tvAttachedTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Attahed to Machine:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvImplementLatLongItem" />
+
+        <TextView
+            android:id="@+id/tvAttachedToMachineItem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Name of Respondent"
+            android:layout_marginStart="16dp"
+            android:text="Attached to Machine"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvMachineLatLongItem" />
+            app:layout_constraintStart_toEndOf="@+id/tvAttachedTo"
+            app:layout_constraintTop_toBottomOf="@id/tvImplementLatLongItem" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.cardview.widget.CardView>

@@ -1,16 +1,14 @@
 package com.m3das.biomech.design;
 
-import android.app.Activity;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.m3das.biomech.design.machinedb.Machines;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +32,7 @@ public class MachineAdapter extends RecyclerView.Adapter<MachineAdapter.MachineH
         holder.Type.setText(currentMachine.getMachine_type());
         holder.QRCode.setText(currentMachine.getMachine_qrcode());
         holder.LatLong.setText(currentMachine.getMachine_latitude() + ", " + currentMachine.getMachine_longitude());
+        holder.NameResp.setText(currentMachine.getResName());
 
 
     }
@@ -54,16 +53,15 @@ public class MachineAdapter extends RecyclerView.Adapter<MachineAdapter.MachineH
     }
 
     class MachineHolder extends RecyclerView.ViewHolder {
-        private final TextView LatLong;
-        private final TextView Type;
-        private final TextView QRCode;
+        private final TextView LatLong,Type, QRCode, NameResp;
 
 
         public MachineHolder(View itemView) {
             super(itemView);
-            LatLong = itemView.findViewById(R.id.tvLatLongitemC);
-            Type = itemView.findViewById(R.id.tvMachineTypeitemC);
-            QRCode = itemView.findViewById(R.id.tvMachineCodeitemC);
+            LatLong = itemView.findViewById(R.id.tvMachineLatLongItem);
+            Type = itemView.findViewById(R.id.tvMachineTypeItem);
+            QRCode = itemView.findViewById(R.id.tvMacineQRCodeItem);
+            NameResp = itemView.findViewById(R.id.tvNameRespitemC);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

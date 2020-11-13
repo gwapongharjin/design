@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
@@ -20,10 +20,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.InputFilter;
 import android.util.Base64;
@@ -32,7 +30,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -47,11 +44,11 @@ import com.androidbuts.multispinnerfilter.SingleSpinnerListener;
 import com.androidbuts.multispinnerfilter.SingleSpinnerSearch;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
-import com.m3das.biomech.design.fragments.MachineListFragment;
+import com.m3das.biomech.design.profiledb.Profile;
+import com.m3das.biomech.design.viewmodels.ProfileViewModel;
 import com.m3das.biomech.design.viewmodels.MachineListViewModel;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -70,75 +67,76 @@ public class AddMachineActivity extends AppCompatActivity {
     private ImageView selectedImage;
     private EditText edtQRCode, edtCapacity, edtAveYield, edtNumLoads, edtRate, edtAveOpHours, edtAveOpDays, edtServiceArea, edtNameOfOwnerOrg,
             edtCustomRate, edtCustomRateUnit, edtOtherProblems, edtOtherAgency, edtOtherBrand, edtOtherModel, edtRatedPower,
-            edtProvince, edtMunicipality, edtBarangay, edtRentProv, edtRentMun, edtRentBrgy;
+            edtRentProv, edtRentMun, edtRentBrgy;
     private TextView tvLat, tvLong, tvTypeOfMill, tvBrand, tvOwnership, tvTypeOfTubewells, tvMachineAvailability, tvConditionPresent, tvLocation, tvModel, tvCommas;
-    private Spinner spinMachineType, spinTypeOfMill, spinRental, spinCustomUnit, spinAvailability, spinConditionPresent,
+    private Spinner spinMachineType, spinTypeOfMill, spinRental, spinCustomUnit, spinAvailability, spinConditionPresent, spinRespName,
             spinTypeofTubeWells, spinOwnership, spinPurchGrantDono, spinAgency, spinBrand, spinModel, spinYearAcquired, spinConditionAcquired, spinLocationOfMachine
             //spinRentProv, spinRentMun, spinProvince, spinMunicipality
             ;
-    private String encodedImage, listOfProblems, accuracy;
+    private String encodedImage, listOfProblems, accuracy, dateToStr, resCode, resName;
 
     private MultiSpinnerSearch multspinProblemsUnused
             //multspinRentBrgy
             ;
-    private SingleSpinnerSearch singleSpinnerSearch
+    private SingleSpinnerSearch singleSpinnerSearch, singlespinProvince, singlespinMunicipality, singlespinBarangay
             //singlespinBarangay
             ;
     private Intent intentFromDb;
     private ConstraintLayout.LayoutParams paramstvBrand, paramstvOwnership, paramsedtCapacity, paramsedtNumLoads, paramstvConditionPresent, paramstvLocation, paramstvModel, paramsedtRatedPower,
             paramsedtAveYield, paramsedtRate, paramstvTypeTubewells, paramsedtNameOfOwnerOrg, paramstvMachineAvailability;
     private MachineListViewModel machineListViewModel;
+    private ProfileViewModel profileViewModel;
+    private ArrayList<String> profilesListAfterSet = new ArrayList<>();
     public static final int CAMERA_PERM_CODE = 101;
     public static final int CAMERA_REQUEST_CODE = 102;
     public static final int GALLERY_REQUEST_CODE = 105;
     public static final int LOCATION_REQUEST_CODE = 127;
     public static final int WRITE_PERM_CODE = 279;
-    public static final String EXTRA_MACHINE_TYPE = "EXTRA_MACHINE_TYPE";
-    public static final String EXTRA_TYPE_TUBEWELLS = "EXTRA_TYPE_TUBEWELLS";
-    public static final String EXTRA_TYPE_MILL = "EXTRA_TYPE_MILL";
-    public static final String EXTRA_MACHINE_QRCODE = "EXTRA_MACHINE_QRCODE";
-    public static final String EXTRA_LAT = "EXTRA_LAT";
-    public static final String EXTRA_LONG = "EXTRA_LONG";
-    public static final String EXTRA_ID = "EXTRA_ID";
-    public static final String EXTRA_IMG = "EXTRA_IMG";
-    public static final String EXTRA_DATE_TIME = "EXTRA_DATE_TIME";
-    public static final String EXTRA_BRAND = "EXTRA_BRAND";
-    public static final String EXTRA_BRAND_SPECIFY = "EXTRA_BRAND_SPECIFY";
-    public static final String EXTRA_MODEL = "EXTRA_MODEL";
-    public static final String EXTRA_MODEL_SPECIFY = "EXTRA_MODEL_SPECIFY";
-    public static final String EXTRA_RATED_POWER = "EXTRA_RATED_POWER";
-    public static final String EXTRA_SERVICE_AREA = "EXTRA_SERVICE_AREA";
-    public static final String EXTRA_AVE_OP_HOURS = "EXTRA_AVE_OP_HOURS";
-    public static final String EXTRA_AVE_OP_DAYS = "EXTRA_AVE_OP_DAYS";
-    public static final String EXTRA_CAPACITY = "EXTRA_CAPACITY";
-    public static final String EXTRA_AVE_YIELD = "EXTRA_AVE_YIELD";
-    public static final String EXTRA_NUM_LOADS = "EXTRA_NUM_LOADS";
-    public static final String EXTRA_RATE = "EXTRA_RATE";
-    public static final String EXTRA_OWNERSHIP = "EXTRA_OWNERSHIP";
-    public static final String EXTRA_PURCH_GRANT_DONO = "EXTRA_PURCH_GRANT_DONO";
-    public static final String EXTRA_AGENCY = "EXTRA_AGENCY";
-    public static final String EXTRA_AGENCY_SPECIFY = "EXTRA_AGENCY_SPECIFY";
-    public static final String EXTRA_NAME_OWNER = "EXTRA_NAME_OWNER";
-    public static final String EXTRA_YEAR_ACQUIRED = "EXTRA_YEAR_ACQUIRED";
-    public static final String EXTRA_CONDITION_ACQUIRED = "EXTRA_CONDITION_ACQUIRED";
-    public static final String EXTRA_RENTAL = "EXTRA_RENTAL";
-    public static final String EXTRA_CUSTOM_RATE = "EXTRA_CUSTOM_RATE";
-    public static final String EXTRA_CUSTOM_UNIT = "EXTRA_CUSTOM_UNIT";
-    public static final String EXTRA_CUSTOM_UNIT_SPECIFY = "EXTRA_CUSTOM_UNIT_SPECIFY";
-    public static final String EXTRA_AVAILABILITY = "EXTRA_AVAILABILITY";
-    public static final String EXTRA_RENT_PROV = "EXTRA_RENT_PROV";
-    public static final String EXTRA_RENT_MUN = "EXTRA_RENT_MUN";
-    public static final String EXTRA_RENT_BRGY = "EXTRA_RENT_BRGY";
-    public static final String EXTRA_CONDITION = "EXTRA_CONDITION";
-    public static final String EXTRA_PROBLEMS = "EXTRA_PROBLEMS";
-    public static final String EXTRA_PROBLEMS_SPECIFY = "EXTRA_PROBLEMS_SPECIFY";
-    public static final String EXTRA_LOCATION = "EXTRA_LOCATION";
-    public static final String EXTRA_PROV = "EXTRA_PROV";
-    public static final String EXTRA_MUN = "EXTRA_MUN";
-    public static final String EXTRA_BRGY = "EXTRA_BRGY";
-    public static final String EXTRA_ACC = "EXTRA_ACCURACY";
-
-
+    public static final String EXTRA_MACHINE_TYPE = "ADDMACHINE_EXTRA_MACHINE_TYPE";
+    public static final String EXTRA_TYPE_TUBEWELLS = "ADDMACHINE_EXTRA_TYPE_TUBEWELLS";
+    public static final String EXTRA_TYPE_MILL = "ADDMACHINE_EXTRA_TYPE_MILL";
+    public static final String EXTRA_MACHINE_QRCODE = "ADDMACHINE_EXTRA_MACHINE_QRCODE";
+    public static final String EXTRA_LAT = "ADDMACHINE_EXTRA_LAT";
+    public static final String EXTRA_LONG = "ADDMACHINE_EXTRA_LONG";
+    public static final String EXTRA_ID = "ADDMACHINE_EXTRA_ID";
+    public static final String EXTRA_DATE_TIME = "ADDMACHINE_EXTRA_DATE_TIME";
+    public static final String EXTRA_BRAND = "ADDMACHINE_EXTRA_BRAND";
+    public static final String EXTRA_BRAND_SPECIFY = "ADDMACHINE_EXTRA_BRAND_SPECIFY";
+    public static final String EXTRA_MODEL = "ADDMACHINE_EXTRA_MODEL";
+    public static final String EXTRA_MODEL_SPECIFY = "ADDMACHINE_EXTRA_MODEL_SPECIFY";
+    public static final String EXTRA_RATED_POWER = "ADDMACHINE_EXTRA_RATED_POWER";
+    public static final String EXTRA_SERVICE_AREA = "ADDMACHINE_EXTRA_SERVICE_AREA";
+    public static final String EXTRA_AVE_OP_HOURS = "ADDMACHINE_EXTRA_AVE_OP_HOURS";
+    public static final String EXTRA_AVE_OP_DAYS = "ADDMACHINE_EXTRA_AVE_OP_DAYS";
+    public static final String EXTRA_CAPACITY = "ADDMACHINE_EXTRA_CAPACITY";
+    public static final String EXTRA_AVE_YIELD = "ADDMACHINE_EXTRA_AVE_YIELD";
+    public static final String EXTRA_NUM_LOADS = "ADDMACHINE_EXTRA_NUM_LOADS";
+    public static final String EXTRA_RATE = "ADDMACHINE_EXTRA_RATE";
+    public static final String EXTRA_OWNERSHIP = "ADDMACHINE_EXTRA_OWNERSHIP";
+    public static final String EXTRA_PURCH_GRANT_DONO = "ADDMACHINE_EXTRA_PURCH_GRANT_DONO";
+    public static final String EXTRA_AGENCY = "ADDMACHINE_EXTRA_AGENCY";
+    public static final String EXTRA_AGENCY_SPECIFY = "ADDMACHINE_EXTRA_AGENCY_SPECIFY";
+    public static final String EXTRA_NAME_OWNER = "ADDMACHINE_EXTRA_NAME_OWNER";
+    public static final String EXTRA_YEAR_ACQUIRED = "ADDMACHINE_EXTRA_YEAR_ACQUIRED";
+    public static final String EXTRA_CONDITION_ACQUIRED = "ADDMACHINE_EXTRA_CONDITION_ACQUIRED";
+    public static final String EXTRA_RENTAL = "ADDMACHINE_EXTRA_RENTAL";
+    public static final String EXTRA_CUSTOM_RATE = "ADDMACHINE_EXTRA_CUSTOM_RATE";
+    public static final String EXTRA_CUSTOM_UNIT = "ADDMACHINE_EXTRA_CUSTOM_UNIT";
+    public static final String EXTRA_CUSTOM_UNIT_SPECIFY = "ADDMACHINE_EXTRA_CUSTOM_UNIT_SPECIFY";
+    public static final String EXTRA_AVAILABILITY = "ADDMACHINE_EXTRA_AVAILABILITY";
+    public static final String EXTRA_RENT_PROV = "ADDMACHINE_EXTRA_RENT_PROV";
+    public static final String EXTRA_RENT_MUN = "ADDMACHINE_EXTRA_RENT_MUN";
+    public static final String EXTRA_RENT_BRGY = "ADDMACHINE_EXTRA_RENT_BRGY";
+    public static final String EXTRA_CONDITION = "ADDMACHINE_EXTRA_CONDITION";
+    public static final String EXTRA_PROBLEMS = "ADDMACHINE_EXTRA_PROBLEMS";
+    public static final String EXTRA_PROBLEMS_SPECIFY = "ADDMACHINE_EXTRA_PROBLEMS_SPECIFY";
+    public static final String EXTRA_LOCATION = "ADDMACHINE_EXTRA_LOCATION";
+    public static final String EXTRA_PROV = "ADDMACHINE_EXTRA_PROV";
+    public static final String EXTRA_MUN = "ADDMACHINE_EXTRA_MUN";
+    public static final String EXTRA_BRGY = "ADDMACHINE_EXTRA_BRGY";
+    public static final String EXTRA_ACC = "ADDMACHINE_EXTRA_ACCURACY";
+    public static final String EXTRA_RES_CODE = "ADDMACHINE_EXTRA_RES_CODE";
+    public static final String EXTRA_RES_NAME = "ADDMACHINE_EXTRA_RES_NAME";
     static Uri capturedImageUri = null;
 
     @Override
@@ -147,44 +145,41 @@ public class AddMachineActivity extends AppCompatActivity {
         setContentView(R.layout.add_machine_activity);
 
         askCameraPermission();
+        requestExtrernalPermission();
 
-        if (checkPermission()) {
+        if (checkExternalPermission()) {
             // Code for above or equal 23 API Oriented Device
             // Your Permission granted already .Do next code
         } else {
-            requestPermission(); // Code for permission
+            requestExtrernalPermission(); // Code for permission
         }
 
-        smallMargin = (int) pxFromDp(this, 8);
-        bigMargin = (int) pxFromDp(this, 32);
-
+        setMargins();
         initViews();
         hide();
 
-        edtAveOpHours.setFilters(new InputFilter[]{new MinMaxFilter("0", "24")});
-        edtAveOpDays.setFilters(new InputFilter[]{new MinMaxFilter("1", "31")});
-        edtServiceArea.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
+        machineListViewModel = new ViewModelProvider(this).get(MachineListViewModel.class);
 
-        paramstvBrand = (ConstraintLayout.LayoutParams) tvBrand.getLayoutParams();
-        paramstvMachineAvailability = (ConstraintLayout.LayoutParams) tvMachineAvailability.getLayoutParams();
-        paramsedtNameOfOwnerOrg = (ConstraintLayout.LayoutParams) edtNameOfOwnerOrg.getLayoutParams();
-        paramstvConditionPresent = (ConstraintLayout.LayoutParams) tvConditionPresent.getLayoutParams();
-        paramstvLocation = (ConstraintLayout.LayoutParams) tvLocation.getLayoutParams();
-        paramstvModel = (ConstraintLayout.LayoutParams) tvModel.getLayoutParams();
-        paramsedtRatedPower = (ConstraintLayout.LayoutParams) edtRatedPower.getLayoutParams();
+        setInputFilters();
 
-        paramstvBrand.topToBottom = R.id.edtQRCode;
-        paramstvBrand.topMargin = bigMargin;
-        tvBrand.setLayoutParams(paramstvBrand);
+        initAllLayoutParameters();
 
-        paramstvMachineAvailability.topToBottom = R.id.spinRental;
-        paramstvMachineAvailability.topMargin = bigMargin;
-        tvMachineAvailability.setLayoutParams(paramstvMachineAvailability);
+        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
 
-        paramsedtNameOfOwnerOrg.topToBottom = R.id.spinOwnership;
-        paramsedtNameOfOwnerOrg.topMargin = bigMargin;
-        edtNameOfOwnerOrg.setLayoutParams(paramsedtNameOfOwnerOrg);
+        profileViewModel.getAllProfiles().observe(this, new Observer<List<Profile>>() {
+            @Override
+            public void onChanged(List<Profile> profiles) {
+                ArrayList<String> stringArrayList = new ArrayList<>();
+                stringArrayList.add("");
+                for (int i = profiles.size() - 1; i >= 0; i--) {
+                    stringArrayList.add(profiles.get(i).getId() + " " + profiles.get(i).getName_respondent());
+                }
 
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, stringArrayList);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinRespName.setAdapter(adapter);
+            }
+        });
 
         ArrayList<String> years = new ArrayList<String>();
         years.add("");
@@ -201,7 +196,6 @@ public class AddMachineActivity extends AppCompatActivity {
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 ContentValues values = new ContentValues();
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -286,7 +280,7 @@ public class AddMachineActivity extends AppCompatActivity {
         spinBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                brandSelect(position);
+                brandSelect(spinBrand.getSelectedItem().toString());
             }
 
             @Override
@@ -298,7 +292,7 @@ public class AddMachineActivity extends AppCompatActivity {
         spinModel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                modelSelect(position);
+                modelSelect(spinModel.getSelectedItem().toString());
             }
 
             @Override
@@ -343,7 +337,6 @@ public class AddMachineActivity extends AppCompatActivity {
 
             }
         });
-
 
         spinCustomUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -404,10 +397,84 @@ public class AddMachineActivity extends AppCompatActivity {
 
             }
         });
+
+        List<KeyPairBoolData> allProvinces = pairingOfList(Arrays.asList(getResources().getStringArray(R.array.provinces)));
+        singlespinProvince.setItems(allProvinces, new SingleSpinnerListener() {
+            @Override
+            public void onItemsSelected(KeyPairBoolData selectedItem) {
+
+                Log.d("Single Prov", selectedItem.getName());
+
+            }
+
+            @Override
+            public void onClear() {
+
+            }
+        });
+
+        List<KeyPairBoolData> allMunicipalities = pairingOfList(Arrays.asList(getResources().getStringArray(R.array.municipalities)));
+        singlespinMunicipality.setItems(allMunicipalities, new SingleSpinnerListener() {
+            @Override
+            public void onItemsSelected(KeyPairBoolData selectedItem) {
+
+                Log.d("Single Mun", selectedItem.getName());
+
+            }
+
+            @Override
+            public void onClear() {
+            }
+        });
+
+        List<KeyPairBoolData> allBarangays = pairingOfList(Arrays.asList(getResources().getStringArray(R.array.barangays)));
+        singlespinBarangay.setItems(allBarangays, new SingleSpinnerListener() {
+            @Override
+            public void onItemsSelected(KeyPairBoolData selectedItem) {
+                Log.d("Single Brgy", selectedItem.getName());
+            }
+
+            @Override
+            public void onClear() {
+            }
+        });
+    }
+
+    private void initAllLayoutParameters() {
+        paramstvBrand = (ConstraintLayout.LayoutParams) tvBrand.getLayoutParams();
+        paramstvMachineAvailability = (ConstraintLayout.LayoutParams) tvMachineAvailability.getLayoutParams();
+        paramsedtNameOfOwnerOrg = (ConstraintLayout.LayoutParams) edtNameOfOwnerOrg.getLayoutParams();
+        paramstvConditionPresent = (ConstraintLayout.LayoutParams) tvConditionPresent.getLayoutParams();
+        paramstvLocation = (ConstraintLayout.LayoutParams) tvLocation.getLayoutParams();
+        paramstvModel = (ConstraintLayout.LayoutParams) tvModel.getLayoutParams();
+        paramsedtRatedPower = (ConstraintLayout.LayoutParams) edtRatedPower.getLayoutParams();
+
+        paramstvBrand.topToBottom = R.id.edtQRCode;
+        paramstvBrand.topMargin = bigMargin;
+        tvBrand.setLayoutParams(paramstvBrand);
+
+        paramstvMachineAvailability.topToBottom = R.id.spinRental;
+        paramstvMachineAvailability.topMargin = bigMargin;
+        tvMachineAvailability.setLayoutParams(paramstvMachineAvailability);
+
+        paramsedtNameOfOwnerOrg.topToBottom = R.id.spinOwnership;
+        paramsedtNameOfOwnerOrg.topMargin = bigMargin;
+        edtNameOfOwnerOrg.setLayoutParams(paramsedtNameOfOwnerOrg);
+    }
+
+    private void setInputFilters() {
+        edtAveOpHours.setFilters(new InputFilter[]{new MinMaxFilter("0", "24")});
+        edtAveOpDays.setFilters(new InputFilter[]{new MinMaxFilter("1", "365")});
+        edtServiceArea.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
     }
 
     public static float pxFromDp(final Context context, final float dp) {
         return dp * context.getResources().getDisplayMetrics().density;
+    }
+
+    private void setMargins() {
+        smallMargin = (int) pxFromDp(this, 8);
+        bigMargin = (int) pxFromDp(this, 32);
     }
 
     public List<KeyPairBoolData> pairingOfList(List<String> stringList) {
@@ -422,8 +489,8 @@ public class AddMachineActivity extends AppCompatActivity {
         return listArray1;
     }
 
-    private void brandSelect(int position) {
-        String pos = spinBrand.getItemAtPosition(position).toString();
+    private void brandSelect(String position) {
+        String pos = position;
         String typeMachine = spinMachineType.getSelectedItem().toString();
         switch (pos) {
             case "OTHERS":
@@ -458,6 +525,8 @@ public class AddMachineActivity extends AppCompatActivity {
         }
         paramstvModel.topMargin = bigMargin;
         tvModel.setLayoutParams(paramstvModel);
+
+
     }
 
     private void editItemSelected(Intent intent1) {
@@ -499,7 +568,6 @@ public class AddMachineActivity extends AppCompatActivity {
         Log.d("Position TYPE MILL", "Position is: " + intent.getStringExtra(EXTRA_TYPE_MILL) + " " + position);
         spinTypeOfMill.setSelection(position);
 
-
 //        stringCompare = intent.getStringExtra(EXTRA_BRAND);
 //        adaptercompare = ArrayAdapter.createFromResource(this, R.array.all_machine_brands, android.R.layout.simple_spinner_item);
 //        adaptercompare.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -508,13 +576,13 @@ public class AddMachineActivity extends AppCompatActivity {
 //            spinBrand.getAdapter().getItem();
 //            position = adaptercompare.getPosition(stringCompare);
 //        }
-
+//
 //        for (int i = 0; i < adaptercompare.getCount(); i++) {
 //            Log.d("Array:", adaptercompare.getItem(i).toString());
 //        }
-
-        Log.d("Position BRAND", "Position is: " + intent.getStringExtra(EXTRA_BRAND) + " " + position);
-        spinBrand.setSelection(position);
+//
+//        Log.d("Position BRAND", "Position is: " + intent.getStringExtra(EXTRA_BRAND) + " " + position);
+//        spinBrand.setSelection(position);
 
         edtOtherBrand.setText(intent.getStringExtra(EXTRA_BRAND_SPECIFY));
 
@@ -525,7 +593,7 @@ public class AddMachineActivity extends AppCompatActivity {
 //            position = adaptercompare.getPosition(stringCompare);
 //        }
 //        Log.d("Position MODEL", "Position is: " + intent.getStringExtra(EXTRA_MODEL) + " " + position);
-        spinModel.setSelection(position);
+//        spinModel.setSelection(position);
 
         edtOtherModel.setText(intent.getStringExtra(EXTRA_MODEL_SPECIFY));
 
@@ -575,6 +643,7 @@ public class AddMachineActivity extends AppCompatActivity {
             years.add(Integer.toString(i));
 
         }
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
 
         stringCompare = intent.getStringExtra(EXTRA_YEAR_ACQUIRED);
@@ -583,6 +652,14 @@ public class AddMachineActivity extends AppCompatActivity {
         }
         Log.d("Position YEAR", "Position is: " + intent.getStringExtra(EXTRA_YEAR_ACQUIRED) + " " + position);
         spinYearAcquired.setSelection(position);
+
+//        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Variable.getListResCode());
+//        stringCompare = intent.getStringExtra(EXTRA_RES_CODE);
+//        if (!isNullOrEmpty(stringCompare)) {
+//            position = adapter.getPosition(stringCompare);
+//        }
+//        Log.d("Position RESCODE", "Position is: " + stringCompare + " " + position);
+//        spinRespName.setSelection(position);
 
         stringCompare = intent.getStringExtra(EXTRA_CONDITION_ACQUIRED);
         adaptercompare = ArrayAdapter.createFromResource(this, R.array.condition_when_bought, android.R.layout.simple_spinner_item);
@@ -634,7 +711,7 @@ public class AddMachineActivity extends AppCompatActivity {
         if (!isNullOrEmpty(stringCompare)) {
             position = adaptercompare.getPosition(stringCompare);
         }
-        Log.d("Position LOCATION", "Position is: " + intent.getStringExtra(EXTRA_CONDITION) + " " + position);
+        Log.d("Position CONDITION", "Position is: " + intent.getStringExtra(EXTRA_CONDITION) + " " + position);
         spinConditionPresent.setSelection(position);
 
         stringCompare = intent.getStringExtra(EXTRA_LOCATION);
@@ -646,9 +723,9 @@ public class AddMachineActivity extends AppCompatActivity {
         Log.d("Position LOCATION", "Position is: " + intent.getStringExtra(EXTRA_LOCATION) + " " + position);
         spinLocationOfMachine.setSelection(position);
 
-        edtProvince.setText(intent.getStringExtra(EXTRA_PROV));
-        edtMunicipality.setText(intent.getStringExtra(EXTRA_MUN));
-        edtBarangay.setText(intent.getStringExtra(EXTRA_BRGY));
+//        edtProvince.setText(intent.getStringExtra(EXTRA_PROV));
+//        edtMunicipality.setText(intent.getStringExtra(EXTRA_MUN));
+//        edtBarangay.setText(intent.getStringExtra(EXTRA_BRGY));
 
 
         tvLat.setText(intent.getStringExtra(EXTRA_LAT));
@@ -658,11 +735,14 @@ public class AddMachineActivity extends AppCompatActivity {
 
         encodedImage = Variable.getStringImage();
 
+        dateToStr = intent.getStringExtra(EXTRA_DATE_TIME);
+
         byte[] decodedString = Base64.decode(Variable.getStringImage(), Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         selectedImage.setImageBitmap(decodedByte);
     }
 
+    //
     private void sortingBrand4WheelTractor(String position) {
         List<String> stringListModel4WheelTractor = Arrays.asList(getResources().getStringArray(R.array.blank));
         switch (position) {
@@ -775,7 +855,7 @@ public class AddMachineActivity extends AppCompatActivity {
         int pos = 0;
         if (intent != null && intent.hasExtra(EXTRA_ID)) {
 
-            String stringCompare = intent.getStringExtra(EXTRA_BRAND);
+            String stringCompare = intent.getStringExtra(EXTRA_MODEL);
 
             if (!isNullOrEmpty(stringCompare)) {
                 pos = dataAdapter.getPosition(stringCompare);
@@ -864,7 +944,7 @@ public class AddMachineActivity extends AppCompatActivity {
         int pos = 0;
         if (intent != null && intent.hasExtra(EXTRA_ID)) {
 
-            String stringCompare = intent.getStringExtra(EXTRA_BRAND);
+            String stringCompare = intent.getStringExtra(EXTRA_MODEL);
 
             if (!isNullOrEmpty(stringCompare)) {
                 pos = dataAdapter.getPosition(stringCompare);
@@ -1001,7 +1081,7 @@ public class AddMachineActivity extends AppCompatActivity {
         int pos = 0;
         if (intent != null && intent.hasExtra(EXTRA_ID)) {
 
-            String stringCompare = intent.getStringExtra(EXTRA_BRAND);
+            String stringCompare = intent.getStringExtra(EXTRA_MODEL);
 
             if (!isNullOrEmpty(stringCompare)) {
                 pos = dataAdapter.getPosition(stringCompare);
@@ -1060,22 +1140,43 @@ public class AddMachineActivity extends AppCompatActivity {
         int pos = 0;
         if (intent != null && intent.hasExtra(EXTRA_ID)) {
 
-            String stringCompare = intent.getStringExtra(EXTRA_BRAND);
+            String stringCompare = intent.getStringExtra(EXTRA_MODEL).trim();
 
             if (!isNullOrEmpty(stringCompare)) {
                 pos = dataAdapter.getPosition(stringCompare);
+            }
+            else {
+                pos = 0;
             }
             spinModel.setSelection(pos);
         }
     }
 
-    private void modelSelect(int position) {
-        String pos = spinModel.getItemAtPosition(position).toString();
+    private void modelSelect(String position) {
+        String pos = position;
 
         switch (pos) {
             case "OTHERS":
                 edtOtherModel.setVisibility(View.VISIBLE);
                 paramsedtRatedPower.topToBottom = R.id.edtOtherModel;
+
+//                List<String> stringList = Arrays.asList(getResources().getStringArray(R.array.specify_only_brand_boom_sprayer_cane_grab_infield));
+//                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, stringList);
+//                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                spinModel.setAdapter(dataAdapter);
+//
+//                Intent intent = intentFromDb;
+//                int positions = 0;
+//                if (intent != null && intent.hasExtra(EXTRA_ID)) {
+//
+//                    String stringCompare = intent.getStringExtra(EXTRA_MODEL);
+//
+//                    if (!isNullOrEmpty(stringCompare)) {
+//                        positions = dataAdapter.getPosition(stringCompare);
+//                    }
+//                    spinModel.setSelection(positions);
+//                }
+
                 break;
             default:
                 edtOtherModel.setVisibility(View.INVISIBLE);
@@ -1084,6 +1185,8 @@ public class AddMachineActivity extends AppCompatActivity {
         }
         paramsedtRatedPower.topMargin = bigMargin;
         edtRatedPower.setLayoutParams(paramsedtRatedPower);
+
+
     }
 
 //    private void provMunSort(int position) {
@@ -1620,11 +1723,22 @@ public class AddMachineActivity extends AppCompatActivity {
         String machineQRCode = edtQRCode.getText().toString();
         String latitude = tvLat.getText().toString();
         String longitude = tvLong.getText().toString();
-//        String image = encodedImage;
-        Date today = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
-        String dateToStr = format.format(today);
 
+
+        profileViewModel.getAllProfiles().observe(this, new Observer<List<Profile>>() {
+            @Override
+            public void onChanged(List<Profile> profiles) {
+                List<String> profileList = new ArrayList<String>();
+                for (int i = 0; i < profiles.size(); i++) {
+                    profileList.add(profiles.get(i).getId() + " " + profiles.get(i).getName_respondent());
+                }
+                ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, profileList);
+
+                int posRespName = spinnerArrayAdapter.getPosition(spinRespName.getSelectedItem().toString());
+                resName = profiles.get(posRespName).getName_respondent();
+                resCode = profiles.get(posRespName).getResCode();
+            }
+        });
 
         if (machineType.trim().isEmpty() ||
                 machineQRCode.trim().isEmpty() ||
@@ -1632,9 +1746,13 @@ public class AddMachineActivity extends AppCompatActivity {
                 isNullOrEmpty(longitude)) {
             Toast.makeText(this, "Incomplete Data", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Date: " + dateToStr + "Type: " + machineType + " QR Code: " + machineQRCode + " Latitude: " + latitude + " Longitude: " + longitude, Toast.LENGTH_LONG).show();
+
             Intent dataAddMachine = new Intent();
 
+            if (isNullOrEmpty(encodedImage)) {
+
+                encodedImage = getResources().getString(R.string.default_image);
+            }
 
             int id = getIntent().getIntExtra(EXTRA_ID, -1);
             if (id != -1) {
@@ -1675,14 +1793,21 @@ public class AddMachineActivity extends AppCompatActivity {
                 dataAddMachine.putExtra(EXTRA_PROBLEMS, listOfProblems);
                 dataAddMachine.putExtra(EXTRA_PROBLEMS_SPECIFY, edtOtherProblems.getText().toString().toUpperCase());
                 dataAddMachine.putExtra(EXTRA_LOCATION, spinLocationOfMachine.getSelectedItem().toString());
-                dataAddMachine.putExtra(EXTRA_PROV, edtProvince.getText().toString().toUpperCase());
-                dataAddMachine.putExtra(EXTRA_MUN, edtMunicipality.getText().toString().toUpperCase());
-                dataAddMachine.putExtra(EXTRA_BRGY, edtBarangay.getText().toString().toUpperCase());
+                dataAddMachine.putExtra(EXTRA_PROV, singlespinProvince.getSelectedItem().toString().toUpperCase());
+                dataAddMachine.putExtra(EXTRA_MUN, singlespinMunicipality.getSelectedItem().toString().toUpperCase());
+                dataAddMachine.putExtra(EXTRA_BRGY, singlespinBarangay.getSelectedItem().toString().toUpperCase());
                 Variable.setStringImage(encodedImage);
                 dataAddMachine.putExtra(EXTRA_LAT, tvLat.getText().toString());
                 dataAddMachine.putExtra(EXTRA_LONG, tvLong.getText().toString());
                 dataAddMachine.putExtra(EXTRA_ACC, accuracy);
-            } else {
+                dataAddMachine.putExtra(EXTRA_RES_CODE, resCode.toUpperCase());
+                dataAddMachine.putExtra(EXTRA_RES_NAME, resName.toUpperCase());
+
+            }
+            else {
+
+                dateToStr = new SimpleDateFormat("MM/dd/yy HH:mm:ss").format(new Date());
+
                 dataAddMachine.putExtra(EXTRA_MACHINE_TYPE, spinMachineType.getSelectedItem().toString());
                 dataAddMachine.putExtra(EXTRA_MACHINE_QRCODE, edtQRCode.getText().toString());
                 dataAddMachine.putExtra(EXTRA_TYPE_TUBEWELLS, spinTypeofTubeWells.getSelectedItem().toString());
@@ -1719,13 +1844,15 @@ public class AddMachineActivity extends AppCompatActivity {
                 dataAddMachine.putExtra(EXTRA_PROBLEMS, listOfProblems);
                 dataAddMachine.putExtra(EXTRA_PROBLEMS_SPECIFY, edtOtherProblems.getText().toString().toUpperCase());
                 dataAddMachine.putExtra(EXTRA_LOCATION, spinLocationOfMachine.getSelectedItem().toString());
-                dataAddMachine.putExtra(EXTRA_PROV, edtProvince.getText().toString().toUpperCase());
-                dataAddMachine.putExtra(EXTRA_MUN, edtMunicipality.getText().toString().toUpperCase());
-                dataAddMachine.putExtra(EXTRA_BRGY, edtBarangay.getText().toString().toUpperCase());
+                dataAddMachine.putExtra(EXTRA_PROV, singlespinProvince.getSelectedItem().toString().toUpperCase());
+                dataAddMachine.putExtra(EXTRA_MUN, singlespinMunicipality.getSelectedItem().toString().toUpperCase());
+                dataAddMachine.putExtra(EXTRA_BRGY, singlespinBarangay.getSelectedItem().toString().toUpperCase());
                 Variable.setStringImage(encodedImage);
                 dataAddMachine.putExtra(EXTRA_LAT, tvLat.getText().toString());
                 dataAddMachine.putExtra(EXTRA_LONG, tvLong.getText().toString());
                 dataAddMachine.putExtra(EXTRA_ACC, accuracy);
+                dataAddMachine.putExtra(EXTRA_RES_CODE, resCode.toUpperCase());
+                dataAddMachine.putExtra(EXTRA_RES_NAME, resName.toUpperCase());
             }
 
             setResult(RESULT_OK, dataAddMachine);
@@ -1733,7 +1860,6 @@ public class AddMachineActivity extends AppCompatActivity {
         }
 
     }
-
 
     private Bitmap scale(Bitmap bitmap, int maxWidth, int maxHeight) {
         // Determine the constrained dimension, which determines both dimensions.
@@ -1769,7 +1895,8 @@ public class AddMachineActivity extends AppCompatActivity {
     public void askCameraPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
-        } else {
+        }
+        else {
             //TODO ADD PICTURE INTENT
         }
 
@@ -1780,7 +1907,7 @@ public class AddMachineActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == CAMERA_PERM_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //TODO ADD PICTURE INTENT
+                Toast.makeText(this, "Camera Permission granted", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Camera Permission is Required to Use camera.", Toast.LENGTH_SHORT).show();
             }
@@ -1794,7 +1921,7 @@ public class AddMachineActivity extends AppCompatActivity {
         }
     }
 
-    private boolean checkPermission() {
+    private boolean checkExternalPermission() {
         int result = ContextCompat.checkSelfPermission(AddMachineActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (result == PackageManager.PERMISSION_GRANTED) {
             return true;
@@ -1803,10 +1930,10 @@ public class AddMachineActivity extends AppCompatActivity {
         }
     }
 
-    private void requestPermission() {
+    private void requestExtrernalPermission() {
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(AddMachineActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            Toast.makeText(AddMachineActivity.this, "NECESITAMOS QUE NOS CONCEDAS LOS PERMISOS DE ALMACENAMIENTO PARA GUARDAR NOTICIAS O RADIOS COMO FAVORITOS.", Toast.LENGTH_LONG).show();
+//            Toast.makeText(AddMachineActivity.this, "NECESITAMOS QUE NOS CONCEDAS LOS PERMISOS DE ALMACENAMIENTO PARA GUARDAR NOTICIAS O RADIOS COMO FAVORITOS.", Toast.LENGTH_LONG).show();
         } else {
             ActivityCompat.requestPermissions(AddMachineActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_PERM_CODE);
         }
@@ -1910,9 +2037,9 @@ public class AddMachineActivity extends AppCompatActivity {
 //        multspinRentBrgy = findViewById(R.id.multispinRentBrgy);
 //        spinRentMun = findViewById(R.id.spinRentMunicipality);
 //        spinRentProv = findViewById(R.id.spinRentProvince);
-        edtProvince = findViewById(R.id.edtProvince);
-        edtMunicipality = findViewById(R.id.edtMunicipality);
-        edtBarangay = findViewById(R.id.edtBarangay);
+        singlespinProvince = findViewById(R.id.singlespinProvince);
+        singlespinMunicipality = findViewById(R.id.singlespinMunicipalities);
+        singlespinBarangay = findViewById(R.id.singlespinBarangays);
         edtRentProv = findViewById(R.id.edtRentProv);
         edtRentMun = findViewById(R.id.edtRentMun);
         edtRentBrgy = findViewById(R.id.edtRentBrgy);
@@ -1957,6 +2084,7 @@ public class AddMachineActivity extends AppCompatActivity {
         edtOtherProblems = findViewById(R.id.edtOtherProblems);
         tvCommas = findViewById(R.id.tvCommas);
         spinLocationOfMachine = findViewById(R.id.spinLocationOfMachine);
+        spinRespName = findViewById(R.id.spinRespondentName);
     }
 
     private void hide() {

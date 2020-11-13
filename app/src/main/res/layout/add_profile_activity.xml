@@ -2,12 +2,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scrollViewInfo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
-    tools:context=".fragments.InfoFragment">
-
+    tools:context=".AddProfile"
+    android:id="@+id/scrollViewInfo"
+    android:background="@drawable/gradient_background">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutInfo"
         android:layout_width="match_parent"
@@ -17,12 +16,13 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:text="Profile of Respondent"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/switchEditSave" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
             android:id="@+id/spinProfile"
@@ -32,7 +32,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/custom_spinner"
             android:entries="@array/ownership_type"
-            app:layout_constraintEnd_toStartOf="@+id/switchEditSave"
+            app:layout_constraintEnd_toStartOf="@+id/btnSaveProfile"
             app:layout_constraintStart_toStartOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -230,17 +230,6 @@
             app:layout_constraintStart_toStartOf="@+id/multspinContactNumber"
             app:layout_constraintTop_toBottomOf="@+id/tvEduc" />
 
-        <Switch
-            android:id="@+id/switchEditSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Edit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.95"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
@@ -249,19 +238,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinEduc" />
 
-        <Button
-            android:id="@+id/btnClearSave"
+        <ImageButton
+            android:id="@+id/btnSaveProfile"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:background="@drawable/custom_button"
-            android:text="New Profile"
-            app:layout_constraintBottom_toTopOf="@+id/textView6"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_image_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/textView6"
+            app:srcCompat="@drawable/ic_outline_save_24" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
 </ScrollView>
-
-

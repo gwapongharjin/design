@@ -1,33 +1,35 @@
- package com.m3das.biomech.design.fragments;
+package com.m3das.biomech.design.fragments;
 
- import android.app.Activity;
- import android.content.Intent;
- import android.content.res.ColorStateList;
- import android.os.Bundle;
- import android.util.Log;
- import android.view.LayoutInflater;
- import android.view.View;
- import android.view.ViewGroup;
- import android.widget.Toast;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
- import androidx.annotation.NonNull;
- import androidx.annotation.Nullable;
- import androidx.fragment.app.Fragment;
- import androidx.lifecycle.Observer;
- import androidx.lifecycle.ViewModelProvider;
- import androidx.recyclerview.widget.ItemTouchHelper;
- import androidx.recyclerview.widget.LinearLayoutManager;
- import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
- import com.google.android.material.floatingactionbutton.FloatingActionButton;
- import com.m3das.biomech.design.AddMachineActivity;
- import com.m3das.biomech.design.MachineAdapter;
- import com.m3das.biomech.design.Machines;
- import com.m3das.biomech.design.R;
- import com.m3das.biomech.design.Variable;
- import com.m3das.biomech.design.viewmodels.MachineListViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.m3das.biomech.design.AddMachineActivity;
+import com.m3das.biomech.design.MachineAdapter;
+import com.m3das.biomech.design.machinedb.Machines;
+import com.m3das.biomech.design.R;
+import com.m3das.biomech.design.Variable;
+import com.m3das.biomech.design.viewmodels.MachineListViewModel;
 
- import java.util.List;
+import java.util.List;
 
 public class MachineListFragment extends Fragment {
 
@@ -50,21 +52,13 @@ public class MachineListFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         num = 3;
         View v = inflater.inflate(R.layout.machine_list_fragment, container, false);
-        fabAddNewMachine = v.findViewById(R.id.floatingActionButtonMachAdd);
-        fabDeleteMachine = v.findViewById(R.id.floatingActionButtonDelete);
+        fabAddNewMachine = v.findViewById(R.id.floatingActionButtonAddMachine);
+        fabDeleteMachine = v.findViewById(R.id.floatingActionButtonDeleteMachine);
 
         recyclerView = v.findViewById(R.id.recyclerViewML);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setHasFixedSize(true);
 
-
-        recyclerView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                fabDeleteMachine.setVisibility(View.VISIBLE);
-                return true;
-            }
-        });
 
         MachineAdapter machineAdapter = new MachineAdapter();
         recyclerView.setAdapter(machineAdapter);
@@ -75,6 +69,15 @@ public class MachineListFragment extends Fragment {
         machineListViewModel.getAllMachines().observe(getActivity(), new Observer<List<Machines>>() {
             @Override
             public void onChanged(List<Machines> machines) {
+                String machineList = "";
+                for (int i = machines.size() - 1; i > -1; i--) {
+                    machineList = machineList + "Machine ID: " + machines.get(i).getId();
+                    machineList = machineList + "\nMachine QR Code: " + machines.get(i).getMachine_qrcode();
+                    machineList = machineList + "\nRespondent Name: " + machines.get(i).getResName();
+                    machineList = machineList + "\nMachine Type: " + machines.get(i).getMachine_type()+ "\n\n";
+                }
+                Variable.setMachList(machineList);
+
                 machineAdapter.setMachinesList(machines);
             }
         });
@@ -128,6 +131,7 @@ public class MachineListFragment extends Fragment {
                 intent.putExtra(AddMachineActivity.EXTRA_LONG, machines.getMachine_longitude());
                 Variable.setStringImage(machines.getMachine_image_base64());
                 intent.putExtra(AddMachineActivity.EXTRA_ACC, machines.getAccuracy());
+                intent.putExtra(AddMachineActivity.EXTRA_RES_CODE, machines.getResCode());
 
                 startActivityForResult(intent, EDIT_NOTE_REQUEST);
             }
@@ -172,7 +176,26 @@ public class MachineListFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                machineListViewModel.delete(machineAdapter.getMachineAt(viewHolder.getAdapterPosition()));
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Deleting Item")
+                        .setMessage("You will be deleting this: "+ machineAdapter.getMachineAt(viewHolder.getAdapterPosition()).getMachine_qrcode())
+                        .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                machineListViewModel.delete(machineAdapter.getMachineAt(viewHolder.getAdapterPosition()));
+                            }
+
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                machineAdapter.notifyDataSetChanged();
+                            }
+                        });
+                builder.show();
+
             }
 
             @Override
@@ -240,14 +263,16 @@ public class MachineListFragment extends Fragment {
             String longitude = data.getStringExtra(AddMachineActivity.EXTRA_LONG);
             String imageString = Variable.getStringImage();
             String accuracy = data.getStringExtra(AddMachineActivity.EXTRA_ACC);
-            String tubewells =data.getStringExtra(AddMachineActivity.EXTRA_TYPE_TUBEWELLS);
+            String tubewells = data.getStringExtra(AddMachineActivity.EXTRA_TYPE_TUBEWELLS);
             String type_mill = data.getStringExtra(AddMachineActivity.EXTRA_TYPE_MILL);
+            String resCode = data.getStringExtra(AddMachineActivity.EXTRA_RES_CODE);
+            String resName = data.getStringExtra(AddMachineActivity.EXTRA_RES_NAME);
 
-            Machines machines = new Machines(machineType,tubewells,type_mill, machineQRCode, datesurvey, brand, brand_specify, model, model_specify, rated_power, service_area, ave_op_hours,
+            Machines machines = new Machines(machineType, tubewells, type_mill, machineQRCode, datesurvey, brand, brand_specify, model, model_specify, rated_power, service_area, ave_op_hours,
                     ave_op_days, capacity, ave_yield, num_loads, rate, ownership, purch_grant_dono, agency, agency_specify, name_owner, year_acquired, condition_acquired,
                     rental, custom_rate, custom_unit, custom_unit_specify, availablity, rent_prov, rent_mun, rent_brgy, condition, problems, problems_specify, location,
-                    prov, mun, brgy, latitude, longitude, imageString, accuracy);
-            
+                    prov, mun, brgy, latitude, longitude, imageString, accuracy, resCode, resName);
+
             machineListViewModel.insert(machines);
 
             Log.d("Is note saved", "Note Saved" + machineType);
@@ -300,13 +325,15 @@ public class MachineListFragment extends Fragment {
             String longitude = data.getStringExtra(AddMachineActivity.EXTRA_LONG);
             String imageString = Variable.getStringImage();
             String accuracy = data.getStringExtra(AddMachineActivity.EXTRA_ACC);
-            String tubewells =data.getStringExtra(AddMachineActivity.EXTRA_TYPE_TUBEWELLS);
+            String tubewells = data.getStringExtra(AddMachineActivity.EXTRA_TYPE_TUBEWELLS);
             String type_mill = data.getStringExtra(AddMachineActivity.EXTRA_TYPE_MILL);
+            String resCode = data.getStringExtra(AddMachineActivity.EXTRA_RES_CODE);
+            String resName = data.getStringExtra(AddMachineActivity.EXTRA_RES_NAME);
 
-            Machines machines = new Machines(machineType,tubewells,type_mill, machineQRCode, datesurvey, brand, brand_specify, model, model_specify, rated_power, service_area, ave_op_hours,
+            Machines machines = new Machines(machineType, tubewells, type_mill, machineQRCode, datesurvey, brand, brand_specify, model, model_specify, rated_power, service_area, ave_op_hours,
                     ave_op_days, capacity, ave_yield, num_loads, rate, ownership, purch_grant_dono, agency, agency_specify, name_owner, year_acquired, condition_acquired,
                     rental, custom_rate, custom_unit, custom_unit_specify, availablity, rent_prov, rent_mun, rent_brgy, condition, problems, problems_specify, location,
-                    prov, mun, brgy, latitude, longitude, imageString, accuracy);
+                    prov, mun, brgy, latitude, longitude, imageString, accuracy, resCode, resName);
 
             machines.setId(id);
 

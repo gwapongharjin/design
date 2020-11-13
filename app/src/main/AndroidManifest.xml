@@ -21,7 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CropSelectActivity"></activity>
+        <activity android:name=".ViewImplements"></activity>
+        <activity android:name=".ViewMachines" />
+        <activity android:name=".AddProfile" />
+        <activity android:name=".CropSelectActivity" />
         <activity android:name=".PrivacyAndConsentActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".AddImplementActivity" />
@@ -35,7 +38,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key"/>
+            android:value="@string/google_maps_key" />
 
         <activity
             android:name=".LocationMapsActivity"

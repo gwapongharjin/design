@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import com.m3das.biomech.design.fragments.DataFragment;
-import com.m3das.biomech.design.fragments.InfoFragment;
+import com.m3das.biomech.design.fragments.ProfileFragment;
 import com.m3das.biomech.design.fragments.MachineListFragment;
 import com.m3das.biomech.design.fragments.MapFragment;
 import com.m3das.biomech.design.fragments.ImplementsFragment;
@@ -23,7 +23,7 @@ private final int numTabs;
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new InfoFragment();
+                return new ProfileFragment();
             case 1:
                 return new MachineListFragment();
             case 2:

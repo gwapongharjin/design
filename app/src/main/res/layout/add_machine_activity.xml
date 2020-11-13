@@ -36,6 +36,17 @@
                 app:layout_constraintStart_toStartOf="@+id/textView5"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
+            <Spinner
+                android:id="@+id/spinRespondentName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/custom_spinner"
+                android:entries="@array/blank"
+                app:layout_constraintEnd_toEndOf="@+id/spinMachineType"
+                app:layout_constraintStart_toStartOf="@+id/spinMachineType"
+                app:layout_constraintTop_toBottomOf="@id/spinMachineType" />
+
             <EditText
                 android:id="@+id/edtQRCode"
                 android:layout_width="wrap_content"
@@ -46,7 +57,7 @@
                 android:hint="QR CODE"
                 android:inputType="text"
                 app:layout_constraintStart_toStartOf="@+id/textView5"
-                app:layout_constraintTop_toBottomOf="@+id/spinMachineType" />
+                app:layout_constraintTop_toBottomOf="@id/spinRespondentName" />
 
             <ImageButton
                 android:id="@+id/btnScanQRCodeMach"
@@ -654,27 +665,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvProvince" />
                 -->
 
-
-            <EditText
-                android:id="@+id/edtProvince"
+            <com.androidbuts.multispinnerfilter.SingleSpinnerSearch
+                android:id="@+id/singlespinProvince"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/custom_edit_text"
-                android:ems="10"
-                android:inputType="textPersonName"
+                android:background="@drawable/custom_spinner"
                 app:layout_constraintEnd_toEndOf="@+id/spinLocationOfMachine"
                 app:layout_constraintStart_toStartOf="@+id/spinLocationOfMachine"
-                app:layout_constraintTop_toBottomOf="@+id/tvProvince" />
+                app:layout_constraintTop_toBottomOf="@id/tvProvince" />
 
             <TextView
                 android:id="@+id/tvMunicipality"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="Municipality"
                 app:layout_constraintStart_toStartOf="@+id/tvProvince"
-                app:layout_constraintTop_toBottomOf="@+id/edtProvince" />
+                app:layout_constraintTop_toBottomOf="@+id/singlespinProvince" />
             <!--
             <Spinner
                 android:id="@+id/spinMunicipality"
@@ -687,27 +694,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvMunicipality" />
                 -->
 
-
-            <EditText
-                android:id="@+id/edtMunicipality"
+            <com.androidbuts.multispinnerfilter.SingleSpinnerSearch
+                android:id="@+id/singlespinMunicipalities"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/custom_edit_text"
-                android:ems="10"
-                android:inputType="textPersonName"
+                android:background="@drawable/custom_spinner"
                 app:layout_constraintEnd_toEndOf="@+id/spinLocationOfMachine"
                 app:layout_constraintStart_toStartOf="@+id/spinLocationOfMachine"
-                app:layout_constraintTop_toBottomOf="@+id/tvMunicipality" />
+                app:layout_constraintTop_toBottomOf="@id/tvMunicipality" />
 
             <TextView
                 android:id="@+id/tvBrgy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="Barangay"
                 app:layout_constraintStart_toStartOf="@+id/tvMunicipality"
-                app:layout_constraintTop_toBottomOf="@+id/edtMunicipality" />
+                app:layout_constraintTop_toBottomOf="@+id/singlespinMunicipalities" />
             <!--
             <com.androidbuts.multispinnerfilter.SingleSpinnerSearch
                 android:id="@+id/singlespinBrgy"
@@ -719,19 +722,14 @@
                 app:layout_constraintStart_toStartOf="@+id/spinMunicipality"
                 app:layout_constraintTop_toBottomOf="@+id/tvBrgy" />
                 -->
-
-
-            <EditText
-                android:id="@+id/edtBarangay"
+            <com.androidbuts.multispinnerfilter.SingleSpinnerSearch
+                android:id="@+id/singlespinBarangays"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/custom_edit_text"
-                android:ems="10"
-                android:inputType="textPersonName"
+                android:background="@drawable/custom_spinner"
                 app:layout_constraintEnd_toEndOf="@+id/spinLocationOfMachine"
                 app:layout_constraintStart_toStartOf="@+id/spinLocationOfMachine"
-                app:layout_constraintTop_toBottomOf="@+id/tvBrgy" />
+                app:layout_constraintTop_toBottomOf="@id/tvBrgy" />
 
             <TextView
                 android:id="@+id/tvLat"
@@ -791,7 +789,7 @@
                 android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtBarangay"
+                app:layout_constraintTop_toBottomOf="@+id/singlespinBarangays"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView

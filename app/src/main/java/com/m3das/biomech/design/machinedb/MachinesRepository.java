@@ -1,4 +1,4 @@
-package com.m3das.biomech.design;
+package com.m3das.biomech.design.machinedb;
 
 import android.app.Application;
 import android.os.AsyncTask;
@@ -10,15 +10,12 @@ import java.util.List;
 public class MachinesRepository {
     private final MachinesDAO machinesDAO;
     private final LiveData<List<Machines>> allMachines;
-    private final LiveData<List<Machines>> listOfMachines, machineSpecificID;
     String idOfMachine;
 
     public MachinesRepository(Application application) {
         MachinesDatabase database = MachinesDatabase.getInstance(application);
         machinesDAO = database.machinesDAO();
         allMachines = machinesDAO.getAllMachines();
-        listOfMachines = machinesDAO.getListofMachines();
-        machineSpecificID = machinesDAO.getMachineID(idOfMachine);
     }
 
     public void insert(Machines machines) {
@@ -35,14 +32,6 @@ public class MachinesRepository {
 
     public LiveData<List<Machines>> getAllMachines() {
         return allMachines;
-    }
-
-    public LiveData<List<Machines>> getListOfMachines() {
-        return listOfMachines;
-    }
-
-    public LiveData<List<Machines>> getMachineID(String getID){
-        return machineSpecificID;
     }
 
 

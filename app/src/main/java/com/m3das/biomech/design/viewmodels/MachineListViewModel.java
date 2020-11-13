@@ -7,48 +7,49 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 
-import com.m3das.biomech.design.Machines;
-import com.m3das.biomech.design.MachinesRepository;
+import com.m3das.biomech.design.machinedb.Machines;
+import com.m3das.biomech.design.machinedb.MachinesRepository;
+import com.m3das.biomech.design.profiledb.Profile;
+import com.m3das.biomech.design.profiledb.ProfileRepository;
 
 import java.util.List;
 
 public class MachineListViewModel extends AndroidViewModel {
     // TODO: Implement the ViewModel
-    public MachinesRepository repository;
+    public MachinesRepository repositoryMachines;
     public LiveData<List<Machines>> allMachines;
-    private final LiveData<List<Machines>> listOfMachines, machinesID;
-    String idOfMachine;
+
+    public LiveData<List<Profile>> allProfiles;
+
 
     public MachineListViewModel(@NonNull Application application) {
         super(application);
-        repository = new MachinesRepository(application);
-        allMachines = repository.getAllMachines();
-        listOfMachines = repository.getListOfMachines();
-        machinesID = repository.getMachineID(idOfMachine);
+        repositoryMachines = new MachinesRepository(application);
+        allMachines = repositoryMachines.getAllMachines();
+
+        ProfileRepository repositoryProfiles = new ProfileRepository(application);
+        allProfiles = repositoryProfiles.getAllUserNames();
+
     }
 
     public void insert(Machines machines) {
-        repository.insert(machines);
+        repositoryMachines.insert(machines);
     }
 
     public void update(Machines machines) {
-        repository.update(machines);
+        repositoryMachines.update(machines);
     }
 
     public void delete(Machines machines) {
-        repository.delete(machines);
+        repositoryMachines.delete(machines);
     }
 
     public LiveData<List<Machines>> getAllMachines() {
         return allMachines;
     }
 
-    public LiveData<List<Machines>> getListOfMachines() {
-        return listOfMachines;
-    }
-
-    public LiveData<List<Machines>> getMachineID(String getID){
-        return machinesID;
+    public LiveData<List<Profile>> getAllProfiles() {
+        return allProfiles;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.m3das.biomech.design;
+package com.m3das.biomech.design.machinedb;
 
 import android.content.Context;
 
@@ -6,14 +6,15 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Machines.class},version = 1)
+@Database(entities = {Machines.class}, version = 1)
 public abstract class MachinesDatabase extends RoomDatabase {
 
     private static MachinesDatabase instance;
+
     public abstract MachinesDAO machinesDAO();
 
-    public static synchronized MachinesDatabase getInstance(Context context){
-        if (instance == null){
+    public static synchronized MachinesDatabase getInstance(Context context) {
+        if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(), MachinesDatabase.class, "machines")
                     .fallbackToDestructiveMigration()
                     .build();
@@ -21,9 +22,5 @@ public abstract class MachinesDatabase extends RoomDatabase {
 
         return instance;
     }
-
-
-
-
 
 }

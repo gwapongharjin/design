@@ -50,6 +50,11 @@ dependencies {
     implementation 'com.github.AnuraganuPunalur:Multi-Selection-Spinner-Android:1.0'
     implementation 'com.xeoh.android:checkboxgroup:1.0.1'
     implementation 'com.github.pratikbutani:MultiSelectSpinner:master-SNAPSHOT'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.1'
     
 // CardView
     implementation "androidx.cardview:cardview:1.0.0"

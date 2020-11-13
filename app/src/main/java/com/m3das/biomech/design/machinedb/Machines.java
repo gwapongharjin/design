@@ -1,11 +1,10 @@
-package com.m3das.biomech.design;
+package com.m3das.biomech.design.machinedb;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "machines")
 public class Machines {
-
 
 
     @PrimaryKey(autoGenerate = true)
@@ -53,12 +52,15 @@ public class Machines {
     private final String machine_longitude;
     private final String machine_image_base64;
     private final String accuracy;
+    private final String resCode;
+    private final String resName;
+
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public Machines(String machine_type, String type_tubewells, String type_mill, String machine_qrcode, String date_of_survey, String machine_brand, String machine_brand_specify, String machine_model, String machine_model_specify, String rated_power, String service_area, String ave_op_hours, String ave_op_days, String capacity, String ave_yield, String num_loads, String rate, String ownership, String purch_grant_dono, String agency, String agency_specify, String name_owner, String year_acquired, String condition_acquired, String rental, String custom_rate, String custom_unit, String specify_custom_unit, String availability, String rent_prov, String rent_mun, String rent_brgy, String condition, String problems, String specify_problems, String location, String prov, String mun, String brgy, String machine_latitude, String machine_longitude, String machine_image_base64, String accuracy) {
+    public Machines(String machine_type, String type_tubewells, String type_mill, String machine_qrcode, String date_of_survey, String machine_brand, String machine_brand_specify, String machine_model, String machine_model_specify, String rated_power, String service_area, String ave_op_hours, String ave_op_days, String capacity, String ave_yield, String num_loads, String rate, String ownership, String purch_grant_dono, String agency, String agency_specify, String name_owner, String year_acquired, String condition_acquired, String rental, String custom_rate, String custom_unit, String specify_custom_unit, String availability, String rent_prov, String rent_mun, String rent_brgy, String condition, String problems, String specify_problems, String location, String prov, String mun, String brgy, String machine_latitude, String machine_longitude, String machine_image_base64, String accuracy, String resCode, String resName) {
         this.machine_type = machine_type;
         this.type_tubewells = type_tubewells;
         this.type_mill = type_mill;
@@ -102,6 +104,8 @@ public class Machines {
         this.machine_longitude = machine_longitude;
         this.machine_image_base64 = machine_image_base64;
         this.accuracy = accuracy;
+        this.resCode = resCode;
+        this.resName = resName;
     }
 
     public int getId() {
@@ -278,5 +282,13 @@ public class Machines {
 
     public String getAccuracy() {
         return accuracy;
+    }
+
+    public String getResName() {
+        return resName;
+    }
+
+    public String getResCode() {
+        return resCode;
     }
 }

@@ -57,7 +57,7 @@
         <item>DITCHER</item>
         <item>HARVESTER</item>
         <item>INFIELD HAULER</item>
-       <item>WATER PUMP</item>
+        <item>WATER PUMP</item>
     </string-array>
 
     <string-array name="machine_types_corn">
@@ -173,6 +173,12 @@
         <item>TELEPHONE NUMBER</item>
     </string-array>
 
+    <string-array name="type_of_planter">
+        <item></item>
+        <item>BILLET</item>
+        <item>WHOLESTALK</item>
+    </string-array>
+
     <string-array name="ownership_type">
         <item></item>
         <item>OWNER</item>
@@ -221,9 +227,9 @@
         <item>FUNCTIONAL UNUSED</item>
         <item>NON-FUNCTIONAL</item>
     </string-array>
-<string-array name="blank">
-    <item></item>
-</string-array>
+    <string-array name="blank">
+        <item></item>
+    </string-array>
     <string-array name="functionality">
         <item></item>
         <item>USED</item>
@@ -282,5 +288,6 @@
     <string name="title_activity_privacy_and_consent">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
 
 </resources>
