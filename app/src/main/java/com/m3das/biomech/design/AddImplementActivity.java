@@ -460,132 +460,7 @@ public class AddImplementActivity extends AppCompatActivity {
             }
         });
 
-        edtTimeUsedDuringOpMain.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!isNullOrEmpty(edtEffectiveAreaAccompMain.getText().toString()) && !isNullOrEmpty(edtTimeUsedDuringOpMain.getText().toString())) {
-                    tvFieldCapacityResultMain.setText(getFieldCapacity(edtEffectiveAreaAccompMain.getText().toString(),edtTimeUsedDuringOpMain.getText().toString()));
-                }
-                else if(isNullOrEmpty(edtEffectiveAreaAccompMain.getText().toString()) || isNullOrEmpty(edtTimeUsedDuringOpMain.getText().toString())){
-                    tvFieldCapacityResultMain.setText("Not yet acquired");
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edtTimeUsedDuringOpMain.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!isNullOrEmpty(edtEffectiveAreaAccompMain.getText().toString()) && !isNullOrEmpty(edtTimeUsedDuringOpMain.getText().toString())) {
-                    tvFieldCapacityResultMain.setText(getFieldCapacity(edtEffectiveAreaAccompMain.getText().toString(),edtTimeUsedDuringOpMain.getText().toString()));
-                }
-                else if(isNullOrEmpty(edtEffectiveAreaAccompMain.getText().toString()) || isNullOrEmpty(edtTimeUsedDuringOpMain.getText().toString())){
-                    tvFieldCapacityResultMain.setText("Not yet acquired");
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-
-    }
-
-    private void initTextViewData() {
-        tvFieldCapacityResultMain.setText("Not yet Acquired");
-        tvFieldCapacityResultPlant.setText("Not yet Acquired");
-        tvFieldCapacityResultFert.setText("Not yet Acquired");
-        tvDeliveryRateResultFert.setText("Not yet Acquired");
-        tvFieldCapacityResultHarvest.setText("Not yet Acquired");
-        tvLat.setText("Not yet Acquired");
-        tvLong.setText("Not yet Acquired");
-    }
-
-    private void setCheckBoxData() {
-        landClear = "";
-        prePlant = "";
-        planting = "";
-        fertilizer = "";
-        pesticide = "";
-        irrigationDrainage = "";
-        cultivation = "";
-        ratooning = "";
-        harvest = "";
-        postHarvest = "";
-        hauling = "";
-    }
-
-    public static boolean isNullOrEmpty(String str) {
-        return str == null || str.isEmpty();
-    }
-
-    private void initTextViewData() {
-        tvFieldCapacityResultMain.setText("Not yet Acquired");
-        tvFieldCapacityResultPlant.setText("Not yet Acquired");
-        tvFieldCapacityResultFert.setText("Not yet Acquired");
-        tvDeliveryRateResultFert.setText("Not yet Acquired");
-        tvFieldCapacityResultHarvest.setText("Not yet Acquired");
-        tvLat.setText("Not yet Acquired");
-        tvLong.setText("Not yet Acquired");
-    }
-
-    private void setCheckBoxData() {
-        landClear = "";
-        prePlant = "";
-        planting = "";
-        fertilizer = "";
-        pesticide = "";
-        irrigationDrainage = "";
-        cultivation = "";
-        ratooning = "";
-        harvest = "";
-        postHarvest = "";
-        hauling = "";
-    }
-
-    public static boolean isNullOrEmpty(String str) {
-        return str == null || str.isEmpty();
-    }
-
-    private void initTextViewData() {
-        tvFieldCapacityResultMain.setText("Not yet Acquired");
-        tvFieldCapacityResultPlant.setText("Not yet Acquired");
-        tvFieldCapacityResultFert.setText("Not yet Acquired");
-        tvDeliveryRateResultFert.setText("Not yet Acquired");
-        tvFieldCapacityResultHarvest.setText("Not yet Acquired");
-        tvLat.setText("Not yet Acquired");
-        tvLong.setText("Not yet Acquired");
-    }
-
-    private void setCheckBoxData() {
-        landClear = "";
-        prePlant = "";
-        planting = "";
-        fertilizer = "";
-        pesticide = "";
-        irrigationDrainage = "";
-        cultivation = "";
-        ratooning = "";
-        harvest = "";
-        postHarvest = "";
-        hauling = "";
-    }
-
-    public static boolean isNullOrEmpty(String str) {
-        return str == null || str.isEmpty();
     }
 
     private void initTextViewData() {
@@ -618,8 +493,6 @@ public class AddImplementActivity extends AppCompatActivity {
 
     private void spinYearsSetAdapter() {
 
-            }
-        });
 
         ArrayList<String> years = new ArrayList<String>();
         years.add("");
@@ -637,7 +510,7 @@ public class AddImplementActivity extends AppCompatActivity {
     }
 
     private String getFieldCapacity(String area,String time){
-        String fieldCapacity = "";
+        String fieldCapacity = new String();
         fieldCapacity = String.valueOf(Double.parseDouble(area) / Double.parseDouble(time));
         return fieldCapacity;
     }
@@ -769,8 +642,6 @@ public class AddImplementActivity extends AppCompatActivity {
         return listArray1;
     }
 
-            }
-        });
 
     private void selectImplement(String pos) {
 
