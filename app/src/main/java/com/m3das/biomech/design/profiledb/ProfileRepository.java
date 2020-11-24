@@ -5,6 +5,9 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
+import com.m3das.biomech.design.machinedb.MachinesDAO;
+import com.m3das.biomech.design.machinedb.MachinesRepository;
+
 import java.util.List;
 
 public class ProfileRepository {
@@ -27,6 +30,10 @@ public class ProfileRepository {
 
     public void delete(Profile profile) {
         new ProfileRepository.DeleteProfileAsyncTask(profileDAO).execute(profile);
+    }
+
+    public void deleteAllProfiles() {
+        new DeleteAllProfilesAsyncTask(profileDAO).execute();
     }
 
     public LiveData<List<Profile>> getAllUserNames(){
@@ -72,6 +79,45 @@ public class ProfileRepository {
         @Override
         protected Void doInBackground(Profile... profile) {
             profileDAO.deleteProfile(profile[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAllProfilesAsyncTask extends AsyncTask<Void, Void, Void> {
+        private ProfileDAO profileDAO;
+
+        private DeleteAllProfilesAsyncTask(ProfileDAO profileDAO) {
+            this.profileDAO = profileDAO;
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            profileDAO.deleteAllProfiles();
+            return null;
+        }
+    }
+
+    private static class DeleteAllProfilesAsyncTask extends AsyncTask<Void, Void, Void> {
+        private ProfileDAO profileDAO;
+
+        private DeleteAllProfilesAsyncTask(ProfileDAO profileDAO) {
+            this.profileDAO = profileDAO;
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            profileDAO.deleteAllProfiles();
+            return null;
+        }
+    }
+
+    private static class DeleteAllProfilesAsyncTask extends AsyncTask<Void, Void, Void> {
+        private ProfileDAO profileDAO;
+
+        private DeleteAllProfilesAsyncTask(ProfileDAO profileDAO) {
+            this.profileDAO = profileDAO;
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            profileDAO.deleteAllProfiles();
             return null;
         }
     }

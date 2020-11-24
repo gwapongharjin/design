@@ -14,6 +14,8 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -60,8 +62,8 @@ public class AddImplementActivity extends AppCompatActivity {
 
     private Spinner spinImplementType, spinMachineUsing, spinTypeOfPlanter, spinYearAcquired, spinLocation, spinCondition;
     ImageButton camera, gallery, getLocation, btnScanQR;
-    String currentPhotoPath, dateToStr, machineCode, machineComplete, landClear, prePlant, planting, fertilizer, pesticide, irrigationDrainage, accuracy,
-            cultivation, ratooning, harvest, postHarvest, hauling, encodedImage, machineQR;
+    String currentPhotoPath, dateToStr, machineCode, machineComplete, landClear, prePlant, planting, fertilizer, pesticide, irrigationDrainage,
+            cultivation, ratooning, harvest, postHarvest, hauling, encodedImage, machineQR, accuracy;
     ImageView selectedImage;
     Button btnSave;
     SingleSpinnerSearch singlespinProvinces, singlespinMunicipalities, singlespinBarangays;
@@ -82,6 +84,8 @@ public class AddImplementActivity extends AppCompatActivity {
             tvHaDitch, tvHoursPDayDitch, tvDaysPSeasonDitch, tvDepthCutDitch;
     CheckBox cbLandClear, cbPrePlant, cbPlant, cbFert, cbPest, cbIrriDrain, cbCult, cbRatoon, cbHarvest, cbPostHarvest, cbHaul;
     int bigMargin, smallMargin;
+    Double fieldCap = null;
+    Double deliveryCap = null;
     public static final int CAMERA_PERM_CODE = 101;
     public static final int CAMERA_REQUEST_CODE = 102;
     public static final int GALLERY_REQUEST_CODE = 105;
@@ -168,6 +172,8 @@ public class AddImplementActivity extends AppCompatActivity {
         initAllLayoutParameters();
         setMarginSize();
         hideAll();
+        setCheckBoxData();
+        initTextViewData();
 
         paramsYearAcquired.topToBottom = R.id.cbHauling;
         paramsYearAcquired.topMargin = bigMargin;
@@ -432,12 +438,188 @@ public class AddImplementActivity extends AppCompatActivity {
             }
         });
 
+        edtTimeUsedDuringOpMain.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!isNullOrEmpty(edtEffectiveAreaAccompMain.getText().toString()) && !isNullOrEmpty(edtTimeUsedDuringOpMain.getText().toString())) {
+                    tvFieldCapacityResultMain.setText(getFieldCapacity(edtEffectiveAreaAccompMain.getText().toString(),edtTimeUsedDuringOpMain.getText().toString()));
+                }
+                else if(isNullOrEmpty(edtEffectiveAreaAccompMain.getText().toString()) || isNullOrEmpty(edtTimeUsedDuringOpMain.getText().toString())){
+                    tvFieldCapacityResultMain.setText("Not yet acquired");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        edtTimeUsedDuringOpMain.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!isNullOrEmpty(edtEffectiveAreaAccompMain.getText().toString()) && !isNullOrEmpty(edtTimeUsedDuringOpMain.getText().toString())) {
+                    tvFieldCapacityResultMain.setText(getFieldCapacity(edtEffectiveAreaAccompMain.getText().toString(),edtTimeUsedDuringOpMain.getText().toString()));
+                }
+                else if(isNullOrEmpty(edtEffectiveAreaAccompMain.getText().toString()) || isNullOrEmpty(edtTimeUsedDuringOpMain.getText().toString())){
+                    tvFieldCapacityResultMain.setText("Not yet acquired");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        edtTimeUsedDuringOpMain.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!isNullOrEmpty(edtEffectiveAreaAccompMain.getText().toString()) && !isNullOrEmpty(edtTimeUsedDuringOpMain.getText().toString())) {
+                    tvFieldCapacityResultMain.setText(getFieldCapacity(edtEffectiveAreaAccompMain.getText().toString(),edtTimeUsedDuringOpMain.getText().toString()));
+                }
+                else if(isNullOrEmpty(edtEffectiveAreaAccompMain.getText().toString()) || isNullOrEmpty(edtTimeUsedDuringOpMain.getText().toString())){
+                    tvFieldCapacityResultMain.setText("Not yet acquired");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
 
     }
 
+    private void initTextViewData() {
+        tvFieldCapacityResultMain.setText("Not yet Acquired");
+        tvFieldCapacityResultPlant.setText("Not yet Acquired");
+        tvFieldCapacityResultFert.setText("Not yet Acquired");
+        tvDeliveryRateResultFert.setText("Not yet Acquired");
+        tvFieldCapacityResultHarvest.setText("Not yet Acquired");
+        tvLat.setText("Not yet Acquired");
+        tvLong.setText("Not yet Acquired");
+    }
+
+    private void setCheckBoxData() {
+        landClear = "";
+        prePlant = "";
+        planting = "";
+        fertilizer = "";
+        pesticide = "";
+        irrigationDrainage = "";
+        cultivation = "";
+        ratooning = "";
+        harvest = "";
+        postHarvest = "";
+        hauling = "";
+    }
+
+    public static boolean isNullOrEmpty(String str) {
+        return str == null || str.isEmpty();
+    }
+
+    private void initTextViewData() {
+        tvFieldCapacityResultMain.setText("Not yet Acquired");
+        tvFieldCapacityResultPlant.setText("Not yet Acquired");
+        tvFieldCapacityResultFert.setText("Not yet Acquired");
+        tvDeliveryRateResultFert.setText("Not yet Acquired");
+        tvFieldCapacityResultHarvest.setText("Not yet Acquired");
+        tvLat.setText("Not yet Acquired");
+        tvLong.setText("Not yet Acquired");
+    }
+
+    private void setCheckBoxData() {
+        landClear = "";
+        prePlant = "";
+        planting = "";
+        fertilizer = "";
+        pesticide = "";
+        irrigationDrainage = "";
+        cultivation = "";
+        ratooning = "";
+        harvest = "";
+        postHarvest = "";
+        hauling = "";
+    }
+
+    public static boolean isNullOrEmpty(String str) {
+        return str == null || str.isEmpty();
+    }
+
+    private void initTextViewData() {
+        tvFieldCapacityResultMain.setText("Not yet Acquired");
+        tvFieldCapacityResultPlant.setText("Not yet Acquired");
+        tvFieldCapacityResultFert.setText("Not yet Acquired");
+        tvDeliveryRateResultFert.setText("Not yet Acquired");
+        tvFieldCapacityResultHarvest.setText("Not yet Acquired");
+        tvLat.setText("Not yet Acquired");
+        tvLong.setText("Not yet Acquired");
+    }
+
+    private void setCheckBoxData() {
+        landClear = "";
+        prePlant = "";
+        planting = "";
+        fertilizer = "";
+        pesticide = "";
+        irrigationDrainage = "";
+        cultivation = "";
+        ratooning = "";
+        harvest = "";
+        postHarvest = "";
+        hauling = "";
+    }
+
+    public static boolean isNullOrEmpty(String str) {
+        return str == null || str.isEmpty();
+    }
+
+    private void initTextViewData() {
+        tvFieldCapacityResultMain.setText("Not yet Acquired");
+        tvFieldCapacityResultPlant.setText("Not yet Acquired");
+        tvFieldCapacityResultFert.setText("Not yet Acquired");
+        tvDeliveryRateResultFert.setText("Not yet Acquired");
+        tvFieldCapacityResultHarvest.setText("Not yet Acquired");
+        tvLat.setText("Not yet Acquired");
+        tvLong.setText("Not yet Acquired");
+    }
+
+    private void setCheckBoxData() {
+        landClear = "";
+        prePlant = "";
+        planting = "";
+        fertilizer = "";
+        pesticide = "";
+        irrigationDrainage = "";
+        cultivation = "";
+        ratooning = "";
+        harvest = "";
+        postHarvest = "";
+        hauling = "";
+    }
+
+    public static boolean isNullOrEmpty(String str) {
+        return str == null || str.isEmpty();
+    }
+
     private void spinYearsSetAdapter() {
 
+            }
+        });
 
         ArrayList<String> years = new ArrayList<String>();
         years.add("");
@@ -454,6 +636,12 @@ public class AddImplementActivity extends AppCompatActivity {
         bigMargin = (int) pxFromDp(this, 32);
     }
 
+    private String getFieldCapacity(String area,String time){
+        String fieldCapacity = "";
+        fieldCapacity = String.valueOf(Double.parseDouble(area) / Double.parseDouble(time));
+        return fieldCapacity;
+    }
+
     public void saveImplement() {
 //        if (machineType.trim().isEmpty() ||
 //                machineQRCode.trim().isEmpty() ||
@@ -464,13 +652,20 @@ public class AddImplementActivity extends AppCompatActivity {
 //        else {
         Intent dataAddImplement = new Intent();
 
-        getComputations();
+//        getComputations();
 
         dateToStr = new SimpleDateFormat("MM/dd/yy HH:mm:ss").format(new Date());
 
         String implementType = spinImplementType.getSelectedItem().toString();
         String implementQRCode = edtQRCode.getText().toString();
 
+        if(isNullOrEmpty(encodedImage)){
+            encodedImage = "Not yet Acquired";
+        }
+
+        if (isNullOrEmpty(accuracy)){
+            accuracy = "Not yet Acquired";
+        }
 
         String temp = spinMachineUsing.getSelectedItem().toString();
 //        machineListViewModel.getAllMachines().observe(this, new Observer<List<Machines>>() {
@@ -489,7 +684,7 @@ public class AddImplementActivity extends AppCompatActivity {
         dataAddImplement.putExtra(EXTRA_IMP_TYPE, spinImplementType.getSelectedItem().toString());
         dataAddImplement.putExtra(EXTRA_IMP_QR, edtQRCode.getText().toString());
         dataAddImplement.putExtra(EXTRA_DATE, dateToStr);
-        dataAddImplement.putExtra(EXTRA_USED_ON, temp.substring(2,14));
+        dataAddImplement.putExtra(EXTRA_USED_ON, temp.substring(2, 14));
         dataAddImplement.putExtra(EXTRA_USED_COMPLETE, temp);
         dataAddImplement.putExtra(EXTRA_LAND_CLEAR, landClear);
         dataAddImplement.putExtra(EXTRA_PRE_PLANT, prePlant);
@@ -534,7 +729,7 @@ public class AddImplementActivity extends AppCompatActivity {
         dataAddImplement.putExtra(EXTRA_AVE_YIELD_HARVEST, edtAveYieldHarvest.getText().toString());
         dataAddImplement.putExtra(EXTRA_TSA_GRAB, edtTotalServiceAreaGrab.getText().toString());
         dataAddImplement.putExtra(EXTRA_AVE_OP_HOURS_GRAB, edtHoursPDayGrab.getText().toString());
-        dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_HARVEST, edtDaysPSeasonHarvest.getText().toString());
+        dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_GRAB, edtDaysPSeasonGrab.getText().toString());
 //        dataAddImplement.putExtra(EXTRA_EFF_AREA_ACC_GRAB,effe);
         dataAddImplement.putExtra(EXTRA_LOAD_CAP_GRAB, edtLoadCapacityGrab.getText().toString());
         dataAddImplement.putExtra(EXTRA_NUM_LOAD_GRAB, edtNumberofLoadsGrab.getText().toString());
@@ -558,73 +753,6 @@ public class AddImplementActivity extends AppCompatActivity {
 //        }
     }
 
-    private void getComputations() {
-
-        int fieldCap = 0, deliveryCap = 0;
-        switch (spinImplementType.getSelectedItem().toString()) {
-            case "SUBSOILER":
-            case "MOLDBOARD PLOW":
-            case "DISC PLOW":
-            case "CHISEL PLOW":
-            case "DISC HARROW":
-            case "POWER HARROW":
-            case "SPIKE-TOOTH HARROW":
-            case "FURROWER":
-            case "FIELD CULTIVATOR":
-            case "INTERROW CULTIVATOR":
-            case "CUTAWAY CULTIVATOR":
-            case "RATOON MANAGER / STUBBLE SHAVER":
-            case "THRASH RAKE":
-            case "WEEDER":
-            case "ROTAVATOR":
-            case "TRASH INCORPORATOR":
-                fieldCap = Integer.parseInt(edtEffectiveAreaAccompMain.getText().toString())/Integer.parseInt(edtTimeUsedDuringOpMain.getText().toString());
-                Log.d("Field Cap", String.valueOf(fieldCap));
-                tvFieldCapacityResultMain.setText(String.valueOf(fieldCap));
-                break;
-            case "MECHANICAL PLANTER":
-
-                break;
-            case "GRANULAR FERTILIZER APPLICATOR":
-            case "FERTILIZER APPLICATOR WITH CUTAWAY":
-                hideAll();
-                showFert();
-                paramsTSAFert.topToBottom = R.id.cbHauling;
-                paramsTSAFert.topMargin = bigMargin;
-                edtTotalServiceAreaFert.setLayoutParams(paramsTSAFert);
-                paramsYearAcquired.topToBottom = R.id.tvDeliveryRateResultFert;
-                break;
-            case "MECHANICAL HARVESTER":
-                hideAll();
-                showHarvest();
-                paramsTSAHarvest.topToBottom = R.id.cbHauling;
-                paramsTSAHarvest.topMargin = bigMargin;
-                edtTotalServiceAreaHarvest.setLayoutParams(paramsTSAHarvest);
-                paramsYearAcquired.topToBottom = R.id.tvTonCannesPHaHarvest;
-                break;
-            case "CANE GRAB LOADERS":
-                hideAll();
-                showGrab();
-                paramsTSAGrab.topToBottom = R.id.cbHauling;
-                paramsTSAGrab.topMargin = bigMargin;
-                edtTotalServiceAreaGrab.setLayoutParams(paramsTSAGrab);
-                paramsYearAcquired.topToBottom = R.id.tvLoadPHaGrab;
-                break;
-            case "DITCHER":
-                hideAll();
-                showDitch();
-                paramsTSADitch.topToBottom = R.id.cbHauling;
-                paramsTSADitch.topMargin = bigMargin;
-                edtTotalServiceAreaDitch.setLayoutParams(paramsTSADitch);
-                paramsYearAcquired.topToBottom = R.id.tvDepthCutDitch;
-                break;
-            default:
-                hideAll();
-                paramsYearAcquired.topToBottom = R.id.cbHauling;
-                break;
-        }
-    }
-
     public static float pxFromDp(final Context context, final float dp) {
         return dp * context.getResources().getDisplayMetrics().density;
     }
@@ -641,6 +769,8 @@ public class AddImplementActivity extends AppCompatActivity {
         return listArray1;
     }
 
+            }
+        });
 
     private void selectImplement(String pos) {
 
@@ -1073,9 +1203,7 @@ public class AddImplementActivity extends AppCompatActivity {
     public void askCameraPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
-        }
-        else {
-            //TODO ADD PICTURE INTENT
+        } else {
         }
 
     }

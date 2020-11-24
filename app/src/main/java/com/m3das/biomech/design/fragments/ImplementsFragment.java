@@ -27,10 +27,12 @@ import com.m3das.biomech.design.AddImplementActivity;
 import com.m3das.biomech.design.AddMachineActivity;
 import com.m3das.biomech.design.ImplementAdapter;
 import com.m3das.biomech.design.MachineAdapter;
+import com.m3das.biomech.design.ProfileAdapter;
 import com.m3das.biomech.design.R;
 import com.m3das.biomech.design.Variable;
 import com.m3das.biomech.design.implementdb.Implements;
 import com.m3das.biomech.design.machinedb.Machines;
+import com.m3das.biomech.design.profiledb.Profile;
 import com.m3das.biomech.design.viewmodels.ImplementViewModel;
 import com.m3das.biomech.design.viewmodels.MachineListViewModel;
 
@@ -82,11 +84,32 @@ public class ImplementsFragment extends Fragment {
                     implementList = implementList + "Implement ID: " + anImplements.get(i).getId();
                     implementList = implementList + "\nImplement QR Code: " + anImplements.get(i).getImplement_qrcode();
                     implementList = implementList + "\nAttached to Machine: " + anImplements.get(i).getUsed_on_machine();
-                    implementList = implementList + "\nImplement type: " + anImplements.get(i).getImplement_type()+ "\n\n";
+                    implementList = implementList + "\nImplement type: " + anImplements.get(i).getImplement_type() + "\n\n";
                 }
                 Variable.setImpList(implementList);
 
                 implementAdapter.setImplementsArrayListList(anImplements);
+            }
+        });
+
+        implementAdapter.setOnItemClickListener(new ImplementAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Implements implement) {
+                Toast.makeText(getContext(), "Editing implement still unavailable", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        implementAdapter.setOnItemClickListener(new ImplementAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Implements implement) {
+                Toast.makeText(getContext(), "Editing implement still unavailable", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        implementAdapter.setOnItemClickListener(new ImplementAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Implements implement) {
+                Toast.makeText(getContext(), "Editing implement still unavailable", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -123,7 +146,7 @@ public class ImplementsFragment extends Fragment {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Deleting Item")
-                        .setMessage("You will be deleting this: "+ implementAdapter.getImplement(viewHolder.getAdapterPosition()).getImplement_qrcode())
+                        .setMessage("You will be deleting this: " + implementAdapter.getImplement(viewHolder.getAdapterPosition()).getImplement_qrcode())
                         .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -155,7 +178,7 @@ public class ImplementsFragment extends Fragment {
         return v;
     }
 
-    public void openAddImplementActivity(){
+    public void openAddImplementActivity() {
         Intent intent = new Intent(getContext(), AddImplementActivity.class);
         startActivityForResult(intent, ADD_IMPLEMENT_REQUEST);
     }
@@ -242,22 +265,21 @@ public class ImplementsFragment extends Fragment {
             String longitude = data.getStringExtra(AddImplementActivity.EXTRA_LONGITUDE);
             String accuracy = data.getStringExtra(AddImplementActivity.EXTRA_ACCURACY);
 
-            Implements imp = new Implements(implement_type, implement_qr_code,date_of_survey, used_on_machine,used_on_machine_complete,land_clearing,pre_planting,planting,fertilizer_application,
-                    pesticide_application,irrigation_drainage,cultivation,ratooning,harvest,post_harvest,hauling,total_service_area_main,average_operating_hours_main,average_operating_days_main,
-                    effective_area_accomplished_main,time_used_during_operation_main,field_capacity_main,type_of_planter,number_of_rows_planter,distance_of_materials_planter,total_service_area_planter
-                    ,average_operating_hours_planter,average_operating_days_planter,effective_area_accomplished_planter,time_used_during_operation_planter,field_capacity_planter,total_service_area_fertilizer
-                    ,average_operating_hours_fertilizer,average_operating_days_fertilizer,effective_area_accomplished_fertilizer,time_used_during_operation_fertilizer,field_capacity_fertilizer,
-                    weight_fertilizer, delivery_rate_fetilizer,total_service_area_harvester,average_operating_hours_harvester,average_operating_days_harvester,effective_area_accomplished_harvester,
-                    time_used_during_operation_harvester,field_capacity_harvester,average_yield_harvester,total_service_area_cane_grab_loader,average_operating_hours_cane_grab_loader,
-                    average_operating_days_cane_grab_loader,"effective_area_accomplished_cane_grab_loader",loading_capacity_cane_grab_loader,number_loads_cane_grab_loader,total_service_area_ditcher,
-                    average_operating_hours_ditcher,average_operating_days_ditcher,depth_cut_ditcher,year_acquired,condition,location,province,city,barangay,image_base64,latitude,longitude,accuracy);
+            Implements imp = new Implements(implement_type, implement_qr_code, date_of_survey, used_on_machine, used_on_machine_complete, land_clearing, pre_planting, planting, fertilizer_application,
+                    pesticide_application, irrigation_drainage, cultivation, ratooning, harvest, post_harvest, hauling, total_service_area_main, average_operating_hours_main, average_operating_days_main,
+                    effective_area_accomplished_main, time_used_during_operation_main, field_capacity_main, type_of_planter, number_of_rows_planter, distance_of_materials_planter, total_service_area_planter
+                    , average_operating_hours_planter, average_operating_days_planter, effective_area_accomplished_planter, time_used_during_operation_planter, field_capacity_planter, total_service_area_fertilizer
+                    , average_operating_hours_fertilizer, average_operating_days_fertilizer, effective_area_accomplished_fertilizer, time_used_during_operation_fertilizer, field_capacity_fertilizer,
+                    weight_fertilizer, delivery_rate_fetilizer, total_service_area_harvester, average_operating_hours_harvester, average_operating_days_harvester, effective_area_accomplished_harvester,
+                    time_used_during_operation_harvester, field_capacity_harvester, average_yield_harvester, total_service_area_cane_grab_loader, average_operating_hours_cane_grab_loader,
+                    average_operating_days_cane_grab_loader, "effective_area_accomplished_cane_grab_loader", loading_capacity_cane_grab_loader, number_loads_cane_grab_loader, total_service_area_ditcher,
+                    average_operating_hours_ditcher, average_operating_days_ditcher, depth_cut_ditcher, year_acquired, condition, location, province, city, barangay, image_base64, latitude, longitude, accuracy);
 
             implementViewModel.insert(imp);
 
             Log.d("Is note saved", "Note Saved" + implement_type);
             Toast.makeText(getActivity(), "Note saved", Toast.LENGTH_SHORT).show();
-        }
-        else if (requestCode == EDIT_IMPLEMENT_REQUEST && resultCode == Activity.RESULT_OK) {
+        } else if (requestCode == EDIT_IMPLEMENT_REQUEST && resultCode == Activity.RESULT_OK) {
             int id = data.getIntExtra(AddImplementActivity.EXTRA_IMP_ID, -1);
             if (id == -1) {
                 Toast.makeText(getActivity(), "Note can't be updated", Toast.LENGTH_SHORT).show();
@@ -329,15 +351,15 @@ public class ImplementsFragment extends Fragment {
             String longitude = data.getStringExtra(AddImplementActivity.EXTRA_LONGITUDE);
             String accuracy = data.getStringExtra(AddImplementActivity.EXTRA_ACCURACY);
 
-            Implements imp = new Implements(implement_type, implement_qr_code,date_of_survey, used_on_machine,used_on_machine_complete,land_clearing,pre_planting,planting,fertilizer_application,
-                    pesticide_application,irrigation_drainage,cultivation,ratooning,harvest,post_harvest,hauling,total_service_area_main,average_operating_hours_main,average_operating_days_main,
-                    effective_area_accomplished_main,time_used_during_operation_main,field_capacity_main,type_of_planter,number_of_rows_planter,distance_of_materials_planter,total_service_area_planter
-                    ,average_operating_hours_planter,average_operating_days_planter,effective_area_accomplished_planter,time_used_during_operation_planter,field_capacity_planter,total_service_area_fertilizer
-                    ,average_operating_hours_fertilizer,average_operating_days_fertilizer,effective_area_accomplished_fertilizer,time_used_during_operation_fertilizer,field_capacity_fertilizer,
-                    weight_fertilizer, delivery_rate_fetilizer,total_service_area_harvester,average_operating_hours_harvester,average_operating_days_harvester,effective_area_accomplished_harvester,
-                    time_used_during_operation_harvester,field_capacity_harvester,average_yield_harvester,total_service_area_cane_grab_loader,average_operating_hours_cane_grab_loader,
-                    average_operating_days_cane_grab_loader,"effective_area_accomplished_cane_grab_loader",loading_capacity_cane_grab_loader,number_loads_cane_grab_loader,total_service_area_ditcher,
-                    average_operating_hours_ditcher,average_operating_days_ditcher,depth_cut_ditcher,year_acquired,condition,location,province,city,barangay,image_base64,latitude,longitude,accuracy);
+            Implements imp = new Implements(implement_type, implement_qr_code, date_of_survey, used_on_machine, used_on_machine_complete, land_clearing, pre_planting, planting, fertilizer_application,
+                    pesticide_application, irrigation_drainage, cultivation, ratooning, harvest, post_harvest, hauling, total_service_area_main, average_operating_hours_main, average_operating_days_main,
+                    effective_area_accomplished_main, time_used_during_operation_main, field_capacity_main, type_of_planter, number_of_rows_planter, distance_of_materials_planter, total_service_area_planter
+                    , average_operating_hours_planter, average_operating_days_planter, effective_area_accomplished_planter, time_used_during_operation_planter, field_capacity_planter, total_service_area_fertilizer
+                    , average_operating_hours_fertilizer, average_operating_days_fertilizer, effective_area_accomplished_fertilizer, time_used_during_operation_fertilizer, field_capacity_fertilizer,
+                    weight_fertilizer, delivery_rate_fetilizer, total_service_area_harvester, average_operating_hours_harvester, average_operating_days_harvester, effective_area_accomplished_harvester,
+                    time_used_during_operation_harvester, field_capacity_harvester, average_yield_harvester, total_service_area_cane_grab_loader, average_operating_hours_cane_grab_loader,
+                    average_operating_days_cane_grab_loader, "effective_area_accomplished_cane_grab_loader", loading_capacity_cane_grab_loader, number_loads_cane_grab_loader, total_service_area_ditcher,
+                    average_operating_hours_ditcher, average_operating_days_ditcher, depth_cut_ditcher, year_acquired, condition, location, province, city, barangay, image_base64, latitude, longitude, accuracy);
 
             implementViewModel.insert(imp);
 

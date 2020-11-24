@@ -30,6 +30,10 @@ public class MachinesRepository {
         new DeleteMachineAsyncTask(machinesDAO).execute(machines);
     }
 
+    public void deleteAllMachines() {
+        new DeleteAllMachinesAsyncTask(machinesDAO).execute();
+    }
+
     public LiveData<List<Machines>> getAllMachines() {
         return allMachines;
     }
@@ -73,6 +77,45 @@ public class MachinesRepository {
         @Override
         protected Void doInBackground(Machines... machines) {
             machinesDAO.deleteMachine(machines[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAllMachinesAsyncTask extends AsyncTask<Void, Void, Void> {
+        private MachinesDAO machinesDAO;
+
+        private DeleteAllMachinesAsyncTask(MachinesDAO machinesDAO) {
+            this.machinesDAO = machinesDAO;
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            machinesDAO.deleteAllMachines();
+            return null;
+        }
+    }
+
+    private static class DeleteAllMachinesAsyncTask extends AsyncTask<Void, Void, Void> {
+        private MachinesDAO machinesDAO;
+
+        private DeleteAllMachinesAsyncTask(MachinesDAO machinesDAO) {
+            this.machinesDAO = machinesDAO;
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            machinesDAO.deleteAllMachines();
+            return null;
+        }
+    }
+
+    private static class DeleteAllMachinesAsyncTask extends AsyncTask<Void, Void, Void> {
+        private MachinesDAO machinesDAO;
+
+        private DeleteAllMachinesAsyncTask(MachinesDAO machinesDAO) {
+            this.machinesDAO = machinesDAO;
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            machinesDAO.deleteAllMachines();
             return null;
         }
     }
