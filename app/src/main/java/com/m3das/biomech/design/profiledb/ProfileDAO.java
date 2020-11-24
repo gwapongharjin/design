@@ -24,5 +24,7 @@ public interface ProfileDAO {
     @Query("SELECT * FROM respondent_profile ORDER BY id DESC")
     LiveData<List<Profile>> getAllProfiles();
 
+    @Query("DELETE FROM respondent_profile")
+    void deleteAllProfiles();
 
 }

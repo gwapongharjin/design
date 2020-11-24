@@ -25,4 +25,6 @@ public interface MachinesDAO {
     LiveData<List<Machines>> getAllMachines();
 
 
+    @Query("DELETE FROM machines")
+    void deleteAllMachines();
 }

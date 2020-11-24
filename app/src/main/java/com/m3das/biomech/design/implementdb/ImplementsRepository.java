@@ -35,7 +35,7 @@ public class ImplementsRepository {
     }
 
     public void deleteAllImplements() {
-        new DeleteAllImplementsAsyncTask(impDAO).execute();
+        new ImplementsRepository.DeleteAllImplementsAsyncTask(impDAO).execute();
     }
 
     public LiveData<List<Implements>> getAllImplements() {
@@ -81,32 +81,6 @@ public class ImplementsRepository {
         @Override
         protected Void doInBackground(Implements... implement) {
             impDAO.deleteImplements(implement[0]);
-            return null;
-        }
-    }
-
-    private static class DeleteAllImplementsAsyncTask extends AsyncTask<Void, Void, Void> {
-        private ImplementsDAO implementsDAO;
-
-        private DeleteAllImplementsAsyncTask(ImplementsDAO implementsDAO) {
-            this.implementsDAO = implementsDAO;
-        }
-        @Override
-        protected Void doInBackground(Void... voids) {
-            implementsDAO.deleteAllImplements();
-            return null;
-        }
-    }
-
-    private static class DeleteAllImplementsAsyncTask extends AsyncTask<Void, Void, Void> {
-        private ImplementsDAO implementsDAO;
-
-        private DeleteAllImplementsAsyncTask(ImplementsDAO implementsDAO) {
-            this.implementsDAO = implementsDAO;
-        }
-        @Override
-        protected Void doInBackground(Void... voids) {
-            implementsDAO.deleteAllImplements();
             return null;
         }
     }

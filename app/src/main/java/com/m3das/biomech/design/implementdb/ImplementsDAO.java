@@ -25,5 +25,7 @@ public interface ImplementsDAO {
         @Query("SELECT * FROM implement ORDER BY id DESC")
         LiveData<List<Implements>> getAllImplements();
 
+        @Query("DELETE FROM implement")
+        void deleteAllImplements();
 
 }

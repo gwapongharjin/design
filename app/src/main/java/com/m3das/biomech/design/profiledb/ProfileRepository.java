@@ -95,30 +95,4 @@ public class ProfileRepository {
             return null;
         }
     }
-
-    private static class DeleteAllProfilesAsyncTask extends AsyncTask<Void, Void, Void> {
-        private ProfileDAO profileDAO;
-
-        private DeleteAllProfilesAsyncTask(ProfileDAO profileDAO) {
-            this.profileDAO = profileDAO;
-        }
-        @Override
-        protected Void doInBackground(Void... voids) {
-            profileDAO.deleteAllProfiles();
-            return null;
-        }
-    }
-
-    private static class DeleteAllProfilesAsyncTask extends AsyncTask<Void, Void, Void> {
-        private ProfileDAO profileDAO;
-
-        private DeleteAllProfilesAsyncTask(ProfileDAO profileDAO) {
-            this.profileDAO = profileDAO;
-        }
-        @Override
-        protected Void doInBackground(Void... voids) {
-            profileDAO.deleteAllProfiles();
-            return null;
-        }
-    }
 }

@@ -94,30 +94,5 @@ public class MachinesRepository {
         }
     }
 
-    private static class DeleteAllMachinesAsyncTask extends AsyncTask<Void, Void, Void> {
-        private MachinesDAO machinesDAO;
-
-        private DeleteAllMachinesAsyncTask(MachinesDAO machinesDAO) {
-            this.machinesDAO = machinesDAO;
-        }
-        @Override
-        protected Void doInBackground(Void... voids) {
-            machinesDAO.deleteAllMachines();
-            return null;
-        }
-    }
-
-    private static class DeleteAllMachinesAsyncTask extends AsyncTask<Void, Void, Void> {
-        private MachinesDAO machinesDAO;
-
-        private DeleteAllMachinesAsyncTask(MachinesDAO machinesDAO) {
-            this.machinesDAO = machinesDAO;
-        }
-        @Override
-        protected Void doInBackground(Void... voids) {
-            machinesDAO.deleteAllMachines();
-            return null;
-        }
-    }
 
 }
