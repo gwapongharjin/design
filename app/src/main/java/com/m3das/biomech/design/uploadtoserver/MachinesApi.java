@@ -53,7 +53,8 @@ public interface MachinesApi {
             @Field("imageBase64Post")String imagebase64,
             @Field("accuracyPost")String accuracy,
             @Field("respondentCodePost")String resCode,
-            @Field("respondentNamePost")String resName
+            @Field("respondentNamePost")String resName,
+            @Field("enumeratorCodePost")String enumCode
     );
 
 }

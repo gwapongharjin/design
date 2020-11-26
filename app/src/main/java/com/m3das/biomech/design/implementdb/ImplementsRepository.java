@@ -35,7 +35,7 @@ public class ImplementsRepository {
     }
 
     public void deleteAllImplements() {
-        new ImplementsRepository.DeleteAllImplementsAsyncTask(impDAO).execute();
+        new DeleteAllImplementsAsyncTask(impDAO).execute();
     }
 
     public LiveData<List<Implements>> getAllImplements() {

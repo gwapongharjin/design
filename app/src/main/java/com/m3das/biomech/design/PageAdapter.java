@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import com.m3das.biomech.design.fragments.DataFragment;
+import com.m3das.biomech.design.fragments.MapsFragment;
 import com.m3das.biomech.design.fragments.ProfileFragment;
 import com.m3das.biomech.design.fragments.MachineListFragment;
-import com.m3das.biomech.design.fragments.MapFragment;
 import com.m3das.biomech.design.fragments.ImplementsFragment;
 
 public class PageAdapter extends FragmentPagerAdapter {
@@ -31,7 +31,7 @@ private final int numTabs;
             case 3:
                 return new DataFragment();
             case 4:
-                return new MapFragment();
+                return new MapsFragment();
             default:
                 return null;
         }

@@ -8,14 +8,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetroClient {
 
 
-    private static final String BASE_URL = "http://192.168.1.4/m3dastest/";
+    private static final String BASE_URL = "http://10.0.68.200/m3dastest/";
     private static RetroClient myClient;
     private Retrofit retrofit;
 
     private RetroClient(){
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build();
@@ -25,11 +25,7 @@ public class RetroClient {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();
-
-
-
     }
-
     public static synchronized RetroClient getInstance(){
 
         if (myClient == null){
@@ -44,4 +40,8 @@ public class RetroClient {
 //    }
 
     public MachinesApi getMachinesApi(){return  retrofit.create(MachinesApi.class);}
+
+    public ImplementsApi getImplementsApi(){return retrofit.create(ImplementsApi.class);}
+
+    public ProfilesApi getProfilesApi(){return retrofit.create(ProfilesApi.class);}
 }

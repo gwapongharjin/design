@@ -151,6 +151,7 @@ public class ImplementsFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 implementViewModel.delete(implementAdapter.getImplement(viewHolder.getAdapterPosition()));
+                                implementAdapter.notifyDataSetChanged();
                             }
 
                         })

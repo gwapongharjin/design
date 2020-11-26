@@ -30,9 +30,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/custom_spinner"
             android:entries="@array/ownership_type"
-            app:layout_constraintEnd_toStartOf="@+id/btnSaveProfile"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -44,6 +45,7 @@
             android:background="@drawable/custom_edit_text"
             android:hint="Specify Profile of Respondent"
             app:layout_constraintEnd_toEndOf="@+id/spinProfile"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/spinProfile"
             app:layout_constraintTop_toBottomOf="@+id/spinProfile" />
 
@@ -59,26 +61,26 @@
 
         <EditText
             android:id="@+id/edtNameResp"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="80dp"
             android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:hint="NAME"
             android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="@+id/spinProfile"
-            app:layout_constraintStart_toStartOf="@+id/textView6"
+            app:layout_constraintEnd_toStartOf="@+id/btnSaveProfileIcon"
+            app:layout_constraintStart_toStartOf="@+id/edtSpecifyProfile"
             app:layout_constraintTop_toBottomOf="@+id/spinProfile" />
 
         <EditText
             android:id="@+id/edtAddress"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_height="96dp"
+            android:layout_marginTop="64dp"
             android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:hint="ADDRESS"
-            android:inputType="textPostalAddress"
+            android:inputType="textMultiLine|textPostalAddress"
             app:layout_constraintEnd_toEndOf="@+id/spinProfile"
             app:layout_constraintStart_toStartOf="@+id/edtNameResp"
             app:layout_constraintTop_toBottomOf="@+id/edtNameResp" />
@@ -87,10 +89,9 @@
             android:id="@+id/edtAGE"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="64dp"
             android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="AGE"
             android:inputType="number"
             android:maxLength="3"
             app:layout_constraintEnd_toEndOf="@+id/radioGroup"
@@ -104,7 +105,7 @@
             android:layout_marginTop="32dp"
             android:text="Sex"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/edtNameResp"
+            app:layout_constraintStart_toStartOf="@+id/textView15"
             app:layout_constraintTop_toBottomOf="@+id/edtAGE" />
 
         <RadioGroup
@@ -176,6 +177,7 @@
             android:ems="10"
             android:hint="Mobile Number 2"
             android:inputType="number"
+            android:maxLength="11"
             app:layout_constraintEnd_toEndOf="@+id/edtMobileNumber"
             app:layout_constraintStart_toStartOf="@+id/edtMobileNumber"
             app:layout_constraintTop_toBottomOf="@+id/edtMobileNumber" />
@@ -184,29 +186,28 @@
             android:id="@+id/edtTelephoneNumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Telephone Number"
             android:inputType="phone"
             android:maxLength="8"
             app:layout_constraintEnd_toEndOf="@+id/multspinContactNumber"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/multspinContactNumber"
-            app:layout_constraintTop_toBottomOf="@+id/edtMobileNumber2" />
+            app:layout_constraintStart_toEndOf="@+id/radioGroup"
+            app:layout_constraintTop_toTopOf="@+id/edtAreaCodeTelNum1" />
 
         <EditText
             android:id="@+id/edtTelephoneNumber2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Telephone Number 2"
             android:inputType="number"
+            android:maxLength="8"
             app:layout_constraintEnd_toEndOf="@+id/edtTelephoneNumber"
-            app:layout_constraintStart_toStartOf="@+id/edtTelephoneNumber"
-            app:layout_constraintTop_toBottomOf="@+id/edtTelephoneNumber" />
+            app:layout_constraintStart_toEndOf="@+id/radioGroup"
+            app:layout_constraintTop_toTopOf="@+id/edtAreaCodeTelNum2" />
 
         <TextView
             android:id="@+id/tvEduc"
@@ -216,7 +217,7 @@
             android:text="Educational Attainment"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/multspinContactNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/edtTelephoneNumber2" />
 
         <Spinner
             android:id="@+id/spinEduc"
@@ -230,16 +231,8 @@
             app:layout_constraintStart_toStartOf="@+id/multspinContactNumber"
             app:layout_constraintTop_toBottomOf="@+id/tvEduc" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinEduc" />
-
         <ImageButton
-            android:id="@+id/btnSaveProfile"
+            android:id="@+id/btnSaveProfileIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_image_button"
@@ -248,6 +241,114 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView6"
             app:srcCompat="@drawable/ic_outline_save_24" />
+
+        <Button
+            android:id="@+id/btnSaveProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/custom_button"
+            android:text="SAVE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinEduc" />
+
+        <EditText
+            android:id="@+id/edtAreaCodeTelNum1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:background="@drawable/custom_edit_text"
+            android:ems="10"
+            android:inputType="number"
+            android:maxLength="3"
+            app:layout_constraintEnd_toEndOf="@+id/radioGroup"
+            app:layout_constraintStart_toStartOf="@+id/edtMobileNumber2"
+            app:layout_constraintTop_toBottomOf="@+id/edtMobileNumber2" />
+
+        <EditText
+            android:id="@+id/edtAreaCodeTelNum2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="54dp"
+            android:background="@drawable/custom_edit_text"
+            android:ems="10"
+            android:inputType="number"
+            android:maxLength="3"
+            app:layout_constraintEnd_toEndOf="@+id/radioGroup"
+            app:layout_constraintStart_toStartOf="@+id/edtMobileNumber2"
+            app:layout_constraintTop_toBottomOf="@+id/edtAreaCodeTelNum1" />
+
+        <TextView
+            android:id="@+id/tvAreaCode1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Area Code"
+            app:layout_constraintBottom_toTopOf="@+id/edtAreaCodeTelNum1"
+            app:layout_constraintEnd_toEndOf="@+id/edtAreaCodeTelNum1"
+            app:layout_constraintStart_toStartOf="@+id/edtAreaCodeTelNum1" />
+
+        <TextView
+            android:id="@+id/tvAreaCode2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Area Code"
+            app:layout_constraintBottom_toTopOf="@+id/edtAreaCodeTelNum2"
+            app:layout_constraintEnd_toEndOf="@+id/edtAreaCodeTelNum2"
+            app:layout_constraintStart_toStartOf="@+id/edtAreaCodeTelNum2" />
+
+        <TextView
+            android:id="@+id/tvTelNum2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="8dp"
+            android:text="Telephone Number 2"
+            app:layout_constraintBottom_toTopOf="@+id/edtTelephoneNumber2"
+            app:layout_constraintEnd_toEndOf="@+id/edtTelephoneNumber2"
+            app:layout_constraintStart_toStartOf="@+id/edtTelephoneNumber2" />
+
+        <TextView
+            android:id="@+id/tvTelNum1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Telephone Number 1"
+            app:layout_constraintBottom_toTopOf="@+id/edtTelephoneNumber"
+            app:layout_constraintEnd_toEndOf="@+id/edtTelephoneNumber"
+            app:layout_constraintStart_toStartOf="@+id/edtTelephoneNumber" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Name of Respondent"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/edtNameResp"
+            app:layout_constraintStart_toStartOf="@+id/textView6" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Address of Respondent"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/edtAddress"
+            app:layout_constraintStart_toStartOf="@+id/textView13" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Age"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/edtAGE"
+            app:layout_constraintStart_toStartOf="@+id/textView14" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

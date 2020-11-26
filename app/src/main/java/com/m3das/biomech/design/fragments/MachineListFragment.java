@@ -185,6 +185,7 @@ public class MachineListFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 machineListViewModel.delete(machineAdapter.getMachineAt(viewHolder.getAdapterPosition()));
+                                machineAdapter.notifyDataSetChanged();
                             }
 
                         })
