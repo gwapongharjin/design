@@ -41,4 +41,8 @@ public class ProfileViewModel extends AndroidViewModel {
     public LiveData<List<Profile>> getAllProfiles() {
         return allProfileNames;
     }
+
+    public void deleteAll(){repositoryProfile.deleteAllProfiles();}
+
+    public void nukeAll(){repositoryProfile.nukeAll();}
 }

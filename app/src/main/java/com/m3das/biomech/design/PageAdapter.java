@@ -29,9 +29,9 @@ private final int numTabs;
             case 2:
                 return new ImplementsFragment();
             case 3:
-                return new DataFragment();
-            case 4:
                 return new MapsFragment();
+            case 4:
+                return new DataFragment();
             default:
                 return null;
         }

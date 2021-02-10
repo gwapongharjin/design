@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#BF360C</color>
-    <color name="colorPrimaryDark">#E65100</color>
-    <color name="colorAccent">#004D40</color>
+    <color name="colorPrimary">#A5C4B8</color>
+    <color name="colorPrimaryDark">#81AD9C</color>
+    <color name="colorAccent">#AFC753</color>
+    <color name="colorPrimaryDarker">#164533</color>
+    <color name="border_edit_text">#3A8C6D</color>
     <color name="black_overlay">#66000000</color>
-    <color name="M3DASMain">#CA721E</color>
+    <color name="M3DASMain">#CFDE8C</color>
+    <color name="ColorSugar">#81AD9C</color>
+    <color name="ColorCorn">#AFA975</color>
+    <color name="ColorRice">#5C5A4D</color>
     <color name="white">#FFFFFF</color>
+    <color name="tab_selected_color">#81AD9C</color>
+    <color name="tab_unselected_color">#A5C4B8</color>
+    <color name="ColorDelete">#A5C4B8</color>
 </resources>

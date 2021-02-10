@@ -4,8 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
     tools:context=".CropSelectActivity">
+
+    <TextView
+        android:id="@+id/textView48"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:text="CORN"
+        android:textColor="@color/colorPrimaryDarker"
+        app:layout_constraintBottom_toBottomOf="@+id/btnCorn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnCorn" />
+
+    <TextView
+        android:id="@+id/textView49"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:text="SUGARCANE"
+        android:textColor="@color/ColorRice"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSugarCane"
+        app:layout_constraintStart_toStartOf="@+id/textView48"
+        app:layout_constraintTop_toTopOf="@+id/btnSugarCane" />
+
+    <TextView
+        android:id="@+id/textView50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:text="RICE"
+        android:textColor="@color/ColorCorn"
+        app:layout_constraintBottom_toBottomOf="@+id/btnRice"
+        app:layout_constraintStart_toStartOf="@+id/textView49"
+        app:layout_constraintTop_toTopOf="@+id/btnRice" />
 
     <Button
         android:id="@+id/btnCorn"
@@ -14,12 +48,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/custom_button"
-        android:text="CORN"
+        android:background="@drawable/custom_button_corn"
         app:layout_constraintBottom_toTopOf="@+id/btnSugarCane"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnRice"
@@ -28,8 +61,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/custom_button"
-        android:text="RICE"
+        android:background="@drawable/custom_button_rice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSugarCane" />
@@ -40,11 +72,59 @@
         android:layout_height="80dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/custom_button"
-        android:text="SUGARCANE"
+        android:background="@drawable/custom_button_sugarcane"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgCorn"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/btnCorn"
+        app:layout_constraintStart_toStartOf="@+id/btnCorn"
+        app:layout_constraintTop_toTopOf="@+id/btnCorn" />
+
+    <ImageView
+        android:id="@+id/imgSugar"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/btnSugarCane"
+        app:layout_constraintStart_toStartOf="@id/btnSugarCane"
+        app:layout_constraintTop_toTopOf="@id/btnSugarCane" />
+
+    <ImageView
+        android:id="@+id/imgRice"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/btnRice"
+        app:layout_constraintStart_toStartOf="@id/btnRice"
+        app:layout_constraintTop_toTopOf="@+id/btnRice" />
+
+    <TextView
+        android:id="@+id/textView55"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Crop"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnCorn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

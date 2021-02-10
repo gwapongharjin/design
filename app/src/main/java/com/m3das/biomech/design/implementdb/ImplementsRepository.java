@@ -4,6 +4,7 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+import androidx.sqlite.db.SimpleSQLiteQuery;
 
 
 import com.m3das.biomech.design.machinedb.MachinesDAO;
@@ -37,6 +38,10 @@ public class ImplementsRepository {
     public void deleteAllImplements() {
         new DeleteAllImplementsAsyncTask(impDAO).execute();
     }
+
+    public void nukeAll(){new NukeAsyncTask(impDAO).execute();}
+
+
 
     public LiveData<List<Implements>> getAllImplements() {
         return allImplements;
@@ -94,6 +99,19 @@ public class ImplementsRepository {
         @Override
         protected Void doInBackground(Void... voids) {
             implementsDAO.deleteAllImplements();
+            return null;
+        }
+    }
+
+    private static class NukeAsyncTask extends AsyncTask<Void, Void, Void> {
+        private ImplementsDAO implementsDAO;
+
+        private NukeAsyncTask(ImplementsDAO implementsDAO) {
+            this.implementsDAO = implementsDAO;
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            implementsDAO.deleteTable(new SimpleSQLiteQuery("DROP TABLE implements"));
             return null;
         }
     }

@@ -24,7 +24,6 @@ public interface MachinesDAO {
     @Query("SELECT * FROM machines ORDER BY id DESC")
     LiveData<List<Machines>> getAllMachines();
 
-
     @Query("DELETE FROM machines")
     void deleteAllMachines();
 }

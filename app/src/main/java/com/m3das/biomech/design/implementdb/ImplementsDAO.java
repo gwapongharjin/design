@@ -5,7 +5,9 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.RawQuery;
 import androidx.room.Update;
+import androidx.sqlite.db.SupportSQLiteQuery;
 
 
 import java.util.List;
@@ -28,4 +30,12 @@ public interface ImplementsDAO {
         @Query("DELETE FROM implement")
         void deleteAllImplements();
 
+        @RawQuery
+        int deleteTable (SupportSQLiteQuery query);
+
+//        @Query("SELECT COUNT(*) FROM implement")
+//        LiveData<Integer> getRowCount();
+//
+//        @Query("UPDATE SQLITE_SEQUENCE SET seq = 1 WHERE name = <table>")
+//        void clearPrimaryKey();
 }

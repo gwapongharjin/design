@@ -1,24 +1,54 @@
 <resources>
     <string name="app_name">M3DAS</string>
-    <string name="privacy_statement">Your privacy and trust are important to us. This privacy statement explains the data that M3DAS processes, how M3DAS processes it, and for what purposes.
+
+    <string name="privacy">Your privacy and trust are important to us. This privacy statement explains the data that M3DAS processes, how M3DAS processes it, and for what purposes.
         \n\nWhat personal information are we collecting?
-        \nWe only collect the minimum amount of personal information for this survey such as your name, address, and contact information for the purpose of validation and tracking of agricultural machineries. The survey will only be asking sensitive information such as age, and educational attainment for the purpose of profiling the respondents of the survey and will not be disclosed without the respondent’s consent for the latter’s protection and safety. Any data acquired ensures that these are securely connected to the M3DAS server through SSL encryption.
-        \n\nHow do we plan to use the responses and who are authorized to access them?\n
-        The survey is conducted solely for the purpose of research involving mechanization resource mapping, monitoring, and data analysis which will be utilized for mechanization planning, implementation, and policy data generation for government departments and LGUs.
-        The only authorized entities who have access with the data provided are the Center for Agri-Fisheries and Biosystems Mechanization (BIOMECH), University of the Philippines Los Baños (UPLB), and the Department of Science and Technology - Philippine Council for Agriculture, Aquatic and Natural Resources Research and Development (DOST-PCAARRD). Any other affiliates or concerned organizations will need to submit a written letter of consent from authorized entities before any access to the data, , except for the processed data in web map format made public. How respondents can access their responses? All data collected from respondents are processed which include, but not limited to, geo-tagged machines, available horsepower (hp), machines for custom hiring, and suitability of machines in an area. Some of these data are presented in a web map format that is accessible for public use e.g. government departments, agencies, institutions, LGUs, and state universities for the purpose of research, and planning and development.
+        \nWe only collect the minimum amount of personal information for this survey such as your name, address, and contact information for the purpose of validation and tracking of agricultural machineries. The survey will only be asking for limited sensitive information such as age, and educational attainment for the purpose of profiling the respondents of the survey and will not be disclosed without the respondent’s consent for the latter’s protection and safety. Any data acquired ensures that these are securely connected to the M3DAS server through SSL encryption.
+        \n\nHow do we plan to use the responses and who are authorized to access them?
+        \nThe survey is conducted solely for the purpose of research involving mechanization resource mapping, monitoring, and data analysis which will be utilized for mechanization planning, implementation, and policy data generation for government departments and LGUs.
+        The only authorized entities who have access with the data provided are the Center for Agri-Fisheries and Biosystems Mechanization (BIOMECH), University of the Philippines Los Baños (UPLB), and the Department of Science and Technology - Philippine Council for Agriculture, Aquatic and Natural Resources Research and Development (DOST-PCAARRD). Any other affiliates or concerned organizations will need to submit a written letter of consent from authorized entities before any access to the data, except for the processed data in web map format made public, can be made.
+        How respondents can access their responses?
+        All data collected from respondents are processed which include, but not limited to, geo-tagged machines, available horsepower (hp), machines for custom hiring, and suitability of machines in an area. Some of these data are presented in a web map format that is accessible for public use e.g. government departments, agencies, institutions, LGUs, and state universities for the purpose of research, and planning and development.
         \n\nHow can respondents contact us?
         \n\nIf you have a privacy concern, complaint or questions please contact us through the following contact address:
-        \n\nM3DAS Project, Center for Agri-Fisheries and Biosystems Mechanization (BIOMECH), College of Engineering and Agro-Industrial Technology (CEAT), University of the Philippines Los Baños (UPLB), College, Laguna, Philippines 4030.  \n\nEmail : biomech.m3das@gmail.com\nTelephone: +63 (049) 536 2686.</string>
+        \n\nM3DAS Project, Center for Agri-Fisheries and Biosystems Mechanization (BIOMECH), College of Engineering and Agro-Industrial Technology (CEAT), University of the Philippines Los Baños (UPLB), College, Laguna, Philippines 4030.  Email : biomech.m3das@gmail.com or biomech.uplb@up.edu.ph, Telephone: +63 (049) 536 3606.
+    </string>
+
+    <string name="privacy1">Your privacy and trust are important to us. This privacy statement explains the data that M3DAS processes, how M3DAS processes it, and for what purposes.</string>
+
+    <string name="privacy2">What personal information are we collecting?</string>
+
+    <string name="privacy3">We only collect the minimum amount of personal information for this survey such as your name, address, and contact information for the purpose of validation and tracking of agricultural machineries. The survey will only be asking for limited sensitive information such as age, and educational attainment for the purpose of profiling the respondents of the survey and will not be disclosed without the respondent’s consent for the latter’s protection and safety. Any data acquired ensures that these are securely connected to the M3DAS server through SSL encryption.</string>
+
+    <string name="privacy4">How do we plan to use the responses and who are authorized to access them?</string>
+
+    <string name="privacy5">The survey is conducted solely for the purpose of research involving mechanization resource mapping, monitoring, and data analysis which will be utilized for mechanization planning, implementation, and policy data generation for government departments and LGUs. The only authorized entities who have access with the data provided are the Center for Agri-Fisheries and Biosystems Mechanization (BIOMECH), University of the Philippines Los Baños (UPLB), and the Department of Science and Technology - Philippine Council for Agriculture, Aquatic and Natural Resources Research and Development (DOST-PCAARRD). Any other affiliates or concerned organizations will need to submit a written letter of consent from authorized entities before any access to the data, except for the processed data in web map format made public, can be made.</string>
+
+    <string name="privacy6">How respondents can access their responses?</string>
+
+    <string name="privacy7">All data collected from respondents are processed which include, but not limited to, geo-tagged machines, available horsepower (hp), machines for custom hiring, and suitability of machines in an area. Some of these data are presented in a web map format that is accessible for public use e.g. government departments, agencies, institutions, LGUs, and state universities for the purpose of research, and planning and development.</string>
+
+    <string name="privacy8">How can respondents contact us?</string>
+
+    <string name="privacy9">If you have a privacy concern, complaint or questions please contact us through the following contact address:</string>
+
+    <string name="privacy10">• M3DAS Project, Center for Agri-Fisheries and Biosystems Mechanization (BIOMECH), College of Engineering and Agro-Industrial Technology (CEAT), University of the Philippines Los Baños (UPLB), College, Laguna, Philippines 4030.</string>
+    <string name="privacy11">Email:</string>
+    <string name="privacy12">Telephone:</string>
+    <string name="privacy13">biomech.m3das@gmail.com or biomech.uplb@up.edu.ph</string>
+    <string name="privacy14">(049) 536 3606</string>
 
     <string name="consent_statement">The purpose of this research project is to collect data for the mechanization resource mapping, monitoring, and data analysis (M3DAS) which will be conducted by the Center for Agri-Fisheries and Biosystems Mechanization (BIOMECH) of the University of the Philippines Los Baños (UPLB). The Initiator (BIOMECH) of this survey is solely responsible for its contents and the responses will be used by the survey Initiator only for the purpose identified by the Initiator.
-        Your participation in this survey is voluntary.  You are invited to participate because you are either an owner of a farm, garage, machine, processing plant, or transloading zone; an operator of farm machine; a manager of a transloading zone; a farm manager or an officer in charge for the farm; and a representative of a cooperative,  LGU, or a farmer’s association. You may also choose not to participate. If you decide to participate, please provide responsible responses, refrain from using any inappropriate language, and refrain from including any confidential information belonging to you or another party.
+        <b>Your participation in this survey is voluntary</b>.  You are invited to participate because you are either an owner of a farm, garage, machine, processing plant, or transloading zone; an operator of farm machine; a manager of a transloading zone; a farm manager or an officer in charge for the farm; and a representative of a cooperative,  LGU, or a farmer’s association. You may also choose not to participate. If you decide to participate, please provide responsible responses, refrain from using any inappropriate language, and refrain from including any confidential information belonging to you or another party.
         If you are asked to reveal any sensitive information that is not included in this survey by the enumerator, you may choose to withdraw at any time. If you do not participate in this research study or if you withdraw from participating any time, you will not be penalized. The duration of the survey is at least 30 minutes. Your responses are subjected to the privacy statement of the organization for your information, protection, and safety.
         All data based on your responses are subjected to confidentiality, therefore any processed data from the survey will not be able to personally identify you. The results will be used solely for research and development purposes, if you have any questions about the research study, please contact the address found in the privacy statement.
-            \n\nBy clicking on “Proceed to Survey” button below indicates that:</string>
-    <string name="consent_part2">• You have read, understood, and agree to the privacy statement of the organization.
-            \n• You have read, understood, and agree to allow the authorized entities to collect and process personal information about and/or relating to you that you agreed to respond in this survey form.</string>
+            <br/>By clicking on <b>“PROCEED”</b> button below indicates that:</string>
+    <string name="consent_part2">• You have read, understood, and agree to the privacy statement of the organization.</string>
+
+    <string name="consent_part3">• You have read, understood, and agree to allow the authorized entities to collect and process personal information about and/or relating to you that you agreed to respond in this survey form.</string>
+
     <string-array name="educ_attain">
-        <item></item>
+        <item>Please Select...</item>
         <item>NOT APPLICABLE</item>
         <item>PRIMARY</item>
         <item>SECONDARY</item>
@@ -26,10 +56,10 @@
         <item>POST GRADUATE</item>
         <item>DIPLOMA</item>
         <item>VOCATIONAL TECHNICAL</item>
-        <item>OTHERS</item>
     </string-array>
 
     <string-array name="machine_types">
+        <item>Please Select...</item>
         <item>2 WHEEL TRACTOR</item>
         <item>4 WHEEL TRACTOR</item>
         <item>BOOM SPRAYER</item>
@@ -49,7 +79,7 @@
     </string-array>
 
     <string-array name="machine_types_sugarcane">
-        <item></item>
+        <item>Please Select...</item>
         <item>2 WHEEL TRACTOR</item>
         <item>4 WHEEL TRACTOR</item>
         <item>BOOM SPRAYER</item>
@@ -61,7 +91,7 @@
     </string-array>
 
     <string-array name="machine_types_corn">
-        <item></item>
+        <item>Please Select...</item>
         <item>	2 WHEEL TRACTOR	</item>
         <item>	4 WHEEL TRACTOR	</item>
         <item>	MECHANICAL PLANTER	</item>
@@ -74,7 +104,7 @@
     </string-array>
 
     <string-array name="machine_types_rice">
-        <item></item>
+        <item>Please Select...</item>
         <item>	2 WHEEL TRACTOR	</item>
         <item>	4 WHEEL TRACTOR	</item>
         <item>	MECHANICAL PLANTER	</item>
@@ -88,7 +118,7 @@
     </string-array>
 
     <string-array name="fourwheeltractorbrands">
-        <item></item>
+        <item>Please Select...</item>
         <item>AGRINDO</item>
         <item>BRANSON</item>
         <item>CASE IH</item>
@@ -130,18 +160,18 @@
         <item>Rented</item>
     </string-array>
     <string-array name="type_of_tubewells">
-        <item></item>
+        <item>Please Select...</item>
         <item>SHALLOW TUBEWELL</item>
         <item>DEEP WELL</item>
     </string-array>
     <string-array name="purchasing_method">
-        <item></item>
+        <item>Please Select...</item>
         <item>PURCHASED</item>
         <item>GRANT</item>
         <item>DONATION</item>
     </string-array>
     <string-array name="implements1">
-        <item></item>
+        <item>Please Select...</item>
         <item>CANE GRAB LOADERS</item>
         <item>CHISEL PLOW</item>
         <item>CUTAWAY CULTIVATOR</item>
@@ -167,20 +197,19 @@
     </string-array>
 
     <string-array name="contact_number">
-        <item></item>
         <item>NOT APPLICABLE</item>
         <item>MOBILE NUMBER</item>
         <item>TELEPHONE NUMBER</item>
     </string-array>
 
     <string-array name="type_of_planter">
-        <item></item>
+        <item>Please Select...</item>
         <item>BILLET</item>
         <item>WHOLESTALK</item>
     </string-array>
 
     <string-array name="ownership_type">
-        <item></item>
+        <item>Please Select...</item>
         <item>OWNER</item>
         <item>OPERATOR OF MACHINE</item>
         <item>MANAGER OF TRANSLOADING ZONE</item>
@@ -191,7 +220,6 @@
         <item>OTHERS</item>
     </string-array>
     <string-array name="subowner">
-        <item></item>
         <item>FARM</item>
         <item>GARAGE</item>
         <item>MACHINE</item>
@@ -199,13 +227,13 @@
         <item>TRANSLOADING ZONE</item>
     </string-array>
     <string-array name="condition_when_bought">
-        <item></item>
+        <item>Please Select...</item>
         <item>BRAND NEW</item>
         <item>SECONDHAND</item>
         <item>RECONDITIONED</item>
     </string-array>
     <string-array name="ownership_of_machine">
-        <item></item>
+        <item>Please Select...</item>
         <item>PRIVATELY OWNED</item>
         <item>COOPERATIVE/ASSOCIATION</item>
         <item>CUSTOM PROVIDER</item>
@@ -213,48 +241,48 @@
     </string-array>
 
     <string-array name="agency">
-        <item></item>
+        <item>Please Select...</item>
         <item>DEPARTMENT OF AGRICULTURE (DA)</item>
         <item>DEPARTMENT OF AGRARIAN REFORM (DAR)</item>
         <item>SUGAR REGULATORY ADMINISTRATION (SRA)</item>
         <item>OTHERS</item>
+    </string-array>
 
+    <string-array name="agency_loan">
+        <item>Please Select...</item>
+        <item>SOCIALIZED CREDIT PROGRAM (SRA)</item>
+        <item>OTHERS</item>
     </string-array>
 
     <string-array name="condition">
-        <item></item>
+        <item>Please Select...</item>
         <item>FUNCTIONAL USED</item>
         <item>FUNCTIONAL UNUSED</item>
         <item>NON-FUNCTIONAL</item>
     </string-array>
     <string-array name="blank">
+        <item>Please Select...</item>
         <item></item>
-    </string-array>
-    <string-array name="functionality">
-        <item></item>
-        <item>USED</item>
-        <item>UNUSED</item>
     </string-array>
 
     <string-array name="rent_availablity">
-        <item></item>
+        <item>Please Select...</item>
         <item>WITHIN BARANGAY</item>
         <item>OUTSIDE BARANGAY</item>
     </string-array>
 
     <string-array name="location">
-        <item></item>
+        <item>Please Select...</item>
         <item>GARAGE</item>
         <item>FIELD</item>
         <item>TRANSLOADING ZONE</item>
     </string-array>
     <string-array name="type_of_mill">
-        <item></item>
+        <item>Please Select...</item>
         <item>MOBILE</item>
         <item>STATIONARY</item>
     </string-array>
     <string-array name="problems_unused">
-        <item></item>
         <item>THE MACHINE IS NOT SUITABLE TO THE CONDITIONS OF THE AREA</item>
         <item>NO ONE IS SKILLED ENOUGH TO OPERATE THE MACHINE</item>
         <item>CUSTOM HIRING RATE OF MACHINE IS TOO HIGH</item>
@@ -262,20 +290,19 @@
         <item>OTHERS</item>
     </string-array>
     <string-array name="problems_nonfunctional">
-        <item></item>
         <item>FOR REPAIR</item>
         <item>TOO OLD, UNREPAIRABLE</item>
         <item>OBSOLETE</item>
         <item>OTHERS</item>
     </string-array>
     <string-array name="custom_rate_units">
-        <item></item>
+        <item>Please Select...</item>
         <item>PHP/HOUR</item>
         <item>PHP/HECTARE</item>
         <item>SPECIFY</item>
     </string-array>
     <string-array name="yes_no">
-        <item></item>
+        <item>Please Select...</item>
         <item>YES</item>
         <item>NO</item>
     </string-array>
@@ -288,6 +315,7 @@
     <string name="title_activity_privacy_and_consent">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="not_yet_acq">Not yet Acquired</string>
 
 
 </resources>

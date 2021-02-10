@@ -19,17 +19,11 @@ public class MachineListViewModel extends AndroidViewModel {
     public MachinesRepository repositoryMachines;
     public LiveData<List<Machines>> allMachines;
 
-    public LiveData<List<Profile>> allProfiles;
-
 
     public MachineListViewModel(@NonNull Application application) {
         super(application);
         repositoryMachines = new MachinesRepository(application);
         allMachines = repositoryMachines.getAllMachines();
-
-        ProfileRepository repositoryProfiles = new ProfileRepository(application);
-        allProfiles = repositoryProfiles.getAllUserNames();
-
     }
 
     public void insert(Machines machines) {
@@ -44,12 +38,10 @@ public class MachineListViewModel extends AndroidViewModel {
         repositoryMachines.delete(machines);
     }
 
+    public void deleteAll(){repositoryMachines.deleteAllMachines();}
+
     public LiveData<List<Machines>> getAllMachines() {
         return allMachines;
-    }
-
-    public LiveData<List<Profile>> getAllProfiles() {
-        return allProfiles;
     }
 
 }

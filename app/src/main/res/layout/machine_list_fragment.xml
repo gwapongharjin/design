@@ -18,10 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/machine_item">
@@ -35,8 +37,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:clickable="true"
-            android:focusable="true"
-            android:src="@android:drawable/ic_input_add"
+            android:src="@drawable/ic_outline_add_24"
+            app:backgroundTint="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -48,8 +50,7 @@
             android:layout_marginBottom="8dp"
             android:clickable="true"
             android:src="@drawable/ic_outline_delete_24"
-            android:tint="#8BC34A"
-            app:backgroundTint="@color/colorAccent"
+            app:backgroundTint="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

@@ -4,7 +4,10 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+import androidx.sqlite.db.SimpleSQLiteQuery;
 
+import com.m3das.biomech.design.implementdb.ImplementsDAO;
+import com.m3das.biomech.design.implementdb.ImplementsRepository;
 import com.m3das.biomech.design.machinedb.MachinesDAO;
 import com.m3das.biomech.design.machinedb.MachinesRepository;
 
@@ -39,6 +42,8 @@ public class ProfileRepository {
     public LiveData<List<Profile>> getAllUserNames(){
         return allProfileNames;
     }
+
+    public void nukeAll(){new NukeAsyncTask(profileDAO).execute();}
 
 
     public static class InsertProfileAsyncTask extends AsyncTask<Profile, Void, Void> {
@@ -92,6 +97,19 @@ public class ProfileRepository {
         @Override
         protected Void doInBackground(Void... voids) {
             profileDAO.deleteAllProfiles();
+            return null;
+        }
+    }
+
+    private static class NukeAsyncTask extends AsyncTask<Void, Void, Void> {
+        private ProfileDAO profileDAO;
+
+        private NukeAsyncTask(ProfileDAO profileDAO) {
+            this.profileDAO = profileDAO;
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            profileDAO.deleteTable(new SimpleSQLiteQuery("DROP TABLE profile"));
             return null;
         }
     }

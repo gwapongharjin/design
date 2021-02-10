@@ -24,11 +24,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.m3das.biomech.design.AddMachineActivity;
 import com.m3das.biomech.design.MachineAdapter;
+import com.m3das.biomech.design.ProfileAdapter;
+import com.m3das.biomech.design.implementdb.Implements;
 import com.m3das.biomech.design.machinedb.Machines;
 import com.m3das.biomech.design.R;
 import com.m3das.biomech.design.Variable;
+import com.m3das.biomech.design.viewmodels.ImplementViewModel;
 import com.m3das.biomech.design.viewmodels.MachineListViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MachineListFragment extends Fragment {
@@ -43,8 +47,10 @@ public class MachineListFragment extends Fragment {
     }
 
     private MachineListViewModel machineListViewModel;
+    private ImplementViewModel implementViewModel;
     public static final int ADD_NOTE_REQUEST = 1123;
     public static final int EDIT_NOTE_REQUEST = 2;
+    ArrayList<ImplementCodeTypeMachcode> implementArrayList = new ArrayList<>();
 
 
     @Override
@@ -65,20 +71,32 @@ public class MachineListFragment extends Fragment {
 
 
         machineListViewModel = new ViewModelProvider(this).get(MachineListViewModel.class);
-
         machineListViewModel.getAllMachines().observe(getActivity(), new Observer<List<Machines>>() {
             @Override
             public void onChanged(List<Machines> machines) {
                 String machineList = "";
+                ArrayList<String> stringArrayList = new ArrayList<>();
                 for (int i = machines.size() - 1; i > -1; i--) {
                     machineList = machineList + "Machine ID: " + machines.get(i).getId();
                     machineList = machineList + "\nMachine QR Code: " + machines.get(i).getMachine_qrcode();
                     machineList = machineList + "\nRespondent Name: " + machines.get(i).getResName();
-                    machineList = machineList + "\nMachine Type: " + machines.get(i).getMachine_type()+ "\n\n";
+                    machineList = machineList + "\nMachine Type: " + machines.get(i).getMachine_type() + "\n\n";
                 }
+
+
                 Variable.setMachList(machineList);
 
                 machineAdapter.setMachinesList(machines);
+            }
+        });
+
+        implementViewModel = new ViewModelProvider(this).get(ImplementViewModel.class);
+        implementViewModel.getAllImplements().observe(getActivity(), new Observer<List<Implements>>() {
+            @Override
+            public void onChanged(List<Implements> anImplements) {
+                for (int i = 0; i < anImplements.size(); i++) {
+                    implementArrayList.add(new ImplementCodeTypeMachcode(anImplements.get(i).getImplement_qrcode(), anImplements.get(i).getImplement_type(), anImplements.get(i).getUsed_on_machine()));
+                }
             }
         });
 
@@ -153,14 +171,14 @@ public class MachineListFragment extends Fragment {
                 num = num + 1;
 
                 if (num % 2 == 0) {
-                    fabDeleteMachine.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimaryDark)));
+                    fabDeleteMachine.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimaryDarker)));
                     fabDeleteMachine.setRippleColor(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
                     Toast.makeText(getContext(), "Now you can delete items by swiping", Toast.LENGTH_SHORT).show();
 
                 } else {
 
-                    fabDeleteMachine.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
-                    fabDeleteMachine.setRippleColor(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimaryDark)));
+                    fabDeleteMachine.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimaryDark)));
+                    fabDeleteMachine.setRippleColor(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimaryDarker)));
 
                 }
 
@@ -177,26 +195,21 @@ public class MachineListFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
+                String machineQrcode = machineAdapter.getMachineAt(viewHolder.getAdapterPosition()).getMachine_qrcode();
+                Integer counter = 0;
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Deleting Item")
-                        .setMessage("You will be deleting this: "+ machineAdapter.getMachineAt(viewHolder.getAdapterPosition()).getMachine_qrcode())
-                        .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                machineListViewModel.delete(machineAdapter.getMachineAt(viewHolder.getAdapterPosition()));
-                                machineAdapter.notifyDataSetChanged();
-                            }
+                for (int i = 0; i < implementArrayList.size(); i++) {
+                    if (implementArrayList.get(i).machcode.contains(machineQrcode)) {
+                        counter++;
+                    }
+//                    Log.d("XRES LOOP", implementArrayList.get(i).code + " : " + implementArrayList.get(i).type + " : " + implementArrayList.get(i).machcode + " : " + counter.toString());
+                }
 
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                machineAdapter.notifyDataSetChanged();
-                            }
-                        });
-                builder.show();
-
+                if (counter > 0) {
+                    showUnableToDelete(machineAdapter, viewHolder);
+                } else {
+                    showDeleteItem(machineAdapter, viewHolder);
+                }
             }
 
             @Override
@@ -210,6 +223,41 @@ public class MachineListFragment extends Fragment {
         }).attachToRecyclerView(recyclerView);
 
         return v;
+    }
+
+    private void showDeleteItem(MachineAdapter machineAdapter, RecyclerView.ViewHolder viewHolder) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Deleting Item")
+                .setMessage("You will be deleting this:\n" + machineAdapter.getMachineAt(viewHolder.getAdapterPosition()).getMachine_type() + "\n" + machineAdapter.getMachineAt(viewHolder.getAdapterPosition()).getMachine_qrcode())
+                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        machineListViewModel.delete(machineAdapter.getMachineAt(viewHolder.getAdapterPosition()));
+                        machineAdapter.notifyDataSetChanged();
+                    }
+
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        machineAdapter.notifyDataSetChanged();
+                    }
+                })
+                .show();
+    }
+
+    private void showUnableToDelete(MachineAdapter machineAdapter, RecyclerView.ViewHolder viewHolder) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Unable to Delete")
+                .setMessage("You can not delete this machine. Please check implements tab")
+                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        machineAdapter.notifyDataSetChanged();
+                    }
+
+                }).show();
     }
 
     @Override
@@ -276,12 +324,11 @@ public class MachineListFragment extends Fragment {
 
             machineListViewModel.insert(machines);
 
-            Log.d("Is note saved", "Note Saved" + machineType);
-            Toast.makeText(getActivity(), "Note saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Machine saved", Toast.LENGTH_SHORT).show();
         } else if (requestCode == EDIT_NOTE_REQUEST && resultCode == Activity.RESULT_OK) {
             int id = data.getIntExtra(AddMachineActivity.EXTRA_ID, -1);
             if (id == -1) {
-                Toast.makeText(getActivity(), "Note can't be updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Machine can't be updated", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -337,14 +384,26 @@ public class MachineListFragment extends Fragment {
                     prov, mun, brgy, latitude, longitude, imageString, accuracy, resCode, resName);
 
             machines.setId(id);
-
             machineListViewModel.update(machines);
-            Toast.makeText(getActivity(), "Note updated", Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(getActivity(), "Machine updated", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getActivity(), "Note not saved", Toast.LENGTH_SHORT).show();
-            Log.d("Is note saved", "Note Not Saved");
+            Toast.makeText(getActivity(), "Machine not saved", Toast.LENGTH_SHORT).show();
+            Log.d("Is note saved", "Machine Not Saved");
         }
 
+    }
+
+    static class ImplementCodeTypeMachcode {
+        String code;
+        String type;
+        String machcode;
+
+        ImplementCodeTypeMachcode(String code, String type, String machcode) {
+            this.type = type;
+            this.code = code;
+            this.machcode = machcode;
+        }
     }
 
 }

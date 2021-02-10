@@ -28,7 +28,7 @@ public class LocationTrack extends Service implements LocationListener {
     double longitude;
     double accuracy;
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 5;
     protected LocationManager locationManager;
 
 

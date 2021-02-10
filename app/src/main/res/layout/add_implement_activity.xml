@@ -13,17 +13,23 @@
 
         <Button
             android:id="@+id/btnSaveImp"
-            android:layout_width="66dp"
-            android:layout_height="29dp"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/custom_button"
             android:text="SAVE"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnGalleryImp" />
 
         <EditText
             android:id="@+id/edtQRCodeImp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:hint="QR CODE"
             android:inputType="text"
@@ -34,7 +40,7 @@
             android:id="@+id/btnScanQRCodeImp"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/edtQRCodeImp"
+            android:background="@drawable/custom_image_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/edtQRCodeImp"
             app:layout_constraintTop_toTopOf="@+id/edtQRCodeImp"
@@ -55,9 +61,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/custom_spinner"
             android:entries="@array/implements1"
+            android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="@+id/btnScanQRCodeImp"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tvImplementType"
             app:layout_constraintTop_toBottomOf="@+id/tvImplementType" />
 
@@ -75,6 +84,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:background="@drawable/custom_spinner"
             app:layout_constraintEnd_toEndOf="@+id/btnScanQRCodeImp"
             app:layout_constraintStart_toStartOf="@+id/spinImplementType"
             app:layout_constraintTop_toBottomOf="@+id/tvSelectMachine" />
@@ -93,6 +103,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
+            android:buttonTint="@color/colorPrimaryDarker"
             android:text="LAND CLEARING"
             app:layout_constraintEnd_toEndOf="@+id/cbPrePlanting"
             app:layout_constraintStart_toStartOf="@+id/spinMachineUsing"
@@ -102,6 +114,8 @@
             android:id="@+id/cbPrePlanting"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_edit_text"
+            android:buttonTint="@color/colorPrimaryDarker"
             android:text="LAND PREPARATION"
             app:layout_constraintEnd_toEndOf="@+id/cbPlanting"
             app:layout_constraintStart_toStartOf="@+id/cbLandClearing"
@@ -111,6 +125,8 @@
             android:id="@+id/cbPlanting"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_edit_text"
+            android:buttonTint="@color/colorPrimaryDarker"
             android:text="PLANTING"
             app:layout_constraintEnd_toEndOf="@+id/cbFertilizer"
             app:layout_constraintStart_toStartOf="@+id/cbPrePlanting"
@@ -118,8 +134,10 @@
 
         <CheckBox
             android:id="@+id/cbFertilizer"
-            android:layout_width="wrap_content"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_edit_text"
+            android:buttonTint="@color/colorPrimaryDarker"
             android:text="FERTILIZER APPLICATION"
             app:layout_constraintStart_toStartOf="@+id/cbPlanting"
             app:layout_constraintTop_toBottomOf="@+id/cbPlanting" />
@@ -128,6 +146,8 @@
             android:id="@+id/cbPesticide"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_edit_text"
+            android:buttonTint="@color/colorPrimaryDarker"
             android:text="PESTICIDE APPLICATION"
             app:layout_constraintEnd_toEndOf="@+id/cbFertilizer"
             app:layout_constraintStart_toStartOf="@+id/cbFertilizer"
@@ -137,6 +157,8 @@
             android:id="@+id/cbIrriDrain"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_edit_text"
+            android:buttonTint="@color/colorPrimaryDarker"
             android:text="IRRIGATION &amp; DRAINAGE"
             app:layout_constraintEnd_toEndOf="@+id/cbPesticide"
             app:layout_constraintStart_toStartOf="@+id/cbPesticide"
@@ -146,6 +168,8 @@
             android:id="@+id/cbCultivation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_edit_text"
+            android:buttonTint="@color/colorPrimaryDarker"
             android:text="CULTIVATION"
             app:layout_constraintEnd_toEndOf="@+id/cbIrriDrain"
             app:layout_constraintStart_toStartOf="@+id/cbIrriDrain"
@@ -155,6 +179,8 @@
             android:id="@+id/cbRatooning"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_edit_text"
+            android:buttonTint="@color/colorPrimaryDarker"
             android:text="RATOONING"
             app:layout_constraintEnd_toEndOf="@+id/cbCultivation"
             app:layout_constraintStart_toStartOf="@+id/cbCultivation"
@@ -164,7 +190,9 @@
             android:id="@+id/cbHarvest"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="HARVEST"
+            android:background="@drawable/custom_edit_text"
+            android:buttonTint="@color/colorPrimaryDarker"
+            android:text="HARVESTING"
             app:layout_constraintEnd_toEndOf="@+id/cbRatooning"
             app:layout_constraintStart_toStartOf="@+id/cbRatooning"
             app:layout_constraintTop_toBottomOf="@+id/cbRatooning" />
@@ -173,6 +201,8 @@
             android:id="@+id/cbPostHarvest"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_edit_text"
+            android:buttonTint="@color/colorPrimaryDarker"
             android:text="POST HARVEST"
             app:layout_constraintEnd_toEndOf="@+id/cbHarvest"
             app:layout_constraintStart_toStartOf="@+id/cbHarvest"
@@ -182,6 +212,8 @@
             android:id="@+id/cbHauling"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_edit_text"
+            android:buttonTint="@color/colorPrimaryDarker"
             android:text="HAULING"
             app:layout_constraintEnd_toEndOf="@+id/cbPostHarvest"
             app:layout_constraintStart_toStartOf="@+id/cbPostHarvest"
@@ -190,116 +222,126 @@
 
         <EditText
             android:id="@+id/edtTotalServiceAreaMain"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="108dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Total Service Area"
+            android:hint="Hectares"
             android:inputType="number"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cbHauling" />
+            app:layout_constraintEnd_toEndOf="@+id/tvSelectMachine"
+            app:layout_constraintStart_toStartOf="@+id/tvHaMain"
+            app:layout_constraintTop_toBottomOf="@+id/cbHauling" />
 
         <TextView
             android:id="@+id/tvHaMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="In hectares (ha)"
-            app:layout_constraintStart_toStartOf="@+id/edtTotalServiceAreaMain"
-            app:layout_constraintTop_toBottomOf="@+id/edtTotalServiceAreaMain" />
+            android:layout_marginBottom="8dp"
+            android:text="Total Service Area"
+            app:layout_constraintBottom_toTopOf="@+id/edtTotalServiceAreaMain"
+            app:layout_constraintStart_toStartOf="@+id/tvOperations2" />
 
         <EditText
             android:id="@+id/edtHoursPDayMain"
-            android:layout_width="230dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Average Operating Hours"
+            android:hint="Hours/Day"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtTotalServiceAreaMain"
             app:layout_constraintStart_toStartOf="@+id/edtTotalServiceAreaMain"
-            app:layout_constraintTop_toBottomOf="@+id/tvHaMain" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayMain" />
 
         <TextView
             android:id="@+id/tvHoursPDayMain"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In Hours per Day"
+            android:layout_marginTop="40dp"
+            android:text="Average Operating Hours per Day"
             app:layout_constraintStart_toStartOf="@+id/tvHaMain"
-            app:layout_constraintTop_toBottomOf="@+id/edtHoursPDayMain" />
+            app:layout_constraintTop_toBottomOf="@+id/edtTotalServiceAreaMain" />
 
         <EditText
             android:id="@+id/edtDaysPSeasonMain"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Average Operating Days"
+            android:hint="Days/Season"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtHoursPDayMain"
             app:layout_constraintStart_toStartOf="@+id/edtHoursPDayMain"
-            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayMain" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDaysPSeasonMain" />
 
         <TextView
             android:id="@+id/tvDaysPSeasonMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In Days Per Season"
+            android:layout_marginTop="40dp"
+            android:text="Average Operating Days per Season"
             app:layout_constraintStart_toStartOf="@+id/tvHoursPDayMain"
-            app:layout_constraintTop_toBottomOf="@+id/edtDaysPSeasonMain" />
+            app:layout_constraintTop_toBottomOf="@+id/edtHoursPDayMain" />
 
         <EditText
             android:id="@+id/edtEffectiveAreaAccompMain"
-            android:layout_width="250dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:gravity="left"
-            android:hint="Effective Area Accomplished"
+            android:hint="Hectares"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtDaysPSeasonMain"
             app:layout_constraintStart_toStartOf="@+id/edtDaysPSeasonMain"
-            app:layout_constraintTop_toBottomOf="@+id/tvDaysPSeasonMain" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHaEAMain" />
 
         <TextView
             android:id="@+id/tvHaEAMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In hectares (ha)"
+            android:layout_marginTop="40dp"
+            android:text="Effective Area Accomplished"
             app:layout_constraintStart_toStartOf="@+id/tvDaysPSeasonMain"
-            app:layout_constraintTop_toBottomOf="@+id/edtEffectiveAreaAccompMain" />
+            app:layout_constraintTop_toBottomOf="@+id/edtDaysPSeasonMain" />
 
         <EditText
             android:id="@+id/edtTimeUsedDuringOpMain"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:gravity="left"
-            android:hint="Time Used in Operation"
+            android:hint="Hours/Day"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtEffectiveAreaAccompMain"
             app:layout_constraintStart_toStartOf="@+id/edtEffectiveAreaAccompMain"
-            app:layout_constraintTop_toBottomOf="@+id/tvHaEAMain" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayOpMain" />
 
         <TextView
             android:id="@+id/tvHoursPDayOpMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In Hours per Day"
+            android:layout_marginTop="40dp"
+            android:text="Time Used in Operation"
             app:layout_constraintStart_toStartOf="@+id/tvHaEAMain"
-            app:layout_constraintTop_toBottomOf="@+id/edtTimeUsedDuringOpMain" />
+            app:layout_constraintTop_toBottomOf="@+id/edtEffectiveAreaAccompMain" />
 
         <TextView
             android:id="@+id/tvFieldCapacityMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="40dp"
+            android:textStyle="bold"
             android:text="Field Capacity: "
             app:layout_constraintStart_toStartOf="@+id/edtTimeUsedDuringOpMain"
-            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayOpMain" />
+            app:layout_constraintTop_toBottomOf="@+id/edtTimeUsedDuringOpMain" />
 
         <TextView
             android:id="@+id/tvFieldCapacityResultMain"
@@ -315,167 +357,188 @@
             android:id="@+id/tvTypeofPlant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:layout_marginTop="108dp"
             android:text="Type of Planter"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvOperations2"
             app:layout_constraintTop_toBottomOf="@id/tvFieldCapacityMain" />
 
         <Spinner
             android:id="@+id/spinTypeOfPlanterPlant"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:background="@drawable/custom_spinner"
             android:entries="@array/type_of_planter"
-            app:layout_constraintEnd_toEndOf="@+id/edtNumberofRowsPlant"
             app:layout_constraintStart_toStartOf="@+id/tvTypeofPlant"
             app:layout_constraintTop_toBottomOf="@+id/tvTypeofPlant" />
 
-        <EditText
-            android:id="@+id/edtNumberofRowsPlant"
+        <TextView
+            android:id="@+id/tvNumRowsPlant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:ems="10"
-            android:hint="Number of Rows"
-            android:inputType="number"
+            android:layout_marginTop="40dp"
+            android:text="Number of Rows"
             app:layout_constraintStart_toStartOf="@+id/tvTypeofPlant"
             app:layout_constraintTop_toBottomOf="@+id/spinTypeOfPlanterPlant" />
 
         <EditText
-            android:id="@+id/edtDistanceOfPlantMatPlant"
-            android:layout_width="260dp"
+            android:id="@+id/edtNumberofRowsPlant"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Distance of Planting Materials"
+            android:hint="Number of Rows"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/tvSelectMachine"
+            app:layout_constraintStart_toStartOf="@+id/tvTypeofPlant"
+            app:layout_constraintTop_toBottomOf="@+id/tvNumRowsPlant" />
+
+        <EditText
+            android:id="@+id/edtDistanceOfPlantMatPlant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
+            android:ems="10"
+            android:hint="Centimeters"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtNumberofRowsPlant"
             app:layout_constraintStart_toStartOf="@+id/edtNumberofRowsPlant"
-            app:layout_constraintTop_toBottomOf="@+id/edtNumberofRowsPlant" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDistancePlant" />
 
         <TextView
             android:id="@+id/tvDistancePlant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Within the Row in Centimeters (cm)"
-            app:layout_constraintStart_toStartOf="@+id/edtDistanceOfPlantMatPlant"
-            app:layout_constraintTop_toBottomOf="@+id/edtDistanceOfPlantMatPlant" />
+            android:layout_marginTop="40dp"
+            android:text="Distance of Planting Materials"
+            app:layout_constraintStart_toStartOf="@+id/tvTypeofPlant"
+            app:layout_constraintTop_toBottomOf="@+id/edtNumberofRowsPlant" />
 
         <EditText
             android:id="@+id/edtTotalServiceAreaPlant"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Total Service Area"
+            android:hint="Hectares"
             android:inputType="number"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDistancePlant" />
+            app:layout_constraintEnd_toEndOf="@+id/edtDistanceOfPlantMatPlant"
+            app:layout_constraintStart_toStartOf="@+id/edtDistanceOfPlantMatPlant"
+            app:layout_constraintTop_toBottomOf="@+id/tvHaPlant" />
 
         <TextView
             android:id="@+id/tvHaPlant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="In hectares (ha)"
-            app:layout_constraintStart_toStartOf="@+id/edtTotalServiceAreaPlant"
-            app:layout_constraintTop_toBottomOf="@+id/edtTotalServiceAreaPlant" />
+            android:layout_marginTop="40dp"
+            android:text="Total Service Area"
+            app:layout_constraintStart_toStartOf="@+id/tvDistancePlant"
+            app:layout_constraintTop_toBottomOf="@+id/edtDistanceOfPlantMatPlant" />
 
         <EditText
             android:id="@+id/edtHoursPDayPlant"
-            android:layout_width="230dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Average Operating Hours"
+            android:hint="Hours/Day"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtTotalServiceAreaPlant"
             app:layout_constraintStart_toStartOf="@+id/edtTotalServiceAreaPlant"
-            app:layout_constraintTop_toBottomOf="@+id/tvHaPlant" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayPlant" />
 
         <TextView
             android:id="@+id/tvHoursPDayPlant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In Hours per Day"
+            android:layout_marginTop="40dp"
+            android:text="Average Operating Hours"
             app:layout_constraintStart_toStartOf="@+id/tvHaPlant"
-            app:layout_constraintTop_toBottomOf="@+id/edtHoursPDayPlant" />
+            app:layout_constraintTop_toBottomOf="@+id/edtTotalServiceAreaPlant" />
 
         <EditText
             android:id="@+id/edtDaysPSeasonPlant"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Average Operating Days"
+            android:hint="Days/Season"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtHoursPDayPlant"
             app:layout_constraintStart_toStartOf="@+id/edtHoursPDayPlant"
-            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayPlant" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDaysPSeasonPlant" />
 
         <TextView
             android:id="@+id/tvDaysPSeasonPlant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In Days Per Season"
+            android:layout_marginTop="40dp"
+            android:text="Average Operating Days"
             app:layout_constraintStart_toStartOf="@+id/tvHoursPDayPlant"
-            app:layout_constraintTop_toBottomOf="@+id/edtDaysPSeasonPlant" />
+            app:layout_constraintTop_toBottomOf="@+id/edtHoursPDayPlant" />
 
         <EditText
             android:id="@+id/edtEffectiveAreaAccompPlant"
-            android:layout_width="250dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:gravity="left"
-            android:hint="Effective Area Accomplished"
+            android:hint="Hectares"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtDaysPSeasonPlant"
             app:layout_constraintStart_toStartOf="@+id/edtDaysPSeasonPlant"
-            app:layout_constraintTop_toBottomOf="@+id/tvDaysPSeasonPlant" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHaEAPlant" />
 
         <TextView
             android:id="@+id/tvHaEAPlant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In hectares (ha)"
+            android:layout_marginTop="40dp"
+            android:text="Effective Area Accomplished"
             app:layout_constraintStart_toStartOf="@+id/tvDaysPSeasonPlant"
-            app:layout_constraintTop_toBottomOf="@+id/edtEffectiveAreaAccompPlant" />
+            app:layout_constraintTop_toBottomOf="@+id/edtDaysPSeasonPlant" />
 
         <EditText
             android:id="@+id/edtTimeUsedDuringOpPlant"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:gravity="left"
-            android:hint="Time Used in Operation"
+            android:hint="Hours"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtEffectiveAreaAccompPlant"
             app:layout_constraintStart_toStartOf="@+id/edtEffectiveAreaAccompPlant"
-            app:layout_constraintTop_toBottomOf="@+id/tvHaEAPlant" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayOpPlant" />
 
         <TextView
             android:id="@+id/tvHoursPDayOpPlant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In Hours per Day"
+            android:layout_marginTop="32dp"
+            android:text="Time Used in Operation"
             app:layout_constraintStart_toStartOf="@+id/tvHaEAPlant"
-            app:layout_constraintTop_toBottomOf="@+id/edtTimeUsedDuringOpPlant" />
+            app:layout_constraintTop_toBottomOf="@+id/edtEffectiveAreaAccompPlant" />
 
         <TextView
             android:id="@+id/tvFieldCapacityPlant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="40dp"
             android:text="Field Capacity: "
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/edtTimeUsedDuringOpPlant"
-            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayOpPlant" />
+            app:layout_constraintTop_toBottomOf="@+id/edtTimeUsedDuringOpPlant" />
 
         <TextView
             android:id="@+id/tvFieldCapacityResultPlant"
@@ -489,116 +552,127 @@
 
         <EditText
             android:id="@+id/edtTotalServiceAreaFert"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="108dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Total Service Area"
+            android:hint="Hectares"
             android:inputType="number"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvFieldCapacityResultPlant" />
+            app:layout_constraintEnd_toEndOf="@+id/tvSelectMachine"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvHaFert"
+            app:layout_constraintTop_toBottomOf="@+id/tvFieldCapacityPlant" />
 
         <TextView
             android:id="@+id/tvHaFert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="In hectares (ha)"
-            app:layout_constraintStart_toStartOf="@+id/edtTotalServiceAreaFert"
-            app:layout_constraintTop_toBottomOf="@+id/edtTotalServiceAreaFert" />
+            android:layout_marginBottom="8dp"
+            android:text="Total Service Area"
+            app:layout_constraintBottom_toTopOf="@+id/edtTotalServiceAreaFert"
+            app:layout_constraintStart_toStartOf="@+id/tvOperations2" />
 
         <EditText
             android:id="@+id/edtHoursPDayFert"
-            android:layout_width="230dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Average Operating Hours"
+            android:hint="Hours/Day"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtTotalServiceAreaFert"
             app:layout_constraintStart_toStartOf="@+id/edtTotalServiceAreaFert"
-            app:layout_constraintTop_toBottomOf="@id/tvHaFert" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayFert" />
 
         <TextView
             android:id="@+id/tvHoursPDayFert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In Hours per Day"
+            android:layout_marginTop="40dp"
+            android:text="Average Operating Hours"
             app:layout_constraintStart_toStartOf="@+id/tvHaFert"
-            app:layout_constraintTop_toBottomOf="@+id/edtHoursPDayFert" />
+            app:layout_constraintTop_toBottomOf="@+id/edtTotalServiceAreaFert" />
 
         <EditText
             android:id="@+id/edtDaysPSeasonFert"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Average Operating Days"
+            android:hint="Days/Season"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtHoursPDayFert"
             app:layout_constraintStart_toStartOf="@+id/edtHoursPDayFert"
-            app:layout_constraintTop_toBottomOf="@id/tvHoursPDayFert" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDaysPSeasonFert" />
 
         <TextView
             android:id="@+id/tvDaysPSeasonFert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In Days Per Season"
+            android:layout_marginTop="40dp"
+            android:text="Average Operating Days"
             app:layout_constraintStart_toStartOf="@id/tvHoursPDayFert"
-            app:layout_constraintTop_toBottomOf="@+id/edtDaysPSeasonFert" />
+            app:layout_constraintTop_toBottomOf="@+id/edtHoursPDayFert" />
 
         <EditText
             android:id="@+id/edtEffectiveAreaAccompFert"
-            android:layout_width="250dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:gravity="left"
-            android:hint="Effective Area Accomplished"
+            android:hint="Hectares"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtDaysPSeasonFert"
             app:layout_constraintStart_toStartOf="@+id/edtDaysPSeasonFert"
-            app:layout_constraintTop_toBottomOf="@id/tvDaysPSeasonFert" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHaEAFert" />
 
         <TextView
             android:id="@+id/tvHaEAFert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In hectares (ha)"
+            android:layout_marginTop="40dp"
+            android:text="Effective Area Accomplished"
             app:layout_constraintStart_toStartOf="@id/tvDaysPSeasonFert"
-            app:layout_constraintTop_toBottomOf="@+id/edtEffectiveAreaAccompFert" />
+            app:layout_constraintTop_toBottomOf="@+id/edtDaysPSeasonFert" />
 
         <EditText
             android:id="@+id/edtTimeUsedDuringOpFert"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:gravity="left"
-            android:hint="Time Used in Operation"
+            android:hint="Hours"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtEffectiveAreaAccompFert"
             app:layout_constraintStart_toStartOf="@+id/edtEffectiveAreaAccompFert"
-            app:layout_constraintTop_toBottomOf="@+id/tvHaEAFert" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayOpFert" />
 
         <TextView
             android:id="@+id/tvHoursPDayOpFert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In Hours per Day"
+            android:layout_marginTop="40dp"
+            android:text="Time Used in Operation"
             app:layout_constraintStart_toStartOf="@+id/tvHaEAFert"
-            app:layout_constraintTop_toBottomOf="@+id/edtTimeUsedDuringOpFert" />
+            app:layout_constraintTop_toBottomOf="@+id/edtEffectiveAreaAccompFert" />
 
         <TextView
             android:id="@+id/tvFieldCapacityFert"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="40dp"
             android:text="Field Capacity: "
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/edtTimeUsedDuringOpFert"
-            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayOpFert" />
+            app:layout_constraintTop_toBottomOf="@+id/edtWeightOfFertFert" />
 
         <TextView
             android:id="@+id/tvFieldCapacityResultFert"
@@ -612,155 +686,167 @@
 
         <EditText
             android:id="@+id/edtWeightOfFertFert"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Weight of Fertilizer"
+            android:hint="Kilogram"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtTimeUsedDuringOpFert"
             app:layout_constraintStart_toStartOf="@+id/edtTimeUsedDuringOpFert"
-            app:layout_constraintTop_toBottomOf="@+id/tvFieldCapacityFert" />
+            app:layout_constraintTop_toBottomOf="@+id/tvWeightFert" />
 
         <TextView
             android:id="@+id/tvWeightFert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In kilograms (kg)"
+            android:layout_marginTop="40dp"
+            android:text="Weight of Granular Fertilizer"
             app:layout_constraintStart_toStartOf="@+id/tvHoursPDayOpFert"
-            app:layout_constraintTop_toBottomOf="@+id/edtWeightOfFertFert" />
+            app:layout_constraintTop_toBottomOf="@+id/edtTimeUsedDuringOpFert" />
 
         <TextView
             android:id="@+id/tvDeliveryRateFert"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:text="Delivery Rate: "
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/edtWeightOfFertFert"
-            app:layout_constraintTop_toBottomOf="@+id/tvWeightFert" />
+            app:layout_constraintTop_toBottomOf="@+id/tvFieldCapacityFert" />
 
         <TextView
             android:id="@+id/tvDeliveryRateResultFert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="@+id/tvDeliveryRateFert"
-            app:layout_constraintStart_toEndOf="@+id/tvDeliveryRateFert"
+            app:layout_constraintStart_toStartOf="@+id/tvFieldCapacityResultFert"
             app:layout_constraintTop_toTopOf="@+id/tvDeliveryRateFert" />
 
         <EditText
             android:id="@+id/edtTotalServiceAreaHarvest"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="108dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Total Service Area"
+            android:hint="Hectares"
             android:inputType="number"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tvSelectMachine"
+            app:layout_constraintStart_toStartOf="@+id/tvHaHarvest"
             app:layout_constraintTop_toBottomOf="@id/tvDeliveryRateFert" />
 
         <TextView
             android:id="@+id/tvHaHarvest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="In hectares (ha)"
-            app:layout_constraintStart_toStartOf="@+id/edtTotalServiceAreaHarvest"
-            app:layout_constraintTop_toBottomOf="@+id/edtTotalServiceAreaHarvest" />
+            android:layout_marginBottom="8dp"
+            android:text="Total Service Area"
+            app:layout_constraintBottom_toTopOf="@+id/edtTotalServiceAreaHarvest"
+            app:layout_constraintStart_toStartOf="@+id/tvOperations2" />
 
         <EditText
             android:id="@+id/edtHoursPDayHarvest"
-            android:layout_width="230dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Average Operating Hours"
+            android:hint="Hours/Day"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtTotalServiceAreaHarvest"
             app:layout_constraintStart_toStartOf="@+id/edtTotalServiceAreaHarvest"
-            app:layout_constraintTop_toBottomOf="@+id/tvHaHarvest" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayHarvest" />
 
         <TextView
             android:id="@+id/tvHoursPDayHarvest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In Hours per Day"
+            android:layout_marginTop="40dp"
+            android:text="Average Operating Hours"
             app:layout_constraintStart_toStartOf="@+id/tvHaHarvest"
-            app:layout_constraintTop_toBottomOf="@+id/edtHoursPDayHarvest" />
+            app:layout_constraintTop_toBottomOf="@+id/edtTotalServiceAreaHarvest" />
 
         <EditText
             android:id="@+id/edtDaysPSeasonHarvest"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Average Operating Days"
+            android:hint="Days/Season"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtHoursPDayHarvest"
             app:layout_constraintStart_toStartOf="@+id/edtHoursPDayHarvest"
-            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayHarvest" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDaysPSeasonHarvest" />
 
         <TextView
             android:id="@+id/tvDaysPSeasonHarvest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In Days Per Season"
+            android:layout_marginTop="40dp"
+            android:text="Average Operating Days"
             app:layout_constraintStart_toStartOf="@+id/tvHoursPDayHarvest"
-            app:layout_constraintTop_toBottomOf="@+id/edtDaysPSeasonHarvest" />
+            app:layout_constraintTop_toBottomOf="@+id/edtHoursPDayHarvest" />
 
         <EditText
             android:id="@+id/edtEffectiveAreaAccompHarvest"
-            android:layout_width="250dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:gravity="left"
-            android:hint="Effective Area Accomplished"
+            android:hint="Hectares"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtDaysPSeasonHarvest"
             app:layout_constraintStart_toStartOf="@+id/edtDaysPSeasonHarvest"
-            app:layout_constraintTop_toBottomOf="@+id/tvDaysPSeasonHarvest" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHaEAHarvest" />
 
         <TextView
             android:id="@+id/tvHaEAHarvest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In hectares (ha)"
+            android:layout_marginTop="40dp"
+            android:text="Effective Area Accomplished"
             app:layout_constraintStart_toStartOf="@+id/tvDaysPSeasonHarvest"
-            app:layout_constraintTop_toBottomOf="@+id/edtEffectiveAreaAccompHarvest" />
+            app:layout_constraintTop_toBottomOf="@+id/edtDaysPSeasonHarvest" />
 
         <EditText
             android:id="@+id/edtTimeUsedDuringOpHarvest"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:gravity="left"
-            android:hint="Time Used in Operation"
+            android:hint="Hours/Day"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtEffectiveAreaAccompHarvest"
             app:layout_constraintStart_toStartOf="@+id/edtEffectiveAreaAccompHarvest"
-            app:layout_constraintTop_toBottomOf="@+id/tvHaEAHarvest" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayOpHarvest" />
 
         <TextView
             android:id="@+id/tvHoursPDayOpHarvest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In Hours per Day"
+            android:layout_marginTop="40dp"
+            android:text="Time Used in Operation"
             app:layout_constraintStart_toStartOf="@+id/tvHaEAHarvest"
-            app:layout_constraintTop_toBottomOf="@+id/edtTimeUsedDuringOpHarvest" />
+            app:layout_constraintTop_toBottomOf="@+id/edtEffectiveAreaAccompHarvest" />
 
         <TextView
             android:id="@+id/tvFieldCapacityHarvest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="40dp"
+            android:textStyle="bold"
             android:text="Field Capacity: "
             app:layout_constraintStart_toStartOf="@+id/edtTimeUsedDuringOpHarvest"
-            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayOpHarvest" />
+            app:layout_constraintTop_toBottomOf="@+id/edtTimeUsedDuringOpHarvest" />
 
         <TextView
             android:id="@+id/tvFieldCapacityResultHarvest"
@@ -776,198 +862,220 @@
             android:id="@+id/edtAveYieldHarvest"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:hint="Average Yield"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="Ton of cannes/Hectare"
             app:layout_constraintEnd_toEndOf="@+id/edtTimeUsedDuringOpHarvest"
-            app:layout_constraintStart_toStartOf="@+id/tvFieldCapacityHarvest"
-            app:layout_constraintTop_toBottomOf="@+id/tvFieldCapacityHarvest" />
+            app:layout_constraintStart_toStartOf="@+id/edtTimeUsedDuringOpHarvest"
+            app:layout_constraintTop_toBottomOf="@+id/tvTonCannesPHaHarvest" />
 
         <TextView
             android:id="@+id/tvTonCannesPHaHarvest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In ton of cannes per hectare (ton/ha)"
+            android:layout_marginTop="40dp"
+            android:text="Average Yield"
             app:layout_constraintStart_toStartOf="@+id/tvHoursPDayOpHarvest"
-            app:layout_constraintTop_toBottomOf="@+id/edtAveYieldHarvest" />
+            app:layout_constraintTop_toBottomOf="@+id/tvFieldCapacityHarvest" />
 
 
         <EditText
             android:id="@+id/edtTotalServiceAreaGrab"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="108dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Total Service Area"
+            android:hint="Hectares"
             android:inputType="number"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTonCannesPHaHarvest" />
+            app:layout_constraintEnd_toEndOf="@+id/tvSelectMachine"
+            app:layout_constraintStart_toStartOf="@+id/tvHaGrab"
+            app:layout_constraintTop_toBottomOf="@+id/edtAveYieldHarvest" />
 
         <TextView
             android:id="@+id/tvHaGrab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="In hectares (ha)"
-            app:layout_constraintStart_toStartOf="@+id/edtTotalServiceAreaGrab"
-            app:layout_constraintTop_toBottomOf="@+id/edtTotalServiceAreaGrab" />
+            android:layout_marginBottom="8dp"
+            android:text="Total Service Area"
+            app:layout_constraintBottom_toTopOf="@+id/edtTotalServiceAreaGrab"
+            app:layout_constraintStart_toStartOf="@+id/tvOperations2" />
 
         <EditText
             android:id="@+id/edtHoursPDayGrab"
-            android:layout_width="230dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Average Operating Hours"
+            android:hint="Hours/Day"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtTotalServiceAreaGrab"
             app:layout_constraintStart_toStartOf="@+id/edtTotalServiceAreaGrab"
-            app:layout_constraintTop_toBottomOf="@+id/tvHaGrab" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayGrab" />
 
         <TextView
             android:id="@+id/tvHoursPDayGrab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In Hours per Day"
+            android:layout_marginTop="40dp"
+            android:text="Average Operating Hours"
             app:layout_constraintStart_toStartOf="@+id/tvHaGrab"
-            app:layout_constraintTop_toBottomOf="@+id/edtHoursPDayGrab" />
+            app:layout_constraintTop_toBottomOf="@+id/edtTotalServiceAreaGrab" />
 
         <EditText
             android:id="@+id/edtDaysPSeasonGrab"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Average Operating Days"
+            android:hint="Days/Season"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtHoursPDayGrab"
             app:layout_constraintStart_toStartOf="@+id/edtHoursPDayGrab"
-            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayGrab" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDaysPSeasonGrab" />
 
         <TextView
             android:id="@+id/tvDaysPSeasonGrab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In Days Per Season"
+            android:layout_marginTop="40dp"
+            android:text="Average Operating Days"
             app:layout_constraintStart_toStartOf="@+id/tvHoursPDayGrab"
-            app:layout_constraintTop_toBottomOf="@+id/edtDaysPSeasonGrab" />
+            app:layout_constraintTop_toBottomOf="@+id/edtHoursPDayGrab" />
 
         <EditText
             android:id="@+id/edtLoadCapacityGrab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
+            android:ems="10"
+            android:hint="Tons/Load"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtDaysPSeasonGrab"
+            app:layout_constraintStart_toStartOf="@+id/edtDaysPSeasonGrab"
+            app:layout_constraintTop_toBottomOf="@+id/tvLoadCapGrab" />
+
+        <TextView
+            android:id="@+id/tvLoadCapGrab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:ems="10"
-            android:hint="Loading Capacity"
-            android:inputType="number"
-            app:layout_constraintStart_toStartOf="@+id/edtDaysPSeasonGrab"
-            app:layout_constraintTop_toBottomOf="@+id/tvDaysPSeasonGrab" />
+            android:layout_marginTop="40dp"
+            android:text="Loading Capacity"
+            app:layout_constraintStart_toStartOf="@+id/tvDaysPSeasonGrab"
+            app:layout_constraintTop_toBottomOf="@id/edtDaysPSeasonGrab" />
 
         <EditText
             android:id="@+id/edtNumberofLoadsGrab"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Number of Loads"
+            android:hint="Loads/Hectare"
             android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/edtLoadCapacityGrab"
             app:layout_constraintStart_toStartOf="@+id/edtLoadCapacityGrab"
-            app:layout_constraintTop_toBottomOf="@+id/edtLoadCapacityGrab" />
+            app:layout_constraintTop_toBottomOf="@+id/tvLoadPHaGrab" />
 
         <TextView
             android:id="@+id/tvLoadPHaGrab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In Loads per hectares (load/ha)"
-            app:layout_constraintStart_toStartOf="@+id/tvDaysPSeasonGrab"
-            app:layout_constraintTop_toBottomOf="@+id/edtNumberofLoadsGrab" />
+            android:layout_marginTop="40dp"
+            android:text="Number of Loads"
+            app:layout_constraintStart_toStartOf="@+id/tvLoadCapGrab"
+            app:layout_constraintTop_toBottomOf="@+id/edtLoadCapacityGrab" />
 
 
         <EditText
             android:id="@+id/edtTotalServiceAreaDitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="108dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Total Service Area"
+            android:hint="Hectares"
             android:inputType="number"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvHaDitch"
             app:layout_constraintTop_toBottomOf="@id/tvLoadPHaGrab" />
 
         <TextView
             android:id="@+id/tvHaDitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="In hectares (ha)"
-            app:layout_constraintStart_toStartOf="@+id/edtTotalServiceAreaDitch"
-            app:layout_constraintTop_toBottomOf="@+id/edtTotalServiceAreaDitch" />
+            android:layout_marginBottom="8dp"
+            android:text="Total Service Area"
+            app:layout_constraintBottom_toTopOf="@+id/edtTotalServiceAreaDitch"
+            app:layout_constraintStart_toStartOf="@+id/tvOperations2" />
 
         <EditText
             android:id="@+id/edtHoursPDayDitch"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Average Operating Hours"
+            android:hint="Hours/Day"
             android:inputType="number"
             app:layout_constraintStart_toStartOf="@+id/edtTotalServiceAreaDitch"
-            app:layout_constraintTop_toBottomOf="@+id/tvHaDitch" />
+            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayDitch" />
 
         <TextView
             android:id="@+id/tvHoursPDayDitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In Hours per Day"
+            android:layout_marginTop="40dp"
+            android:text="Average Operating Hours"
             app:layout_constraintStart_toStartOf="@+id/tvHaDitch"
-            app:layout_constraintTop_toBottomOf="@+id/edtHoursPDayDitch" />
+            app:layout_constraintTop_toBottomOf="@+id/edtTotalServiceAreaDitch" />
 
         <EditText
             android:id="@+id/edtDaysPSeasonDitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:hint="Average Operating Days"
+            android:hint="Days/Season"
             android:inputType="number"
             app:layout_constraintStart_toStartOf="@+id/edtHoursPDayDitch"
-            app:layout_constraintTop_toBottomOf="@+id/tvHoursPDayDitch" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDaysPSeasonDitch" />
 
         <TextView
             android:id="@+id/tvDaysPSeasonDitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="In Days Per Season"
+            android:layout_marginTop="40dp"
+            android:text="Average Operating Days"
             app:layout_constraintStart_toStartOf="@+id/tvHoursPDayDitch"
-            app:layout_constraintTop_toBottomOf="@+id/edtDaysPSeasonDitch" />
-
-        <EditText
-            android:id="@+id/edtDepthOfCutDitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:ems="10"
-            android:hint="Depth of Cut"
-            android:inputType="number"
-            app:layout_constraintStart_toStartOf="@+id/edtDaysPSeasonDitch"
-            app:layout_constraintTop_toBottomOf="@+id/tvDaysPSeasonDitch" />
+            app:layout_constraintTop_toBottomOf="@+id/edtHoursPDayDitch" />
 
         <TextView
             android:id="@+id/tvDepthCutDitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="In centimeters (cm)"
+            android:layout_marginTop="40dp"
+            android:text="Depth of Cut"
             app:layout_constraintStart_toStartOf="@+id/tvDaysPSeasonDitch"
-            app:layout_constraintTop_toBottomOf="@+id/edtDepthOfCutDitch" />
+            app:layout_constraintTop_toBottomOf="@+id/edtDaysPSeasonDitch" />
 
+
+        <EditText
+            android:id="@+id/edtDepthOfCutDitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
+            android:ems="10"
+            android:hint="Centimeters"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="@+id/edtDaysPSeasonDitch"
+            app:layout_constraintTop_toBottomOf="@+id/tvDepthCutDitch" />
 
         <TextView
             android:id="@+id/tvYearAcquiredImp"
@@ -983,6 +1091,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:background="@drawable/custom_spinner"
             android:hint="Year Acquired"
             app:layout_constraintEnd_toEndOf="@+id/cbHauling"
             app:layout_constraintStart_toStartOf="@+id/cbHauling"
@@ -992,89 +1101,67 @@
             android:id="@+id/tvConditionAcquired"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="40dp"
             android:text="Condition"
             app:layout_constraintStart_toStartOf="@+id/tvOperations2"
             app:layout_constraintTop_toBottomOf="@+id/spinYearAcquiredImp" />
-
-        <ImageButton
-            android:id="@+id/btnGetLocationImp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/btnGalleryImp"
-            app:layout_constraintStart_toStartOf="@+id/btnGalleryImp"
-            app:layout_constraintTop_toBottomOf="@+id/btnGalleryImp"
-            app:srcCompat="@drawable/ic_outline_map_24" />
 
         <Spinner
             android:id="@+id/spinConditionImp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:background="@drawable/custom_spinner"
             android:entries="@array/condition"
             app:layout_constraintStart_toStartOf="@+id/spinMachineUsing"
             app:layout_constraintTop_toBottomOf="@+id/tvConditionAcquired" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Location of Implement During Survey"
+            app:layout_constraintStart_toStartOf="@+id/tvConditionAcquired"
+            app:layout_constraintTop_toBottomOf="@+id/spinConditionImp" />
 
         <Spinner
             android:id="@+id/spinLocationImp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:background="@drawable/custom_spinner"
             android:entries="@array/location"
             app:layout_constraintStart_toStartOf="@+id/spinConditionImp"
             app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
         <TextView
-            android:id="@+id/textView20"
+            android:id="@+id/textView17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Location"
-            app:layout_constraintStart_toStartOf="@+id/tvConditionAcquired"
-            app:layout_constraintTop_toBottomOf="@+id/spinConditionImp" />
-
-        <com.androidbuts.multispinnerfilter.SingleSpinnerSearch
-            android:id="@+id/singlespinProvincesImp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            app:layout_constraintEnd_toEndOf="@+id/spinConditionImp"
-            app:layout_constraintStart_toStartOf="@+id/spinLocationImp"
+            android:layout_marginTop="40dp"
+            android:text="Coordinates of Implement"
+            app:layout_constraintStart_toStartOf="@+id/textView20"
             app:layout_constraintTop_toBottomOf="@id/spinLocationImp" />
-
-        <com.androidbuts.multispinnerfilter.SingleSpinnerSearch
-            android:id="@+id/singlespinMunicipalitiesImp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/singlespinProvincesImp"
-            app:layout_constraintStart_toStartOf="@+id/singlespinProvincesImp"
-            app:layout_constraintTop_toBottomOf="@id/singlespinProvincesImp" />
-
-        <com.androidbuts.multispinnerfilter.SingleSpinnerSearch
-            android:id="@+id/singlespinBarangaysImp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/singlespinProvincesImp"
-            app:layout_constraintStart_toStartOf="@+id/singlespinProvincesImp"
-            app:layout_constraintTop_toBottomOf="@id/singlespinMunicipalitiesImp"/>
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Latitude:"
-            app:layout_constraintStart_toStartOf="@+id/imgMachineImp"
-            app:layout_constraintTop_toBottomOf="@+id/btnGetLocationImp" />
+            app:layout_constraintStart_toStartOf="@+id/spinLocationImp"
+            app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
         <TextView
             android:id="@+id/tvLatitudeImp"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:text="TextView"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/textView10"
             app:layout_constraintTop_toTopOf="@+id/textView10" />
 
@@ -1089,11 +1176,93 @@
 
         <TextView
             android:id="@+id/tvLongitudeImp"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="TextView"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="@+id/tvLatitudeImp"
             app:layout_constraintStart_toStartOf="@+id/tvLatitudeImp"
             app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+        <TextView
+            android:id="@+id/tvAccImp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="@+id/tvLatitudeImp"
+            app:layout_constraintStart_toStartOf="@+id/tvLatitudeImp"
+            app:layout_constraintTop_toTopOf="@+id/textView56" />
+
+        <ImageButton
+            android:id="@+id/btnGetLocationImp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/custom_image_button"
+            app:layout_constraintStart_toStartOf="@+id/textView56"
+            app:layout_constraintTop_toBottomOf="@+id/textView56"
+            app:srcCompat="@drawable/ic_outline_map_24" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Get Location"
+            app:layout_constraintBottom_toBottomOf="@+id/btnGetLocationImp"
+            app:layout_constraintEnd_toEndOf="@+id/tvLongitudeImp"
+            app:layout_constraintStart_toEndOf="@+id/btnGetLocationImp"
+            app:layout_constraintTop_toTopOf="@+id/btnGetLocationImp" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Location of Garage"
+            app:layout_constraintStart_toStartOf="@+id/textView20"
+            app:layout_constraintTop_toBottomOf="@+id/btnGetLocationImp" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Province"
+            app:layout_constraintStart_toStartOf="@+id/textView11"
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+        <com.androidbuts.multispinnerfilter.SingleSpinnerSearch
+            android:id="@+id/singlespinProvincesImp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:hintText="Please Select..."
+            android:background="@drawable/custom_spinner"
+            app:layout_constraintEnd_toEndOf="@+id/imgMachineImp"
+            app:layout_constraintStart_toStartOf="@id/singlespinMunicipalitiesImp"
+            app:layout_constraintTop_toTopOf="@+id/textView19" />
+
+        <com.androidbuts.multispinnerfilter.SingleSpinnerSearch
+            android:id="@+id/singlespinMunicipalitiesImp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:hintText="Please Select..."
+            android:layout_marginStart="16dp"
+            android:background="@drawable/custom_spinner"
+            app:layout_constraintEnd_toEndOf="@+id/singlespinProvincesImp"
+            app:layout_constraintStart_toEndOf="@+id/textView22"
+            app:layout_constraintTop_toTopOf="@+id/textView22" />
+
+        <com.androidbuts.multispinnerfilter.SingleSpinnerSearch
+            android:id="@+id/singlespinBarangaysImp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:hintText="Please Select..."
+            app:layout_constraintEnd_toEndOf="@+id/singlespinProvincesImp"
+            app:layout_constraintStart_toStartOf="@+id/singlespinMunicipalitiesImp"
+            app:layout_constraintTop_toTopOf="@+id/textView23"
+            android:background="@drawable/custom_spinner" />
 
         <ImageView
             android:id="@+id/imgMachineImp"
@@ -1104,13 +1273,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/singlespinBarangaysImp"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:srcCompat="@drawable/no_image_icon" />
 
         <ImageButton
             android:id="@+id/btnCameraImp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/custom_image_button"
             app:layout_constraintStart_toStartOf="@+id/imgMachineImp"
             app:layout_constraintTop_toBottomOf="@+id/imgMachineImp"
             app:srcCompat="@drawable/ic_outline_camera_alt_24" />
@@ -1120,9 +1290,57 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/imgMachineImp"
-            app:layout_constraintTop_toBottomOf="@+id/imgMachineImp"
+            android:background="@drawable/custom_image_button"
+            app:layout_constraintStart_toStartOf="@+id/btnCameraImp"
+            app:layout_constraintTop_toBottomOf="@+id/btnCameraImp"
             app:srcCompat="@drawable/ic_outline_photo_album_24" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Municipality"
+            app:layout_constraintStart_toStartOf="@+id/textView19"
+            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Barangay"
+            app:layout_constraintStart_toStartOf="@+id/textView22"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Capture Image"
+            app:layout_constraintBottom_toBottomOf="@+id/btnCameraImp"
+            app:layout_constraintStart_toEndOf="@+id/btnCameraImp"
+            app:layout_constraintTop_toTopOf="@+id/btnCameraImp" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Select Image"
+            app:layout_constraintBottom_toBottomOf="@+id/btnGalleryImp"
+            app:layout_constraintStart_toEndOf="@+id/btnGalleryImp"
+            app:layout_constraintTop_toTopOf="@+id/btnGalleryImp" />
+
+        <TextView
+            android:id="@+id/textView56"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Accuracy:"
+            app:layout_constraintStart_toStartOf="@+id/textView11"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

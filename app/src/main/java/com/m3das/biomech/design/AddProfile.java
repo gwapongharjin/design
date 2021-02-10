@@ -1,19 +1,25 @@
 package com.m3das.biomech.design;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidbuts.multispinnerfilter.KeyPairBoolData;
 import com.androidbuts.multispinnerfilter.MultiSpinnerListener;
@@ -29,10 +35,13 @@ public class AddProfile extends AppCompatActivity {
 
     private Spinner spinEduc, spinProfile;
     private TextView tvEduc;
-    private EditText addressResp, nameResp, mobileNum, telNum, mobileNum2, telNum2, age, edtSpecifyPofile;
+    private EditText addressResp, nameResp, mobileNum, telNum, mobileNum2, telNum2, age, edtSpecifyPofile, edtAreaCode1, edtAreaCode2;
+    private TextView tvMobNum1, tvMobNum2, tvTelNum1, tvTelNum2, tvAreaCode1, tvAreaCode2;
     private RadioButton rbMale, rbFemale;
-    private ImageButton btnSave;
-    private String sex;
+    private Button btnSave;
+    private Integer contactNumValue;
+    private boolean profileCheck, nameRespCheck, contactNumCheck, sexCheck, ageCheck, addressCheck, educCheck;
+    private String sex, ownerType, contactNumType, profileType;
     private ConstraintLayout constraintLayout;
     private MultiSpinnerSearch multspinOwner, multspinContact;
     public static final String EXTRA_PROFILE_ID = "ADDPROFILE_EXTRA_ID";
@@ -52,18 +61,48 @@ public class AddProfile extends AppCompatActivity {
     public static final String EXTRA_PROFILE_EDUC_ATTAIN = "ADDPROFILE_EXTRA_EDUC_ATTAIN";
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exitByBackKey();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void exitByBackKey() {
+        AlertDialog alertbox = new AlertDialog.Builder(this)
+                .setMessage("Do you want to exit?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                    }
+                })
+                .show();
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_profile_activity);
+
+        showPrivacyAndConsent();
 
         initViews();
 
         hideByDefaultViews();
 
+        sex = "";
+        ownerType = "";
+        contactNumValue = 0;
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 saveProfile();
             }
 
@@ -80,69 +119,17 @@ public class AddProfile extends AppCompatActivity {
 
             }
         });
-
+        multspinContact.setHintText("Please Select...");
         multspinContact.setItems(pairingOfList(Arrays.asList(getResources().getStringArray(R.array.contact_number))), new MultiSpinnerListener() {
             @Override
             public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
                 String pos = "";
                 for (int i = 0; i < selectedItems.size(); i++) {
                     //Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-                    pos = pos + " " + selectedItems.get(i).getName();
+                    pos = pos + "," + selectedItems.get(i).getName();
                 }
-                ConstraintLayout.LayoutParams paramsTvEduc = (ConstraintLayout.LayoutParams) tvEduc.getLayoutParams();
-                ConstraintLayout.LayoutParams paramsTelNum = (ConstraintLayout.LayoutParams) telNum.getLayoutParams();
-
-                if (pos.contains("TELEPHONE NUMBER") || pos.contains("MOBILE NUMBER")) {
-                    if (pos.contains("TELEPHONE NUMBER") && pos.contains("MOBILE NUMBER")) {
-                        Log.d("MULT SPIN BOTH", pos);
-                        telNum.setVisibility(View.VISIBLE);
-                        telNum2.setVisibility(View.VISIBLE);
-                        mobileNum.setVisibility(View.VISIBLE);
-                        mobileNum2.setVisibility(View.VISIBLE);
-                        paramsTvEduc.topToBottom = R.id.edtTelephoneNumber2;
-                        paramsTelNum.topToBottom = R.id.edtMobileNumber2;
-                    } else {
-                        if (pos.contains("TELEPHONE NUMBER")) {
-                            Log.d("MULT SPIN TL", pos);
-                            telNum.setVisibility(View.VISIBLE);
-                            telNum2.setVisibility(View.VISIBLE);
-                            mobileNum.setVisibility(View.INVISIBLE);
-                            mobileNum2.setVisibility(View.INVISIBLE);
-                            paramsTelNum.topToBottom = R.id.multspinContactNumber;
-                            paramsTvEduc.topToBottom = R.id.edtTelephoneNumber2;
-                        } else if (pos.contains("MOBILE NUMBER")) {
-                            Log.d("MULT SPIN MB", pos);
-                            mobileNum.setVisibility(View.VISIBLE);
-                            mobileNum2.setVisibility(View.VISIBLE);
-                            telNum.setVisibility(View.INVISIBLE);
-                            telNum2.setVisibility(View.INVISIBLE);
-                            paramsTelNum.topToBottom = R.id.edtMobileNumber2;
-                            paramsTvEduc.topToBottom = R.id.edtMobileNumber2;
-                        }
-                    }
-
-                } else if (pos.contains("NOT APPLICABLE")) {
-                    Log.d("MULT SPIN NA", pos);
-                    mobileNum.setVisibility(View.INVISIBLE);
-                    mobileNum2.setVisibility(View.INVISIBLE);
-                    telNum.setVisibility(View.INVISIBLE);
-                    telNum2.setVisibility(View.INVISIBLE);
-                    paramsTelNum.topToBottom = R.id.edtMobileNumber2;
-                    paramsTvEduc.topToBottom = R.id.multspinContactNumber;
-                } else {
-                    Log.d("MULT SPIN ELSE", pos);
-                    telNum.setVisibility(View.INVISIBLE);
-                    telNum2.setVisibility(View.INVISIBLE);
-                    mobileNum.setVisibility(View.INVISIBLE);
-                    mobileNum2.setVisibility(View.INVISIBLE);
-                    paramsTelNum.topToBottom = R.id.edtMobileNumber2;
-                    paramsTvEduc.topToBottom = R.id.multspinContactNumber;
-
-                }
-                paramsTvEduc.topMargin = (int) pxFromDp(AddProfile.this, 32);
-                paramsTelNum.topMargin = (int) pxFromDp(AddProfile.this, 32);
-                telNum.setLayoutParams(paramsTelNum);
-                tvEduc.setLayoutParams(paramsTvEduc);
+                contactNum(pos);
+                contactNumType = pos;
             }
         });
 
@@ -151,9 +138,16 @@ public class AddProfile extends AppCompatActivity {
         multspinOwner.setItems(pairingOfList(Arrays.asList(getResources().getStringArray(R.array.subowner))), new MultiSpinnerListener() {
             @Override
             public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+                String pos = "";
                 for (int i = 0; i < selectedItems.size(); i++) {
-                    //Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+                    Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+                    pos = pos + " " + selectedItems.get(i).getName();
+                    Log.d("POS VALUE", pos);
                 }
+                ownerType = pos;
+                Log.d("POS VAL", ownerType);
+
+
             }
 
         });
@@ -179,7 +173,29 @@ public class AddProfile extends AppCompatActivity {
             }
         });
 
+        nameResp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.d("POS VAL", ownerType);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+    }
+
+    private void showPrivacyAndConsent() {
+        Log.d("SHOWING", "Privacy and Consent");
+        Intent intent = new Intent(getApplicationContext(), PrivacyAndConsentActivity.class);
+        startActivity(intent);
     }
 
     private void initViews() {
@@ -200,50 +216,250 @@ public class AddProfile extends AppCompatActivity {
         edtSpecifyPofile = findViewById(R.id.edtSpecifyProfile);
         spinProfile = findViewById(R.id.spinProfile);
         multspinContact = findViewById(R.id.multspinContactNumber);
-        btnSave = findViewById(R.id.btnSaveProfileIcon);
+        btnSave = findViewById(R.id.btnSaveProfile);
+        tvMobNum1 = findViewById(R.id.tvPhoneNum1);
+        tvMobNum2 = findViewById(R.id.tvPhoneNum2);
+        tvTelNum1 = findViewById(R.id.tvTelNum1);
+        tvTelNum2 = findViewById(R.id.tvTelNum2);
+        tvAreaCode1 = findViewById(R.id.tvAreaCode1);
+        tvAreaCode2 = findViewById(R.id.tvAreaCode2);
+        edtAreaCode1 = findViewById(R.id.edtAreaCodeTelNum1);
+        edtAreaCode2 = findViewById(R.id.edtAreaCodeTelNum2);
+    }
+
+    private void contactNum(String string) {
+        String pos = string;
+        contactNumValue = 0;
+        ConstraintLayout.LayoutParams paramsTvEduc = (ConstraintLayout.LayoutParams) tvEduc.getLayoutParams();
+        ConstraintLayout.LayoutParams paramsTelNum = (ConstraintLayout.LayoutParams) telNum.getLayoutParams();
+
+        if (pos.contains("TELEPHONE NUMBER") || pos.contains("MOBILE NUMBER")) {
+            if (pos.contains("TELEPHONE NUMBER") && pos.contains("MOBILE NUMBER")) {
+                Log.d("MULT SPIN BOTH", pos);
+                contactNumValue = 4;
+                telNum.setVisibility(View.VISIBLE);
+                telNum2.setVisibility(View.VISIBLE);
+                tvAreaCode1.setVisibility(View.VISIBLE);
+                tvAreaCode2.setVisibility(View.VISIBLE);
+                edtAreaCode1.setVisibility(View.VISIBLE);
+                edtAreaCode2.setVisibility(View.VISIBLE);
+                mobileNum.setVisibility(View.VISIBLE);
+                mobileNum2.setVisibility(View.VISIBLE);
+                tvMobNum1.setVisibility(View.VISIBLE);
+                tvMobNum2.setVisibility(View.VISIBLE);
+                tvTelNum1.setVisibility(View.VISIBLE);
+                tvTelNum2.setVisibility(View.VISIBLE);
+                paramsTvEduc.topToBottom = R.id.edtTelephoneNumber2;
+                paramsTelNum.topToBottom = R.id.edtMobileNumber2;
+            } else {
+                if (pos.contains("TELEPHONE NUMBER")) {
+                    Log.d("MULT SPIN TL", pos);
+                    contactNumValue = 3;
+                    telNum.setVisibility(View.VISIBLE);
+                    telNum2.setVisibility(View.VISIBLE);
+                    tvTelNum1.setVisibility(View.VISIBLE);
+                    tvTelNum2.setVisibility(View.VISIBLE);
+                    tvAreaCode1.setVisibility(View.VISIBLE);
+                    tvAreaCode2.setVisibility(View.VISIBLE);
+                    edtAreaCode1.setVisibility(View.VISIBLE);
+                    edtAreaCode2.setVisibility(View.VISIBLE);
+                    mobileNum.setVisibility(View.GONE);
+                    mobileNum2.setVisibility(View.GONE);
+                    tvMobNum1.setVisibility(View.GONE);
+                    tvMobNum2.setVisibility(View.GONE);
+                    paramsTelNum.topToBottom = R.id.multspinContactNumber;
+                    paramsTvEduc.topToBottom = R.id.edtTelephoneNumber2;
+                } else if (pos.contains("MOBILE NUMBER")) {
+                    Log.d("MULT SPIN MB", pos);
+                    contactNumValue = 2;
+                    mobileNum.setVisibility(View.VISIBLE);
+                    mobileNum2.setVisibility(View.VISIBLE);
+                    tvMobNum1.setVisibility(View.VISIBLE);
+                    tvMobNum2.setVisibility(View.VISIBLE);
+                    telNum.setVisibility(View.GONE);
+                    telNum2.setVisibility(View.GONE);
+                    tvTelNum1.setVisibility(View.GONE);
+                    tvTelNum2.setVisibility(View.GONE);
+                    tvAreaCode1.setVisibility(View.GONE);
+                    tvAreaCode2.setVisibility(View.GONE);
+                    edtAreaCode1.setVisibility(View.GONE);
+                    edtAreaCode2.setVisibility(View.GONE);
+                    paramsTelNum.topToBottom = R.id.edtMobileNumber2;
+                    paramsTvEduc.topToBottom = R.id.edtMobileNumber2;
+                }
+            }
+
+        } else if (pos.contains("NOT APPLICABLE")) {
+            Log.d("MULT SPIN NA", pos);
+            contactNumValue = 1;
+            mobileNum.setVisibility(View.GONE);
+            mobileNum2.setVisibility(View.GONE);
+            telNum.setVisibility(View.GONE);
+            telNum2.setVisibility(View.GONE);
+            tvMobNum1.setVisibility(View.GONE);
+            tvMobNum2.setVisibility(View.GONE);
+            tvTelNum1.setVisibility(View.GONE);
+            tvTelNum2.setVisibility(View.GONE);
+            tvAreaCode1.setVisibility(View.GONE);
+            tvAreaCode2.setVisibility(View.GONE);
+            edtAreaCode1.setVisibility(View.GONE);
+            edtAreaCode2.setVisibility(View.GONE);
+            paramsTelNum.topToBottom = R.id.edtMobileNumber2;
+            paramsTvEduc.topToBottom = R.id.multspinContactNumber;
+        } else {
+            Log.d("MULT SPIN ELSE", pos);
+            contactNumValue = 0;
+            telNum.setVisibility(View.GONE);
+            telNum2.setVisibility(View.GONE);
+            mobileNum.setVisibility(View.GONE);
+            mobileNum2.setVisibility(View.GONE);
+            tvMobNum1.setVisibility(View.GONE);
+            tvMobNum2.setVisibility(View.GONE);
+            tvTelNum1.setVisibility(View.GONE);
+            tvTelNum2.setVisibility(View.GONE);
+            tvAreaCode1.setVisibility(View.GONE);
+            tvAreaCode2.setVisibility(View.GONE);
+            edtAreaCode1.setVisibility(View.GONE);
+            edtAreaCode2.setVisibility(View.GONE);
+            paramsTelNum.topToBottom = R.id.edtMobileNumber2;
+            paramsTvEduc.topToBottom = R.id.multspinContactNumber;
+
+        }
+        paramsTvEduc.topMargin = (int) pxFromDp(AddProfile.this, 54);
+        paramsTelNum.topMargin = (int) pxFromDp(AddProfile.this, 54);
+        telNum.setLayoutParams(paramsTelNum);
+        tvEduc.setLayoutParams(paramsTvEduc);
+
     }
 
     private void saveProfile() {
 
-        Intent dataAddProfile = new Intent();
+        List<String> listIncomplete = new ArrayList<>();
 
-        String timeStamp = new SimpleDateFormat("MMddyyHHmmss").format(new Date());
-        String resCode = "";
-        String tempStr = nameResp.getText().toString().replaceAll("\\s", "").toUpperCase();
+        if (infoCheck()) {
+            Intent dataAddProfile = new Intent();
+
+            String timeStamp = new SimpleDateFormat("MMddyyHHmmss").format(new Date());
+            String resCode = "";
+            String tempStr = nameResp.getText().toString().replaceAll("\\s", "").toUpperCase();
 
 
-        int id = getIntent().getIntExtra(EXTRA_PROFILE_ID, -1);
-        if (id != -1) {
+            int id = getIntent().getIntExtra(EXTRA_PROFILE_ID, -1);
+            if (id != -1) {
 
-        }
-        else {
+            } else {
 
-            resCode = tempStr.substring(0, 3) + tempStr.substring(Math.max(0, tempStr.length() - 3)) + timeStamp;
-            Log.d("Rescode: ", resCode);
+                resCode = tempStr.substring(0, 3) + tempStr.substring(Math.max(0, tempStr.length() - 3)) + timeStamp;
+                Log.d("Rescode: ", resCode);
 
-            if(isNullOrEmpty(sex)){
-                sex = "null";
+                dataAddProfile.putExtra(EXTRA_PROFILE_RESCODE, resCode);
+                dataAddProfile.putExtra(EXTRA_PROFILE, spinProfile.getSelectedItem().toString().toUpperCase());
+                dataAddProfile.putExtra(EXTRA_PROFILE_SPECIFY, edtSpecifyPofile.getText().toString().toUpperCase());
+                dataAddProfile.putExtra(EXTRA_PROFILE_OWNER_TYPE, ownerType);
+                dataAddProfile.putExtra(EXTRA_PROFILE_NAME, nameResp.getText().toString().toUpperCase());
+                dataAddProfile.putExtra(EXTRA_PROFILE_ADDRESS, addressResp.getText().toString().toUpperCase());
+                dataAddProfile.putExtra(EXTRA_PROFILE_AGE, age.getText().toString().toUpperCase());
+                dataAddProfile.putExtra(EXTRA_PROFILE_SEX, sex.toUpperCase());
+                dataAddProfile.putExtra(EXTRA_PROFILE_CONTACT_INFO, contactNumType);
+                dataAddProfile.putExtra(EXTRA_PROFILE_MOB_NUM1, mobileNum.getText().toString().toUpperCase());
+                dataAddProfile.putExtra(EXTRA_PROFILE_MOB_NUM2, mobileNum2.getText().toString().toUpperCase());
+                dataAddProfile.putExtra(EXTRA_PROFILE_TEL_NUM1, edtAreaCode1.getText().toString() + " - " + telNum.getText().toString());
+                dataAddProfile.putExtra(EXTRA_PROFILE_TEL_NUM2, edtAreaCode2.getText().toString() + " - " + telNum2.getText().toString());
+                dataAddProfile.putExtra(EXTRA_PROFILE_EDUC_ATTAIN, spinEduc.getSelectedItem().toString().toUpperCase());
             }
 
-            dataAddProfile.putExtra(EXTRA_PROFILE_RESCODE, resCode);
-            dataAddProfile.putExtra(EXTRA_PROFILE, spinProfile.getSelectedItem().toString().toUpperCase());
-            dataAddProfile.putExtra(EXTRA_PROFILE_SPECIFY, edtSpecifyPofile.getText().toString().toUpperCase());
-            dataAddProfile.putExtra(EXTRA_PROFILE_OWNER_TYPE, multspinOwner.getSelectedItem().toString().toUpperCase());//TODO get multspin
-            dataAddProfile.putExtra(EXTRA_PROFILE_NAME, nameResp.getText().toString().toUpperCase());
-            dataAddProfile.putExtra(EXTRA_PROFILE_ADDRESS, addressResp.getText().toString().toUpperCase());
-            dataAddProfile.putExtra(EXTRA_PROFILE_AGE, age.getText().toString().toUpperCase());
-            dataAddProfile.putExtra(EXTRA_PROFILE_SEX, sex.toUpperCase());
-            dataAddProfile.putExtra(EXTRA_PROFILE_CONTACT_INFO, multspinContact.getSelectedItem().toString().toUpperCase());//TODO get multspin
-            dataAddProfile.putExtra(EXTRA_PROFILE_MOB_NUM1, mobileNum.getText().toString().toUpperCase());
-            dataAddProfile.putExtra(EXTRA_PROFILE_MOB_NUM2, mobileNum2.getText().toString().toUpperCase());
-            dataAddProfile.putExtra(EXTRA_PROFILE_TEL_NUM1, telNum.getText().toString().toUpperCase());
-            dataAddProfile.putExtra(EXTRA_PROFILE_TEL_NUM2, telNum2.getText().toString().toUpperCase());
-            dataAddProfile.putExtra(EXTRA_PROFILE_EDUC_ATTAIN, spinEduc.getSelectedItem().toString().toUpperCase());
+            setResult(RESULT_OK, dataAddProfile);
+            finish();
+        } else {
+
+            if (!profileCheck) {
+                listIncomplete.add("Profile");
+            }
+            if (!nameRespCheck) {
+                listIncomplete.add("Name of Respondent");
+            }
+            if (!addressCheck) {
+                listIncomplete.add("Address");
+            }
+            if (!ageCheck) {
+                listIncomplete.add("Age");
+            }
+            if (!sexCheck) {
+                listIncomplete.add("Sex");
+            }
+            if (!contactNumCheck) {
+                listIncomplete.add("Contact Number/s");
+            }
+            if (!educCheck) {
+                listIncomplete.add("Educational Attainment");
+            }
+            String inc = "";
+            for (int i = 0; i < listIncomplete.size(); i++) {
+                inc = inc + listIncomplete.get(i) + "\n";
+            }
+            Toast.makeText(this, "Incomplete Data!\nPlease Check\n\n" + inc, Toast.LENGTH_LONG).show();
+            Log.d("Prof Check", String.valueOf(listIncomplete) + ": " + inc);
 
         }
 
-        setResult(RESULT_OK, dataAddProfile);
-        finish();
+
+    }
+
+    private boolean infoCheck() {
+
+        switch (spinProfile.getSelectedItemPosition()) {
+            default:
+                profileCheck = true;
+                break;
+            case 1:
+                profileCheck = ownerType.length() >= 3;
+                break;
+            case 8:
+                profileCheck = !isNullOrEmpty(edtSpecifyPofile.getText().toString());
+                break;
+            case 0:
+                profileCheck = false;
+                break;
+        }
+
+        nameRespCheck = !isNullOrEmpty(nameResp.getText().toString()) && nameResp.length() >= 6;
+
+        addressCheck = !isNullOrEmpty(addressResp.getText().toString());
+
+        ageCheck = !isNullOrEmpty(age.getText().toString());
+
+        sexCheck = !isNullOrEmpty(sex);
+
+        switch (contactNumValue) {
+            case 1:
+                contactNumCheck = true;
+                break;
+            case 2:
+                contactNumCheck = !isNullOrEmpty(mobileNum.getText().toString()) && mobileNum.length() >= 11;
+                break;
+            case 3:
+                contactNumCheck = !isNullOrEmpty(edtAreaCode1.getText().toString()) && !isNullOrEmpty(telNum.getText().toString()) && edtAreaCode1.length() >= 2 && telNum.length() >= 7;
+                break;
+            case 4:
+                contactNumCheck = !isNullOrEmpty(mobileNum.getText().toString()) && !isNullOrEmpty(edtAreaCode1.getText().toString()) && !isNullOrEmpty(telNum.getText().toString()) && edtAreaCode1.length() >= 2 && telNum.length() >= 7;
+                break;
+            default:
+            case 0:
+                contactNumCheck = false;
+                break;
+        }
+
+        educCheck = spinEduc.getSelectedItemPosition() != 0;
+
+        Log.d("Prof Check", "Profile: " + profileCheck);
+        Log.d("Prof Check", "Name: " + nameRespCheck);
+        Log.d("Prof Check", "Address: " + addressCheck);
+        Log.d("Prof Check", "Age: " + ageCheck);
+        Log.d("Prof Check", "Sex: " + sexCheck);
+        Log.d("Prof Check", "Contact: " + contactNumCheck);
+        Log.d("Prof Check", "Education: " + educCheck);
+
+        return (profileCheck && nameRespCheck && addressCheck && ageCheck && sexCheck && contactNumCheck && educCheck);
 
     }
 
@@ -268,32 +484,42 @@ public class AddProfile extends AppCompatActivity {
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) nameResp.getLayoutParams();
         if (spinProfile.getSelectedItemPosition() == 1) {
             multspinOwner.setVisibility(View.VISIBLE);
-            edtSpecifyPofile.setVisibility(View.INVISIBLE);
+            edtSpecifyPofile.setVisibility(View.GONE);
             params.topToBottom = R.id.multspinOwner;
 
         } else if (spinProfile.getSelectedItemPosition() == 8) {
-            multspinOwner.setVisibility(View.INVISIBLE);
+            multspinOwner.setVisibility(View.GONE);
             edtSpecifyPofile.setVisibility(View.VISIBLE);
             params.topToBottom = R.id.edtSpecifyProfile;
         } else {
-            multspinOwner.setVisibility(View.INVISIBLE);
-            edtSpecifyPofile.setVisibility(View.INVISIBLE);
+            multspinOwner.setVisibility(View.GONE);
+            edtSpecifyPofile.setVisibility(View.GONE);
             params.topToBottom = R.id.spinProfile;
         }
-        params.topMargin = (int) pxFromDp(AddProfile.this, 32);
+        profileType = spinProfile.getSelectedItem().toString();
+        params.topMargin = (int) pxFromDp(AddProfile.this, 54);
         nameResp.setLayoutParams(params);
     }
 
     private void hideByDefaultViews() {
-        mobileNum.setVisibility(View.INVISIBLE);
-        telNum.setVisibility(View.INVISIBLE);
-        mobileNum2.setVisibility(View.INVISIBLE);
-        telNum2.setVisibility(View.INVISIBLE);
-        multspinOwner.setVisibility(View.INVISIBLE);
-        edtSpecifyPofile.setVisibility(View.INVISIBLE);
+        mobileNum.setVisibility(View.GONE);
+        telNum.setVisibility(View.GONE);
+        mobileNum2.setVisibility(View.GONE);
+        telNum2.setVisibility(View.GONE);
+        multspinOwner.setVisibility(View.GONE);
+        edtSpecifyPofile.setVisibility(View.GONE);
+        tvMobNum1.setVisibility(View.GONE);
+        tvMobNum2.setVisibility(View.GONE);
+        tvTelNum1.setVisibility(View.GONE);
+        tvTelNum2.setVisibility(View.GONE);
+        tvAreaCode1.setVisibility(View.GONE);
+        tvAreaCode2.setVisibility(View.GONE);
+        edtAreaCode1.setVisibility(View.GONE);
+        edtAreaCode2.setVisibility(View.GONE);
     }
 
     public static float pxFromDp(final Context context, final float dp) {
         return dp * context.getResources().getDisplayMetrics().density;
     }
+
 }

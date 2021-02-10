@@ -42,5 +42,10 @@ public class ImplementViewModel extends AndroidViewModel {
         return listOfImplements;
     }
 
+    public void deleteAll(){repositoryImplements.deleteAllImplements();}
+
+    public void nukeAll(){repositoryImplements.nukeAll();}
+
+
 
 }

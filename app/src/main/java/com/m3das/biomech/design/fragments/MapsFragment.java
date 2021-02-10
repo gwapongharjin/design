@@ -10,9 +10,11 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.dynamic.IObjectWrapper;
 import com.google.android.gms.internal.maps.zzac;
@@ -65,6 +67,8 @@ import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.m3das.biomech.design.LocationMapsActivity;
+import com.m3das.biomech.design.LocationTrack;
 import com.m3das.biomech.design.R;
 import com.m3das.biomech.design.implementdb.Implements;
 import com.m3das.biomech.design.machinedb.Machines;
@@ -81,6 +85,8 @@ public class MapsFragment extends Fragment {
     LatLng locationMach;
     FloatingActionButton fabRefresh;
     private GoogleMap gMap;
+    private LocationTrack locationTrack;
+    private LatLng loc;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -96,10 +102,13 @@ public class MapsFragment extends Fragment {
         @Override
         public void onMapReady(GoogleMap googleMap) {
             gMap = googleMap;
+            gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(13.00, 122.00), 5));
         }
     };
 
     private void refreshMap() {
+        locationMach = null;
+        locationImp = null;
         implementViewModel.getAllImplements().observe(getActivity(), new Observer<List<Implements>>() {
             @Override
             public void onChanged(List<Implements> anImplements) {
@@ -109,35 +118,56 @@ public class MapsFragment extends Fragment {
                         locationImp = new LatLng(Double.parseDouble(anImplements.get(i).getLatitude()), Double.parseDouble(anImplements.get(i).getLongitude()));
                         gMap.addMarker(new MarkerOptions()
                                         .position(locationImp)
-                                        .title(anImplements.get(i).getImplement_qrcode())
-                                        .snippet(anImplements.get(i).getUsed_on_machine())
-//                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-                                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.attachmentresized))
+                                        .title("Implement Code: " + anImplements.get(i).getImplement_qrcode())
+                                        .snippet("Attached to: " + anImplements.get(i).getUsed_on_machine())
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+//                                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.attachmentresized))
                         );
+                        Log.d("LocImp", String.valueOf(locationImp));
                     }
+                }
+                if (locationImp != null) {
+                    gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationImp, 14));
                 }
             }
         });
 
-        machineListViewModel.getAllMachines().observe(getActivity(), new Observer<List<Machines>>() {
-            @Override
-            public void onChanged(List<Machines> machines) {
-                for (int i = 0; i < machines.size(); i++) {
-                    if (machines.get(i).getMachine_latitude().toLowerCase().equals("not yet acquired") || machines.get(i).getMachine_longitude().toLowerCase().equals("not yet acquired")) {
-                    } else {
-                        locationMach = new LatLng(Double.parseDouble(machines.get(i).getMachine_latitude()), Double.parseDouble(machines.get(i).getMachine_longitude()));
-                        gMap.addMarker(new MarkerOptions()
-                                        .position(locationMach)
-                                        .title(machines.get(i).getMachine_qrcode())
-                                        .snippet(machines.get(i).getResName())
-//                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-                                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.machineresized))
-                        );
+        machineListViewModel.getAllMachines().
+
+                observe(getActivity(), new Observer<List<Machines>>() {
+                    @Override
+                    public void onChanged(List<Machines> machines) {
+                        for (int i = 0; i < machines.size(); i++) {
+                            if (machines.get(i).getMachine_latitude().toLowerCase().equals("not yet acquired") || machines.get(i).getMachine_longitude().toLowerCase().equals("not yet acquired") || machines.get(i).getMachine_longitude().isEmpty() || machines.get(i).getMachine_latitude().isEmpty()) {
+                            } else {
+                                locationMach = new LatLng(Double.parseDouble(machines.get(i).getMachine_latitude()), Double.parseDouble(machines.get(i).getMachine_longitude()));
+                                gMap.addMarker(new MarkerOptions()
+                                                .position(locationMach)
+                                                .title("Machine Code: " + machines.get(i).getMachine_qrcode())
+                                                .snippet("Respondent: " + machines.get(i).getResName())
+                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+//                                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.machineresized))
+                                );
+                                Log.d("LocMach", String.valueOf(locationMach));
+                            }
+                        }
+                        if (locationMach != null) {
+                            gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationMach, 14));
+                        }
                     }
-                }
-                gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationMach, 14));
-            }
-        });
+                });
+
+//        if (locationMach == null && locationImp == null) {
+//            Toast.makeText(getContext(), "Please input data first", Toast.LENGTH_SHORT).show();
+//        } else {
+//            if (locationMach == null) {
+//                gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationImp, 14));
+//            }
+//            if (locationImp == null) {
+//                gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationMach, 14));
+//            }
+//
+//        }
     }
 
     @Nullable
@@ -147,7 +177,6 @@ public class MapsFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.maps_fragment, container, false);
         fabRefresh = v.findViewById(R.id.fabRefreshMap);
-
         fabRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,11 +186,11 @@ public class MapsFragment extends Fragment {
                 gMap.clear();
                 refreshMap();
             }
+
         });
 
         machineListViewModel = new ViewModelProvider(getActivity()).get(MachineListViewModel.class);
         implementViewModel = new ViewModelProvider(getActivity()).get(ImplementViewModel.class);
-
         return v;
     }
 

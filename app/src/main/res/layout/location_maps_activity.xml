@@ -4,45 +4,133 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#421616"
     tools:context=".LocationMapsActivity">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabSaveLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/colorAccent"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@android:drawable/ic_menu_save"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabGetLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@android:drawable/ic_menu_mylocation"
-        map:backgroundTint="@color/colorPrimaryDark"
-        map:layout_constraintBottom_toBottomOf="@+id/map"
-        map:layout_constraintEnd_toEndOf="parent" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/map"
-        class="com.google.android.gms.maps.SupportMapFragment"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF"
-        tools:layout="@layout/location_maps_activity"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_height="match_parent">
 
-    </androidx.fragment.app.FragmentContainerView>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabSaveLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/border_edit_text"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@android:drawable/ic_menu_save"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/map"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            tools:layout="@layout/location_maps_activity"
+            tools:layout_editor_absoluteX="77dp"
+            tools:layout_editor_absoluteY="-16dp">
+
+
+        </androidx.fragment.app.FragmentContainerView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabGetLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@android:drawable/ic_menu_mylocation"
+            map:backgroundTint="@color/colorPrimaryDark"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="8dp"
+        android:text="Latitude"
+        map:layout_constraintBottom_toTopOf="@+id/textView27"
+        map:layout_constraintStart_toStartOf="@+id/textView27" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Longitude"
+        map:layout_constraintBottom_toTopOf="@+id/textView28"
+        map:layout_constraintStart_toStartOf="@+id/textView28" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="32dp"
+        android:text="Accuracy"
+        map:layout_constraintBottom_toBottomOf="@id/constraintLayout2"
+        map:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvLatMaps"
+        android:layout_width="150dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:ellipsize="end"
+        map:layout_constraintBottom_toBottomOf="@+id/textView26"
+        map:layout_constraintStart_toStartOf="@+id/tvLongMaps"
+        map:layout_constraintTop_toTopOf="@+id/textView26" />
+
+    <TextView
+        android:id="@+id/tvLongMaps"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="42dp"
+        android:background="@color/white"
+        android:ellipsize="end"
+        map:layout_constraintBottom_toBottomOf="@+id/textView27"
+        map:layout_constraintEnd_toEndOf="@id/tvLatMaps"
+        map:layout_constraintStart_toEndOf="@+id/textView27"
+        map:layout_constraintTop_toTopOf="@+id/textView27" />
+
+    <TextView
+        android:id="@+id/tvAccMaps"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:ellipsize="end"
+        map:layout_constraintBottom_toBottomOf="@+id/textView28"
+        map:layout_constraintEnd_toEndOf="@id/tvLongMaps"
+        map:layout_constraintStart_toStartOf="@+id/tvLongMaps"
+        map:layout_constraintTop_toTopOf="@+id/textView28" />
+
+    <TextView
+        android:id="@+id/tvDrawable"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/circle"
+        map:layout_constraintBottom_toBottomOf="@+id/tvAccMaps"
+        map:layout_constraintEnd_toStartOf="@+id/tvAccMaps"
+        map:layout_constraintStart_toEndOf="@+id/textView28"
+        map:layout_constraintTop_toTopOf="@+id/tvAccMaps" />
+
+    <TextView
+        android:id="@+id/textView59"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/circle_ring"
+        map:layout_constraintBottom_toBottomOf="@+id/tvDrawable"
+        map:layout_constraintEnd_toEndOf="@+id/tvDrawable"
+        map:layout_constraintStart_toStartOf="@+id/tvDrawable"
+        map:layout_constraintTop_toTopOf="@+id/tvDrawable" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

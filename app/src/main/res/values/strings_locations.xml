@@ -13,7 +13,6 @@
     </string-array>
 
     <string-array name="municipalities">
-        <item>	NOT APPLICABLE	</item>
         <item>	CUARTERO	</item>
         <item>	DAO	</item>
         <item>	DUMALAG	</item>
@@ -32,7 +31,6 @@
         <item>	SIGMA	</item>
         <item>	TAPAZ	</item>
         <item>	ALTAVAS	</item>
-        <item>	BALETE	</item>
         <item>	BANGA	</item>
         <item>	BATAN	</item>
         <item>	BURUANGA	</item>
@@ -48,7 +46,6 @@
         <item>	NEW WASHINGTON	</item>
         <item>	NUMANCIA	</item>
         <item>	TANGALAN	</item>
-        <item>	NOT APPLICABLE	</item>
         <item>	AJUY	</item>
         <item>	ALIMODIAN	</item>
         <item>	ANILAO	</item>
@@ -146,7 +143,6 @@
         <item>	AGONCILLO	</item>
         <item>	ALITAGTAG	</item>
         <item>	BALAYAN	</item>
-        <item>	BALETE	</item>
         <item>	BATANGAS CITY	</item>
         <item>	BAUAN	</item>
         <item>	CALACA	</item>
@@ -193,7 +189,6 @@
         <item>	MABINAY	</item>
         <item>	MANJUYOD	</item>
         <item>	PAMPLONA	</item>
-        <item>	SAN JOSE	</item>
         <item>	SANTA CATALINA	</item>
         <item>	SIATON	</item>
         <item>	SIBULAN	</item>
@@ -271,9 +266,7 @@
         <item>	DOLORES	</item>
         <item>	DURAN	</item>
         <item>	SAN AGUSTIN	</item>
-        <item>	SAN JOSE	</item>
         <item>	SAN MARTIN	</item>
-        <item>	SAN MIGUEL	</item>
         <item>	SAN RAFAEL	</item>
         <item>	SAN ROQUE	</item>
         <item>	SANTA CARMEN	</item>
@@ -282,7 +275,6 @@
         <item>	SANTA RITA	</item>
         <item>	SANTA TERESA	</item>
         <item>	SANTO ANGEL	</item>
-        <item>	SANTO NINO	</item>
         <item>	SANTO ROSARIO	</item>
         <item>	POBLACION	</item>
         <item>	AGBATUAN	</item>
@@ -308,7 +300,6 @@
         <item>	ONGOL ILAYA	</item>
         <item>	SAGRADA FAMILIA	</item>
         <item>	SALCEDO	</item>
-        <item>	SAN JUAN	</item>
         <item>	SIBARIWAN	</item>
         <item>	TAMULALOD	</item>
         <item>	TASLAN	</item>
@@ -627,7 +618,6 @@
         <item>	LAGDUNGAN	</item>
         <item>	LAHUG	</item>
         <item>	LIBERTAD	</item>
-        <item>	MABINI	</item>
         <item>	MALIAO	</item>
         <item>	MALITBOG	</item>
         <item>	MINAN	</item>
@@ -967,7 +957,6 @@
         <item>	CUNSAD	</item>
         <item>	CUYAD	</item>
         <item>	DALID	</item>
-        <item>	DAO	</item>
         <item>	GINES	</item>
         <item>	GINOMOY	</item>
         <item>	INGWAN	</item>
@@ -2228,6 +2217,38 @@
         <item>	BARANGAY 7 (POB.)	</item>
         <item>	BARANGAY 8 (POB.)	</item>
         <item>	BARANGAY 9 (POB.)	</item>
+        <item>	BARANGAY 10 (POB.)	</item>
+        <item>	BARANGAY 11 (POB.)	</item>
+        <item>	BARANGAY 12 (POB.)	</item>
+        <item>	BARANGAY 13 (POB.)	</item>
+        <item>	BARANGAY 14 (POB.)	</item>
+        <item>	BARANGAY 15 (POB.)	</item>
+        <item>	BARANGAY 16 (POB.)	</item>
+        <item>	BARANGAY 17 (POB.)	</item>
+        <item>	BARANGAY 18 (POB.)	</item>
+        <item>	BARANGAY 19 (POB.)	</item>
+        <item>	BARANGAY 20 (POB.)	</item>
+        <item>	BARANGAY 21 (POB.)	</item>
+        <item>	BARANGAY 22 (POB.)	</item>
+        <item>	BARANGAY 23 (POB.)	</item>
+        <item>	BARANGAY 24 (POB.)	</item>
+        <item>	BARANGAY 25 (POB.)	</item>
+        <item>	BARANGAY 26 (POB.)	</item>
+        <item>	BARANGAY 27 (POB.)	</item>
+        <item>	BARANGAY 28 (POB.)	</item>
+        <item>	BARANGAY 29 (POB.)	</item>
+        <item>	BARANGAY 30 (POB.)	</item>
+        <item>	BARANGAY 31 (POB.)	</item>
+        <item>	BARANGAY 32 (POB.)	</item>
+        <item>	BARANGAY 33 (POB.)	</item>
+        <item>	BARANGAY 34 (POB.)	</item>
+        <item>	BARANGAY 35 (POB.)	</item>
+        <item>	BARANGAY 36 (POB.)	</item>
+        <item>	BARANGAY 37 (POB.)	</item>
+        <item>	BARANGAY 38 (POB.)	</item>
+        <item>	BARANGAY 39 (POB.)	</item>
+        <item>	BARANGAY 40 (POB.)	</item>
+        <item>	BARANGAY 41 (POB.)	</item>
         <item>	BAROSONG	</item>
         <item>	BARROC	</item>
         <item>	BINALIUAN MAYOR	</item>
@@ -2411,7 +2432,6 @@
         <item>	ONATE DE LEON	</item>
         <item>	OBRERO-LAPUZ	</item>
         <item>	ORTIZ	</item>
-        <item>	OSMENA	</item>
         <item>	OUR LADY OF LOURDES	</item>
         <item>	RIZAL PALAPALA I	</item>
         <item>	RIZAL PALAPALA II	</item>
@@ -3323,39 +3343,7 @@
         <item>	IGMAYA-AN	</item>
         <item>	KUMALISKIS	</item>
         <item>	PINOWAYAN (PROSPERIDAD)	</item>
-        <item>	ALANGILAN	</item>
-        <item>	BARANGAY 10 (POB.)	</item>
-        <item>	BARANGAY 11 (POB.)	</item>
-        <item>	BARANGAY 12 (POB.)	</item>
-        <item>	BARANGAY 13 (POB.)	</item>
-        <item>	BARANGAY 14 (POB.)	</item>
-        <item>	BARANGAY 15 (POB.)	</item>
-        <item>	BARANGAY 16 (POB.)	</item>
-        <item>	BARANGAY 17 (POB.)	</item>
-        <item>	BARANGAY 18 (POB.)	</item>
-        <item>	BARANGAY 19 (POB.)	</item>
-        <item>	BARANGAY 20 (POB.)	</item>
-        <item>	BARANGAY 21 (POB.)	</item>
-        <item>	BARANGAY 22 (POB.)	</item>
-        <item>	BARANGAY 23 (POB.)	</item>
-        <item>	BARANGAY 24 (POB.)	</item>
-        <item>	BARANGAY 25 (POB.)	</item>
-        <item>	BARANGAY 26 (POB.)	</item>
-        <item>	BARANGAY 27 (POB.)	</item>
-        <item>	BARANGAY 28 (POB.)	</item>
-        <item>	BARANGAY 29 (POB.)	</item>
-        <item>	BARANGAY 30 (POB.)	</item>
-        <item>	BARANGAY 31 (POB.)	</item>
-        <item>	BARANGAY 32 (POB.)	</item>
-        <item>	BARANGAY 33 (POB.)	</item>
-        <item>	BARANGAY 34 (POB.)	</item>
-        <item>	BARANGAY 35 (POB.)	</item>
-        <item>	BARANGAY 36 (POB.)	</item>
-        <item>	BARANGAY 37 (POB.)	</item>
-        <item>	BARANGAY 38 (POB.)	</item>
-        <item>	BARANGAY 39 (POB.)	</item>
-        <item>	BARANGAY 40 (POB.)	</item>
-        <item>	BARANGAY 41 (POB.)	</item>
+
         <item>	BATA	</item>
         <item>	CABUG	</item>
         <item>	ESTEFANIA	</item>
@@ -3379,21 +3367,15 @@
         <item>	BARIGON	</item>
         <item>	CORAL NA MUNTI	</item>
         <item>	GUITNA	</item>
-        <item>	MABINI	</item>
         <item>	PAMIGA	</item>
         <item>	PANHULAN	</item>
         <item>	PANSIPIT	</item>
         <item>	POBLACION	</item>
-        <item>	POOK	</item>
         <item>	SAN JACINTO	</item>
         <item>	SAN TEODORO	</item>
-        <item>	SANTA CRUZ	</item>
-        <item>	SANTO TOMAS	</item>
         <item>	SUBIC IBABA	</item>
         <item>	SUBIC ILAYA	</item>
         <item>	BANYAGA	</item>
-        <item>	BALAGBAG	</item>
-        <item>	CONCEPCION	</item>
         <item>	CONCORDIA	</item>
         <item>	DALIPIT EAST	</item>
         <item>	DALIPIT WEST	</item>
@@ -3405,23 +3387,9 @@
         <item>	MUZON SEGUNDO	</item>
         <item>	PINAGKURUSAN	</item>
         <item>	PING-AS	</item>
-        <item>	POBLACION EAST	</item>
-        <item>	POBLACION WEST	</item>
         <item>	SAN JOSE	</item>
         <item>	TADLAC	</item>
-        <item>	SAN JUAN	</item>
         <item>	BACLARAN	</item>
-        <item>	BARANGAY 1 (POB.)	</item>
-        <item>	BARANGAY 10 (POB.)	</item>
-        <item>	BARANGAY 11 (POB.)	</item>
-        <item>	BARANGAY 12 (POB.)	</item>
-        <item>	BARANGAY 2 (POB.)	</item>
-        <item>	BARANGAY 3 (POB.)	</item>
-        <item>	BARANGAY 4 (POB.)	</item>
-        <item>	BARANGAY 5 (POB.)	</item>
-        <item>	BARANGAY 6 (POB.)	</item>
-        <item>	BARANGAY 7 (POB.)	</item>
-        <item>	BARANGAY 8 (POB.)	</item>
         <item>	CALAN	</item>
         <item>	CALOOCAN	</item>
         <item>	CALZADA	</item>
@@ -3430,7 +3398,7 @@
         <item>	CAYBUNGA	</item>
         <item>	CAYPONCE	</item>
         <item>	DALIG	</item>
-        <item>	DAO	</item>
+        <item>  DAO     </item>
         <item>	DILAO	</item>
         <item>	DUHATAN	</item>
         <item>	DURUNGAO	</item>
@@ -3451,7 +3419,6 @@
         <item>	SAMBAT	</item>
         <item>	SAMPAGA	</item>
         <item>	SAN PIRO	</item>
-        <item>	SANTOL	</item>
         <item>	SUKOL	</item>
         <item>	TACTAC	</item>
         <item>	TALUDTUD	</item>
@@ -3468,7 +3435,6 @@
         <item>	SAMPALOCAN	</item>
         <item>	SOLIS	</item>
         <item>	BALAGTAS	</item>
-        <item>	BALETE	</item>
         <item>	BANABA CENTER	</item>
         <item>	BANABA KANLURAN	</item>
         <item>	BANABA SILANGAN	</item>
@@ -3514,22 +3480,12 @@
         <item>	PINAMUCAN	</item>
         <item>	PINAMUCAN IBABA	</item>
         <item>	PINAMUCAN SILANGAN	</item>
-        <item>	BARANGAY 15 (POB.)	</item>
-        <item>	BARANGAY 16 (POB.)	</item>
-        <item>	BARANGAY 17 (POB.)	</item>
-        <item>	BARANGAY 19 (POB.)	</item>
-        <item>	BARANGAY 20 (POB.)	</item>
-        <item>	BARANGAY 21 (POB.)	</item>
-        <item>	BARANGAY 24 (POB.)	</item>
-        <item>	SAMPAGA	</item>
         <item>	SAN AGAPITO, ISLA VERDE	</item>
         <item>	SAN AGUSTIN KANLURAN, ISLA VERDE	</item>
         <item>	SAN AGUSTIN SILANGAN, ISLA VERDE	</item>
         <item>	SAN ANDRES, ISLA VERDE	</item>
         <item>	SAN ANTONIO, ISLA VERDE	</item>
         <item>	SAN JOSE SICO	</item>
-        <item>	SAN MIGUEL	</item>
-        <item>	SANTA CLARA	</item>
         <item>	SANTA RITA APLAYA	</item>
         <item>	SANTA RITA KARSADA	</item>
         <item>	SANTO NIÑO	</item>
@@ -3556,7 +3512,6 @@
         <item>	BAGUILAWA	</item>
         <item>	BALAYONG	</item>
         <item>	COLVO	</item>
-        <item>	DURUNGAO	</item>
         <item>	GULIBAY	</item>
         <item>	INICBULAN	</item>
         <item>	LOCLOC	</item>
@@ -3570,7 +3525,6 @@
         <item>	PITUGO	</item>
         <item>	SAN ANDRES PROPER	</item>
         <item>	SAN ANDRES UNO	</item>
-        <item>	SAN TEODORO	</item>
         <item>	SANTA MARIA	</item>
         <item>	SINALA	</item>
         <item>	BAGONG TUBIG	</item>
@@ -3591,7 +3545,6 @@
         <item>	LUMBANG NA BATA	</item>
         <item>	LUMBANG NA MATANDA	</item>
         <item>	MADALUNOT	</item>
-        <item>	MAKINA	</item>
         <item>	MATIPOK	</item>
         <item>	MUNTING CORAL	</item>
         <item>	NIYUGAN	</item>
@@ -3633,7 +3586,6 @@
         <item>	SAN FELIPE	</item>
         <item>	BALANGA	</item>
         <item>	CALAMIAS	</item>
-        <item>	CATANDALA	</item>
         <item>	COLIAT	</item>
         <item>	DAYAPAN	</item>
         <item>	LAPU-LAPU	</item>
@@ -3647,7 +3599,6 @@
         <item>	QUILO	</item>
         <item>	SALABAN I	</item>
         <item>	SANDALAN	</item>
-        <item>	SANTO NIÑO	</item>
         <item>	TALAIBON	</item>
         <item>	TULAY NA PATPAT	</item>
         <item>	SALABAN III	</item>
@@ -3666,8 +3617,6 @@
         <item>	ARUMAHAN	</item>
         <item>	AYAO-IYAO	</item>
         <item>	BAGONG POOK	</item>
-        <item>	BAGONG SIKAT	</item>
-        <item>	BUKAL	</item>
         <item>	CAHILAN I	</item>
         <item>	CAHILAN II	</item>
         <item>	LUCKY	</item>
@@ -3717,12 +3666,10 @@
         <item>	ANTIPOLO DEL SUR	</item>
         <item>	SAN SEBASTIAN (BALAGBAG)	</item>
         <item>	BALINTAWAK	</item>
-        <item>	BOLBOK	</item>
         <item>	BUGTONG NA PULO	</item>
         <item>	BULACNIN	</item>
         <item>	BULAKLAKAN	</item>
         <item>	DAGATAN	</item>
-        <item>	DUHATAN	</item>
         <item>	HALANG	</item>
         <item>	INOSLOBAN	</item>
         <item>	KAYUMANGGI	</item>
@@ -3740,7 +3687,7 @@
         <item>	PINAGKAWITAN	</item>
         <item>	PINAGTONGULAN	</item>
         <item>	POBLACION BARANGAY 1	</item>
-        <item>	POBLACION BARANGAY 1 0	</item>
+        <item>	POBLACION BARANGAY 10	</item>
         <item>	POBLACION BARANGAY 11	</item>
         <item>	POBLACION BARANGAY 2	</item>
         <item>	POBLACION BARANGAY 3	</item>
@@ -3833,7 +3780,6 @@
         <item>	KAYRILAW	</item>
         <item>	COGUNAN	</item>
         <item>	DAYAP	</item>
-        <item>	LOOC	</item>
         <item>	LUMBANGAN	</item>
         <item>	MALAPAD NA BATO	</item>
         <item>	MATAAS NA PULO	</item>
@@ -3965,7 +3911,6 @@
         <item>	BONLIW	</item>
         <item>	CALUMPANG WEST	</item>
         <item>	CALUMPANG EAST	</item>
-        <item>	MAHABANG PARANG	</item>
         <item>	TALIBA	</item>
         <item>	TEJERO	</item>
         <item>	TUNGAL	</item>
@@ -3973,13 +3918,11 @@
         <item>	BALETE	</item>
         <item>	BALUK-BALUK	</item>
         <item>	BANCORO	</item>
-        <item>	BANGIN	</item>
         <item>	CALANGAY	</item>
         <item>	HIPIT	</item>
         <item>	MAABUD NORTH	</item>
         <item>	MAABUD SOUTH	</item>
         <item>	MUNLAWIN	</item>
-        <item>	PANSIPIT	</item>
         <item>	SINTURISAN	</item>
         <item>	TAGUDTOD	</item>
         <item>	TALANG	</item>
@@ -4055,9 +3998,7 @@
         <item>	POBLACION14	</item>
         <item>	BALAS	</item>
         <item>	BUCO	</item>
-        <item>	CALOOCAN	</item>
         <item>	LEYNES	</item>
-        <item>	POBLACION BARANGAY 1	</item>
         <item>	SAMPALOC	</item>
         <item>	TRANCA	</item>
         <item>	TUMAWAY	</item>
@@ -4084,7 +4025,6 @@
         <item>	NATATAS	</item>
         <item>	PANTAY MATANDA	</item>
         <item>	PANTAY BATA	</item>
-        <item>	SALA	</item>
         <item>	SANTOL (DOÑA JACOBA GARCIA)	</item>
         <item>	SANTOR	</item>
         <item>	SULPOC	</item>
@@ -4092,7 +4032,6 @@
         <item>	TINURIK	</item>
         <item>	ULANGO	</item>
         <item>	BACAO	</item>
-        <item>	BILOGO	</item>
         <item>	GUINHAWA	</item>
         <item>	MABAYABAS	</item>
         <item>	MAHANADIONG	</item>

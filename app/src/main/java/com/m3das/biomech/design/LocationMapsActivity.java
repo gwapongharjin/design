@@ -5,12 +5,16 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
+import android.os.Handler;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -35,6 +39,10 @@ public class LocationMapsActivity extends FragmentActivity implements OnMapReady
     private final static int ALL_PERMISSIONS_RESULT = 27;
     private FloatingActionButton fabGetLoc, fabSaveLoc;
     private Double latitude, longitude, accuracy;
+    private TextView tvAcc, tvLong, tvLat, tvDrawable;
+    Handler handler = new Handler();
+    Runnable runnable;
+    int delay = 2000;
     LocationTrack locationTrack;
 
     @Override
@@ -48,10 +56,28 @@ public class LocationMapsActivity extends FragmentActivity implements OnMapReady
         permissions.add(ACCESS_FINE_LOCATION);
         permissions.add(ACCESS_COARSE_LOCATION);
 
+
         permissionsToRequest = findUnAskedPermissions(permissions);
         //get the permissions we have asked for before but are not granted..
         //we will store this in a global list to access later.
 
+        tvAcc = findViewById(R.id.tvAccMaps);
+        tvLat = findViewById(R.id.tvLatMaps);
+        tvLong = findViewById(R.id.tvLongMaps);
+        tvDrawable = findViewById(R.id.tvDrawable);
+
+//        final DialogGetLocation dialogGetLocation = new DialogGetLocation(this);
+
+//        final Runnable runnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                dialogGetLocation.dismissDialog();
+//
+//
+//            }
+//        };
+//
+//        final Handler h = new Handler();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
@@ -67,32 +93,18 @@ public class LocationMapsActivity extends FragmentActivity implements OnMapReady
         accuracy = Double.NaN;
 
         fabGetLoc.setOnClickListener(view -> {
-
-            locationTrack = new LocationTrack(LocationMapsActivity.this);
-
-            if (locationTrack.canGetLocation()) {
-                longitude = locationTrack.getLongitude();
-                latitude = locationTrack.getLatitude();
-                accuracy = locationTrack.getAccuracy();
-
-                Toast.makeText(getApplicationContext(), "Longitude:" + longitude + "\nLatitude:" + latitude + "\nAccuracy:" + accuracy, Toast.LENGTH_SHORT).show();
-
-                mMap.clear();
-                LatLng loc = new LatLng(latitude, longitude);
-                mMap.addMarker(new MarkerOptions().position(loc).title("My Current Location"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
-            } else {
-
-                locationTrack.showSettingsAlert();
-            }
-
+            getLocationInfo();
+//                mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
         });
 
         fabSaveLoc.setOnClickListener(view -> {
 
             if (latitude.isNaN() && longitude.isNaN() && accuracy.isNaN()) {
-                Toast.makeText(this,"Please get your location first before saving",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please get your location first before saving", Toast.LENGTH_SHORT).show();
+            } else if (latitude == 0 && longitude == 0 && accuracy == 0) {
+                Toast.makeText(this, "Please get your location first before saving", Toast.LENGTH_SHORT).show();
+            } else if (accuracy > 8) {
+                Toast.makeText(this, "Unable to save. Please wait until the accuracy is below 8 or the indicator is yellow/green.", Toast.LENGTH_LONG).show();
             } else {
                 String strLat = String.format("%.8f", latitude);
                 String strLong = String.format("%.8f", longitude);
@@ -107,6 +119,60 @@ public class LocationMapsActivity extends FragmentActivity implements OnMapReady
             }
 
         });
+    }
+
+    @Override
+    protected void onResume() {
+        handler.postDelayed(runnable = new Runnable() {
+            public void run() {
+                handler.postDelayed(runnable, delay);
+                getLocationInfo();
+//                Toast.makeText(getApplicationContext(), "Showing every second", Toast.LENGTH_SHORT).show();
+            }
+        }, delay);
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        handler.removeCallbacks(runnable);
+        super.onPause();
+    }
+
+    private void getLocationInfo() {
+        locationTrack = new LocationTrack(LocationMapsActivity.this);
+
+        if (locationTrack.canGetLocation()) {
+            longitude = locationTrack.getLongitude();
+            latitude = locationTrack.getLatitude();
+            accuracy = locationTrack.getAccuracy();
+
+            int color;
+
+            if (accuracy > 0 && accuracy <= 5) {
+                color = Color.GREEN;
+            } else if (accuracy > 5 && accuracy < 8) {
+                color = Color.YELLOW;
+            } else {
+                color = Color.RED;
+            }
+//                Toast.makeText(getApplicationContext(), "Longitude:" + longitude + "\nLatitude:" + latitude + "\nAccuracy:" + accuracy, Toast.LENGTH_SHORT).show();
+
+            tvLat.setText(String.valueOf(latitude));
+            tvLong.setText(String.valueOf(longitude));
+            tvAcc.setText(String.valueOf(accuracy));
+
+            Drawable drawable = getResources().getDrawable(R.drawable.circle);
+            drawable.mutate().setColorFilter(color, PorterDuff.Mode.SRC_IN);
+            tvDrawable.setBackground(drawable);
+
+            mMap.clear();
+            LatLng loc = new LatLng(latitude, longitude);
+            mMap.addMarker(new MarkerOptions().position(loc).title("My Current Location"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
+        } else {
+            locationTrack.showSettingsAlert();
+        }
     }
 
     /**

@@ -7,12 +7,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetroClient {
 
-
-    private static final String BASE_URL = "http://10.0.68.200/m3dastest/";
+    //    private static final String BASE_URL = "http://m3das-biomech.uplb.edu.ph/m3dasv2/";
+    //    192.168.1.12
+    private static final String BASE_URL = "http://192.168.1.12/m3dastest/";
     private static RetroClient myClient;
     private Retrofit retrofit;
 
-    private RetroClient(){
+    private RetroClient() {
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -26,9 +27,10 @@ public class RetroClient {
                 .client(okHttpClient)
                 .build();
     }
-    public static synchronized RetroClient getInstance(){
 
-        if (myClient == null){
+    public static synchronized RetroClient getInstance() {
+
+        if (myClient == null) {
             myClient = new RetroClient();
 
         }
@@ -39,9 +41,19 @@ public class RetroClient {
 //        return retrofit.create(MachinesApi.class);
 //    }
 
-    public MachinesApi getMachinesApi(){return  retrofit.create(MachinesApi.class);}
+    public MachinesApi getMachinesApi() {
+        return retrofit.create(MachinesApi.class);
+    }
 
-    public ImplementsApi getImplementsApi(){return retrofit.create(ImplementsApi.class);}
+    public ImplementsApi getImplementsApi() {
+        return retrofit.create(ImplementsApi.class);
+    }
 
-    public ProfilesApi getProfilesApi(){return retrofit.create(ProfilesApi.class);}
+    public ProfilesApi getProfilesApi() {
+        return retrofit.create(ProfilesApi.class);
+    }
+
+    public EnumeratorCode checkEnumeratorCode() {
+        return retrofit.create(EnumeratorCode.class);
+    }
 }

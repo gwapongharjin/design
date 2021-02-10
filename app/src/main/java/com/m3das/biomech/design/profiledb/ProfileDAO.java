@@ -5,7 +5,9 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.RawQuery;
 import androidx.room.Update;
+import androidx.sqlite.db.SupportSQLiteQuery;
 
 import java.util.List;
 
@@ -26,5 +28,8 @@ public interface ProfileDAO {
 
     @Query("DELETE FROM respondent_profile")
     void deleteAllProfiles();
+
+    @RawQuery
+    int deleteTable (SupportSQLiteQuery query);
 
 }
