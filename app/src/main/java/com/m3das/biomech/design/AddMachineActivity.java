@@ -203,6 +203,8 @@ public class AddMachineActivity extends AppCompatActivity {
 
         setInputFilters();
 
+
+        Log.d("DEBADDMLAYOUT","Launching set params");
         initAllLayoutParameters();
 
         initVariables();
@@ -593,17 +595,22 @@ public class AddMachineActivity extends AppCompatActivity {
         paramstvBrand.topMargin = bigMargin;
         tvBrand.setLayoutParams(paramstvBrand);
 
-        paramstvMachineAvailability.topToBottom = R.id.spinRental;
-        paramstvMachineAvailability.topMargin = bigMargin;
-        tvMachineAvailability.setLayoutParams(paramstvMachineAvailability);
+//        paramstvMachineAvailability.topToBottom = R.id.spinRental;
+//        paramstvMachineAvailability.topMargin = bigMargin;
+//        tvMachineAvailability.setLayoutParams(paramstvMachineAvailability);
 
         paramsedtNameOfOwnerOrg.topToBottom = R.id.spinOwnership;
         paramsedtNameOfOwnerOrg.topMargin = bigMargin;
         edtNameOfOwnerOrg.setLayoutParams(paramsedtNameOfOwnerOrg);
 
+        Log.d("DEBADDMLAYOUT","Setting paramstvCondition");
         paramstvConditionPresent.topToBottom = R.id.spinRental;
         paramstvConditionPresent.topMargin = bigMargin;
         tvConditionPresent.setLayoutParams(paramstvConditionPresent);
+        Log.d("DEBADDMLAYOUT","POST" + paramstvConditionPresent.topToBottom + " to " + R.id.spinRental);
+//        paramstvConditionPresent.topToBottom = R.id.spinRental;
+//        paramstvConditionPresent.topMargin = bigMargin;
+//        tvConditionPresent.setLayoutParams(paramstvConditionPresent);
     }
 
     private void setInputFilters() {
@@ -1720,6 +1727,7 @@ public class AddMachineActivity extends AppCompatActivity {
                 spinCustomUnit.setVisibility(View.INVISIBLE);
                 tvMachineAvailability.setVisibility(View.INVISIBLE);
                 spinAvailability.setVisibility(View.INVISIBLE);
+
                 tvBrgyRent.setVisibility(View.INVISIBLE);
                 tvMunRent.setVisibility(View.INVISIBLE);
                 tvProvRent.setVisibility(View.INVISIBLE);
@@ -1729,27 +1737,110 @@ public class AddMachineActivity extends AppCompatActivity {
                 tvCustomRate.setVisibility(View.INVISIBLE);
                 tvCustomUnit.setVisibility(View.INVISIBLE);
 
+                tvPlowingRent.setVisibility(View.INVISIBLE);
+                tvHarrowingRent.setVisibility(View.INVISIBLE);
+                tvFurrowingRent.setVisibility(View.INVISIBLE);
+                tvOtherRent.setVisibility(View.INVISIBLE);
+                tvCustomUnitOther.setVisibility(View.INVISIBLE);
+
+                edtPlowingRent.setVisibility(View.INVISIBLE);
+                edtFurrowingRent.setVisibility(View.INVISIBLE);
+                edtHarrowingRent.setVisibility(View.INVISIBLE);
+                edtOtherRent.setVisibility(View.INVISIBLE);
+
+                spinPlowingRentUnit.setVisibility(View.INVISIBLE);
+                spinFurrowingRentUnit.setVisibility(View.INVISIBLE);
+                spinHarrowingRentUnit.setVisibility(View.INVISIBLE);
+                spinOtherRentUnit.setVisibility(View.INVISIBLE);
+
+                tvAveFuelConsPlow.setVisibility(View.INVISIBLE);
+                tvAveFuelConsHarr.setVisibility(View.INVISIBLE);
+                tvAveFuelConsFurr.setVisibility(View.INVISIBLE);
+
+                edtAveFuelConsPlow.setVisibility(View.INVISIBLE);
+                edtAveFuelConsHarr.setVisibility(View.INVISIBLE);
+                edtAveFuelConsFurr.setVisibility(View.INVISIBLE);
+
                 paramstvConditionPresent.topToBottom = R.id.spinRental;
 
                 paramstvConditionPresent.topMargin = bigMargin;
                 tvConditionPresent.setLayoutParams(paramstvConditionPresent);
                 break;
             case "YES":
-                edtCustomRate.setVisibility(View.VISIBLE);
-                spinCustomUnit.setVisibility(View.VISIBLE);
-                tvMachineAvailability.setVisibility(View.VISIBLE);
-                spinAvailability.setVisibility(View.VISIBLE);
-                tvCustomRate.setVisibility(View.VISIBLE);
-                tvCustomUnit.setVisibility(View.VISIBLE);
 
-                paramstvMachineAvailability.topToBottom = R.id.edtPlowingRent;
+                if (spinMachineType.getSelectedItem().toString().contains("TRACTOR")) {
+                    tvPlowingRent.setVisibility(View.VISIBLE);
+                    tvHarrowingRent.setVisibility(View.VISIBLE);
+                    tvFurrowingRent.setVisibility(View.VISIBLE);
+                    tvOtherRent.setVisibility(View.VISIBLE);
+                    tvCustomUnitOther.setVisibility(View.VISIBLE);
+
+                    edtPlowingRent.setVisibility(View.VISIBLE);
+                    edtFurrowingRent.setVisibility(View.VISIBLE);
+                    edtHarrowingRent.setVisibility(View.VISIBLE);
+                    edtOtherRent.setVisibility(View.VISIBLE);
+
+                    spinPlowingRentUnit.setVisibility(View.VISIBLE);
+                    spinFurrowingRentUnit.setVisibility(View.VISIBLE);
+                    spinHarrowingRentUnit.setVisibility(View.VISIBLE);
+                    spinOtherRentUnit.setVisibility(View.VISIBLE);
+
+                    tvAveFuelConsPlow.setVisibility(View.VISIBLE);
+                    tvAveFuelConsHarr.setVisibility(View.VISIBLE);
+                    tvAveFuelConsFurr.setVisibility(View.VISIBLE);
+
+                    edtAveFuelConsPlow.setVisibility(View.VISIBLE);
+                    edtAveFuelConsHarr.setVisibility(View.VISIBLE);
+                    edtAveFuelConsFurr.setVisibility(View.VISIBLE);
+
+                    tvMachineAvailability.setVisibility(View.VISIBLE);
+                    spinAvailability.setVisibility(View.VISIBLE);
+
+                    paramstvMachineAvailability.topToBottom = R.id.edtAveFuelConsumptionFurrowing;
+
+
+                } else {
+                    edtCustomRate.setVisibility(View.VISIBLE);
+                    spinCustomUnit.setVisibility(View.VISIBLE);
+                    tvMachineAvailability.setVisibility(View.VISIBLE);
+                    spinAvailability.setVisibility(View.VISIBLE);
+                    tvCustomRate.setVisibility(View.VISIBLE);
+                    tvCustomUnit.setVisibility(View.VISIBLE);
+
+                    tvPlowingRent.setVisibility(View.INVISIBLE);
+                    tvHarrowingRent.setVisibility(View.INVISIBLE);
+                    tvFurrowingRent.setVisibility(View.INVISIBLE);
+                    tvOtherRent.setVisibility(View.INVISIBLE);
+                    tvCustomUnitOther.setVisibility(View.INVISIBLE);
+
+                    edtPlowingRent.setVisibility(View.INVISIBLE);
+                    edtFurrowingRent.setVisibility(View.INVISIBLE);
+                    edtHarrowingRent.setVisibility(View.INVISIBLE);
+                    edtOtherRent.setVisibility(View.INVISIBLE);
+
+                    spinPlowingRentUnit.setVisibility(View.INVISIBLE);
+                    spinFurrowingRentUnit.setVisibility(View.INVISIBLE);
+                    spinHarrowingRentUnit.setVisibility(View.INVISIBLE);
+                    spinOtherRentUnit.setVisibility(View.INVISIBLE);
+
+                    tvAveFuelConsPlow.setVisibility(View.INVISIBLE);
+                    tvAveFuelConsHarr.setVisibility(View.INVISIBLE);
+                    tvAveFuelConsFurr.setVisibility(View.INVISIBLE);
+
+                    edtAveFuelConsPlow.setVisibility(View.INVISIBLE);
+                    edtAveFuelConsHarr.setVisibility(View.INVISIBLE);
+                    edtAveFuelConsFurr.setVisibility(View.INVISIBLE);
+
+                    paramstvMachineAvailability.topToBottom = R.id.spinMainRentUnit;
+
+                }
                 paramstvConditionPresent.topToBottom = R.id.spinAvailability;
-
                 paramstvMachineAvailability.topMargin = bigMargin;
                 tvMachineAvailability.setLayoutParams(paramstvMachineAvailability);
                 paramstvConditionPresent.topMargin = bigMargin;
                 tvConditionPresent.setLayoutParams(paramstvConditionPresent);
                 break;
+
         }
 
     }
@@ -2830,17 +2921,17 @@ public class AddMachineActivity extends AppCompatActivity {
                     rentCustomCheck = false;
                 } else
 //                    rentCustomCheck = spinCustomUnit.getSelectedItemPosition() != 3 || !isNullOrEmpty(edtCustomRateUnit.getText().toString());
-                switch (spinAvailability.getSelectedItemPosition()) {
-                    case 0:
-                        rentAvailCheck = false;
-                        break;
-                    case 1:
-                        rentAvailCheck = true;
-                        break;
-                    case 2:
-                        rentAvailCheck = listOfBrgyRent.length() >= 2 && munRent.length() >= 2 && provRent.length() >= 2;
-                        break;
-                }
+                    switch (spinAvailability.getSelectedItemPosition()) {
+                        case 0:
+                            rentAvailCheck = false;
+                            break;
+                        case 1:
+                            rentAvailCheck = true;
+                            break;
+                        case 2:
+                            rentAvailCheck = listOfBrgyRent.length() >= 2 && munRent.length() >= 2 && provRent.length() >= 2;
+                            break;
+                    }
                 break;
             case 2:
                 rentSelectCheck = true;
@@ -3201,6 +3292,31 @@ public class AddMachineActivity extends AppCompatActivity {
         tvPurchGrantDono.setVisibility(View.INVISIBLE);
         tvAgency.setVisibility(View.INVISIBLE);
         rgLoanCash.setVisibility(View.INVISIBLE);
+
+
+        tvPlowingRent.setVisibility(View.INVISIBLE);
+        tvHarrowingRent.setVisibility(View.INVISIBLE);
+        tvFurrowingRent.setVisibility(View.INVISIBLE);
+        tvOtherRent.setVisibility(View.INVISIBLE);
+        tvCustomUnitOther.setVisibility(View.INVISIBLE);
+
+        edtPlowingRent.setVisibility(View.INVISIBLE);
+        edtFurrowingRent.setVisibility(View.INVISIBLE);
+        edtHarrowingRent.setVisibility(View.INVISIBLE);
+        edtOtherRent.setVisibility(View.INVISIBLE);
+
+        spinPlowingRentUnit.setVisibility(View.INVISIBLE);
+        spinFurrowingRentUnit.setVisibility(View.INVISIBLE);
+        spinHarrowingRentUnit.setVisibility(View.INVISIBLE);
+        spinOtherRentUnit.setVisibility(View.INVISIBLE);
+
+        tvAveFuelConsPlow.setVisibility(View.INVISIBLE);
+        tvAveFuelConsHarr.setVisibility(View.INVISIBLE);
+        tvAveFuelConsFurr.setVisibility(View.INVISIBLE);
+
+        edtAveFuelConsPlow.setVisibility(View.INVISIBLE);
+        edtAveFuelConsHarr.setVisibility(View.INVISIBLE);
+        edtAveFuelConsFurr.setVisibility(View.INVISIBLE);
 
         //Hiding Location Spinners
 //        spinProvince.setVisibility(View.INVISIBLE);

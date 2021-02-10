@@ -100,6 +100,7 @@ public class AddProfile extends AppCompatActivity {
         ownerType = "";
         contactNumValue = 0;
 
+        sex = "";
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

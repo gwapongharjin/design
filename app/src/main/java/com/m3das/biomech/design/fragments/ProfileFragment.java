@@ -109,6 +109,13 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        profileAdapter.setOnItemClickListener(new ProfileAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Profile profile) {
+                Toast.makeText(getContext(), "Editing profile still unavailable", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         fabAddNewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -38,6 +38,10 @@ public class ImplementViewModel extends AndroidViewModel {
         repositoryImplements.delete(imp);
     }
 
+    public void deleteAllImplements() {
+        repositoryImplements.deleteAllImplements();
+    }
+
     public LiveData<List<Implements>> getAllImplements() {
         return listOfImplements;
     }

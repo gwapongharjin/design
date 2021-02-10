@@ -593,8 +593,10 @@
                 android:id="@+id/tvForRent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
                 android:text="Is this Machine for Rent?"
+                android:tooltipText="Pinaparenta ba ang makinaryang ito?"
                 app:layout_constraintEnd_toEndOf="@+id/tvConditionAcquired"
                 app:layout_constraintStart_toStartOf="@+id/tvConditionAcquired"
                 app:layout_constraintTop_toBottomOf="@id/spinConditionAcquired" />
@@ -603,6 +605,7 @@
                 android:id="@+id/spinRental"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/custom_spinner"
                 android:entries="@array/yes_no"
                 app:layout_constraintEnd_toEndOf="@+id/spinConditionAcquired"
@@ -616,7 +619,7 @@
                 android:layout_marginTop="32dp"
                 android:text="Custom Rate (in PHP)"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
-                app:layout_constraintTop_toBottomOf="@+id/spinRental" />
+                app:layout_constraintTop_toBottomOf="@+id/tvForRent" />
 
             <TextView
                 android:id="@+id/tvCustomUnitMain"
@@ -659,11 +662,11 @@
                 android:id="@+id/tvPlowingRent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:text="Plowing Custom Rate (in PHP)"
                 app:layout_constraintEnd_toEndOf="@+id/edtPlowingRent"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
-                app:layout_constraintTop_toBottomOf="@+id/edtMainRent" />
+                app:layout_constraintTop_toBottomOf="@+id/tvForRent" />
 
             <TextView
                 android:id="@+id/tvCustomUnitOther"
@@ -904,7 +907,7 @@
                 android:layout_marginTop="32dp"
                 android:text="Machine Availability"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
-                app:layout_constraintTop_toBottomOf="@+id/tvAveFuelConsumptionFurrowing" />
+                app:layout_constraintTop_toBottomOf="@+id/edtAveFuelConsumptionFurrowing" />
 
             <!--
             <Spinner
@@ -1022,9 +1025,9 @@
                 android:id="@+id/tvConditionPresent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="32dp"
                 android:text="Present Condition"
-                app:layout_constraintStart_toStartOf="@+id/tvMachineAvailability"
+                app:layout_constraintStart_toStartOf="@+id/tvForRent"
                 app:layout_constraintTop_toBottomOf="@+id/multSpinBrgyRent" />
 
             <Spinner
@@ -1044,8 +1047,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Year Machine became Inoperable"
-                app:layout_constraintEnd_toEndOf="@+id/tvConditionPresent"
+                android:text="Year Machine became faulty"
+                app:layout_constraintEnd_toEndOf="@+id/spinConditionPresent"
                 app:layout_constraintStart_toStartOf="@+id/tvOwnership"
                 app:layout_constraintTop_toBottomOf="@id/spinConditionPresent" />
 
@@ -1054,10 +1057,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/custom_spinner"
                 app:layout_constraintEnd_toEndOf="@+id/spinConditionPresent"
-                app:layout_constraintStart_toEndOf="@id/tvYearInoperable"
-                app:layout_constraintTop_toTopOf="@+id/tvYearInoperable" />
+                app:layout_constraintStart_toStartOf="@+id/spinConditionPresent"
+                app:layout_constraintTop_toBottomOf="@+id/tvYearInoperable" />
 
             <TextView
                 android:id="@+id/tvMachineUnused"
@@ -1066,7 +1070,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Why is this machine unused/non-functional?"
                 app:layout_constraintStart_toStartOf="@+id/tvConditionPresent"
-                app:layout_constraintTop_toBottomOf="@+id/tvYearInoperable" />
+                app:layout_constraintTop_toBottomOf="@+id/spinYearInoperable" />
 
             <com.androidbuts.multispinnerfilter.MultiSpinnerSearch
                 android:id="@+id/multspinProblemsUnused"

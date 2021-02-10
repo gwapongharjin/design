@@ -15,7 +15,6 @@ import com.m3das.biomech.design.profiledb.ProfileRepository;
 import java.util.List;
 
 public class MachineListViewModel extends AndroidViewModel {
-    // TODO: Implement the ViewModel
     public MachinesRepository repositoryMachines;
     public LiveData<List<Machines>> allMachines;
 
@@ -39,6 +38,10 @@ public class MachineListViewModel extends AndroidViewModel {
     }
 
     public void deleteAll(){repositoryMachines.deleteAllMachines();}
+
+    public void deleteAllMachines(){
+        repositoryMachines.deleteAllMachines();
+    }
 
     public LiveData<List<Machines>> getAllMachines() {
         return allMachines;
