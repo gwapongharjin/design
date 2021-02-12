@@ -24,11 +24,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.m3das.biomech.design.AddMachineActivity;
 import com.m3das.biomech.design.MachineAdapter;
-import com.m3das.biomech.design.ProfileAdapter;
-import com.m3das.biomech.design.implementdb.Implements;
-import com.m3das.biomech.design.machinedb.Machines;
 import com.m3das.biomech.design.R;
 import com.m3das.biomech.design.Variable;
+import com.m3das.biomech.design.implementdb.Implements;
+import com.m3das.biomech.design.machinedb.Machines;
 import com.m3das.biomech.design.viewmodels.ImplementViewModel;
 import com.m3das.biomech.design.viewmodels.MachineListViewModel;
 
@@ -116,6 +115,8 @@ public class MachineListFragment extends Fragment {
                 intent.putExtra(AddMachineActivity.EXTRA_MODEL_SPECIFY, machines.getMachine_model_specify());
                 intent.putExtra(AddMachineActivity.EXTRA_RATED_POWER, machines.getRated_power());
                 intent.putExtra(AddMachineActivity.EXTRA_SERVICE_AREA, machines.getService_area());
+                intent.putExtra(AddMachineActivity.EXTRA_NEWLY_PLANTED_AREA, machines.getNewly_planted_area());
+                intent.putExtra(AddMachineActivity.EXTRA_RATOONED_AREA, machines.getRatooned_area());
                 intent.putExtra(AddMachineActivity.EXTRA_AVE_OP_HOURS, machines.getAve_op_hours());
                 intent.putExtra(AddMachineActivity.EXTRA_AVE_OP_DAYS, machines.getAve_op_days());
                 intent.putExtra(AddMachineActivity.EXTRA_CAPACITY, machines.getCapacity());
@@ -130,9 +131,24 @@ public class MachineListFragment extends Fragment {
                 intent.putExtra(AddMachineActivity.EXTRA_YEAR_ACQUIRED, machines.getYear_acquired());
                 intent.putExtra(AddMachineActivity.EXTRA_CONDITION_ACQUIRED, machines.getCondition_acquired());
                 intent.putExtra(AddMachineActivity.EXTRA_RENTAL, machines.getRental());
-                intent.putExtra(AddMachineActivity.EXTRA_CUSTOM_RATE, machines.getCustom_rate());
-                intent.putExtra(AddMachineActivity.EXTRA_CUSTOM_UNIT, machines.getCustom_unit());
-                intent.putExtra(AddMachineActivity.EXTRA_CUSTOM_UNIT_SPECIFY, machines.getSpecify_custom_unit());
+                intent.putExtra(AddMachineActivity.EXTRA_MAIN_RENT_RATE, machines.getMain_custom_rent());
+                intent.putExtra(AddMachineActivity.EXTRA_MAIN_RENT_UNIT, machines.getMain_custom_rent_unit());
+                intent.putExtra(AddMachineActivity.EXTRA_MAIN_RENT_UNIT_SPECIFY, machines.getMain_custom_rent_unit_specify());
+                intent.putExtra(AddMachineActivity.EXTRA_PLOW_RENT_RATE, machines.getPlow_custom_rent());
+                intent.putExtra(AddMachineActivity.EXTRA_PLOW_RENT_UNIT, machines.getPlow_custom_rent_unit());
+                intent.putExtra(AddMachineActivity.EXTRA_PLOW_RENT_UNIT_SPECIFY, machines.getPlow_custom_rent_unit_specify());
+                intent.putExtra(AddMachineActivity.EXTRA_HARR_RENT_RATE, machines.getHarr_custom_rent());
+                intent.putExtra(AddMachineActivity.EXTRA_HARR_RENT_UNIT, machines.getHarr_custom_rent_unit());
+                intent.putExtra(AddMachineActivity.EXTRA_HARR_RENT_UNIT_SPECIFY, machines.getHarr_custom_rent_unit_specify());
+                intent.putExtra(AddMachineActivity.EXTRA_FURR_RENT_RATE, machines.getFurr_custom_rent());
+                intent.putExtra(AddMachineActivity.EXTRA_FURR_RENT_UNIT, machines.getFurr_custom_rent_unit());
+                intent.putExtra(AddMachineActivity.EXTRA_FURR_RENT_UNIT_SPECIFY, machines.getFurr_custom_rent_unit_specify());
+                intent.putExtra(AddMachineActivity.EXTRA_OTHR_RENT_RATE, machines.getOther_custom_rent());
+                intent.putExtra(AddMachineActivity.EXTRA_OTHR_RENT_UNIT, machines.getOther_custom_rent_unit());
+                intent.putExtra(AddMachineActivity.EXTRA_OTHR_RENT_UNIT_SPECIFY, machines.getOther_custom_rent_unit_specify());
+                intent.putExtra(AddMachineActivity.EXTRA_AVE_FUEL_PLOW, machines.getPlow_ave_fuel());
+                intent.putExtra(AddMachineActivity.EXTRA_AVE_FUEL_HARR, machines.getHarr_ave_fuel());
+                intent.putExtra(AddMachineActivity.EXTRA_AVE_FUEL_FURR, machines.getFurr_ave_fuel());
                 intent.putExtra(AddMachineActivity.EXTRA_AVAILABILITY, machines.getAvailability());
                 intent.putExtra(AddMachineActivity.EXTRA_RENT_PROV, machines.getRent_prov());
                 intent.putExtra(AddMachineActivity.EXTRA_RENT_MUN, machines.getRent_mun());
@@ -140,6 +156,7 @@ public class MachineListFragment extends Fragment {
                 intent.putExtra(AddMachineActivity.EXTRA_CONDITION, machines.getCondition());
                 intent.putExtra(AddMachineActivity.EXTRA_PROBLEMS, machines.getProblems());
                 intent.putExtra(AddMachineActivity.EXTRA_PROBLEMS_SPECIFY, machines.getSpecify_problems());
+                intent.putExtra(AddMachineActivity.EXTRA_YEAR_INOPERABLE, machines.getYear_inoperable());
                 intent.putExtra(AddMachineActivity.EXTRA_LOCATION, machines.getLocation());
                 intent.putExtra(AddMachineActivity.EXTRA_PROV, machines.getProv());
                 intent.putExtra(AddMachineActivity.EXTRA_MUN, machines.getMun());
@@ -273,6 +290,8 @@ public class MachineListFragment extends Fragment {
 
             String machineType = data.getStringExtra(AddMachineActivity.EXTRA_MACHINE_TYPE);
             String machineQRCode = data.getStringExtra(AddMachineActivity.EXTRA_MACHINE_QRCODE);
+            String tubewells = data.getStringExtra(AddMachineActivity.EXTRA_TYPE_TUBEWELLS);
+            String type_mill = data.getStringExtra(AddMachineActivity.EXTRA_TYPE_MILL);
             String datesurvey = data.getStringExtra(AddMachineActivity.EXTRA_DATE_TIME);
             String brand = data.getStringExtra(AddMachineActivity.EXTRA_BRAND);
             String brand_specify = data.getStringExtra(AddMachineActivity.EXTRA_BRAND_SPECIFY);
@@ -280,6 +299,8 @@ public class MachineListFragment extends Fragment {
             String model_specify = data.getStringExtra(AddMachineActivity.EXTRA_MODEL_SPECIFY);
             String rated_power = data.getStringExtra(AddMachineActivity.EXTRA_RATED_POWER);
             String service_area = data.getStringExtra(AddMachineActivity.EXTRA_SERVICE_AREA);
+            String newly_planted_area = data.getStringExtra(AddMachineActivity.EXTRA_NEWLY_PLANTED_AREA);
+            String ratooned_area = data.getStringExtra(AddMachineActivity.EXTRA_RATOONED_AREA);
             String ave_op_hours = data.getStringExtra(AddMachineActivity.EXTRA_AVE_OP_HOURS);
             String ave_op_days = data.getStringExtra(AddMachineActivity.EXTRA_AVE_OP_DAYS);
             String capacity = data.getStringExtra(AddMachineActivity.EXTRA_CAPACITY);
@@ -294,16 +315,35 @@ public class MachineListFragment extends Fragment {
             String year_acquired = data.getStringExtra(AddMachineActivity.EXTRA_YEAR_ACQUIRED);
             String condition_acquired = data.getStringExtra(AddMachineActivity.EXTRA_CONDITION_ACQUIRED);
             String rental = data.getStringExtra(AddMachineActivity.EXTRA_RENTAL);
-            String custom_rate = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_RATE);
-            String custom_unit = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_UNIT);
-            String custom_unit_specify = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_UNIT_SPECIFY);
-            String availablity = data.getStringExtra(AddMachineActivity.EXTRA_AVAILABILITY);
+//            String custom_rate = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_RATE);
+//            String custom_unit = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_UNIT);
+//            String custom_unit_specify = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_UNIT_SPECIFY);
+            String main_rent_rate = data.getStringExtra(AddMachineActivity.EXTRA_MAIN_RENT_RATE);
+            String main_rent_unit = data.getStringExtra(AddMachineActivity.EXTRA_MAIN_RENT_UNIT);
+            String main_rent_unit_specify = data.getStringExtra(AddMachineActivity.EXTRA_MAIN_RENT_UNIT_SPECIFY);
+            String plow_rent_rate = data.getStringExtra(AddMachineActivity.EXTRA_PLOW_RENT_RATE);
+            String plow_rent_unit = data.getStringExtra(AddMachineActivity.EXTRA_PLOW_RENT_UNIT);
+            String plow_rent_unit_specify = data.getStringExtra(AddMachineActivity.EXTRA_PLOW_RENT_UNIT_SPECIFY);
+            String harr_rent_rate = data.getStringExtra(AddMachineActivity.EXTRA_HARR_RENT_RATE);
+            String harr_rent_unit = data.getStringExtra(AddMachineActivity.EXTRA_HARR_RENT_UNIT);
+            String harr_rent_unit_specify = data.getStringExtra(AddMachineActivity.EXTRA_HARR_RENT_UNIT_SPECIFY);
+            String furr_rent_rate = data.getStringExtra(AddMachineActivity.EXTRA_FURR_RENT_RATE);
+            String furr_rent_unit = data.getStringExtra(AddMachineActivity.EXTRA_FURR_RENT_UNIT);
+            String furr_rent_unit_specify = data.getStringExtra(AddMachineActivity.EXTRA_FURR_RENT_UNIT_SPECIFY);
+            String othr_rent_rate = data.getStringExtra(AddMachineActivity.EXTRA_OTHR_RENT_RATE);
+            String othr_rent_unit = data.getStringExtra(AddMachineActivity.EXTRA_OTHR_RENT_UNIT);
+            String othr_rent_unit_specify = data.getStringExtra(AddMachineActivity.EXTRA_OTHR_RENT_UNIT_SPECIFY);
+            String ave_fuel_plow = data.getStringExtra(AddMachineActivity.EXTRA_AVE_FUEL_PLOW);
+            String ave_fuel_harr = data.getStringExtra(AddMachineActivity.EXTRA_AVE_FUEL_HARR);
+            String ave_fuel_furr = data.getStringExtra(AddMachineActivity.EXTRA_AVE_FUEL_FURR);
+            String availability = data.getStringExtra(AddMachineActivity.EXTRA_AVAILABILITY);
             String rent_prov = data.getStringExtra(AddMachineActivity.EXTRA_RENT_PROV);
             String rent_mun = data.getStringExtra(AddMachineActivity.EXTRA_RENT_MUN);
             String rent_brgy = data.getStringExtra(AddMachineActivity.EXTRA_RENT_BRGY);
             String condition = data.getStringExtra(AddMachineActivity.EXTRA_CONDITION);
             String problems = data.getStringExtra(AddMachineActivity.EXTRA_PROBLEMS);
             String problems_specify = data.getStringExtra(AddMachineActivity.EXTRA_PROBLEMS_SPECIFY);
+            String year_inoperable = data.getStringExtra(AddMachineActivity.EXTRA_YEAR_INOPERABLE);
             String location = data.getStringExtra(AddMachineActivity.EXTRA_LOCATION);
             String prov = data.getStringExtra(AddMachineActivity.EXTRA_PROV);
             String mun = data.getStringExtra(AddMachineActivity.EXTRA_MUN);
@@ -312,15 +352,15 @@ public class MachineListFragment extends Fragment {
             String longitude = data.getStringExtra(AddMachineActivity.EXTRA_LONG);
             String imageString = Variable.getStringImage();
             String accuracy = data.getStringExtra(AddMachineActivity.EXTRA_ACC);
-            String tubewells = data.getStringExtra(AddMachineActivity.EXTRA_TYPE_TUBEWELLS);
-            String type_mill = data.getStringExtra(AddMachineActivity.EXTRA_TYPE_MILL);
             String resCode = data.getStringExtra(AddMachineActivity.EXTRA_RES_CODE);
             String resName = data.getStringExtra(AddMachineActivity.EXTRA_RES_NAME);
 
-            Machines machines = new Machines(machineType, tubewells, type_mill, machineQRCode, datesurvey, brand, brand_specify, model, model_specify, rated_power, service_area, ave_op_hours,
-                    ave_op_days, capacity, ave_yield, num_loads, rate, ownership, purch_grant_dono, agency, agency_specify, name_owner, year_acquired, condition_acquired,
-                    rental, custom_rate, custom_unit, custom_unit_specify, availablity, rent_prov, rent_mun, rent_brgy, condition, problems, problems_specify, location,
-                    prov, mun, brgy, latitude, longitude, imageString, accuracy, resCode, resName);
+            Machines machines = new Machines(machineType, tubewells, type_mill, machineQRCode, datesurvey, brand, brand_specify, model, model_specify, rated_power, service_area,
+                    newly_planted_area, ratooned_area, ave_op_hours, ave_op_days, capacity, ave_yield, num_loads, rate, ownership, purch_grant_dono, agency, agency_specify, name_owner,
+                    year_acquired, condition_acquired, rental, main_rent_rate, main_rent_unit, main_rent_unit_specify, plow_rent_rate, plow_rent_unit, plow_rent_unit_specify, harr_rent_rate,
+                    harr_rent_unit, harr_rent_unit_specify, furr_rent_rate, furr_rent_unit, furr_rent_unit_specify, othr_rent_rate, othr_rent_unit, othr_rent_unit_specify, ave_fuel_plow,
+                    ave_fuel_harr, ave_fuel_furr, availability, rent_prov, rent_mun, rent_brgy, condition, problems, problems_specify, year_inoperable, location, prov, mun, brgy, latitude,
+                    longitude, imageString, accuracy, resCode, resName);
 
             machineListViewModel.insert(machines);
 
@@ -334,6 +374,8 @@ public class MachineListFragment extends Fragment {
 
             String machineType = data.getStringExtra(AddMachineActivity.EXTRA_MACHINE_TYPE);
             String machineQRCode = data.getStringExtra(AddMachineActivity.EXTRA_MACHINE_QRCODE);
+            String tubewells = data.getStringExtra(AddMachineActivity.EXTRA_TYPE_TUBEWELLS);
+            String type_mill = data.getStringExtra(AddMachineActivity.EXTRA_TYPE_MILL);
             String datesurvey = data.getStringExtra(AddMachineActivity.EXTRA_DATE_TIME);
             String brand = data.getStringExtra(AddMachineActivity.EXTRA_BRAND);
             String brand_specify = data.getStringExtra(AddMachineActivity.EXTRA_BRAND_SPECIFY);
@@ -341,6 +383,8 @@ public class MachineListFragment extends Fragment {
             String model_specify = data.getStringExtra(AddMachineActivity.EXTRA_MODEL_SPECIFY);
             String rated_power = data.getStringExtra(AddMachineActivity.EXTRA_RATED_POWER);
             String service_area = data.getStringExtra(AddMachineActivity.EXTRA_SERVICE_AREA);
+            String newly_planted_area = data.getStringExtra(AddMachineActivity.EXTRA_NEWLY_PLANTED_AREA);
+            String ratooned_area = data.getStringExtra(AddMachineActivity.EXTRA_RATOONED_AREA);
             String ave_op_hours = data.getStringExtra(AddMachineActivity.EXTRA_AVE_OP_HOURS);
             String ave_op_days = data.getStringExtra(AddMachineActivity.EXTRA_AVE_OP_DAYS);
             String capacity = data.getStringExtra(AddMachineActivity.EXTRA_CAPACITY);
@@ -355,16 +399,35 @@ public class MachineListFragment extends Fragment {
             String year_acquired = data.getStringExtra(AddMachineActivity.EXTRA_YEAR_ACQUIRED);
             String condition_acquired = data.getStringExtra(AddMachineActivity.EXTRA_CONDITION_ACQUIRED);
             String rental = data.getStringExtra(AddMachineActivity.EXTRA_RENTAL);
-            String custom_rate = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_RATE);
-            String custom_unit = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_UNIT);
-            String custom_unit_specify = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_UNIT_SPECIFY);
-            String availablity = data.getStringExtra(AddMachineActivity.EXTRA_AVAILABILITY);
+//            String custom_rate = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_RATE);
+//            String custom_unit = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_UNIT);
+//            String custom_unit_specify = data.getStringExtra(AddMachineActivity.EXTRA_CUSTOM_UNIT_SPECIFY);
+            String main_rent_rate = data.getStringExtra(AddMachineActivity.EXTRA_MAIN_RENT_RATE);
+            String main_rent_unit = data.getStringExtra(AddMachineActivity.EXTRA_MAIN_RENT_UNIT);
+            String main_rent_unit_specify = data.getStringExtra(AddMachineActivity.EXTRA_MAIN_RENT_UNIT_SPECIFY);
+            String plow_rent_rate = data.getStringExtra(AddMachineActivity.EXTRA_PLOW_RENT_RATE);
+            String plow_rent_unit = data.getStringExtra(AddMachineActivity.EXTRA_PLOW_RENT_UNIT);
+            String plow_rent_unit_specify = data.getStringExtra(AddMachineActivity.EXTRA_PLOW_RENT_UNIT_SPECIFY);
+            String harr_rent_rate = data.getStringExtra(AddMachineActivity.EXTRA_HARR_RENT_RATE);
+            String harr_rent_unit = data.getStringExtra(AddMachineActivity.EXTRA_HARR_RENT_UNIT);
+            String harr_rent_unit_specify = data.getStringExtra(AddMachineActivity.EXTRA_HARR_RENT_UNIT_SPECIFY);
+            String furr_rent_rate = data.getStringExtra(AddMachineActivity.EXTRA_FURR_RENT_RATE);
+            String furr_rent_unit = data.getStringExtra(AddMachineActivity.EXTRA_FURR_RENT_UNIT);
+            String furr_rent_unit_specify = data.getStringExtra(AddMachineActivity.EXTRA_FURR_RENT_UNIT_SPECIFY);
+            String othr_rent_rate = data.getStringExtra(AddMachineActivity.EXTRA_OTHR_RENT_RATE);
+            String othr_rent_unit = data.getStringExtra(AddMachineActivity.EXTRA_OTHR_RENT_UNIT);
+            String othr_rent_unit_specify = data.getStringExtra(AddMachineActivity.EXTRA_OTHR_RENT_UNIT_SPECIFY);
+            String ave_fuel_plow = data.getStringExtra(AddMachineActivity.EXTRA_AVE_FUEL_PLOW);
+            String ave_fuel_harr = data.getStringExtra(AddMachineActivity.EXTRA_AVE_FUEL_HARR);
+            String ave_fuel_furr = data.getStringExtra(AddMachineActivity.EXTRA_AVE_FUEL_FURR);
+            String availability = data.getStringExtra(AddMachineActivity.EXTRA_AVAILABILITY);
             String rent_prov = data.getStringExtra(AddMachineActivity.EXTRA_RENT_PROV);
             String rent_mun = data.getStringExtra(AddMachineActivity.EXTRA_RENT_MUN);
             String rent_brgy = data.getStringExtra(AddMachineActivity.EXTRA_RENT_BRGY);
             String condition = data.getStringExtra(AddMachineActivity.EXTRA_CONDITION);
             String problems = data.getStringExtra(AddMachineActivity.EXTRA_PROBLEMS);
             String problems_specify = data.getStringExtra(AddMachineActivity.EXTRA_PROBLEMS_SPECIFY);
+            String year_inoperable = data.getStringExtra(AddMachineActivity.EXTRA_YEAR_INOPERABLE);
             String location = data.getStringExtra(AddMachineActivity.EXTRA_LOCATION);
             String prov = data.getStringExtra(AddMachineActivity.EXTRA_PROV);
             String mun = data.getStringExtra(AddMachineActivity.EXTRA_MUN);
@@ -373,15 +436,15 @@ public class MachineListFragment extends Fragment {
             String longitude = data.getStringExtra(AddMachineActivity.EXTRA_LONG);
             String imageString = Variable.getStringImage();
             String accuracy = data.getStringExtra(AddMachineActivity.EXTRA_ACC);
-            String tubewells = data.getStringExtra(AddMachineActivity.EXTRA_TYPE_TUBEWELLS);
-            String type_mill = data.getStringExtra(AddMachineActivity.EXTRA_TYPE_MILL);
             String resCode = data.getStringExtra(AddMachineActivity.EXTRA_RES_CODE);
             String resName = data.getStringExtra(AddMachineActivity.EXTRA_RES_NAME);
 
-            Machines machines = new Machines(machineType, tubewells, type_mill, machineQRCode, datesurvey, brand, brand_specify, model, model_specify, rated_power, service_area, ave_op_hours,
-                    ave_op_days, capacity, ave_yield, num_loads, rate, ownership, purch_grant_dono, agency, agency_specify, name_owner, year_acquired, condition_acquired,
-                    rental, custom_rate, custom_unit, custom_unit_specify, availablity, rent_prov, rent_mun, rent_brgy, condition, problems, problems_specify, location,
-                    prov, mun, brgy, latitude, longitude, imageString, accuracy, resCode, resName);
+            Machines machines = new Machines(machineType, tubewells, type_mill, machineQRCode, datesurvey, brand, brand_specify, model, model_specify, rated_power, service_area,
+                    newly_planted_area, ratooned_area, ave_op_hours, ave_op_days, capacity, ave_yield, num_loads, rate, ownership, purch_grant_dono, agency, agency_specify, name_owner,
+                    year_acquired, condition_acquired, rental, main_rent_rate, main_rent_unit, main_rent_unit_specify, plow_rent_rate, plow_rent_unit, plow_rent_unit_specify, harr_rent_rate,
+                    harr_rent_unit, harr_rent_unit_specify, furr_rent_rate, furr_rent_unit, furr_rent_unit_specify, othr_rent_rate, othr_rent_unit, othr_rent_unit_specify, ave_fuel_plow,
+                    ave_fuel_harr, ave_fuel_furr, availability, rent_prov, rent_mun, rent_brgy, condition, problems, problems_specify, year_inoperable, location, prov, mun, brgy, latitude,
+                    longitude, imageString, accuracy, resCode, resName);
 
             machines.setId(id);
             machineListViewModel.update(machines);

@@ -341,6 +341,7 @@ public class ImplementsFragment extends Fragment {
             String date_of_survey = data.getStringExtra(AddImplementActivity.EXTRA_DATE);
             String used_on_machine = data.getStringExtra(AddImplementActivity.EXTRA_USED_ON);
             String used_on_machine_complete = data.getStringExtra(AddImplementActivity.EXTRA_USED_COMPLETE);
+
             String land_clearing = data.getStringExtra(AddImplementActivity.EXTRA_LAND_CLEAR);
             String pre_planting = data.getStringExtra(AddImplementActivity.EXTRA_PRE_PLANT);
             String planting = data.getStringExtra(AddImplementActivity.EXTRA_PLANTING);
@@ -352,12 +353,14 @@ public class ImplementsFragment extends Fragment {
             String harvest = data.getStringExtra(AddImplementActivity.EXTRA_HARVEST);
             String post_harvest = data.getStringExtra(AddImplementActivity.EXTRA_POST_HARVEST);
             String hauling = data.getStringExtra(AddImplementActivity.EXTRA_HAULING);
+
             String total_service_area_main = data.getStringExtra(AddImplementActivity.EXTRA_TSA_MAIN);
             String average_operating_hours_main = data.getStringExtra(AddImplementActivity.EXTRA_AVE_OP_HOURS_MAIN);
             String average_operating_days_main = data.getStringExtra(AddImplementActivity.EXTRA_AVE_OP_DAYS_MAIN);
             String effective_area_accomplished_main = data.getStringExtra(AddImplementActivity.EXTRA_EFF_AREA_ACC_MAIN);
             String time_used_during_operation_main = data.getStringExtra(AddImplementActivity.EXTRA_TIME_USED_OP_MAIN);
             String field_capacity_main = data.getStringExtra(AddImplementActivity.EXTRA_FIELD_CAP_MAIN);
+
             String type_of_planter = data.getStringExtra(AddImplementActivity.EXTRA_TYPE_PLANT);
             String number_of_rows_planter = data.getStringExtra(AddImplementActivity.EXTRA_NUM_ROWS_PLANT);
             String distance_of_materials_planter = data.getStringExtra(AddImplementActivity.EXTRA_DIST_MAT_PLANT);
@@ -367,6 +370,7 @@ public class ImplementsFragment extends Fragment {
             String effective_area_accomplished_planter = data.getStringExtra(AddImplementActivity.EXTRA_EFF_AREA_ACC_PLANT);
             String time_used_during_operation_planter = data.getStringExtra(AddImplementActivity.EXTRA_TIME_USED_OP_PLANT);
             String field_capacity_planter = data.getStringExtra(AddImplementActivity.EXTRA_FIELD_CAP_PLANT);
+
             String total_service_area_fertilizer = data.getStringExtra(AddImplementActivity.EXTRA_TSA_FERT);
             String average_operating_hours_fertilizer = data.getStringExtra(AddImplementActivity.EXTRA_AVE_OP_HOURS_FERT);
             String average_operating_days_fertilizer = data.getStringExtra(AddImplementActivity.EXTRA_AVE_OP_DAYS_FERT);
@@ -375,6 +379,7 @@ public class ImplementsFragment extends Fragment {
             String field_capacity_fertilizer = data.getStringExtra(AddImplementActivity.EXTRA_FIELD_CAP_FERT);
             String weight_fertilizer = data.getStringExtra(AddImplementActivity.EXTRA_WEIGHT_FERT);
             String delivery_rate_fetilizer = data.getStringExtra(AddImplementActivity.EXTRA_DEL_RATE_FERT);
+
             String total_service_area_harvester = data.getStringExtra(AddImplementActivity.EXTRA_TSA_HARVEST);
             String average_operating_hours_harvester = data.getStringExtra(AddImplementActivity.EXTRA_AVE_OP_HOURS_HARVEST);
             String average_operating_days_harvester = data.getStringExtra(AddImplementActivity.EXTRA_AVE_OP_DAYS_HARVEST);
@@ -382,15 +387,18 @@ public class ImplementsFragment extends Fragment {
             String time_used_during_operation_harvester = data.getStringExtra(AddImplementActivity.EXTRA_TIME_USED_OP_HARVEST);
             String field_capacity_harvester = data.getStringExtra(AddImplementActivity.EXTRA_FIELD_CAP_HARVEST);
             String average_yield_harvester = data.getStringExtra(AddImplementActivity.EXTRA_AVE_YIELD_HARVEST);
+
             String total_service_area_cane_grab_loader = data.getStringExtra(AddImplementActivity.EXTRA_TSA_GRAB);
             String average_operating_hours_cane_grab_loader = data.getStringExtra(AddImplementActivity.EXTRA_AVE_OP_HOURS_GRAB);
             String average_operating_days_cane_grab_loader = data.getStringExtra(AddImplementActivity.EXTRA_AVE_OP_DAYS_GRAB);
             String loading_capacity_cane_grab_loader = data.getStringExtra(AddImplementActivity.EXTRA_LOAD_CAP_GRAB);
             String number_loads_cane_grab_loader = data.getStringExtra(AddImplementActivity.EXTRA_NUM_LOAD_GRAB);
+
             String total_service_area_ditcher = data.getStringExtra(AddImplementActivity.EXTRA_TSA_DITCH);
             String average_operating_hours_ditcher = data.getStringExtra(AddImplementActivity.EXTRA_AVE_OP_HOURS_DITCH);
             String average_operating_days_ditcher = data.getStringExtra(AddImplementActivity.EXTRA_AVE_OP_DAYS_DITCH);
             String depth_cut_ditcher = data.getStringExtra(AddImplementActivity.EXTRA_DEPTH_CUT_DITCH);
+
             String year_acquired = data.getStringExtra(AddImplementActivity.EXTRA_YEAR_ACQUIRED);
             String condition = data.getStringExtra(AddImplementActivity.EXTRA_CONDITION);
             String location = data.getStringExtra(AddImplementActivity.EXTRA_LOCATION);
@@ -402,19 +410,10 @@ public class ImplementsFragment extends Fragment {
             String longitude = data.getStringExtra(AddImplementActivity.EXTRA_LONGITUDE);
             String accuracy = data.getStringExtra(AddImplementActivity.EXTRA_ACCURACY);
 
-            Implements imp = new Implements(implement_type, implement_qr_code, date_of_survey, used_on_machine, used_on_machine_complete, land_clearing, pre_planting, planting, fertilizer_application,
-                    pesticide_application, irrigation_drainage, cultivation, ratooning, harvest, post_harvest, hauling, total_service_area_main, average_operating_hours_main, average_operating_days_main,
-                    effective_area_accomplished_main, time_used_during_operation_main, field_capacity_main, type_of_planter, number_of_rows_planter, distance_of_materials_planter, total_service_area_planter
-                    , average_operating_hours_planter, average_operating_days_planter, effective_area_accomplished_planter, time_used_during_operation_planter, field_capacity_planter, total_service_area_fertilizer
-                    , average_operating_hours_fertilizer, average_operating_days_fertilizer, effective_area_accomplished_fertilizer, time_used_during_operation_fertilizer, field_capacity_fertilizer,
-                    weight_fertilizer, delivery_rate_fetilizer, total_service_area_harvester, average_operating_hours_harvester, average_operating_days_harvester, effective_area_accomplished_harvester,
-                    time_used_during_operation_harvester, field_capacity_harvester, average_yield_harvester, total_service_area_cane_grab_loader, average_operating_hours_cane_grab_loader,
-                    average_operating_days_cane_grab_loader, loading_capacity_cane_grab_loader, number_loads_cane_grab_loader, total_service_area_ditcher,
-                    average_operating_hours_ditcher, average_operating_days_ditcher, depth_cut_ditcher, year_acquired, condition, location, province, city, barangay, image_base64, latitude, longitude, accuracy);
+            Implements imp = new Implements();
 
             implementViewModel.insert(imp);
 
-            Log.d("Is note saved", "Implement Saved" + implement_type);
             Toast.makeText(getActivity(), "Implement saved", Toast.LENGTH_SHORT).show();
         } else if (requestCode == EDIT_IMPLEMENT_REQUEST && resultCode == Activity.RESULT_OK) {
             int id = data.getIntExtra(AddImplementActivity.EXTRA_IMP_ID, -1);

@@ -61,6 +61,7 @@ public class Machines {
     private final String condition;
     private final String problems;
     private final String specify_problems;
+    private final String year_inoperable;
     private final String location;
     private final String prov;
     private final String mun;
@@ -76,13 +77,15 @@ public class Machines {
         this.id = id;
     }
 
-    public Machines(String machine_type, String type_tubewells, String type_mill, String machine_qrcode, String date_of_survey, String machine_brand, String machine_brand_specify, String machine_model, String machine_model_specify,
-                    String rated_power, String service_area, String newly_planted_area, String ratooned_area, String ave_op_hours, String ave_op_days, String capacity, String ave_yield, String num_loads, String rate, String ownership,
-                    String purch_grant_dono, String agency, String agency_specify, String name_owner, String year_acquired, String condition_acquired, String rental, String main_custom_rent, String main_custom_rent_unit,
-                    String main_custom_rent_unit_specify, String plow_custom_rent, String plow_custom_rent_unit, String plow_custom_rent_unit_specify, String harr_custom_rent, String harr_custom_rent_unit, String harr_custom_rent_unit_specify,
-                    String furr_custom_rent, String furr_custom_rent_unit, String furr_custom_rent_unit_specify, String other_custom_rent, String other_custom_rent_unit, String other_custom_rent_unit_specify, String plow_ave_fuel,
-                    String harr_ave_fuel, String furr_ave_fuel, String availability, String rent_prov, String rent_mun, String rent_brgy, String condition, String problems, String specify_problems, String location, String prov, String mun,
-                    String brgy, String machine_latitude, String machine_longitude, String machine_image_base64, String accuracy, String resCode, String resName) {
+    public Machines(String machine_type, String type_tubewells, String type_mill, String machine_qrcode, String date_of_survey, String machine_brand, String machine_brand_specify,
+                    String machine_model, String machine_model_specify, String rated_power, String service_area, String newly_planted_area, String ratooned_area, String ave_op_hours,
+                    String ave_op_days, String capacity, String ave_yield, String num_loads, String rate, String ownership, String purch_grant_dono, String agency, String agency_specify,
+                    String name_owner, String year_acquired, String condition_acquired, String rental, String main_custom_rent, String main_custom_rent_unit, String main_custom_rent_unit_specify,
+                    String plow_custom_rent, String plow_custom_rent_unit, String plow_custom_rent_unit_specify, String harr_custom_rent, String harr_custom_rent_unit,
+                    String harr_custom_rent_unit_specify, String furr_custom_rent, String furr_custom_rent_unit, String furr_custom_rent_unit_specify, String other_custom_rent,
+                    String other_custom_rent_unit, String other_custom_rent_unit_specify, String plow_ave_fuel, String harr_ave_fuel, String furr_ave_fuel, String availability,
+                    String rent_prov, String rent_mun, String rent_brgy, String condition, String problems, String specify_problems, String year_inoperable, String location, String prov, String mun, String brgy,
+                    String machine_latitude, String machine_longitude, String machine_image_base64, String accuracy, String resCode, String resName) {
         this.machine_type = machine_type;
         this.type_tubewells = type_tubewells;
         this.type_mill = type_mill;
@@ -135,6 +138,7 @@ public class Machines {
         this.condition = condition;
         this.problems = problems;
         this.specify_problems = specify_problems;
+        this.year_inoperable = year_inoperable;
         this.location = location;
         this.prov = prov;
         this.mun = mun;
@@ -357,6 +361,10 @@ public class Machines {
 
     public String getSpecify_problems() {
         return specify_problems;
+    }
+
+    public String getYear_inoperable() {
+        return year_inoperable;
     }
 
     public String getLocation() {

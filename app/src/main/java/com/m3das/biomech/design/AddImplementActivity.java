@@ -106,6 +106,10 @@ public class AddImplementActivity extends AppCompatActivity {
     public static final String EXTRA_DATE = "ADDIMPLEMENT_EXTRA_DATE";
     public static final String EXTRA_USED_ON = "ADDIMPLEMENT_EXTRA_USED_ON";
     public static final String EXTRA_USED_COMPLETE = "ADDIMPLEMENT_EXTRA_USED_COMPLETE";
+
+    public static final String EXTRA_BRAND = "ADDIMPLEMENT_EXTRA_BRAND";
+    public static final String EXTRA_MODEL = "ADDIMPLEMENT_EXTRA_MODEL";
+
     public static final String EXTRA_LAND_CLEAR = "ADDIMPLEMENT_EXTRA_LAND_CLEAR";
     public static final String EXTRA_PRE_PLANT = "ADDIMPLEMENT_EXTRA_PRE_PLANT";
     public static final String EXTRA_PLANTING = "ADDIMPLEMENT_EXTRA_PLANTING";
@@ -117,47 +121,49 @@ public class AddImplementActivity extends AppCompatActivity {
     public static final String EXTRA_HARVEST = "ADDIMPLEMENT_EXTRA_HARVEST";
     public static final String EXTRA_POST_HARVEST = "ADDIMPLEMENT_EXTRA_POST_HARVEST";
     public static final String EXTRA_HAULING = "ADDIMPLEMENT_EXTRA_HAULING";
-    public static final String EXTRA_TSA_MAIN = "ADDIMPLEMENT_EXTRA_TSA_MAIN";
-    public static final String EXTRA_AVE_OP_HOURS_MAIN = "ADDIMPLEMENT_EXTRA_AVE_OP_HOURS_MAIN";
-    public static final String EXTRA_AVE_OP_DAYS_MAIN = "ADDIMPLEMENT_EXTRA_AVE_OP_DAYS_MAIN";
+
     public static final String EXTRA_EFF_AREA_ACC_MAIN = "ADDIMPLEMENT_EXTRA_EFF_AREA_ACC_MAIN";
     public static final String EXTRA_TIME_USED_OP_MAIN = "ADDIMPLEMENT_EXTRA_TIME_USED_OP_MAIN";
     public static final String EXTRA_FIELD_CAP_MAIN = "ADDIMPLEMENT_EXTRA_FIELD_CAP_MAIN";
+
     public static final String EXTRA_TYPE_PLANT = "ADDIMPLEMENT_EXTRA_TYPE_PLANT";
     public static final String EXTRA_NUM_ROWS_PLANT = "ADDIMPLEMENT_EXTRA_NUM_ROWS_PLANT";
     public static final String EXTRA_DIST_MAT_PLANT = "ADDIMPLEMENT_EXTRA_DIST_MAT_PLANT";
-    public static final String EXTRA_TSA_PLANT = "ADDIMPLEMENT_EXTRA_TSA_PLANT";
-    public static final String EXTRA_AVE_OP_HOURS_PLANT = "ADDIMPLEMENT_EXTRA_AVE_OP_HOURS_PLANT";
-    public static final String EXTRA_AVE_OP_DAYS_PLANT = "ADDIMPLEMENT_EXTRA_AVE_OP_DAYS_PLANT";
     public static final String EXTRA_EFF_AREA_ACC_PLANT = "ADDIMPLEMENT_EXTRA_EFF_AREA_ACC_PLANT";
     public static final String EXTRA_TIME_USED_OP_PLANT = "ADDIMPLEMENT_EXTRA_TIME_USED_OP_PLANT";
     public static final String EXTRA_FIELD_CAP_PLANT = "ADDIMPLEMENT_EXTRA_FIELD_CAP_PLANT";
-    public static final String EXTRA_TSA_FERT = "ADDIMPLEMENT_EXTRA_TSA_FERT";
-    public static final String EXTRA_AVE_OP_HOURS_FERT = "ADDIMPLEMENT_EXTRA_AVE_OP_HOURS_FERT";
-    public static final String EXTRA_AVE_OP_DAYS_FERT = "ADDIMPLEMENT_EXTRA_AVE_OP_DAYS_FERT";
+
     public static final String EXTRA_EFF_AREA_ACC_FERT = "ADDIMPLEMENT_EXTRA_EFF_AREA_ACC_FERT";
     public static final String EXTRA_TIME_USED_OP_FERT = "ADDIMPLEMENT_EXTRA_TIME_USED_OP_FERT";
     public static final String EXTRA_FIELD_CAP_FERT = "ADDIMPLEMENT_EXTRA_FIELD_CAP_FERT";
     public static final String EXTRA_WEIGHT_FERT = "ADDIMPLEMENT_EXTRA_WEIGHT_FERT";
     public static final String EXTRA_DEL_RATE_FERT = "ADDIMPLEMENT_EXTRA_DEL_RATE_FERT";
-    public static final String EXTRA_TSA_HARVEST = "ADDIMPLEMENT_EXTRA_TSA_HARVEST";
-    public static final String EXTRA_AVE_OP_HOURS_HARVEST = "ADDIMPLEMENT_EXTRA_AVE_OP_HOURS_HARVEST";
-    public static final String EXTRA_AVE_OP_DAYS_HARVEST = "ADDIMPLEMENT_EXTRA_AVE_OP_DAYS_HARVEST";
+
     public static final String EXTRA_EFF_AREA_ACC_HARVEST = "ADDIMPLEMENT_EXTRA_EFF_AREA_ACC_HARVEST";
     public static final String EXTRA_TIME_USED_OP_HARVEST = "ADDIMPLEMENT_EXTRA_TIME_USED_OP_HARVEST";
     public static final String EXTRA_FIELD_CAP_HARVEST = "ADDIMPLEMENT_EXTRA_FIELD_CAP_HARVEST";
     public static final String EXTRA_AVE_YIELD_HARVEST = "ADDIMPLEMENT_EXTRA_AVEYIELD_HARVEST";
-    public static final String EXTRA_TSA_GRAB = "ADDIMPLEMENT_EXTRA_TSA_GRAB";
-    public static final String EXTRA_AVE_OP_HOURS_GRAB = "ADDIMPLEMENT_EXTRA_AVE_OP_HOURS_GRAB";
-    public static final String EXTRA_AVE_OP_DAYS_GRAB = "ADDIMPLEMENT_EXTRA_AVE_OP_DAYS_GRAB";
+
+    public static final String EXTRA_EFF_AREA_ACC_GRAB = "ADDIMPLEMENT_EXTRA_EFF_AREA_ACC_GRAB";
+    public static final String EXTRA_TIME_USED_OP_GRAB = "ADDIMPLEMENT_EXTRA_TIME_USED_OP_GRAB";
     public static final String EXTRA_LOAD_CAP_GRAB = "ADDIMPLEMENT_EXTRA_LOAD_CAP_GRAB";
-    public static final String EXTRA_NUM_LOAD_GRAB = "ADDIMPLEMENT_EXTRA_NUM_LOAD_GRAB";
-    public static final String EXTRA_TSA_DITCH = "ADDIMPLEMENT_EXTRA_TSA_DITCH";
-    public static final String EXTRA_AVE_OP_HOURS_DITCH = "ADDIMPLEMENT_EXTRA_AVE_OP_HOURS_DITCH";
-    public static final String EXTRA_AVE_OP_DAYS_DITCH = "ADDIMPLEMENT_EXTRA_AVE_OP_DAYS_DITCH";
+    public static final String EXTRA_FIELD_CAP_GRAB = "ADDIMPLEMENT_EXTRA_FIELD_CAP_GRAB";
+
     public static final String EXTRA_DEPTH_CUT_DITCH = "ADDIMPLEMENT_EXTRA_DEPTH_CUT_DITCH";
+
+    public static final String EXTRA_OWNERSHIP = "ADDIMPLEMENT_EXTRA_OWNERSHIP";
+    public static final String EXTRA_PURCH_GRANT_DONO = "ADDIMPLEMENT_EXTRA_PURCH_GRANT_DONO";
+    public static final String EXTRA_AGENCY = "ADDIMPLEMENT_EXTRA_AGENCY";
+    public static final String EXTRA_AGENCY_SPECIFY = "ADDIMPLEMENT_EXTRA_AGENCY_SPECIFY";
+
     public static final String EXTRA_YEAR_ACQUIRED = "ADDIMPLEMENT_EXTRA_YEAR_ACQUIRED";
     public static final String EXTRA_CONDITION = "ADDIMPLEMENT_EXTRA_CONDITION";
+
+    public static final String EXTRA_MODIFICATIONS = "ADDIMPLEMENT_EXTRA_MODIFICATIONS";
+    public static final String EXTRA_PROBLEMS = "ADDIMPLEMENT_EXTRA_PROBLEMS";
+    public static final String EXTRA_PROBLEMS_SPECIFY = "ADDIMPLEMENT_EXTRA_PROBLEMS_SPECIFY";
+    public static final String EXTRA_YEAR_INOPERABLE = "ADDIMPLEMENT_EXTRA_YEAR_INOPERABLE";
+
     public static final String EXTRA_LOCATION = "ADDIMPLEMENT_EXTRA_LOCATION";
     public static final String EXTRA_PROVINCE = "ADDIMPLEMENT_EXTRA_PROVINCE";
     public static final String EXTRA_MUNICIPALITY = "ADDIMPLEMENT_EXTRA_MUNICIPALITY";

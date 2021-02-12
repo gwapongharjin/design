@@ -72,7 +72,7 @@ public class AddMachineActivity extends AppCompatActivity {
     private int bigMargin, smallMargin, biggerMargin;
     private int stringArrayValue;
     private ImageView selectedImage;
-    private EditText edtQRCode, edtCapacity, edtAveYield, edtNumLoads, edtRate, edtAveOpHours, edtAveOpDays, edtServiceArea, edtRatoonArea, edtNameOfOwnerOrg, edtCustomRate, edtOtherProblems,
+    private EditText edtQRCode, edtCapacity, edtAveYield, edtNumLoads, edtRate, edtAveOpHours, edtAveOpDays, edtNewlyPlantedArea, edtRatoonArea, edtNameOfOwnerOrg, edtCustomRate, edtOtherProblems,
             edtOtherAgency, edtOtherBrand, edtOtherModel, edtRatedPower, edtPlowingRent, edtHarrowingRent, edtFurrowingRent, edtOtherRent, edtAveFuelConsPlow, edtAveFuelConsHarr,
             edtAveFuelConsFurr;
     private TextView tvLat, tvLong, tvTypeOfMill, tvBrand, tvOwnership, tvTypeOfTubewells, tvMachineAvailability, tvConditionPresent, tvLocation, tvModel, tvProvRent, tvMunRent, tvBrgyRent,
@@ -86,7 +86,7 @@ public class AddMachineActivity extends AppCompatActivity {
     private RadioGroup rgLoanCash;
     private RadioButton rbLoan, rbCash;
     private String encodedImage, listOfProblems, dateToStr, resCode, resName, listOfBrgyRent, munRent, provRent, loanCash, purchGrantDono;
-
+    private Double totalServiceArea;
     private MultiSpinnerSearch multspinProblemsUnused, multSpinBrgyRent, multSpinProvRent, multSpinMunRent
             //multspinRentBrgy
             ;
@@ -122,6 +122,8 @@ public class AddMachineActivity extends AppCompatActivity {
     public static final String EXTRA_MODEL_SPECIFY = "ADDMACHINE_EXTRA_MODEL_SPECIFY";
     public static final String EXTRA_RATED_POWER = "ADDMACHINE_EXTRA_RATED_POWER";
     public static final String EXTRA_SERVICE_AREA = "ADDMACHINE_EXTRA_SERVICE_AREA";
+    public static final String EXTRA_NEWLY_PLANTED_AREA = "ADDMACHINE_EXTRA_NEWLY_PLANTED_AREA";
+    public static final String EXTRA_RATOONED_AREA = "ADDMACHINE_EXTRA_RATOONED_AREA";
     public static final String EXTRA_AVE_OP_HOURS = "ADDMACHINE_EXTRA_AVE_OP_HOURS";
     public static final String EXTRA_AVE_OP_DAYS = "ADDMACHINE_EXTRA_AVE_OP_DAYS";
     public static final String EXTRA_CAPACITY = "ADDMACHINE_EXTRA_CAPACITY";
@@ -136,9 +138,27 @@ public class AddMachineActivity extends AppCompatActivity {
     public static final String EXTRA_YEAR_ACQUIRED = "ADDMACHINE_EXTRA_YEAR_ACQUIRED";
     public static final String EXTRA_CONDITION_ACQUIRED = "ADDMACHINE_EXTRA_CONDITION_ACQUIRED";
     public static final String EXTRA_RENTAL = "ADDMACHINE_EXTRA_RENTAL";
-    public static final String EXTRA_CUSTOM_RATE = "ADDMACHINE_EXTRA_CUSTOM_RATE";
-    public static final String EXTRA_CUSTOM_UNIT = "ADDMACHINE_EXTRA_CUSTOM_UNIT";
-    public static final String EXTRA_CUSTOM_UNIT_SPECIFY = "ADDMACHINE_EXTRA_CUSTOM_UNIT_SPECIFY";
+    //    public static final String EXTRA_CUSTOM_RATE = "ADDMACHINE_EXTRA_CUSTOM_RATE";
+    //    public static final String EXTRA_CUSTOM_UNIT = "ADDMACHINE_EXTRA_CUSTOM_UNIT";
+    public static final String EXTRA_MAIN_RENT_RATE = "ADDMACHINE_EXTRA_MAIN_RATE";
+    public static final String EXTRA_MAIN_RENT_UNIT = "ADDMACHINE_EXTRA_MAIN_UNIT";
+    public static final String EXTRA_MAIN_RENT_UNIT_SPECIFY = "ADDMACHINE_EXTRA_MAIN_RATE_SPECIFY";
+    public static final String EXTRA_PLOW_RENT_RATE = "ADDMACHINE_EXTRA_PLOW_RATE";
+    public static final String EXTRA_PLOW_RENT_UNIT = "ADDMACHINE_EXTRA_PLOW_UNIT";
+    public static final String EXTRA_PLOW_RENT_UNIT_SPECIFY = "ADDMACHINE_EXTRA_PLOW_RATE_SPECIFY";
+    public static final String EXTRA_HARR_RENT_RATE = "ADDMACHINE_EXTRA_HARR_RATE";
+    public static final String EXTRA_HARR_RENT_UNIT = "ADDMACHINE_EXTRA_HARR_UNIT";
+    public static final String EXTRA_HARR_RENT_UNIT_SPECIFY = "ADDMACHINE_EXTRA_HARR_RATE_SPECIFY";
+    public static final String EXTRA_FURR_RENT_RATE = "ADDMACHINE_EXTRA_FURR_RATE";
+    public static final String EXTRA_FURR_RENT_UNIT = "ADDMACHINE_EXTRA_FURR_UNIT";
+    public static final String EXTRA_FURR_RENT_UNIT_SPECIFY = "ADDMACHINE_EXTRA_FURR_RATE_SPECIFY";
+    public static final String EXTRA_OTHR_RENT_RATE = "ADDMACHINE_EXTRA_OTHR_RATE";
+    public static final String EXTRA_OTHR_RENT_UNIT = "ADDMACHINE_EXTRA_OTHR_UNIT";
+    public static final String EXTRA_OTHR_RENT_UNIT_SPECIFY = "ADDMACHINE_EXTRA_OTHR_RATE_SPECIFY";
+    //    public static final String EXTRA_CUSTOM_UNIT_SPECIFY = "ADDMACHINE_EXTRA_CUSTOM_UNIT_SPECIFY";
+    public static final String EXTRA_AVE_FUEL_PLOW = "ADDMACHINE_EXTRA_AVE_FUEL_PLOW";
+    public static final String EXTRA_AVE_FUEL_HARR = "ADDMACHINE_EXTRA_AVE_FUEL_HARR";
+    public static final String EXTRA_AVE_FUEL_FURR = "ADDMACHINE_EXTRA_AVE_FUEL_FURR";
     public static final String EXTRA_AVAILABILITY = "ADDMACHINE_EXTRA_AVAILABILITY";
     public static final String EXTRA_RENT_PROV = "ADDMACHINE_EXTRA_RENT_PROV";
     public static final String EXTRA_RENT_MUN = "ADDMACHINE_EXTRA_RENT_MUN";
@@ -146,6 +166,7 @@ public class AddMachineActivity extends AppCompatActivity {
     public static final String EXTRA_CONDITION = "ADDMACHINE_EXTRA_CONDITION";
     public static final String EXTRA_PROBLEMS = "ADDMACHINE_EXTRA_PROBLEMS";
     public static final String EXTRA_PROBLEMS_SPECIFY = "ADDMACHINE_EXTRA_PROBLEMS_SPECIFY";
+    public static final String EXTRA_YEAR_INOPERABLE = "ADDMACHINE_EXTRA_YEAR_INOPERABLE";
     public static final String EXTRA_LOCATION = "ADDMACHINE_EXTRA_LOCATION";
     public static final String EXTRA_PROV = "ADDMACHINE_EXTRA_PROV";
     public static final String EXTRA_MUN = "ADDMACHINE_EXTRA_MUN";
@@ -338,7 +359,6 @@ public class AddMachineActivity extends AppCompatActivity {
 
             }
         });
-
 
 
         spinConditionPresent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -548,7 +568,7 @@ public class AddMachineActivity extends AppCompatActivity {
 //                Toast.makeText(getApplicationContext(), spinMachineType.getSelectedItem().toString() + " AREA: " + edtServiceArea.getText().toString() + " HOURS: " + edtAveOpHours.getText().toString(), Toast.LENGTH_SHORT).show();
                 if (spinMachineType.getSelectedItem().toString().contains("HARVESTER")) {
                     Log.d("DEBHARONCH", "Inside onchanged ave op hours");
-                    edtCapacity.setText(getFieldCapacity(edtServiceArea.getText().toString(), edtAveOpHours.getText().toString()));
+                    edtCapacity.setText(getFieldCapacity(edtNewlyPlantedArea.getText().toString(), edtAveOpHours.getText().toString()));
                 }
             }
 
@@ -618,7 +638,7 @@ public class AddMachineActivity extends AppCompatActivity {
 //        edtAveOpHours.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL|InputType.TYPE_CLASS_NUMBER);
         edtAveOpHours.setFilters(new InputFilter[]{new MinMaxFilter("0", "24")});
         edtAveOpDays.setFilters(new InputFilter[]{new MinMaxFilter("1", "365")});
-        edtServiceArea.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
+        edtNewlyPlantedArea.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
         edtRatedPower.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(3, 2)});
 
 //        edittext.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "1000"), new DecimalDigitsInputFilter(3,2)});
@@ -805,7 +825,7 @@ public class AddMachineActivity extends AppCompatActivity {
         edtOtherModel.setText(intent1.getStringExtra(EXTRA_MODEL_SPECIFY));
 
         edtRatedPower.setText(intent1.getStringExtra(EXTRA_RATED_POWER));
-        edtServiceArea.setText(intent1.getStringExtra(EXTRA_SERVICE_AREA));
+        edtNewlyPlantedArea.setText(intent1.getStringExtra(EXTRA_SERVICE_AREA));
         edtAveOpHours.setText(intent1.getStringExtra(EXTRA_AVE_OP_HOURS));
         edtAveOpDays.setText(intent1.getStringExtra(EXTRA_AVE_OP_DAYS));
         edtCapacity.setText(intent1.getStringExtra(EXTRA_CAPACITY));
@@ -2498,6 +2518,7 @@ public class AddMachineActivity extends AppCompatActivity {
             }
 
             Log.d("XSAVX", loanCash + " : " + spinPurchGrantDono.getSelectedItem().toString() + " : " + modeOfPurchase);
+            totalServiceArea = (Double.parseDouble(edtNewlyPlantedArea.getText().toString()) + Double.parseDouble(edtRatoonArea.getText().toString()));
 
             dataAddMachine.putExtra(EXTRA_MACHINE_TYPE, spinMachineType.getSelectedItem().toString());
             dataAddMachine.putExtra(EXTRA_MACHINE_QRCODE, edtQRCode.getText().toString());
@@ -2509,7 +2530,9 @@ public class AddMachineActivity extends AppCompatActivity {
             dataAddMachine.putExtra(EXTRA_MODEL, spinModel.getSelectedItem().toString());
             dataAddMachine.putExtra(EXTRA_MODEL_SPECIFY, edtOtherModel.getText().toString().toUpperCase());
             dataAddMachine.putExtra(EXTRA_RATED_POWER, edtRatedPower.getText().toString());
-            dataAddMachine.putExtra(EXTRA_SERVICE_AREA, edtServiceArea.getText().toString());
+            dataAddMachine.putExtra(EXTRA_SERVICE_AREA, totalServiceArea.toString());
+            dataAddMachine.putExtra(EXTRA_NEWLY_PLANTED_AREA, edtNewlyPlantedArea.getText().toString());
+            dataAddMachine.putExtra(EXTRA_RATOONED_AREA, edtRatoonArea.getText().toString());
             dataAddMachine.putExtra(EXTRA_AVE_OP_HOURS, edtAveOpHours.getText().toString());
             dataAddMachine.putExtra(EXTRA_AVE_OP_DAYS, edtAveOpDays.getText().toString());
             dataAddMachine.putExtra(EXTRA_CAPACITY, edtCapacity.getText().toString());
@@ -2524,9 +2547,27 @@ public class AddMachineActivity extends AppCompatActivity {
             dataAddMachine.putExtra(EXTRA_YEAR_ACQUIRED, spinYearAcquired.getSelectedItem().toString());
             dataAddMachine.putExtra(EXTRA_CONDITION_ACQUIRED, spinConditionAcquired.getSelectedItem().toString());
             dataAddMachine.putExtra(EXTRA_RENTAL, spinRental.getSelectedItem().toString());
-            dataAddMachine.putExtra(EXTRA_CUSTOM_RATE, edtCustomRate.getText().toString());
-            dataAddMachine.putExtra(EXTRA_CUSTOM_UNIT, spinCustomUnit.getSelectedItem().toString());
+//            dataAddMachine.putExtra(EXTRA_CUSTOM_RATE, edtCustomRate.getText().toString());
+//            dataAddMachine.putExtra(EXTRA_CUSTOM_UNIT, spinCustomUnit.getSelectedItem().toString());
 //            dataAddMachine.putExtra(EXTRA_CUSTOM_UNIT_SPECIFY, edtCustomRateUnit.getText().toString().toUpperCase());
+            dataAddMachine.putExtra(EXTRA_MAIN_RENT_RATE, edtCustomRate.getText().toString());
+            dataAddMachine.putExtra(EXTRA_MAIN_RENT_UNIT, spinCustomUnit.getSelectedItem().toString());
+            dataAddMachine.putExtra(EXTRA_MAIN_RENT_UNIT_SPECIFY, "NO TEXTBOX");
+            dataAddMachine.putExtra(EXTRA_PLOW_RENT_RATE, edtPlowingRent.getText().toString());
+            dataAddMachine.putExtra(EXTRA_PLOW_RENT_UNIT, spinPlowingRentUnit.getSelectedItem().toString());
+            dataAddMachine.putExtra(EXTRA_PLOW_RENT_UNIT_SPECIFY, "NO TEXTBOX");
+            dataAddMachine.putExtra(EXTRA_HARR_RENT_RATE, edtHarrowingRent.getText().toString());
+            dataAddMachine.putExtra(EXTRA_HARR_RENT_UNIT, spinHarrowingRentUnit.getSelectedItem().toString());
+            dataAddMachine.putExtra(EXTRA_HARR_RENT_UNIT_SPECIFY, "NO TEXTBOX");
+            dataAddMachine.putExtra(EXTRA_FURR_RENT_RATE, edtFurrowingRent.getText().toString());
+            dataAddMachine.putExtra(EXTRA_FURR_RENT_UNIT, spinFurrowingRentUnit.getSelectedItem().toString());
+            dataAddMachine.putExtra(EXTRA_FURR_RENT_UNIT_SPECIFY, "NO TEXTBOX");
+            dataAddMachine.putExtra(EXTRA_OTHR_RENT_RATE, edtCustomRate.getText().toString());
+            dataAddMachine.putExtra(EXTRA_OTHR_RENT_UNIT, spinCustomUnit.getSelectedItem().toString());
+            dataAddMachine.putExtra(EXTRA_OTHR_RENT_UNIT_SPECIFY, "NO TEXTBOX");
+            dataAddMachine.putExtra(EXTRA_AVE_FUEL_PLOW, edtAveFuelConsPlow.getText().toString());
+            dataAddMachine.putExtra(EXTRA_AVE_FUEL_HARR, edtAveFuelConsHarr.getText().toString());
+            dataAddMachine.putExtra(EXTRA_AVE_FUEL_FURR, edtAveFuelConsFurr.getText().toString());
             dataAddMachine.putExtra(EXTRA_AVAILABILITY, spinAvailability.getSelectedItem().toString());
             dataAddMachine.putExtra(EXTRA_RENT_PROV, provRent);
             dataAddMachine.putExtra(EXTRA_RENT_MUN, munRent);
@@ -2534,6 +2575,7 @@ public class AddMachineActivity extends AppCompatActivity {
             dataAddMachine.putExtra(EXTRA_CONDITION, spinConditionPresent.getSelectedItem().toString());
             dataAddMachine.putExtra(EXTRA_PROBLEMS, listOfProblems);
             dataAddMachine.putExtra(EXTRA_PROBLEMS_SPECIFY, edtOtherProblems.getText().toString().toUpperCase());
+            dataAddMachine.putExtra(EXTRA_YEAR_INOPERABLE, spinYearInoperable.getSelectedItem().toString());
             dataAddMachine.putExtra(EXTRA_LOCATION, spinLocationOfMachine.getSelectedItem().toString());
             dataAddMachine.putExtra(EXTRA_PROV, singlespinProvince.getSelectedItem().toString().toUpperCase());
             dataAddMachine.putExtra(EXTRA_MUN, singlespinMunicipality.getSelectedItem().toString().toUpperCase());
@@ -2668,7 +2710,7 @@ public class AddMachineActivity extends AppCompatActivity {
                 }
                 machineTypeInfoCheck = machineTypeInfoBrandCheck && machineTypeInfoModelCheck;
 
-                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtServiceArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString());
+                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString());
                 // 2 Wheel Tractor
                 // 4 Wheel Tractor
                 break;
@@ -2695,7 +2737,7 @@ public class AddMachineActivity extends AppCompatActivity {
                     }
                 }
                 machineTypeInfoCheck = machineTypeInfoBrandCheck && machineTypeInfoModelCheck;
-                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) || !isNullOrEmpty(edtServiceArea.getText().toString()) || !isNullOrEmpty(edtAveOpHours.getText().toString()) ||
+                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) || !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) || !isNullOrEmpty(edtAveOpHours.getText().toString()) ||
                         !isNullOrEmpty(edtCapacity.getText().toString());
                 // BoomSprayer
                 // PowerSprayer
@@ -2722,7 +2764,7 @@ public class AddMachineActivity extends AppCompatActivity {
                     }
                 }
                 machineTypeInfoCheck = machineTypeInfoBrandCheck && machineTypeInfoModelCheck;
-                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtServiceArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
+                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
                         !isNullOrEmpty(edtNumLoads.getText().toString());
                 // Cane Grab Loader
                 break;
@@ -2745,7 +2787,7 @@ public class AddMachineActivity extends AppCompatActivity {
                     }
                 }
                 machineTypeInfoCheck = machineTypeInfoBrandCheck && machineTypeInfoModelCheck;
-                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtServiceArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
+                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
                         !isNullOrEmpty(edtCapacity.getText().toString()) && !isNullOrEmpty(edtAveYield.getText().toString());
                 // CombineHarvester
                 // Harvester
@@ -2772,7 +2814,7 @@ public class AddMachineActivity extends AppCompatActivity {
 
                 machineTypeInfoCheck = machineTypeInfoBrandCheck && machineTypeInfoModelCheck;
 
-                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtServiceArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
+                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
                         !isNullOrEmpty(edtCapacity.getText().toString()) && !isNullOrEmpty(edtRate.getText().toString());
                 //Dryer
                 //Sheller
@@ -2800,7 +2842,7 @@ public class AddMachineActivity extends AppCompatActivity {
 
                 machineTypeInfoCheck = machineTypeInfoBrandCheck && machineTypeInfoModelCheck && typeMillCheck;
 
-                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtServiceArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
+                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
                         !isNullOrEmpty(edtCapacity.getText().toString()) && !isNullOrEmpty(edtRate.getText().toString());
                 //Mill
                 break;
@@ -2826,7 +2868,7 @@ public class AddMachineActivity extends AppCompatActivity {
 
                 machineTypeInfoCheck = machineTypeInfoBrandCheck && machineTypeInfoModelCheck && typeTubewellsCheck;
 
-                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtServiceArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
+                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
                         !isNullOrEmpty(edtCapacity.getText().toString());
                 //WaterPump
                 break;
@@ -3196,7 +3238,7 @@ public class AddMachineActivity extends AppCompatActivity {
         spinTypeofTubeWells = findViewById(R.id.spinTypeOfTubewells);
         edtAveOpDays = findViewById(R.id.edtAverageOperatingDays);
         edtAveOpHours = findViewById(R.id.edtAverageOperatingHours);
-        edtServiceArea = findViewById(R.id.edtNewlyPlantedArea);
+        edtNewlyPlantedArea = findViewById(R.id.edtNewlyPlantedArea);
         edtRatoonArea = findViewById(R.id.edtRatoonArea);
         spinOwnership = findViewById(R.id.spinOwnership);
         spinPurchGrantDono = findViewById(R.id.spinPurchGrantDono);
