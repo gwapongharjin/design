@@ -578,10 +578,10 @@
                 android:entries="@array/condition_when_bought"
                 app:layout_constraintEnd_toEndOf="@+id/spinOwnership"
                 app:layout_constraintStart_toStartOf="@+id/spinOwnership"
-                app:layout_constraintTop_toBottomOf="@+id/tvConditionAcquired" />
+                app:layout_constraintTop_toBottomOf="@+id/tvConditionPresentImp" />
 
             <TextView
-                android:id="@+id/tvConditionAcquired"
+                android:id="@+id/tvConditionPresentImp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -597,15 +597,15 @@
                 android:layout_marginEnd="32dp"
                 android:text="Is this Machine for Rent?"
                 android:tooltipText="Pinaparenta ba ang makinaryang ito?"
-                app:layout_constraintEnd_toEndOf="@+id/tvConditionAcquired"
-                app:layout_constraintStart_toStartOf="@+id/tvConditionAcquired"
+                app:layout_constraintEnd_toEndOf="@+id/tvConditionPresentImp"
+                app:layout_constraintStart_toStartOf="@+id/tvConditionPresentImp"
                 app:layout_constraintTop_toBottomOf="@id/spinConditionAcquired" />
 
             <Spinner
                 android:id="@+id/spinRental"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="32dp"
                 android:background="@drawable/custom_spinner"
                 android:entries="@array/yes_no"
                 app:layout_constraintEnd_toEndOf="@+id/spinConditionAcquired"
@@ -1056,7 +1056,6 @@
                 android:id="@+id/spinYearInoperable"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/custom_spinner"
                 app:layout_constraintEnd_toEndOf="@+id/spinConditionPresent"

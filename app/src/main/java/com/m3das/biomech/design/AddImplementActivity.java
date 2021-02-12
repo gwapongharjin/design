@@ -71,21 +71,21 @@ public class AddImplementActivity extends AppCompatActivity {
     Button btnSave;
     private Intent intentFromDb;
     SingleSpinnerSearch singlespinProvinces, singlespinMunicipalities, singlespinBarangays;
-    ConstraintLayout.LayoutParams paramsYearAcquired, paramsTSAMain, paramstvPlanter, paramsTSAFert, paramsTSAHarvest, paramsTSAGrab, paramsTSADitch;
-    EditText edtQRCode, edtTotalServiceAreaMain, edtHoursPDayMain, edtDaysPSeasonMain, edtEffectiveAreaAccompMain, edtTimeUsedDuringOpMain,
-            edtNumberofRowsPlant, edtDistanceofPlantMat, edtTotalServiceAreaPlant, edtHoursPDayPlant, edtDaysPSeasonPlant, edtEffectiveAreaAccompPlant, edtTimeUsedDuringOpPlant,
-            edtTotalServiceAreaFert, edtHoursPDayFert, edtDaysPSeasonFert, edtEffectiveAreaAccompFert, edtTimeUsedDuringOpFert, edtWeightOfFert,
-            edtTotalServiceAreaHarvest, edtHoursPDayHarvest, edtDaysPSeasonHarvest, edtEffectiveAreaAccompHarvest, edtTimeUsedDuringOpHarvest, edtAveYieldHarvest,
-            edtTotalServiceAreaGrab, edtHoursPDayGrab, edtDaysPSeasonGrab, edtLoadCapacityGrab, edtNumberofLoadsGrab,
-            edtTotalServiceAreaDitch, edtHoursPDayDitch, edtDaysPSeasonDitch, edtDepthOfCutDitch;
+    ConstraintLayout.LayoutParams paramsYearAcquired, paramsEAMain, paramstvPlanter, paramsEAFert, paramsEAHarvest, paramsEAGrab, paramsDCDitch;
+    EditText edtQRCode, edtEffectiveAreaAccompMain, edtTimeUsedDuringOpMain,
+            edtNumberofRowsPlant, edtDistanceofPlantMat, edtEffectiveAreaAccompPlant, edtTimeUsedDuringOpPlant,
+            edtEffectiveAreaAccompFert, edtTimeUsedDuringOpFert, edtWeightOfFert,
+            edtEffectiveAreaAccompHarvest, edtTimeUsedDuringOpHarvest, edtAveYieldHarvest,
+            edtEffectiveAreaAccompGrab, edtTimeUsedDuringOpGrab, edtLoadCapacityGrab,
+            edtDepthOfCutDitch;
 
     TextView tvYearAcquired, tvLat, tvLong, tvAcc,
-            tvHaMain, tvHoursPDayMain, tvDaysPSeasonMain, tvHaEAMain, tvHoursPDayOpMain, tvFieldCapacityMain, tvFieldCapacityResultMain,
-            tvTypeofPlant, tvDistanceofPlant, tvHaPlant, tvHoursPDayPlant, tvDaysPSeasonPlant, tvHaEAPlant, tvHoursPDayOpPlant, tvFieldCapacityPlant, tvFieldCapacityResultPlant, tvNumRowsPlant,
-            tvHaFert, tvHoursPDayFert, tvDaysPSeasonfFert, tvHaEAFert, tvHoursPDayOpFert, tvFieldCapacityFert, tvFieldCapacityResultFert, tvWeightOfFert, tvDeliveryRateFert, tvDeliveryRateResultFert,
-            tvHaHarvest, tvHoursPDayHarvest, tvDaysPSeasonHarvest, tvHaEAHarvest, tvHoursPDayOpHarvest, tvFieldCapacityHarvest, tvFieldCapacityResultHarvest, tvTonCannesPHaHarvest,
-            tvHaGrab, tvHoursPDayGrab, tvDaysPSeasonGrab, tvLoadPHaGrab, tvLoadCapGrab,
-            tvHaDitch, tvHoursPDayDitch, tvDaysPSeasonDitch, tvDepthCutDitch;
+            tvHaEAMain, tvHoursPDayOpMain, tvFieldCapacityMain, tvFieldCapacityResultMain,
+            tvTypeofPlant, tvDistanceofPlant, tvNumRowsPlant, tvHaEAPlant, tvHoursPDayOpPlant, tvFieldCapacityPlant, tvFieldCapacityResultPlant,
+            tvHaEAFert, tvHoursPDayOpFert, tvFieldCapacityFert, tvFieldCapacityResultFert, tvWeightOfFert, tvDeliveryRateFert, tvDeliveryRateResultFert,
+            tvHaEAHarvest, tvHoursPDayOpHarvest, tvFieldCapacityHarvest, tvFieldCapacityResultHarvest, tvTonCannesPHaHarvest,
+            tvHaEAGrab, tvHoursPDayOpGrab, tvLoadCapacityGrab, tvFieldCapacityGrab, tvFieldCapacityResultGrab,
+            tvDepthCutDitch;
     CheckBox cbLandClear, cbPrePlant, cbPlant, cbFert, cbPest, cbIrriDrain, cbCult, cbRatoon, cbHarvest, cbPostHarvest, cbHaul;
     int bigMargin, smallMargin;
     Double fieldCap = null;
@@ -338,7 +338,7 @@ public class AddImplementActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveImplement();
+//                saveImplement();
             }
         });
 
@@ -719,9 +719,9 @@ public class AddImplementActivity extends AppCompatActivity {
             hauling = "";
         }
 
-        edtTotalServiceAreaMain.setText(intent.getStringExtra(EXTRA_TSA_MAIN));
-        edtHoursPDayMain.setText(intent.getStringExtra(EXTRA_AVE_OP_HOURS_MAIN));
-        edtDaysPSeasonMain.setText(intent.getStringExtra(EXTRA_AVE_OP_DAYS_MAIN));
+//        edtTotalServiceAreaMain.setText(intent.getStringExtra(EXTRA_TSA_MAIN));
+//        edtHoursPDayMain.setText(intent.getStringExtra(EXTRA_AVE_OP_HOURS_MAIN));
+//        edtDaysPSeasonMain.setText(intent.getStringExtra(EXTRA_AVE_OP_DAYS_MAIN));
         edtEffectiveAreaAccompMain.setText(intent.getStringExtra(EXTRA_EFF_AREA_ACC_MAIN));
         edtTimeUsedDuringOpMain.setText(intent.getStringExtra(EXTRA_TIME_USED_OP_MAIN));
         tvFieldCapacityResultMain.setText(intent.getStringExtra(EXTRA_FIELD_CAP_MAIN));
@@ -737,39 +737,39 @@ public class AddImplementActivity extends AppCompatActivity {
         spinTypeOfPlanter.setSelection(position);
         edtNumberofRowsPlant.setText(intent.getStringExtra(EXTRA_NUM_ROWS_PLANT));
         edtDistanceofPlantMat.setText(intent.getStringExtra(EXTRA_DIST_MAT_PLANT));
-        edtTotalServiceAreaPlant.setText(intent.getStringExtra(EXTRA_TSA_PLANT));
-        edtHoursPDayPlant.setText(intent.getStringExtra(EXTRA_AVE_OP_HOURS_PLANT));
-        edtDaysPSeasonPlant.setText(intent.getStringExtra(EXTRA_AVE_OP_DAYS_PLANT));
+//        edtTotalServiceAreaPlant.setText(intent.getStringExtra(EXTRA_TSA_PLANT));
+//        edtHoursPDayPlant.setText(intent.getStringExtra(EXTRA_AVE_OP_HOURS_PLANT));
+//        edtDaysPSeasonPlant.setText(intent.getStringExtra(EXTRA_AVE_OP_DAYS_PLANT));
         edtEffectiveAreaAccompPlant.setText(intent.getStringExtra(EXTRA_EFF_AREA_ACC_PLANT));
         edtTimeUsedDuringOpPlant.setText(intent.getStringExtra(EXTRA_TIME_USED_OP_PLANT));
         tvFieldCapacityResultPlant.setText(intent.getStringExtra(EXTRA_FIELD_CAP_PLANT));
 
-        edtTotalServiceAreaFert.setText(intent.getStringExtra(EXTRA_TSA_FERT));
-        edtHoursPDayFert.setText(intent.getStringExtra(EXTRA_AVE_OP_HOURS_FERT));
-        edtDaysPSeasonFert.setText(intent.getStringExtra(EXTRA_AVE_OP_DAYS_FERT));
+//        edtTotalServiceAreaFert.setText(intent.getStringExtra(EXTRA_TSA_FERT));
+//        edtHoursPDayFert.setText(intent.getStringExtra(EXTRA_AVE_OP_HOURS_FERT));
+//        edtDaysPSeasonFert.setText(intent.getStringExtra(EXTRA_AVE_OP_DAYS_FERT));
         edtEffectiveAreaAccompFert.setText(intent.getStringExtra(EXTRA_EFF_AREA_ACC_FERT));
         edtTimeUsedDuringOpFert.setText(intent.getStringExtra(EXTRA_TIME_USED_OP_FERT));
         tvFieldCapacityResultFert.setText(intent.getStringExtra(EXTRA_FIELD_CAP_FERT));
         edtWeightOfFert.setText(intent.getStringExtra(EXTRA_WEIGHT_FERT));
         tvDeliveryRateResultFert.setText(intent.getStringExtra(EXTRA_DEL_RATE_FERT));
 
-        edtTotalServiceAreaHarvest.setText(intent.getStringExtra(EXTRA_TSA_HARVEST));
-        edtHoursPDayHarvest.setText(intent.getStringExtra(EXTRA_AVE_OP_HOURS_HARVEST));
-        edtDaysPSeasonHarvest.setText(intent.getStringExtra(EXTRA_AVE_OP_DAYS_HARVEST));
+//        edtTotalServiceAreaHarvest.setText(intent.getStringExtra(EXTRA_TSA_HARVEST));
+//        edtHoursPDayHarvest.setText(intent.getStringExtra(EXTRA_AVE_OP_HOURS_HARVEST));
+//        edtDaysPSeasonHarvest.setText(intent.getStringExtra(EXTRA_AVE_OP_DAYS_HARVEST));
         edtEffectiveAreaAccompHarvest.setText(intent.getStringExtra(EXTRA_EFF_AREA_ACC_HARVEST));
         edtTimeUsedDuringOpHarvest.setText(intent.getStringExtra(EXTRA_TIME_USED_OP_HARVEST));
         tvFieldCapacityResultHarvest.setText(intent.getStringExtra(EXTRA_FIELD_CAP_HARVEST));
         edtAveYieldHarvest.setText(intent.getStringExtra(EXTRA_AVE_YIELD_HARVEST));
 
-        edtTotalServiceAreaGrab.setText(intent.getStringExtra(EXTRA_TSA_GRAB));
-        edtHoursPDayGrab.setText(intent.getStringExtra(EXTRA_AVE_OP_HOURS_GRAB));
-        edtDaysPSeasonGrab.setText(intent.getStringExtra(EXTRA_AVE_OP_DAYS_GRAB));
+//        edtTotalServiceAreaGrab.setText(intent.getStringExtra(EXTRA_TSA_GRAB));
+//        edtHoursPDayGrab.setText(intent.getStringExtra(EXTRA_AVE_OP_HOURS_GRAB));
+//        edtDaysPSeasonGrab.setText(intent.getStringExtra(EXTRA_AVE_OP_DAYS_GRAB));
+//        edtNumberofLoadsGrab.setText(intent.getStringExtra(EXTRA_NUM_LOAD_GRAB));
         edtLoadCapacityGrab.setText(intent.getStringExtra(EXTRA_LOAD_CAP_GRAB));
-        edtNumberofLoadsGrab.setText(intent.getStringExtra(EXTRA_NUM_LOAD_GRAB));
 
-        edtTotalServiceAreaDitch.setText(intent.getStringExtra(EXTRA_TSA_DITCH));
-        edtHoursPDayDitch.setText(intent.getStringExtra(EXTRA_AVE_OP_HOURS_DITCH));
-        edtDaysPSeasonDitch.setText(intent.getStringExtra(EXTRA_AVE_OP_DAYS_DITCH));
+//        edtTotalServiceAreaDitch.setText(intent.getStringExtra(EXTRA_TSA_DITCH));
+//        edtHoursPDayDitch.setText(intent.getStringExtra(EXTRA_AVE_OP_HOURS_DITCH));
+//        edtDaysPSeasonDitch.setText(intent.getStringExtra(EXTRA_AVE_OP_DAYS_DITCH));
         edtDepthOfCutDitch.setText(intent.getStringExtra(EXTRA_DEPTH_CUT_DITCH));
 
 
@@ -1014,45 +1014,45 @@ public class AddImplementActivity extends AppCompatActivity {
             dataAddImplement.putExtra(EXTRA_HARVEST, harvest);
             dataAddImplement.putExtra(EXTRA_POST_HARVEST, postHarvest);
             dataAddImplement.putExtra(EXTRA_HAULING, hauling);
-            dataAddImplement.putExtra(EXTRA_TSA_MAIN, edtTotalServiceAreaMain.getText().toString());
-            dataAddImplement.putExtra(EXTRA_AVE_OP_HOURS_MAIN, edtHoursPDayMain.getText().toString());
-            dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_MAIN, edtDaysPSeasonMain.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_TSA_MAIN, edtTotalServiceAreaMain.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_AVE_OP_HOURS_MAIN, edtHoursPDayMain.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_MAIN, edtDaysPSeasonMain.getText().toString());
             dataAddImplement.putExtra(EXTRA_EFF_AREA_ACC_MAIN, edtEffectiveAreaAccompMain.getText().toString());
             dataAddImplement.putExtra(EXTRA_TIME_USED_OP_MAIN, edtTimeUsedDuringOpMain.getText().toString());
             dataAddImplement.putExtra(EXTRA_FIELD_CAP_MAIN, tvFieldCapacityResultMain.getText().toString());
             dataAddImplement.putExtra(EXTRA_TYPE_PLANT, spinTypeOfPlanter.getSelectedItem().toString());
             dataAddImplement.putExtra(EXTRA_NUM_ROWS_PLANT, edtNumberofRowsPlant.getText().toString());
             dataAddImplement.putExtra(EXTRA_DIST_MAT_PLANT, edtDistanceofPlantMat.getText().toString());
-            dataAddImplement.putExtra(EXTRA_TSA_PLANT, edtTotalServiceAreaPlant.getText().toString());
-            dataAddImplement.putExtra(EXTRA_AVE_OP_HOURS_PLANT, edtHoursPDayPlant.getText().toString());
-            dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_PLANT, edtDaysPSeasonPlant.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_TSA_PLANT, edtTotalServiceAreaPlant.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_AVE_OP_HOURS_PLANT, edtHoursPDayPlant.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_PLANT, edtDaysPSeasonPlant.getText().toString());
             dataAddImplement.putExtra(EXTRA_EFF_AREA_ACC_PLANT, edtEffectiveAreaAccompPlant.getText().toString());
             dataAddImplement.putExtra(EXTRA_TIME_USED_OP_PLANT, edtTimeUsedDuringOpPlant.getText().toString());
             dataAddImplement.putExtra(EXTRA_FIELD_CAP_PLANT, tvFieldCapacityResultPlant.getText().toString());
-            dataAddImplement.putExtra(EXTRA_TSA_FERT, edtTotalServiceAreaFert.getText().toString());
-            dataAddImplement.putExtra(EXTRA_AVE_OP_HOURS_FERT, edtHoursPDayFert.getText().toString());
-            dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_FERT, edtHoursPDayFert.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_TSA_FERT, edtTotalServiceAreaFert.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_AVE_OP_HOURS_FERT, edtHoursPDayFert.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_FERT, edtHoursPDayFert.getText().toString());
             dataAddImplement.putExtra(EXTRA_EFF_AREA_ACC_FERT, edtEffectiveAreaAccompFert.getText().toString());
             dataAddImplement.putExtra(EXTRA_TIME_USED_OP_FERT, edtTimeUsedDuringOpFert.getText().toString());
             dataAddImplement.putExtra(EXTRA_FIELD_CAP_FERT, tvFieldCapacityResultFert.getText().toString());
             dataAddImplement.putExtra(EXTRA_WEIGHT_FERT, edtWeightOfFert.getText().toString());
             dataAddImplement.putExtra(EXTRA_DEL_RATE_FERT, tvDeliveryRateResultFert.getText().toString());
-            dataAddImplement.putExtra(EXTRA_TSA_HARVEST, edtTotalServiceAreaHarvest.getText().toString());
-            dataAddImplement.putExtra(EXTRA_AVE_OP_HOURS_HARVEST, edtHoursPDayHarvest.getText().toString());
-            dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_HARVEST, edtDaysPSeasonHarvest.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_TSA_HARVEST, edtTotalServiceAreaHarvest.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_AVE_OP_HOURS_HARVEST, edtHoursPDayHarvest.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_HARVEST, edtDaysPSeasonHarvest.getText().toString());
             dataAddImplement.putExtra(EXTRA_EFF_AREA_ACC_HARVEST, edtEffectiveAreaAccompHarvest.getText().toString());
             dataAddImplement.putExtra(EXTRA_TIME_USED_OP_HARVEST, edtTimeUsedDuringOpHarvest.getText().toString());
             dataAddImplement.putExtra(EXTRA_FIELD_CAP_HARVEST, tvFieldCapacityResultHarvest.getText().toString());
             dataAddImplement.putExtra(EXTRA_AVE_YIELD_HARVEST, edtAveYieldHarvest.getText().toString());
-            dataAddImplement.putExtra(EXTRA_TSA_GRAB, edtTotalServiceAreaGrab.getText().toString());
-            dataAddImplement.putExtra(EXTRA_AVE_OP_HOURS_GRAB, edtHoursPDayGrab.getText().toString());
-            dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_GRAB, edtDaysPSeasonGrab.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_TSA_GRAB, edtTotalServiceAreaGrab.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_AVE_OP_HOURS_GRAB, edtHoursPDayGrab.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_GRAB, edtDaysPSeasonGrab.getText().toString());
 //        dataAddImplement.putExtra(EXTRA_EFF_AREA_ACC_GRAB,effe);
             dataAddImplement.putExtra(EXTRA_LOAD_CAP_GRAB, edtLoadCapacityGrab.getText().toString());
-            dataAddImplement.putExtra(EXTRA_NUM_LOAD_GRAB, edtNumberofLoadsGrab.getText().toString());
-            dataAddImplement.putExtra(EXTRA_TSA_DITCH, edtTotalServiceAreaDitch.getText().toString());
-            dataAddImplement.putExtra(EXTRA_AVE_OP_HOURS_DITCH, edtHoursPDayDitch.getText().toString());
-            dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_DITCH, edtDaysPSeasonDitch.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_NUM_LOAD_GRAB, edtNumberofLoadsGrab.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_TSA_DITCH, edtTotalServiceAreaDitch.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_AVE_OP_HOURS_DITCH, edtHoursPDayDitch.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_DITCH, edtDaysPSeasonDitch.getText().toString());
             dataAddImplement.putExtra(EXTRA_DEPTH_CUT_DITCH, edtDepthOfCutDitch.getText().toString());
             dataAddImplement.putExtra(EXTRA_YEAR_ACQUIRED, spinYearAcquired.getSelectedItem().toString());
             dataAddImplement.putExtra(EXTRA_CONDITION, spinCondition.getSelectedItem().toString());
@@ -1123,45 +1123,39 @@ public class AddImplementActivity extends AppCompatActivity {
             case "ROTAVATOR":
             case "TRASH INCORPORATOR":
 
-                implementSpecsCheck = !isNullOrEmpty(edtTotalServiceAreaMain.getText().toString()) && !isNullOrEmpty(edtHoursPDayMain.getText().toString()) &&
-                        !isNullOrEmpty(edtDaysPSeasonMain.getText().toString()) && !isNullOrEmpty(edtEffectiveAreaAccompMain.getText().toString()) &&
+                implementSpecsCheck = !isNullOrEmpty(edtEffectiveAreaAccompMain.getText().toString()) &&
                         !isNullOrEmpty(edtTimeUsedDuringOpMain.getText().toString());
 
                 break;
             case "MECHANICAL PLANTER":
 
                 implementSpecsCheck = !isNullOrEmpty(spinTypeOfPlanter.getSelectedItem().toString()) && !isNullOrEmpty(edtNumberofRowsPlant.getText().toString()) &&
-                        !isNullOrEmpty(edtDistanceofPlantMat.getText().toString()) && !isNullOrEmpty(edtTotalServiceAreaPlant.getText().toString()) &&
-                        !isNullOrEmpty(edtHoursPDayPlant.getText().toString()) && !isNullOrEmpty(edtDaysPSeasonPlant.getText().toString()) &&
-                        !isNullOrEmpty(edtEffectiveAreaAccompPlant.getText().toString()) && !isNullOrEmpty(edtTimeUsedDuringOpPlant.getText().toString());
+                        !isNullOrEmpty(edtDistanceofPlantMat.getText().toString()) && !isNullOrEmpty(edtEffectiveAreaAccompPlant.getText().toString()) &&
+                        !isNullOrEmpty(edtTimeUsedDuringOpPlant.getText().toString());
 
                 break;
             case "GRANULAR FERTILIZER APPLICATOR":
             case "FERTILIZER APPLICATOR WITH CUTAWAY":
 
-                implementSpecsCheck = !isNullOrEmpty(edtTotalServiceAreaFert.getText().toString()) && !isNullOrEmpty(edtHoursPDayFert.getText().toString()) &&
-                        !isNullOrEmpty(edtDaysPSeasonFert.getText().toString()) && !isNullOrEmpty(edtEffectiveAreaAccompFert.getText().toString()) &&
+                implementSpecsCheck = !isNullOrEmpty(edtEffectiveAreaAccompFert.getText().toString()) &&
                         !isNullOrEmpty(edtTimeUsedDuringOpFert.getText().toString()) && !isNullOrEmpty(edtWeightOfFert.getText().toString());
 
                 break;
             case "MECHANICAL HARVESTER":
 
-                implementSpecsCheck = !isNullOrEmpty(edtTotalServiceAreaHarvest.getText().toString()) && !isNullOrEmpty(edtHoursPDayHarvest.getText().toString()) &&
-                        !isNullOrEmpty(edtDaysPSeasonHarvest.getText().toString()) && !isNullOrEmpty(edtEffectiveAreaAccompHarvest.getText().toString()) &&
+                implementSpecsCheck = !isNullOrEmpty(edtEffectiveAreaAccompHarvest.getText().toString()) &&
                         !isNullOrEmpty(edtTimeUsedDuringOpHarvest.getText().toString()) && !isNullOrEmpty(edtAveYieldHarvest.getText().toString());
                 break;
             case "CANE GRAB LOADERS":
 
-                implementSpecsCheck = !isNullOrEmpty(edtTotalServiceAreaGrab.getText().toString()) && !isNullOrEmpty(edtHoursPDayGrab.getText().toString()) &&
-                        !isNullOrEmpty(edtDaysPSeasonGrab.getText().toString()) && !isNullOrEmpty(edtLoadCapacityGrab.getText().toString()) &&
-                        !isNullOrEmpty(edtNumberofLoadsGrab.getText().toString());
+                implementSpecsCheck = !isNullOrEmpty(edtEffectiveAreaAccompGrab.getText().toString()) && !isNullOrEmpty(edtTimeUsedDuringOpGrab.getText().toString()) &&
+                        !isNullOrEmpty(edtLoadCapacityGrab.getText().toString());
 
                 //TODO add new edit texts
                 break;
             case "DITCHER":
 
-                implementSpecsCheck = !isNullOrEmpty(edtTotalServiceAreaDitch.getText().toString()) && !isNullOrEmpty(edtHoursPDayDitch.getText().toString()) &&
-                        !isNullOrEmpty(edtDaysPSeasonDitch.getText().toString()) && !isNullOrEmpty(edtDepthOfCutDitch.getText().toString());
+                implementSpecsCheck = !isNullOrEmpty(edtDepthOfCutDitch.getText().toString());
                 break;
             default:
                 implementSpecsCheck = false;
@@ -1239,9 +1233,9 @@ public class AddImplementActivity extends AppCompatActivity {
             case "TRASH INCORPORATOR":
                 hideAll();
                 showMainImplements();
-                paramsTSAMain.topToBottom = R.id.cbHauling;
-                paramsTSAMain.topMargin = bigMargin;
-                edtTotalServiceAreaMain.setLayoutParams(paramsTSAMain);
+                paramsEAMain.topToBottom = R.id.cbHauling;
+                paramsEAMain.topMargin = bigMargin;
+                tvHaEAMain.setLayoutParams(paramsEAMain);
                 tvYearAcquired.setLayoutParams(paramsYearAcquired);
                 paramsYearAcquired.topToBottom = R.id.tvFieldCapacityResultMain;
                 break;
@@ -1257,33 +1251,33 @@ public class AddImplementActivity extends AppCompatActivity {
             case "FERTILIZER APPLICATOR WITH CUTAWAY":
                 hideAll();
                 showFert();
-                paramsTSAFert.topToBottom = R.id.cbHauling;
-                paramsTSAFert.topMargin = bigMargin;
-                edtTotalServiceAreaFert.setLayoutParams(paramsTSAFert);
+                paramsEAFert.topToBottom = R.id.cbHauling;
+                paramsEAFert.topMargin = bigMargin;
+                tvHaEAFert.setLayoutParams(paramsEAFert);
                 paramsYearAcquired.topToBottom = R.id.tvDeliveryRateResultFert;
                 break;
             case "MECHANICAL HARVESTER":
                 hideAll();
                 showHarvest();
-                paramsTSAHarvest.topToBottom = R.id.cbHauling;
-                paramsTSAHarvest.topMargin = bigMargin;
-                edtTotalServiceAreaHarvest.setLayoutParams(paramsTSAHarvest);
-                paramsYearAcquired.topToBottom = R.id.edtAveYieldHarvest;
+                paramsEAHarvest.topToBottom = R.id.cbHauling;
+                paramsEAHarvest.topMargin = bigMargin;
+                tvHaEAHarvest.setLayoutParams(paramsEAHarvest);
+                paramsYearAcquired.topToBottom = R.id.tvFieldCapacityHarvest;
                 break;
             case "CANE GRAB LOADERS":
                 hideAll();
                 showGrab();
-                paramsTSAGrab.topToBottom = R.id.cbHauling;
-                paramsTSAGrab.topMargin = bigMargin;
-                edtTotalServiceAreaGrab.setLayoutParams(paramsTSAGrab);
-                paramsYearAcquired.topToBottom = R.id.edtNumberofLoadsGrab;
+                paramsEAGrab.topToBottom = R.id.cbHauling;
+                paramsEAGrab.topMargin = bigMargin;
+                tvHaEAGrab.setLayoutParams(paramsEAGrab);
+                paramsYearAcquired.topToBottom = R.id.tvFieldCapacityGrab;
                 break;
             case "DITCHER":
                 hideAll();
                 showDitch();
-                paramsTSADitch.topToBottom = R.id.cbHauling;
-                paramsTSADitch.topMargin = bigMargin;
-                edtTotalServiceAreaDitch.setLayoutParams(paramsTSADitch);
+                paramsDCDitch.topToBottom = R.id.cbHauling;
+                paramsDCDitch.topMargin = bigMargin;
+                tvDepthCutDitch.setLayoutParams(paramsDCDitch);
                 paramsYearAcquired.topToBottom = R.id.edtDepthOfCutDitch;
                 break;
             default:
@@ -1296,42 +1290,53 @@ public class AddImplementActivity extends AppCompatActivity {
     }
 
     private void showDitch() {
-        edtTotalServiceAreaDitch.setVisibility(View.VISIBLE);
-        edtHoursPDayDitch.setVisibility(View.VISIBLE);
-        edtDaysPSeasonDitch.setVisibility(View.VISIBLE);
-        edtDepthOfCutDitch.setVisibility(View.VISIBLE);
-
-        tvHaDitch.setVisibility(View.VISIBLE);
-        tvHoursPDayDitch.setVisibility(View.VISIBLE);
-        tvDaysPSeasonDitch.setVisibility(View.VISIBLE);
+//        edtTotalServiceAreaDitch.setVisibility(View.VISIBLE);
+//        edtHoursPDayDitch.setVisibility(View.VISIBLE);
+//        edtDaysPSeasonDitch.setVisibility(View.VISIBLE);
+//
+//        tvHaDitch.setVisibility(View.VISIBLE);
+//        tvHoursPDayDitch.setVisibility(View.VISIBLE);
+//        tvDaysPSeasonDitch.setVisibility(View.VISIBLE);
         tvDepthCutDitch.setVisibility(View.VISIBLE);
+        edtDepthOfCutDitch.setVisibility(View.VISIBLE);
     }
 
     private void showGrab() {
-        edtTotalServiceAreaGrab.setVisibility(View.VISIBLE);
-        edtHoursPDayGrab.setVisibility(View.VISIBLE);
-        edtDaysPSeasonGrab.setVisibility(View.VISIBLE);
-        edtLoadCapacityGrab.setVisibility(View.VISIBLE);
-        edtNumberofLoadsGrab.setVisibility(View.VISIBLE);
+//        edtTotalServiceAreaGrab.setVisibility(View.VISIBLE);
+//        edtHoursPDayGrab.setVisibility(View.VISIBLE);
+//        edtDaysPSeasonGrab.setVisibility(View.VISIBLE);
+//        edtNumberofLoadsGrab.setVisibility(View.VISIBLE);
+//
+//        tvHaGrab.setVisibility(View.VISIBLE);
+//        tvHoursPDayGrab.setVisibility(View.VISIBLE);
+//        tvDaysPSeasonGrab.setVisibility(View.VISIBLE);
+//        tvLoadPHaGrab.setVisibility(View.VISIBLE);
+//        tvLoadCapGrab.setVisibility(View.VISIBLE);
 
-        tvHaGrab.setVisibility(View.VISIBLE);
-        tvHoursPDayGrab.setVisibility(View.VISIBLE);
-        tvDaysPSeasonGrab.setVisibility(View.VISIBLE);
-        tvLoadPHaGrab.setVisibility(View.VISIBLE);
-        tvLoadCapGrab.setVisibility(View.VISIBLE);
+
+        edtEffectiveAreaAccompGrab.setVisibility(View.VISIBLE);
+        edtTimeUsedDuringOpGrab.setVisibility(View.VISIBLE);
+        edtLoadCapacityGrab.setVisibility(View.VISIBLE);
+        tvHaEAGrab.setVisibility(View.VISIBLE);
+        tvHoursPDayOpGrab.setVisibility(View.VISIBLE);
+        tvLoadCapacityGrab.setVisibility(View.VISIBLE);
+        tvFieldCapacityGrab.setVisibility(View.VISIBLE);
+        tvFieldCapacityResultGrab.setVisibility(View.VISIBLE);
     }
 
     private void showHarvest() {
-        edtTotalServiceAreaHarvest.setVisibility(View.VISIBLE);
-        edtHoursPDayHarvest.setVisibility(View.VISIBLE);
-        edtDaysPSeasonHarvest.setVisibility(View.VISIBLE);
+//        edtTotalServiceAreaHarvest.setVisibility(View.VISIBLE);
+//        edtHoursPDayHarvest.setVisibility(View.VISIBLE);
+//        edtDaysPSeasonHarvest.setVisibility(View.VISIBLE);
+//        tvHaHarvest.setVisibility(View.VISIBLE);
+//        tvHoursPDayHarvest.setVisibility(View.VISIBLE);
+//        tvDaysPSeasonHarvest.setVisibility(View.VISIBLE);
+
         edtEffectiveAreaAccompHarvest.setVisibility(View.VISIBLE);
         edtTimeUsedDuringOpHarvest.setVisibility(View.VISIBLE);
         edtAveYieldHarvest.setVisibility(View.VISIBLE);
 
-        tvHaHarvest.setVisibility(View.VISIBLE);
-        tvHoursPDayHarvest.setVisibility(View.VISIBLE);
-        tvDaysPSeasonHarvest.setVisibility(View.VISIBLE);
+
         tvHaEAHarvest.setVisibility(View.VISIBLE);
         tvHoursPDayOpHarvest.setVisibility(View.VISIBLE);
         tvFieldCapacityHarvest.setVisibility(View.VISIBLE);
@@ -1340,16 +1345,17 @@ public class AddImplementActivity extends AppCompatActivity {
     }
 
     private void showFert() {
-        edtTotalServiceAreaFert.setVisibility(View.VISIBLE);
-        edtHoursPDayFert.setVisibility(View.VISIBLE);
-        edtDaysPSeasonFert.setVisibility(View.VISIBLE);
+//        edtTotalServiceAreaFert.setVisibility(View.VISIBLE);
+//        edtHoursPDayFert.setVisibility(View.VISIBLE);
+//        edtDaysPSeasonFert.setVisibility(View.VISIBLE);
+//        tvHaFert.setVisibility(View.VISIBLE);
+//        tvHoursPDayFert.setVisibility(View.VISIBLE);
+//        tvDaysPSeasonfFert.setVisibility(View.VISIBLE);
         edtEffectiveAreaAccompFert.setVisibility(View.VISIBLE);
         edtTimeUsedDuringOpFert.setVisibility(View.VISIBLE);
         edtWeightOfFert.setVisibility(View.VISIBLE);
 
-        tvHaFert.setVisibility(View.VISIBLE);
-        tvHoursPDayFert.setVisibility(View.VISIBLE);
-        tvDaysPSeasonfFert.setVisibility(View.VISIBLE);
+
         tvHaEAFert.setVisibility(View.VISIBLE);
         tvHoursPDayOpFert.setVisibility(View.VISIBLE);
         tvFieldCapacityFert.setVisibility(View.VISIBLE);
@@ -1360,25 +1366,27 @@ public class AddImplementActivity extends AppCompatActivity {
     }
 
     private void showPlanter() {
+//        edtTotalServiceAreaPlant.setVisibility(View.VISIBLE);
+//        edtHoursPDayPlant.setVisibility(View.VISIBLE);
+//        edtDaysPSeasonPlant.setVisibility(View.VISIBLE);
+//        tvTypeofPlant.setVisibility(View.VISIBLE);
+//        tvDistanceofPlant.setVisibility(View.VISIBLE);
+//        tvHaPlant.setVisibility(View.VISIBLE);
+//        tvHoursPDayPlant.setVisibility(View.VISIBLE);
+//        tvDaysPSeasonPlant.setVisibility(View.VISIBLE);
         spinTypeOfPlanter.setVisibility(View.VISIBLE);
         edtNumberofRowsPlant.setVisibility(View.VISIBLE);
         edtDistanceofPlantMat.setVisibility(View.VISIBLE);
-        edtTotalServiceAreaPlant.setVisibility(View.VISIBLE);
-        edtHoursPDayPlant.setVisibility(View.VISIBLE);
-        edtDaysPSeasonPlant.setVisibility(View.VISIBLE);
         edtEffectiveAreaAccompPlant.setVisibility(View.VISIBLE);
         edtTimeUsedDuringOpPlant.setVisibility(View.VISIBLE);
 
-        tvTypeofPlant.setVisibility(View.VISIBLE);
-        tvDistanceofPlant.setVisibility(View.VISIBLE);
-        tvHaPlant.setVisibility(View.VISIBLE);
-        tvHoursPDayPlant.setVisibility(View.VISIBLE);
-        tvDaysPSeasonPlant.setVisibility(View.VISIBLE);
         tvHaEAPlant.setVisibility(View.VISIBLE);
         tvHoursPDayOpPlant.setVisibility(View.VISIBLE);
         tvFieldCapacityPlant.setVisibility(View.VISIBLE);
         tvFieldCapacityResultPlant.setVisibility(View.VISIBLE);
         tvNumRowsPlant.setVisibility(View.VISIBLE);
+        tvDistanceofPlant.setVisibility(View.VISIBLE);
+        tvTypeofPlant.setVisibility(View.VISIBLE);
     }
 
     private void initViews() {
@@ -1400,7 +1408,7 @@ public class AddImplementActivity extends AppCompatActivity {
         tvLong = findViewById(R.id.tvLongitudeImp);
         tvAcc = findViewById(R.id.tvAccImp);
         spinLocation = findViewById(R.id.spinLocationImp);
-        spinCondition = findViewById(R.id.spinConditionImp);
+        spinCondition = findViewById(R.id.spinConditionPresentImp);
         btnSave = findViewById(R.id.btnSaveImp);
 
 
@@ -1416,14 +1424,48 @@ public class AddImplementActivity extends AppCompatActivity {
         cbPostHarvest = findViewById(R.id.cbPostHarvest);
         cbHaul = findViewById(R.id.cbHauling);
 
-        edtTotalServiceAreaMain = findViewById(R.id.edtTotalServiceAreaMain);
-        edtHoursPDayMain = findViewById(R.id.edtHoursPDayMain);
-        edtDaysPSeasonMain = findViewById(R.id.edtDaysPSeasonMain);
+//        edtTotalServiceAreaMain = findViewById(R.id.edtTotalServiceAreaMain);
+//        edtHoursPDayMain = findViewById(R.id.edtHoursPDayMain);
+//        edtDaysPSeasonMain = findViewById(R.id.edtDaysPSeasonMain);
+//        tvHaMain = findViewById(R.id.tvHaMain);
+//        tvHoursPDayMain = findViewById(R.id.tvHoursPDayMain);
+//        tvDaysPSeasonMain = findViewById(R.id.tvDaysPSeasonMain);
+//        edtTotalServiceAreaPlant = findViewById(R.id.edtTotalServiceAreaPlant);
+//        edtHoursPDayPlant = findViewById(R.id.edtHoursPDayPlant);
+//        edtDaysPSeasonPlant = findViewById(R.id.edtDaysPSeasonPlant);
+
+//        tvHaPlant = findViewById(R.id.tvHaPlant);
+//        tvHoursPDayPlant = findViewById(R.id.tvHoursPDayPlant);
+//        tvDaysPSeasonPlant = findViewById(R.id.tvDaysPSeasonPlant);
+//        edtTotalServiceAreaFert = findViewById(R.id.edtTotalServiceAreaFert);
+//        edtHoursPDayFert = findViewById(R.id.edtHoursPDayFert);
+//        edtDaysPSeasonFert = findViewById(R.id.edtDaysPSeasonFert);
+//        tvHaFert = findViewById(R.id.tvHaFert);
+//        tvHoursPDayFert = findViewById(R.id.tvHoursPDayFert);
+//        tvDaysPSeasonfFert = findViewById(R.id.tvDaysPSeasonFert);
+//        edtTotalServiceAreaHarvest = findViewById(R.id.edtTotalServiceAreaHarvest);
+//        edtHoursPDayHarvest = findViewById(R.id.edtHoursPDayHarvest);
+//        edtDaysPSeasonHarvest = findViewById(R.id.edtDaysPSeasonHarvest);
+//        tvHaHarvest = findViewById(R.id.tvHaHarvest);
+//        tvHoursPDayHarvest = findViewById(R.id.tvHoursPDayHarvest);
+//        tvDaysPSeasonHarvest = findViewById(R.id.tvDaysPSeasonHarvest);
+//        edtTotalServiceAreaGrab = findViewById(R.id.edtTotalServiceAreaGrab);
+//        edtHoursPDayGrab = findViewById(R.id.edtHoursPDayGrab);
+//        edtDaysPSeasonGrab = findViewById(R.id.edtDaysPSeasonGrab);
+//        edtNumberofLoadsGrab = findViewById(R.id.edtNumberofLoadsGrab);
+//        tvHaGrab = findViewById(R.id.tvHaGrab);
+//        tvHoursPDayGrab = findViewById(R.id.tvHoursPDayGrab);
+//        tvDaysPSeasonGrab = findViewById(R.id.tvDaysPSeasonGrab);
+//        tvLoadPHaGrab = findViewById(R.id.tvLoadPHaGrab);
+//        tvLoadCapGrab = findViewById(R.id.tvLoadCapGrab);
+//        edtTotalServiceAreaDitch = findViewById(R.id.edtTotalServiceAreaDitch);
+//        edtHoursPDayDitch = findViewById(R.id.edtHoursPDayDitch);
+//        edtDaysPSeasonDitch = findViewById(R.id.edtDaysPSeasonDitch);
+//        tvHoursPDayDitch = findViewById(R.id.tvHoursPDayDitch);
+//        tvDaysPSeasonDitch = findViewById(R.id.tvDaysPSeasonDitch);
+//        tvHaDitch = findViewById(R.id.tvHaDitch);
         edtEffectiveAreaAccompMain = findViewById(R.id.edtEffectiveAreaAccompMain);
         edtTimeUsedDuringOpMain = findViewById(R.id.edtTimeUsedDuringOpMain);
-        tvHaMain = findViewById(R.id.tvHaMain);
-        tvHoursPDayMain = findViewById(R.id.tvHoursPDayMain);
-        tvDaysPSeasonMain = findViewById(R.id.tvDaysPSeasonMain);
         tvHaEAMain = findViewById(R.id.tvHaEAMain);
         tvHoursPDayOpMain = findViewById(R.id.tvHoursPDayOpMain);
         tvFieldCapacityMain = findViewById(R.id.tvFieldCapacityMain);
@@ -1432,32 +1474,19 @@ public class AddImplementActivity extends AppCompatActivity {
         spinTypeOfPlanter = findViewById(R.id.spinTypeOfPlanterPlant);
         edtNumberofRowsPlant = findViewById(R.id.edtNumberofRowsPlant);
         edtDistanceofPlantMat = findViewById(R.id.edtDistanceOfPlantMatPlant);
-        edtTotalServiceAreaPlant = findViewById(R.id.edtTotalServiceAreaPlant);
-        edtHoursPDayPlant = findViewById(R.id.edtHoursPDayPlant);
-        edtDaysPSeasonPlant = findViewById(R.id.edtDaysPSeasonPlant);
         edtEffectiveAreaAccompPlant = findViewById(R.id.edtEffectiveAreaAccompPlant);
         edtTimeUsedDuringOpPlant = findViewById(R.id.edtTimeUsedDuringOpPlant);
-        tvTypeofPlant = findViewById(R.id.tvTypeofPlant);
-        tvDistanceofPlant = findViewById(R.id.tvDistancePlant);
-        tvHaPlant = findViewById(R.id.tvHaPlant);
-        tvHoursPDayPlant = findViewById(R.id.tvHoursPDayPlant);
-        tvDaysPSeasonPlant = findViewById(R.id.tvDaysPSeasonPlant);
         tvHaEAPlant = findViewById(R.id.tvHaEAPlant);
         tvHoursPDayOpPlant = findViewById(R.id.tvHoursPDayOpPlant);
         tvFieldCapacityPlant = findViewById(R.id.tvFieldCapacityPlant);
         tvFieldCapacityResultPlant = findViewById(R.id.tvFieldCapacityResultPlant);
         tvNumRowsPlant = findViewById(R.id.tvNumRowsPlant);
+        tvTypeofPlant = findViewById(R.id.tvTypeofPlant);
+        tvDistanceofPlant = findViewById(R.id.tvDistancePlant);
 
-
-        edtTotalServiceAreaFert = findViewById(R.id.edtTotalServiceAreaFert);
-        edtHoursPDayFert = findViewById(R.id.edtHoursPDayFert);
-        edtDaysPSeasonFert = findViewById(R.id.edtDaysPSeasonFert);
         edtEffectiveAreaAccompFert = findViewById(R.id.edtEffectiveAreaAccompFert);
         edtTimeUsedDuringOpFert = findViewById(R.id.edtTimeUsedDuringOpFert);
         edtWeightOfFert = findViewById(R.id.edtWeightOfFertFert);
-        tvHaFert = findViewById(R.id.tvHaFert);
-        tvHoursPDayFert = findViewById(R.id.tvHoursPDayFert);
-        tvDaysPSeasonfFert = findViewById(R.id.tvDaysPSeasonFert);
         tvHaEAFert = findViewById(R.id.tvHaEAFert);
         tvHoursPDayOpFert = findViewById(R.id.tvHoursPDayOpFert);
         tvFieldCapacityFert = findViewById(R.id.tvFieldCapacityFert);
@@ -1466,123 +1495,142 @@ public class AddImplementActivity extends AppCompatActivity {
         tvDeliveryRateFert = findViewById(R.id.tvDeliveryRateFert);
         tvDeliveryRateResultFert = findViewById(R.id.tvDeliveryRateResultFert);
 
-        edtTotalServiceAreaHarvest = findViewById(R.id.edtTotalServiceAreaHarvest);
-        edtHoursPDayHarvest = findViewById(R.id.edtHoursPDayHarvest);
-        edtDaysPSeasonHarvest = findViewById(R.id.edtDaysPSeasonHarvest);
         edtEffectiveAreaAccompHarvest = findViewById(R.id.edtEffectiveAreaAccompHarvest);
         edtTimeUsedDuringOpHarvest = findViewById(R.id.edtTimeUsedDuringOpHarvest);
         edtAveYieldHarvest = findViewById(R.id.edtAveYieldHarvest);
-        tvHaHarvest = findViewById(R.id.tvHaHarvest);
-        tvHoursPDayHarvest = findViewById(R.id.tvHoursPDayHarvest);
-        tvDaysPSeasonHarvest = findViewById(R.id.tvDaysPSeasonHarvest);
         tvHaEAHarvest = findViewById(R.id.tvHaEAHarvest);
         tvHoursPDayOpHarvest = findViewById(R.id.tvHoursPDayOpHarvest);
         tvFieldCapacityHarvest = findViewById(R.id.tvFieldCapacityHarvest);
         tvFieldCapacityResultHarvest = findViewById(R.id.tvFieldCapacityResultHarvest);
         tvTonCannesPHaHarvest = findViewById(R.id.tvTonCannesPHaHarvest);
 
-        edtTotalServiceAreaGrab = findViewById(R.id.edtTotalServiceAreaGrab);
-        edtHoursPDayGrab = findViewById(R.id.edtHoursPDayGrab);
-        edtDaysPSeasonGrab = findViewById(R.id.edtDaysPSeasonGrab);
+        edtEffectiveAreaAccompGrab = findViewById(R.id.edtEffectiveAreaAccompGrab);
+        edtTimeUsedDuringOpGrab = findViewById(R.id.edtTimeUsedDuringOpGrab);
         edtLoadCapacityGrab = findViewById(R.id.edtLoadCapacityGrab);
-        edtNumberofLoadsGrab = findViewById(R.id.edtNumberofLoadsGrab);
-        tvHaGrab = findViewById(R.id.tvHaGrab);
-        tvHoursPDayGrab = findViewById(R.id.tvHoursPDayGrab);
-        tvDaysPSeasonGrab = findViewById(R.id.tvDaysPSeasonGrab);
-        tvLoadPHaGrab = findViewById(R.id.tvLoadPHaGrab);
-        tvLoadCapGrab = findViewById(R.id.tvLoadCapGrab);
+        tvHaEAGrab = findViewById(R.id.tvHaEAGrab);
+        tvHoursPDayOpGrab = findViewById(R.id.tvHoursPdayOpGrab);
+        tvLoadCapacityGrab = findViewById(R.id.tvLoadCapGrab);
+        tvFieldCapacityGrab = findViewById(R.id.tvFieldCapacityGrab);
+        tvFieldCapacityResultGrab = findViewById(R.id.tvFieldCapacityResultGrab);
 
-        edtTotalServiceAreaDitch = findViewById(R.id.edtTotalServiceAreaDitch);
-        edtHoursPDayDitch = findViewById(R.id.edtHoursPDayDitch);
-        edtDaysPSeasonDitch = findViewById(R.id.edtDaysPSeasonDitch);
         edtDepthOfCutDitch = findViewById(R.id.edtDepthOfCutDitch);
-        tvHaDitch = findViewById(R.id.tvHaDitch);
-        tvHoursPDayDitch = findViewById(R.id.tvHoursPDayDitch);
-        tvDaysPSeasonDitch = findViewById(R.id.tvDaysPSeasonDitch);
         tvDepthCutDitch = findViewById(R.id.tvDepthCutDitch);
     }
 
     private void showMainImplements() {
-        edtTotalServiceAreaMain.setVisibility(View.VISIBLE);
-        edtHoursPDayMain.setVisibility(View.VISIBLE);
-        edtDaysPSeasonMain.setVisibility(View.VISIBLE);
+//        edtTotalServiceAreaMain.setVisibility(View.VISIBLE);
+//        edtHoursPDayMain.setVisibility(View.VISIBLE);
+//        edtDaysPSeasonMain.setVisibility(View.VISIBLE);
+//        tvHaMain.setVisibility(View.VISIBLE);
+//        tvHoursPDayMain.setVisibility(View.VISIBLE);
+//        tvDaysPSeasonMain.setVisibility(View.VISIBLE);
+
+        tvHaEAMain.setVisibility(View.VISIBLE);
         edtEffectiveAreaAccompMain.setVisibility(View.VISIBLE);
         edtTimeUsedDuringOpMain.setVisibility(View.VISIBLE);
 
-        tvHaMain.setVisibility(View.VISIBLE);
-        tvHoursPDayMain.setVisibility(View.VISIBLE);
-        tvDaysPSeasonMain.setVisibility(View.VISIBLE);
-        tvHaEAMain.setVisibility(View.VISIBLE);
         tvHoursPDayOpMain.setVisibility(View.VISIBLE);
         tvFieldCapacityMain.setVisibility(View.VISIBLE);
         tvFieldCapacityResultMain.setVisibility(View.VISIBLE);
     }
 
     private void hideAll() {
-
-        edtTotalServiceAreaMain.setVisibility(View.GONE);
-        edtHoursPDayMain.setVisibility(View.GONE);
-        edtDaysPSeasonMain.setVisibility(View.GONE);
+//        edtTotalServiceAreaGrab.setVisibility(View.GONE);
+//        edtHoursPDayGrab.setVisibility(View.GONE);
+//        edtDaysPSeasonGrab.setVisibility(View.GONE);
+//        edtNumberofLoadsGrab.setVisibility(View.GONE);
+//
+//        edtTotalServiceAreaDitch.setVisibility(View.GONE);
+//        edtHoursPDayDitch.setVisibility(View.GONE);
+//        edtDaysPSeasonDitch.setVisibility(View.GONE);
+//
+//
+//        tvHaMain.setVisibility(View.GONE);
+//        tvHoursPDayMain.setVisibility(View.GONE);
+//        tvDaysPSeasonMain.setVisibility(View.GONE);
+//
+//
+//        tvTypeofPlant.setVisibility(View.GONE);
+//        tvDistanceofPlant.setVisibility(View.GONE);
+//        tvHaPlant.setVisibility(View.GONE);
+//        tvHoursPDayPlant.setVisibility(View.GONE);
+//        tvDaysPSeasonPlant.setVisibility(View.GONE);
+//
+//
+//        tvHaFert.setVisibility(View.GONE);
+//        tvHoursPDayFert.setVisibility(View.GONE);
+//        tvDaysPSeasonfFert.setVisibility(View.GONE);
+//
+//        tvHaHarvest.setVisibility(View.GONE);
+//        tvHoursPDayHarvest.setVisibility(View.GONE);
+//        tvDaysPSeasonHarvest.setVisibility(View.GONE);
+//
+//        tvHaGrab.setVisibility(View.GONE);
+//        tvHoursPDayGrab.setVisibility(View.GONE);
+//        tvDaysPSeasonGrab.setVisibility(View.GONE);
+//        tvLoadPHaGrab.setVisibility(View.GONE);
+//        tvLoadCapGrab.setVisibility(View.GONE);
+//
+//        tvHaDitch.setVisibility(View.GONE);
+//        tvHoursPDayDitch.setVisibility(View.GONE);
+//        tvDaysPSeasonDitch.setVisibility(View.GONE);
+//
+//        edtTotalServiceAreaMain.setVisibility(View.GONE);
+//        edtHoursPDayMain.setVisibility(View.GONE);
+//        edtDaysPSeasonMain.setVisibility(View.GONE);
+//        edtTotalServiceAreaPlant.setVisibility(View.GONE);
+//        edtHoursPDayPlant.setVisibility(View.GONE);
+//        edtDaysPSeasonPlant.setVisibility(View.GONE);
+//
+//        edtTotalServiceAreaFert.setVisibility(View.GONE);
+//        edtHoursPDayFert.setVisibility(View.GONE);
+//        edtDaysPSeasonFert.setVisibility(View.GONE);
+//
+//        edtTotalServiceAreaHarvest.setVisibility(View.GONE);
+//        edtHoursPDayHarvest.setVisibility(View.GONE);
+//        edtDaysPSeasonHarvest.setVisibility(View.GONE);
         edtEffectiveAreaAccompMain.setVisibility(View.GONE);
         edtTimeUsedDuringOpMain.setVisibility(View.GONE);
 
         spinTypeOfPlanter.setVisibility(View.GONE);
         edtNumberofRowsPlant.setVisibility(View.GONE);
         edtDistanceofPlantMat.setVisibility(View.GONE);
-        edtTotalServiceAreaPlant.setVisibility(View.GONE);
-        edtHoursPDayPlant.setVisibility(View.GONE);
-        edtDaysPSeasonPlant.setVisibility(View.GONE);
+
         edtEffectiveAreaAccompPlant.setVisibility(View.GONE);
         edtTimeUsedDuringOpPlant.setVisibility(View.GONE);
 
-        edtTotalServiceAreaFert.setVisibility(View.GONE);
-        edtHoursPDayFert.setVisibility(View.GONE);
-        edtDaysPSeasonFert.setVisibility(View.GONE);
         edtEffectiveAreaAccompFert.setVisibility(View.GONE);
         edtTimeUsedDuringOpFert.setVisibility(View.GONE);
         edtWeightOfFert.setVisibility(View.GONE);
 
-        edtTotalServiceAreaHarvest.setVisibility(View.GONE);
-        edtHoursPDayHarvest.setVisibility(View.GONE);
-        edtDaysPSeasonHarvest.setVisibility(View.GONE);
         edtEffectiveAreaAccompHarvest.setVisibility(View.GONE);
         edtTimeUsedDuringOpHarvest.setVisibility(View.GONE);
         edtAveYieldHarvest.setVisibility(View.GONE);
 
-        edtTotalServiceAreaGrab.setVisibility(View.GONE);
-        edtHoursPDayGrab.setVisibility(View.GONE);
-        edtDaysPSeasonGrab.setVisibility(View.GONE);
+        edtEffectiveAreaAccompGrab.setVisibility(View.GONE);
+        edtTimeUsedDuringOpGrab.setVisibility(View.GONE);
         edtLoadCapacityGrab.setVisibility(View.GONE);
-        edtNumberofLoadsGrab.setVisibility(View.GONE);
+        tvHaEAGrab.setVisibility(View.GONE);
+        tvHoursPDayOpGrab.setVisibility(View.GONE);
+        tvLoadCapacityGrab.setVisibility(View.GONE);
+        tvFieldCapacityGrab.setVisibility(View.GONE);
+        tvFieldCapacityResultGrab.setVisibility(View.GONE);
 
-        edtTotalServiceAreaDitch.setVisibility(View.GONE);
-        edtHoursPDayDitch.setVisibility(View.GONE);
-        edtDaysPSeasonDitch.setVisibility(View.GONE);
         edtDepthOfCutDitch.setVisibility(View.GONE);
 
-
-        tvHaMain.setVisibility(View.GONE);
-        tvHoursPDayMain.setVisibility(View.GONE);
-        tvDaysPSeasonMain.setVisibility(View.GONE);
         tvHaEAMain.setVisibility(View.GONE);
         tvHoursPDayOpMain.setVisibility(View.GONE);
         tvFieldCapacityMain.setVisibility(View.GONE);
         tvFieldCapacityResultMain.setVisibility(View.GONE);
 
-        tvTypeofPlant.setVisibility(View.GONE);
-        tvDistanceofPlant.setVisibility(View.GONE);
-        tvHaPlant.setVisibility(View.GONE);
-        tvHoursPDayPlant.setVisibility(View.GONE);
-        tvDaysPSeasonPlant.setVisibility(View.GONE);
         tvHaEAPlant.setVisibility(View.GONE);
         tvHoursPDayOpPlant.setVisibility(View.GONE);
         tvFieldCapacityPlant.setVisibility(View.GONE);
         tvFieldCapacityResultPlant.setVisibility(View.GONE);
         tvNumRowsPlant.setVisibility(View.GONE);
+        tvDistanceofPlant.setVisibility(View.GONE);
+        tvTypeofPlant.setVisibility(View.GONE);
 
-        tvHaFert.setVisibility(View.GONE);
-        tvHoursPDayFert.setVisibility(View.GONE);
-        tvDaysPSeasonfFert.setVisibility(View.GONE);
         tvHaEAFert.setVisibility(View.GONE);
         tvHoursPDayOpFert.setVisibility(View.GONE);
         tvFieldCapacityFert.setVisibility(View.GONE);
@@ -1591,35 +1639,25 @@ public class AddImplementActivity extends AppCompatActivity {
         tvDeliveryRateFert.setVisibility(View.GONE);
         tvDeliveryRateResultFert.setVisibility(View.GONE);
 
-        tvHaHarvest.setVisibility(View.GONE);
-        tvHoursPDayHarvest.setVisibility(View.GONE);
-        tvDaysPSeasonHarvest.setVisibility(View.GONE);
         tvHaEAHarvest.setVisibility(View.GONE);
         tvHoursPDayOpHarvest.setVisibility(View.GONE);
         tvFieldCapacityHarvest.setVisibility(View.GONE);
         tvFieldCapacityResultHarvest.setVisibility(View.GONE);
         tvTonCannesPHaHarvest.setVisibility(View.GONE);
 
-        tvHaGrab.setVisibility(View.GONE);
-        tvHoursPDayGrab.setVisibility(View.GONE);
-        tvDaysPSeasonGrab.setVisibility(View.GONE);
-        tvLoadPHaGrab.setVisibility(View.GONE);
-        tvLoadCapGrab.setVisibility(View.GONE);
-
-        tvHaDitch.setVisibility(View.GONE);
-        tvHoursPDayDitch.setVisibility(View.GONE);
-        tvDaysPSeasonDitch.setVisibility(View.GONE);
         tvDepthCutDitch.setVisibility(View.GONE);
     }
 
     private void initAllLayoutParameters() {
-        paramsYearAcquired = (ConstraintLayout.LayoutParams) tvYearAcquired.getLayoutParams();
-        paramsTSAMain = (ConstraintLayout.LayoutParams) edtTotalServiceAreaMain.getLayoutParams();
-        paramsTSAFert = (ConstraintLayout.LayoutParams) edtTotalServiceAreaFert.getLayoutParams();
-        paramsTSAHarvest = (ConstraintLayout.LayoutParams) edtTotalServiceAreaHarvest.getLayoutParams();
-        paramsTSAGrab = (ConstraintLayout.LayoutParams) edtTotalServiceAreaGrab.getLayoutParams();
-        paramsTSADitch = (ConstraintLayout.LayoutParams) edtTotalServiceAreaDitch.getLayoutParams();
+
+
+        paramsEAMain = (ConstraintLayout.LayoutParams) tvHaEAMain.getLayoutParams();
         paramstvPlanter = (ConstraintLayout.LayoutParams) tvTypeofPlant.getLayoutParams();
+        paramsEAFert = (ConstraintLayout.LayoutParams) tvHaEAFert.getLayoutParams();
+        paramsEAHarvest = (ConstraintLayout.LayoutParams) tvHaEAHarvest.getLayoutParams();
+        paramsEAGrab = (ConstraintLayout.LayoutParams) tvHaEAGrab.getLayoutParams();
+        paramsDCDitch = (ConstraintLayout.LayoutParams) tvDepthCutDitch.getLayoutParams();
+        paramsYearAcquired = (ConstraintLayout.LayoutParams) tvYearAcquired.getLayoutParams();
     }
 
 

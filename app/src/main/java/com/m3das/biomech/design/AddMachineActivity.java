@@ -72,7 +72,7 @@ public class AddMachineActivity extends AppCompatActivity {
     private int bigMargin, smallMargin, biggerMargin;
     private int stringArrayValue;
     private ImageView selectedImage;
-    private EditText edtQRCode, edtCapacity, edtAveYield, edtNumLoads, edtRate, edtAveOpHours, edtAveOpDays, edtServiceArea, edtNameOfOwnerOrg, edtCustomRate, edtOtherProblems,
+    private EditText edtQRCode, edtCapacity, edtAveYield, edtNumLoads, edtRate, edtAveOpHours, edtAveOpDays, edtServiceArea, edtRatoonArea, edtNameOfOwnerOrg, edtCustomRate, edtOtherProblems,
             edtOtherAgency, edtOtherBrand, edtOtherModel, edtRatedPower, edtPlowingRent, edtHarrowingRent, edtFurrowingRent, edtOtherRent, edtAveFuelConsPlow, edtAveFuelConsHarr,
             edtAveFuelConsFurr;
     private TextView tvLat, tvLong, tvTypeOfMill, tvBrand, tvOwnership, tvTypeOfTubewells, tvMachineAvailability, tvConditionPresent, tvLocation, tvModel, tvProvRent, tvMunRent, tvBrgyRent,
@@ -98,7 +98,7 @@ public class AddMachineActivity extends AppCompatActivity {
             purchGrantDonoCheck, agencyCheck, rentSelectCheck, rentCustomCheck, rentAvailCheck, conditionPresentCheck, otherProblemsCheck, locationMachineCheck, locationGarageCheck,
             machineTypeInfoBrandCheck, machineTypeInfoModelCheck, typeMillCheck, typeTubewellsCheck;
     private ConstraintLayout.LayoutParams paramstvBrand, paramstvOwnership, paramsedtCapacity, paramsedtNumLoads, paramstvConditionPresent, paramstvLocation, paramstvModel, paramsedtRatedPower,
-            paramsedtAveYield, paramsedtRate, paramstvTypeTubewells, paramsedtNameOfOwnerOrg, paramstvMachineAvailability;
+            paramsedtAveYield, paramsedtRate, paramstvTypeTubewells, paramsedtNameOfOwnerOrg, paramstvMachineAvailability, paramstvMachineUnused;
     private String machineSelected;
     private MachineListViewModel machineListViewModel;
     private ProfileViewModel profileViewModel;
@@ -204,7 +204,7 @@ public class AddMachineActivity extends AppCompatActivity {
         setInputFilters();
 
 
-        Log.d("DEBADDMLAYOUT","Launching set params");
+        Log.d("DEBADDMLAYOUT", "Launching set params");
         initAllLayoutParameters();
 
         initVariables();
@@ -545,7 +545,7 @@ public class AddMachineActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Toast.makeText(getApplicationContext(), spinMachineType.getSelectedItem().toString() + " AREA: " + edtServiceArea.getText().toString() + " HOURS: " + edtAveOpHours.getText().toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), spinMachineType.getSelectedItem().toString() + " AREA: " + edtServiceArea.getText().toString() + " HOURS: " + edtAveOpHours.getText().toString(), Toast.LENGTH_SHORT).show();
                 if (spinMachineType.getSelectedItem().toString().contains("HARVESTER")) {
                     Log.d("DEBHARONCH", "Inside onchanged ave op hours");
                     edtCapacity.setText(getFieldCapacity(edtServiceArea.getText().toString(), edtAveOpHours.getText().toString()));
@@ -590,6 +590,7 @@ public class AddMachineActivity extends AppCompatActivity {
         paramstvLocation = (ConstraintLayout.LayoutParams) tvLocation.getLayoutParams();
         paramstvModel = (ConstraintLayout.LayoutParams) tvModel.getLayoutParams();
         paramsedtRatedPower = (ConstraintLayout.LayoutParams) edtRatedPower.getLayoutParams();
+        paramstvMachineUnused = (ConstraintLayout.LayoutParams) tvMachineUnused.getLayoutParams();
 
         paramstvBrand.topToBottom = R.id.edtQRCode;
         paramstvBrand.topMargin = bigMargin;
@@ -603,11 +604,11 @@ public class AddMachineActivity extends AppCompatActivity {
         paramsedtNameOfOwnerOrg.topMargin = bigMargin;
         edtNameOfOwnerOrg.setLayoutParams(paramsedtNameOfOwnerOrg);
 
-        Log.d("DEBADDMLAYOUT","Setting paramstvCondition");
+        Log.d("DEBADDMLAYOUT", "Setting paramstvCondition");
         paramstvConditionPresent.topToBottom = R.id.spinRental;
         paramstvConditionPresent.topMargin = bigMargin;
         tvConditionPresent.setLayoutParams(paramstvConditionPresent);
-        Log.d("DEBADDMLAYOUT","POST" + paramstvConditionPresent.topToBottom + " to " + R.id.spinRental);
+        Log.d("DEBADDMLAYOUT", "POST" + paramstvConditionPresent.topToBottom + " to " + R.id.spinRental);
 //        paramstvConditionPresent.topToBottom = R.id.spinRental;
 //        paramstvConditionPresent.topMargin = bigMargin;
 //        tvConditionPresent.setLayoutParams(paramstvConditionPresent);
@@ -1619,6 +1620,7 @@ public class AddMachineActivity extends AppCompatActivity {
                 tvYearInoperable.setVisibility(View.VISIBLE);
                 spinYearInoperable.setVisibility(View.VISIBLE);
                 stringArray = R.array.problems_unused;
+                paramstvMachineUnused.topToBottom = R.id.spinYearInoperable;
                 paramstvLocation.topToBottom = R.id.multspinProblemsUnused;
                 break;
             case "NON-FUNCTIONAL":
@@ -1628,6 +1630,7 @@ public class AddMachineActivity extends AppCompatActivity {
                 spinYearInoperable.setVisibility(View.INVISIBLE);
                 tvMachineUnused.setVisibility(View.VISIBLE);
                 stringArray = R.array.problems_nonfunctional;
+                paramstvMachineUnused.topToBottom = R.id.spinConditionPresent;
                 paramstvLocation.topToBottom = R.id.multspinProblemsUnused;
                 break;
         }
@@ -2629,9 +2632,9 @@ public class AddMachineActivity extends AppCompatActivity {
         agencyCheck = false;
         yearSelectCheck = false;
         conditionAcquiredCheck = false;
-        rentSelectCheck = false;
-        rentCustomCheck = false;
-        rentAvailCheck = false;
+        rentSelectCheck = true;             //TODO RETURN TO FALSE
+        rentCustomCheck = true;             //TODO RETURN TO FALSE
+        rentAvailCheck = true;              //TODO RETURN TO FALSE
         conditionPresentCheck = false;
         otherProblemsCheck = false;
         locationMachineCheck = false;
@@ -2911,34 +2914,34 @@ public class AddMachineActivity extends AppCompatActivity {
 
         conditionAcquiredCheck = spinConditionAcquired.getSelectedItemPosition() != 0;
 
-        switch (spinRental.getSelectedItemPosition()) {
-            case 0:
-                rentSelectCheck = false;
-                break;
-            case 1:
-                rentSelectCheck = true;
-                if (isNullOrEmpty(edtCustomRate.getText().toString()) || spinCustomUnit.getSelectedItemPosition() == 0) {
-                    rentCustomCheck = false;
-                } else
+//        switch (spinRental.getSelectedItemPosition()) {
+//            case 0:
+//                rentSelectCheck = false;
+//                break;
+//            case 1:
+//                rentSelectCheck = true;
+//                if (isNullOrEmpty(edtCustomRate.getText().toString()) || spinCustomUnit.getSelectedItemPosition() == 0) {
+//                    rentCustomCheck = false;
+//                } else
 //                    rentCustomCheck = spinCustomUnit.getSelectedItemPosition() != 3 || !isNullOrEmpty(edtCustomRateUnit.getText().toString());
-                    switch (spinAvailability.getSelectedItemPosition()) {
-                        case 0:
-                            rentAvailCheck = false;
-                            break;
-                        case 1:
-                            rentAvailCheck = true;
-                            break;
-                        case 2:
-                            rentAvailCheck = listOfBrgyRent.length() >= 2 && munRent.length() >= 2 && provRent.length() >= 2;
-                            break;
-                    }
-                break;
-            case 2:
-                rentSelectCheck = true;
-                rentCustomCheck = true;
-                rentAvailCheck = true;
-                break;
-        }
+//                    switch (spinAvailability.getSelectedItemPosition()) {
+//                        case 0:
+//                            rentAvailCheck = false;
+//                            break;
+//                        case 1:
+//                            rentAvailCheck = true;
+//                            break;
+//                        case 2:
+//                            rentAvailCheck = listOfBrgyRent.length() >= 2 && munRent.length() >= 2 && provRent.length() >= 2;
+//                            break;
+//                    }
+//                break;
+//            case 2:
+//                rentSelectCheck = true;
+//                rentCustomCheck = true;
+//                rentAvailCheck = true;
+//                break;
+//        }
 
         switch (spinConditionPresent.getSelectedItemPosition()) {
             case 0:
@@ -3194,6 +3197,7 @@ public class AddMachineActivity extends AppCompatActivity {
         edtAveOpDays = findViewById(R.id.edtAverageOperatingDays);
         edtAveOpHours = findViewById(R.id.edtAverageOperatingHours);
         edtServiceArea = findViewById(R.id.edtNewlyPlantedArea);
+        edtRatoonArea = findViewById(R.id.edtRatoonArea);
         spinOwnership = findViewById(R.id.spinOwnership);
         spinPurchGrantDono = findViewById(R.id.spinPurchGrantDono);
         spinAgency = findViewById(R.id.spinAgency);

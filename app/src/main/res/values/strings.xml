@@ -42,7 +42,7 @@
         <b>Your participation in this survey is voluntary</b>.  You are invited to participate because you are either an owner of a farm, garage, machine, processing plant, or transloading zone; an operator of farm machine; a manager of a transloading zone; a farm manager or an officer in charge for the farm; and a representative of a cooperative,  LGU, or a farmer’s association. You may also choose not to participate. If you decide to participate, please provide responsible responses, refrain from using any inappropriate language, and refrain from including any confidential information belonging to you or another party.
         If you are asked to reveal any sensitive information that is not included in this survey by the enumerator, you may choose to withdraw at any time. If you do not participate in this research study or if you withdraw from participating any time, you will not be penalized. The duration of the survey is at least 30 minutes. Your responses are subjected to the privacy statement of the organization for your information, protection, and safety.
         All data based on your responses are subjected to confidentiality, therefore any processed data from the survey will not be able to personally identify you. The results will be used solely for research and development purposes, if you have any questions about the research study, please contact the address found in the privacy statement.
-            <br/>By clicking on <b>“PROCEED”</b> button below indicates that:</string>
+            <br />By clicking on <b>“PROCEED”</b> button below indicates that:</string>
     <string name="consent_part2">• You have read, understood, and agree to the privacy statement of the organization.</string>
 
     <string name="consent_part3">• You have read, understood, and agree to allow the authorized entities to collect and process personal information about and/or relating to you that you agreed to respond in this survey form.</string>
@@ -259,6 +259,14 @@
         <item>FUNCTIONAL USED</item>
         <item>FUNCTIONAL UNUSED</item>
         <item>NON-FUNCTIONAL</item>
+    </string-array>
+
+    <string-array name="conditionImplement">
+        <item>Please Select...</item>
+        <item>BRAND NEW</item>
+        <item>BRAND NEW AND MODIFIED</item>
+        <item>SECOND HAND</item>
+        <item>LOCALLY FABRICATED</item>
     </string-array>
     <string-array name="blank">
         <item>Please Select...</item>
