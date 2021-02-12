@@ -11,19 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/btnSaveImp"
-            android:layout_width="70dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
-            android:background="@drawable/custom_button"
-            android:text="SAVE"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnGalleryImp" />
-
         <EditText
             android:id="@+id/edtQRCodeImp"
             android:layout_width="wrap_content"
@@ -40,8 +27,9 @@
             android:id="@+id/btnScanQRCodeImp"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="16dp"
             android:background="@drawable/custom_image_button"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/edtQRCodeImp"
             app:layout_constraintTop_toTopOf="@+id/edtQRCodeImp"
             app:srcCompat="@drawable/ic_outline_center_focus_strong_24" />
@@ -905,7 +893,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/custom_edit_text"
             android:hint="Ton of cannes/Hectare"
-            app:layout_constraintEnd_toEndOf="@+id/cbHauling"
+            app:layout_constraintEnd_toEndOf="@+id/edtTimeUsedDuringOpHarvest"
             app:layout_constraintStart_toStartOf="@+id/edtTimeUsedDuringOpHarvest"
             app:layout_constraintTop_toBottomOf="@+id/tvTonCannesPHaHarvest" />
 
@@ -1041,13 +1029,86 @@
             app:layout_constraintTop_toBottomOf="@+id/tvDepthCutDitch" />
 
         <TextView
+            android:id="@+id/tvOwnershipImp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2300dp"
+            android:text="Type of Ownership"
+            app:layout_constraintStart_toStartOf="@+id/tvOperations2"
+            app:layout_constraintTop_toBottomOf="@+id/cbHauling" />
+
+        <Spinner
+            android:id="@+id/spinOwnershipImp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/custom_spinner"
+            android:entries="@array/ownership_of_machine"
+            app:layout_constraintEnd_toEndOf="@+id/cbHauling"
+            app:layout_constraintStart_toStartOf="@+id/cbHauling"
+            app:layout_constraintTop_toBottomOf="@+id/tvOwnershipImp" />
+
+        <TextView
+            android:id="@+id/tvPurchGrantDonoImp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Mode of Acquisition"
+            app:layout_constraintStart_toStartOf="@+id/tvOwnershipImp"
+            app:layout_constraintTop_toBottomOf="@+id/spinOwnershipImp" />
+
+        <Spinner
+            android:id="@+id/spinPurchGrantDonoImp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_spinner"
+            android:entries="@array/purchasing_method"
+            app:layout_constraintEnd_toEndOf="@+id/spinOwnershipImp"
+            app:layout_constraintStart_toStartOf="@+id/spinOwnershipImp"
+            app:layout_constraintTop_toBottomOf="@+id/tvPurchGrantDonoImp" />
+
+        <TextView
+            android:id="@+id/tvAgencyImp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="From what Agency?"
+            app:layout_constraintStart_toStartOf="@+id/tvDepthCutDitch"
+            app:layout_constraintTop_toBottomOf="@id/spinPurchGrantDonoImp" />
+
+        <Spinner
+            android:id="@+id/spinAgencyImp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_spinner"
+            android:entries="@array/agency"
+            app:layout_constraintEnd_toEndOf="@+id/cbHauling"
+            app:layout_constraintStart_toStartOf="@+id/cbHauling"
+            app:layout_constraintTop_toBottomOf="@+id/tvAgencyImp" />
+
+        <EditText
+            android:id="@+id/edtOtherAgencyImp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_edit_text"
+            android:ems="10"
+            android:hint="Specify Agency"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="@+id/spinAgencyImp"
+            app:layout_constraintStart_toStartOf="@+id/spinAgencyImp"
+            app:layout_constraintTop_toBottomOf="@+id/spinAgencyImp" />
+
+        <TextView
             android:id="@+id/tvYearAcquiredImp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="108dp"
             android:text="Year Acquired"
             app:layout_constraintStart_toStartOf="@+id/tvOperations2"
-            app:layout_constraintTop_toBottomOf="@+id/edtDepthOfCutDitch" />
+            app:layout_constraintTop_toBottomOf="@+id/edtOtherAgencyImp" />
 
         <Spinner
             android:id="@+id/spinYearAcquiredImp"
@@ -1096,10 +1157,10 @@
             android:id="@+id/tvConditionPresentImp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="72dp"
             android:text="Present Condition"
             app:layout_constraintStart_toStartOf="@+id/tvOperations2"
-            app:layout_constraintTop_toBottomOf="@+id/edtModifications" />
+            app:layout_constraintTop_toBottomOf="@+id/spinConditionAcquiredImp" />
 
         <Spinner
             android:id="@+id/spinConditionPresentImp"
@@ -1131,7 +1192,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvYearInoperableImp" />
 
         <TextView
-            android:id="@+id/tvImplmplementUnused"
+            android:id="@+id/tvImplementUnused"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -1146,9 +1207,9 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/custom_spinner"
             app:hintText="Please Select..."
-            app:layout_constraintEnd_toEndOf="@+id/spinConditionPresentImp"
+            app:layout_constraintEnd_toEndOf="@+id/cbHauling"
             app:layout_constraintStart_toStartOf="@+id/spinConditionPresentImp"
-            app:layout_constraintTop_toBottomOf="@+id/tvImplmplementUnused" />
+            app:layout_constraintTop_toBottomOf="@+id/tvImplementUnused" />
 
         <EditText
             android:id="@+id/edtOtherProblemsImp"
@@ -1166,7 +1227,7 @@
             app:layout_constraintTop_toBottomOf="@id/multspinProblemsUnusedImp" />
 
         <TextView
-            android:id="@+id/textView20"
+            android:id="@+id/tvLocImp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -1182,7 +1243,7 @@
             android:background="@drawable/custom_spinner"
             android:entries="@array/location"
             app:layout_constraintStart_toStartOf="@+id/spinConditionPresentImp"
-            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+            app:layout_constraintTop_toBottomOf="@+id/tvLocImp" />
 
         <TextView
             android:id="@+id/textView17"
@@ -1190,7 +1251,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="Coordinates of Implement"
-            app:layout_constraintStart_toStartOf="@+id/textView20"
+            app:layout_constraintStart_toStartOf="@+id/tvLocImp"
             app:layout_constraintTop_toBottomOf="@id/spinLocationImp" />
 
         <TextView
@@ -1234,6 +1295,15 @@
             app:layout_constraintTop_toTopOf="@+id/textView11" />
 
         <TextView
+            android:id="@+id/textView56"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Accuracy:"
+            app:layout_constraintStart_toStartOf="@+id/textView11"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+        <TextView
             android:id="@+id/tvAccImp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -1270,7 +1340,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="Location of Garage"
-            app:layout_constraintStart_toStartOf="@+id/textView20"
+            app:layout_constraintStart_toStartOf="@+id/tvLocImp"
             app:layout_constraintTop_toBottomOf="@+id/btnGetLocationImp" />
 
         <TextView
@@ -1292,6 +1362,15 @@
             app:layout_constraintStart_toStartOf="@id/singlespinMunicipalitiesImp"
             app:layout_constraintTop_toTopOf="@+id/textView19" />
 
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Municipality"
+            app:layout_constraintStart_toStartOf="@+id/textView19"
+            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
         <com.androidbuts.multispinnerfilter.SingleSpinnerSearch
             android:id="@+id/singlespinMunicipalitiesImp"
             android:layout_width="0dp"
@@ -1302,6 +1381,15 @@
             app:layout_constraintEnd_toEndOf="@+id/singlespinProvincesImp"
             app:layout_constraintStart_toEndOf="@+id/textView22"
             app:layout_constraintTop_toTopOf="@+id/textView22" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Barangay"
+            app:layout_constraintStart_toStartOf="@+id/textView22"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
         <com.androidbuts.multispinnerfilter.SingleSpinnerSearch
             android:id="@+id/singlespinBarangaysImp"
@@ -1334,6 +1422,16 @@
             app:layout_constraintTop_toBottomOf="@+id/imgMachineImp"
             app:srcCompat="@drawable/ic_outline_camera_alt_24" />
 
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Capture Image"
+            app:layout_constraintBottom_toBottomOf="@+id/btnCameraImp"
+            app:layout_constraintStart_toEndOf="@+id/btnCameraImp"
+            app:layout_constraintTop_toTopOf="@+id/btnCameraImp" />
+
         <ImageButton
             android:id="@+id/btnGalleryImp"
             android:layout_width="wrap_content"
@@ -1345,34 +1443,6 @@
             app:srcCompat="@drawable/ic_outline_photo_album_24" />
 
         <TextView
-            android:id="@+id/textView22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Municipality"
-            app:layout_constraintStart_toStartOf="@+id/textView19"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
-
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Barangay"
-            app:layout_constraintStart_toStartOf="@+id/textView22"
-            app:layout_constraintTop_toBottomOf="@+id/textView22" />
-
-        <TextView
-            android:id="@+id/textView24"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Capture Image"
-            app:layout_constraintBottom_toBottomOf="@+id/btnCameraImp"
-            app:layout_constraintStart_toEndOf="@+id/btnCameraImp"
-            app:layout_constraintTop_toTopOf="@+id/btnCameraImp" />
-
-        <TextView
             android:id="@+id/textView25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -1382,14 +1452,18 @@
             app:layout_constraintStart_toEndOf="@+id/btnGalleryImp"
             app:layout_constraintTop_toTopOf="@+id/btnGalleryImp" />
 
-        <TextView
-            android:id="@+id/textView56"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Accuracy:"
-            app:layout_constraintStart_toStartOf="@+id/textView11"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        <Button
+            android:id="@+id/btnSaveImp"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/custom_button"
+            android:text="SAVE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnGalleryImp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

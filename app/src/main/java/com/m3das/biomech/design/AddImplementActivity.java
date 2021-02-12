@@ -43,8 +43,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.androidbuts.multispinnerfilter.KeyPairBoolData;
+import com.androidbuts.multispinnerfilter.MultiSpinnerListener;
+import com.androidbuts.multispinnerfilter.MultiSpinnerSearch;
 import com.androidbuts.multispinnerfilter.SingleSpinnerListener;
 import com.androidbuts.multispinnerfilter.SingleSpinnerSearch;
+import com.anurag.multiselectionspinner.MultiSpinner;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.m3das.biomech.design.machinedb.Machines;
@@ -63,23 +66,24 @@ import java.util.List;
 
 public class AddImplementActivity extends AppCompatActivity {
 
-    private Spinner spinImplementType, spinMachineUsing, spinTypeOfPlanter, spinYearAcquired, spinLocation, spinCondition;
+    private Spinner spinImplementType, spinMachineUsing, spinTypeOfPlanter, spinYearAcquired, spinLocation, spinConditionAcquired, spinYearInoperable, spinConditionPresent, spinOwnership, spinPurchGrantDono, spinAgency;
     ImageButton camera, gallery, getLocation, btnScanQR;
-    String dateToStr, machineComplete, landClear, prePlant, planting, fertilizer, pesticide, irrigationDrainage,
+    String dateToStr, machineComplete, landClear, prePlant, planting, fertilizer, pesticide, irrigationDrainage, listOfProblems, purchGrantDono,
             cultivation, ratooning, harvest, postHarvest, hauling, encodedImage;
     ImageView selectedImage;
     Button btnSave;
     private Intent intentFromDb;
     SingleSpinnerSearch singlespinProvinces, singlespinMunicipalities, singlespinBarangays;
-    ConstraintLayout.LayoutParams paramsYearAcquired, paramsEAMain, paramstvPlanter, paramsEAFert, paramsEAHarvest, paramsEAGrab, paramsDCDitch;
-    EditText edtQRCode, edtEffectiveAreaAccompMain, edtTimeUsedDuringOpMain,
+    MultiSpinnerSearch multspinProblemsUnused;
+    ConstraintLayout.LayoutParams paramsYearAcquired, paramsEAMain, paramstvPlanter, paramsEAFert, paramsEAHarvest, paramsEAGrab, paramsDCDitch, paramstvImplementUnused, paramstvLocation, paramstvConditionPresent, paramstvOwnership;
+    EditText edtQRCode, edtOtherProblems, edtEffectiveAreaAccompMain, edtTimeUsedDuringOpMain, edtOtherAgency, edtModifications,
             edtNumberofRowsPlant, edtDistanceofPlantMat, edtEffectiveAreaAccompPlant, edtTimeUsedDuringOpPlant,
             edtEffectiveAreaAccompFert, edtTimeUsedDuringOpFert, edtWeightOfFert,
             edtEffectiveAreaAccompHarvest, edtTimeUsedDuringOpHarvest, edtAveYieldHarvest,
             edtEffectiveAreaAccompGrab, edtTimeUsedDuringOpGrab, edtLoadCapacityGrab,
             edtDepthOfCutDitch;
 
-    TextView tvYearAcquired, tvLat, tvLong, tvAcc,
+    TextView tvYearAcquired, tvYearInoperable, tvLat, tvLong, tvAcc, tvLocation, tvImplementUnused, tvOwnership, tvPurchGrantDono, tvAgency, tvConditionPresent,
             tvHaEAMain, tvHoursPDayOpMain, tvFieldCapacityMain, tvFieldCapacityResultMain,
             tvTypeofPlant, tvDistanceofPlant, tvNumRowsPlant, tvHaEAPlant, tvHoursPDayOpPlant, tvFieldCapacityPlant, tvFieldCapacityResultPlant,
             tvHaEAFert, tvHoursPDayOpFert, tvFieldCapacityFert, tvFieldCapacityResultFert, tvWeightOfFert, tvDeliveryRateFert, tvDeliveryRateResultFert,
@@ -163,11 +167,10 @@ public class AddImplementActivity extends AppCompatActivity {
     public static final String EXTRA_ACCURACY = "ADDIMPLEMENT_EXTRA_ACCURACY";
     ArrayList<MachineClass> machineArrayList = new ArrayList<>();
     String temp1, temp2;
-    private boolean implementSpecsCheck, qrCheck, machineUsingCheck, operationCheck, locationGarageCheck, locationImplementCheck, conditionPresentCheck, yearSelectCheck;
+    private boolean implementSpecsCheck, qrCheck, machineUsingCheck, operationCheck, locationGarageCheck, locationImplementCheck, conditionPresentCheck, yearSelectCheck, hasOtherProblems;
 
 
     private String resLat, resLong;
-    private MachineListViewModel machineListViewModel;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -179,7 +182,7 @@ public class AddImplementActivity extends AppCompatActivity {
     }
 
     private void exitByBackKey() {
-        AlertDialog alertbox = new AlertDialog.Builder(this)
+        new AlertDialog.Builder(this)
                 .setMessage("Do you want to exit?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
@@ -215,7 +218,7 @@ public class AddImplementActivity extends AppCompatActivity {
         spinYearsSetAdapter();
 
 
-        machineListViewModel = new ViewModelProvider(this).get(MachineListViewModel.class);
+        MachineListViewModel machineListViewModel = new ViewModelProvider(this).get(MachineListViewModel.class);
         machineListViewModel.getAllMachines().observe(this, new Observer<List<Machines>>() {
             @Override
             public void onChanged(List<Machines> machines) {
@@ -594,6 +597,65 @@ public class AddImplementActivity extends AppCompatActivity {
             }
         });
 
+        spinConditionPresent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                problemsUnused(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinOwnership.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ownershipSelect(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        spinPurchGrantDono.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                purchGrantDonoSelect(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinAgency.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                otherAgency(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinConditionAcquired.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                conditionModifications(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         Intent intent = getIntent();
 
         if (intent.hasExtra(EXTRA_IMP_ID)) {
@@ -794,7 +856,7 @@ public class AddImplementActivity extends AppCompatActivity {
             position = adaptercompare.getPosition(stringCompare);
         }
         Log.d("Position CONDITION", "Position is: " + intent.getStringExtra(EXTRA_CONDITION) + " " + position);
-        spinCondition.setSelection(position);
+        spinConditionAcquired.setSelection(position);
 
         stringCompare = intent.getStringExtra(EXTRA_LOCATION);
         adaptercompare = ArrayAdapter.createFromResource(this, R.array.location, android.R.layout.simple_spinner_item);
@@ -929,6 +991,7 @@ public class AddImplementActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
         spinYearAcquired.setAdapter(adapter);
+        spinYearInoperable.setAdapter(adapter);
     }
 
     private void setMarginSize() {
@@ -1055,7 +1118,7 @@ public class AddImplementActivity extends AppCompatActivity {
 //            dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_DITCH, edtDaysPSeasonDitch.getText().toString());
             dataAddImplement.putExtra(EXTRA_DEPTH_CUT_DITCH, edtDepthOfCutDitch.getText().toString());
             dataAddImplement.putExtra(EXTRA_YEAR_ACQUIRED, spinYearAcquired.getSelectedItem().toString());
-            dataAddImplement.putExtra(EXTRA_CONDITION, spinCondition.getSelectedItem().toString());
+            dataAddImplement.putExtra(EXTRA_CONDITION, spinConditionAcquired.getSelectedItem().toString());
             dataAddImplement.putExtra(EXTRA_LOCATION, spinLocation.getSelectedItem().toString());
             dataAddImplement.putExtra(EXTRA_PROVINCE, singlespinProvinces.getSelectedItem().toString());
             dataAddImplement.putExtra(EXTRA_MUNICIPALITY, singlespinMunicipalities.getSelectedItem().toString());
@@ -1172,7 +1235,7 @@ public class AddImplementActivity extends AppCompatActivity {
 
         yearSelectCheck = spinYearAcquired.getSelectedItemPosition() != 0;
 
-        conditionPresentCheck = spinCondition.getSelectedItemPosition() != 0;
+        conditionPresentCheck = spinConditionAcquired.getSelectedItemPosition() != 0;
 
         locationImplementCheck = spinLocation.getSelectedItemPosition() != 0;
 
@@ -1236,8 +1299,7 @@ public class AddImplementActivity extends AppCompatActivity {
                 paramsEAMain.topToBottom = R.id.cbHauling;
                 paramsEAMain.topMargin = bigMargin;
                 tvHaEAMain.setLayoutParams(paramsEAMain);
-                tvYearAcquired.setLayoutParams(paramsYearAcquired);
-                paramsYearAcquired.topToBottom = R.id.tvFieldCapacityResultMain;
+                paramstvOwnership.topToBottom = R.id.tvFieldCapacityResultMain;
                 break;
             case "MECHANICAL PLANTER":
                 hideAll();
@@ -1245,7 +1307,7 @@ public class AddImplementActivity extends AppCompatActivity {
                 paramstvPlanter.topToBottom = R.id.cbHauling;
                 paramstvPlanter.topMargin = bigMargin;
                 tvTypeofPlant.setLayoutParams(paramstvPlanter);
-                paramsYearAcquired.topToBottom = R.id.tvFieldCapacityResultPlant;
+                paramstvOwnership.topToBottom = R.id.tvFieldCapacityResultPlant;
                 break;
             case "GRANULAR FERTILIZER APPLICATOR":
             case "FERTILIZER APPLICATOR WITH CUTAWAY":
@@ -1254,7 +1316,7 @@ public class AddImplementActivity extends AppCompatActivity {
                 paramsEAFert.topToBottom = R.id.cbHauling;
                 paramsEAFert.topMargin = bigMargin;
                 tvHaEAFert.setLayoutParams(paramsEAFert);
-                paramsYearAcquired.topToBottom = R.id.tvDeliveryRateResultFert;
+                paramstvOwnership.topToBottom = R.id.tvDeliveryRateResultFert;
                 break;
             case "MECHANICAL HARVESTER":
                 hideAll();
@@ -1262,7 +1324,7 @@ public class AddImplementActivity extends AppCompatActivity {
                 paramsEAHarvest.topToBottom = R.id.cbHauling;
                 paramsEAHarvest.topMargin = bigMargin;
                 tvHaEAHarvest.setLayoutParams(paramsEAHarvest);
-                paramsYearAcquired.topToBottom = R.id.tvFieldCapacityHarvest;
+                paramstvOwnership.topToBottom = R.id.tvFieldCapacityHarvest;
                 break;
             case "CANE GRAB LOADERS":
                 hideAll();
@@ -1270,7 +1332,7 @@ public class AddImplementActivity extends AppCompatActivity {
                 paramsEAGrab.topToBottom = R.id.cbHauling;
                 paramsEAGrab.topMargin = bigMargin;
                 tvHaEAGrab.setLayoutParams(paramsEAGrab);
-                paramsYearAcquired.topToBottom = R.id.tvFieldCapacityGrab;
+                paramstvOwnership.topToBottom = R.id.tvFieldCapacityGrab;
                 break;
             case "DITCHER":
                 hideAll();
@@ -1278,15 +1340,15 @@ public class AddImplementActivity extends AppCompatActivity {
                 paramsDCDitch.topToBottom = R.id.cbHauling;
                 paramsDCDitch.topMargin = bigMargin;
                 tvDepthCutDitch.setLayoutParams(paramsDCDitch);
-                paramsYearAcquired.topToBottom = R.id.edtDepthOfCutDitch;
+                paramstvOwnership.topToBottom = R.id.edtDepthOfCutDitch;
                 break;
             default:
                 hideAll();
-                paramsYearAcquired.topToBottom = R.id.cbHauling;
+                paramstvOwnership.topToBottom = R.id.cbHauling;
                 break;
         }
-        paramsYearAcquired.topMargin = bigMargin;
-        tvYearAcquired.setLayoutParams(paramsYearAcquired);
+        paramstvOwnership.topMargin = bigMargin;
+        tvOwnership.setLayoutParams(paramstvOwnership);
     }
 
     private void showDitch() {
@@ -1387,134 +1449,6 @@ public class AddImplementActivity extends AppCompatActivity {
         tvNumRowsPlant.setVisibility(View.VISIBLE);
         tvDistanceofPlant.setVisibility(View.VISIBLE);
         tvTypeofPlant.setVisibility(View.VISIBLE);
-    }
-
-    private void initViews() {
-
-        spinImplementType = findViewById(R.id.spinImplementType);
-        camera = findViewById(R.id.btnCameraImp);
-        gallery = findViewById(R.id.btnGalleryImp);
-        selectedImage = findViewById(R.id.imgMachineImp);
-        getLocation = findViewById(R.id.btnGetLocationImp);
-        edtQRCode = findViewById(R.id.edtQRCodeImp);
-        btnScanQR = findViewById(R.id.btnScanQRCodeImp);
-        spinMachineUsing = findViewById(R.id.spinMachineUsing);
-        spinYearAcquired = findViewById(R.id.spinYearAcquiredImp);
-        tvYearAcquired = findViewById(R.id.tvYearAcquiredImp);
-        singlespinProvinces = findViewById(R.id.singlespinProvincesImp);
-        singlespinMunicipalities = findViewById(R.id.singlespinMunicipalitiesImp);
-        singlespinBarangays = findViewById(R.id.singlespinBarangaysImp);
-        tvLat = findViewById(R.id.tvLatitudeImp);
-        tvLong = findViewById(R.id.tvLongitudeImp);
-        tvAcc = findViewById(R.id.tvAccImp);
-        spinLocation = findViewById(R.id.spinLocationImp);
-        spinCondition = findViewById(R.id.spinConditionPresentImp);
-        btnSave = findViewById(R.id.btnSaveImp);
-
-
-        cbLandClear = findViewById(R.id.cbLandClearing);
-        cbPrePlant = findViewById(R.id.cbPrePlanting);
-        cbPlant = findViewById(R.id.cbPlanting);
-        cbFert = findViewById(R.id.cbFertilizer);
-        cbPest = findViewById(R.id.cbPesticide);
-        cbIrriDrain = findViewById(R.id.cbIrriDrain);
-        cbCult = findViewById(R.id.cbCultivation);
-        cbRatoon = findViewById(R.id.cbRatooning);
-        cbHarvest = findViewById(R.id.cbHarvest);
-        cbPostHarvest = findViewById(R.id.cbPostHarvest);
-        cbHaul = findViewById(R.id.cbHauling);
-
-//        edtTotalServiceAreaMain = findViewById(R.id.edtTotalServiceAreaMain);
-//        edtHoursPDayMain = findViewById(R.id.edtHoursPDayMain);
-//        edtDaysPSeasonMain = findViewById(R.id.edtDaysPSeasonMain);
-//        tvHaMain = findViewById(R.id.tvHaMain);
-//        tvHoursPDayMain = findViewById(R.id.tvHoursPDayMain);
-//        tvDaysPSeasonMain = findViewById(R.id.tvDaysPSeasonMain);
-//        edtTotalServiceAreaPlant = findViewById(R.id.edtTotalServiceAreaPlant);
-//        edtHoursPDayPlant = findViewById(R.id.edtHoursPDayPlant);
-//        edtDaysPSeasonPlant = findViewById(R.id.edtDaysPSeasonPlant);
-
-//        tvHaPlant = findViewById(R.id.tvHaPlant);
-//        tvHoursPDayPlant = findViewById(R.id.tvHoursPDayPlant);
-//        tvDaysPSeasonPlant = findViewById(R.id.tvDaysPSeasonPlant);
-//        edtTotalServiceAreaFert = findViewById(R.id.edtTotalServiceAreaFert);
-//        edtHoursPDayFert = findViewById(R.id.edtHoursPDayFert);
-//        edtDaysPSeasonFert = findViewById(R.id.edtDaysPSeasonFert);
-//        tvHaFert = findViewById(R.id.tvHaFert);
-//        tvHoursPDayFert = findViewById(R.id.tvHoursPDayFert);
-//        tvDaysPSeasonfFert = findViewById(R.id.tvDaysPSeasonFert);
-//        edtTotalServiceAreaHarvest = findViewById(R.id.edtTotalServiceAreaHarvest);
-//        edtHoursPDayHarvest = findViewById(R.id.edtHoursPDayHarvest);
-//        edtDaysPSeasonHarvest = findViewById(R.id.edtDaysPSeasonHarvest);
-//        tvHaHarvest = findViewById(R.id.tvHaHarvest);
-//        tvHoursPDayHarvest = findViewById(R.id.tvHoursPDayHarvest);
-//        tvDaysPSeasonHarvest = findViewById(R.id.tvDaysPSeasonHarvest);
-//        edtTotalServiceAreaGrab = findViewById(R.id.edtTotalServiceAreaGrab);
-//        edtHoursPDayGrab = findViewById(R.id.edtHoursPDayGrab);
-//        edtDaysPSeasonGrab = findViewById(R.id.edtDaysPSeasonGrab);
-//        edtNumberofLoadsGrab = findViewById(R.id.edtNumberofLoadsGrab);
-//        tvHaGrab = findViewById(R.id.tvHaGrab);
-//        tvHoursPDayGrab = findViewById(R.id.tvHoursPDayGrab);
-//        tvDaysPSeasonGrab = findViewById(R.id.tvDaysPSeasonGrab);
-//        tvLoadPHaGrab = findViewById(R.id.tvLoadPHaGrab);
-//        tvLoadCapGrab = findViewById(R.id.tvLoadCapGrab);
-//        edtTotalServiceAreaDitch = findViewById(R.id.edtTotalServiceAreaDitch);
-//        edtHoursPDayDitch = findViewById(R.id.edtHoursPDayDitch);
-//        edtDaysPSeasonDitch = findViewById(R.id.edtDaysPSeasonDitch);
-//        tvHoursPDayDitch = findViewById(R.id.tvHoursPDayDitch);
-//        tvDaysPSeasonDitch = findViewById(R.id.tvDaysPSeasonDitch);
-//        tvHaDitch = findViewById(R.id.tvHaDitch);
-        edtEffectiveAreaAccompMain = findViewById(R.id.edtEffectiveAreaAccompMain);
-        edtTimeUsedDuringOpMain = findViewById(R.id.edtTimeUsedDuringOpMain);
-        tvHaEAMain = findViewById(R.id.tvHaEAMain);
-        tvHoursPDayOpMain = findViewById(R.id.tvHoursPDayOpMain);
-        tvFieldCapacityMain = findViewById(R.id.tvFieldCapacityMain);
-        tvFieldCapacityResultMain = findViewById(R.id.tvFieldCapacityResultMain);
-
-        spinTypeOfPlanter = findViewById(R.id.spinTypeOfPlanterPlant);
-        edtNumberofRowsPlant = findViewById(R.id.edtNumberofRowsPlant);
-        edtDistanceofPlantMat = findViewById(R.id.edtDistanceOfPlantMatPlant);
-        edtEffectiveAreaAccompPlant = findViewById(R.id.edtEffectiveAreaAccompPlant);
-        edtTimeUsedDuringOpPlant = findViewById(R.id.edtTimeUsedDuringOpPlant);
-        tvHaEAPlant = findViewById(R.id.tvHaEAPlant);
-        tvHoursPDayOpPlant = findViewById(R.id.tvHoursPDayOpPlant);
-        tvFieldCapacityPlant = findViewById(R.id.tvFieldCapacityPlant);
-        tvFieldCapacityResultPlant = findViewById(R.id.tvFieldCapacityResultPlant);
-        tvNumRowsPlant = findViewById(R.id.tvNumRowsPlant);
-        tvTypeofPlant = findViewById(R.id.tvTypeofPlant);
-        tvDistanceofPlant = findViewById(R.id.tvDistancePlant);
-
-        edtEffectiveAreaAccompFert = findViewById(R.id.edtEffectiveAreaAccompFert);
-        edtTimeUsedDuringOpFert = findViewById(R.id.edtTimeUsedDuringOpFert);
-        edtWeightOfFert = findViewById(R.id.edtWeightOfFertFert);
-        tvHaEAFert = findViewById(R.id.tvHaEAFert);
-        tvHoursPDayOpFert = findViewById(R.id.tvHoursPDayOpFert);
-        tvFieldCapacityFert = findViewById(R.id.tvFieldCapacityFert);
-        tvFieldCapacityResultFert = findViewById(R.id.tvFieldCapacityResultFert);
-        tvWeightOfFert = findViewById(R.id.tvWeightFert);
-        tvDeliveryRateFert = findViewById(R.id.tvDeliveryRateFert);
-        tvDeliveryRateResultFert = findViewById(R.id.tvDeliveryRateResultFert);
-
-        edtEffectiveAreaAccompHarvest = findViewById(R.id.edtEffectiveAreaAccompHarvest);
-        edtTimeUsedDuringOpHarvest = findViewById(R.id.edtTimeUsedDuringOpHarvest);
-        edtAveYieldHarvest = findViewById(R.id.edtAveYieldHarvest);
-        tvHaEAHarvest = findViewById(R.id.tvHaEAHarvest);
-        tvHoursPDayOpHarvest = findViewById(R.id.tvHoursPDayOpHarvest);
-        tvFieldCapacityHarvest = findViewById(R.id.tvFieldCapacityHarvest);
-        tvFieldCapacityResultHarvest = findViewById(R.id.tvFieldCapacityResultHarvest);
-        tvTonCannesPHaHarvest = findViewById(R.id.tvTonCannesPHaHarvest);
-
-        edtEffectiveAreaAccompGrab = findViewById(R.id.edtEffectiveAreaAccompGrab);
-        edtTimeUsedDuringOpGrab = findViewById(R.id.edtTimeUsedDuringOpGrab);
-        edtLoadCapacityGrab = findViewById(R.id.edtLoadCapacityGrab);
-        tvHaEAGrab = findViewById(R.id.tvHaEAGrab);
-        tvHoursPDayOpGrab = findViewById(R.id.tvHoursPdayOpGrab);
-        tvLoadCapacityGrab = findViewById(R.id.tvLoadCapGrab);
-        tvFieldCapacityGrab = findViewById(R.id.tvFieldCapacityGrab);
-        tvFieldCapacityResultGrab = findViewById(R.id.tvFieldCapacityResultGrab);
-
-        edtDepthOfCutDitch = findViewById(R.id.edtDepthOfCutDitch);
-        tvDepthCutDitch = findViewById(R.id.tvDepthCutDitch);
     }
 
     private void showMainImplements() {
@@ -1648,6 +1582,154 @@ public class AddImplementActivity extends AppCompatActivity {
         tvDepthCutDitch.setVisibility(View.GONE);
     }
 
+    private void initViews() {
+
+        spinImplementType = findViewById(R.id.spinImplementType);
+        camera = findViewById(R.id.btnCameraImp);
+        gallery = findViewById(R.id.btnGalleryImp);
+        selectedImage = findViewById(R.id.imgMachineImp);
+        getLocation = findViewById(R.id.btnGetLocationImp);
+        edtQRCode = findViewById(R.id.edtQRCodeImp);
+        btnScanQR = findViewById(R.id.btnScanQRCodeImp);
+        spinMachineUsing = findViewById(R.id.spinMachineUsing);
+        spinYearAcquired = findViewById(R.id.spinYearAcquiredImp);
+        tvYearAcquired = findViewById(R.id.tvYearAcquiredImp);
+
+        tvOwnership = findViewById(R.id.tvOwnershipImp);
+        spinOwnership = findViewById(R.id.spinOwnershipImp);
+        tvPurchGrantDono = findViewById(R.id.tvPurchGrantDonoImp);
+        spinPurchGrantDono = findViewById(R.id.spinPurchGrantDonoImp);
+        tvAgency = findViewById(R.id.tvAgencyImp);
+        spinAgency = findViewById(R.id.spinAgencyImp);
+        edtOtherAgency = findViewById(R.id.edtOtherAgencyImp);
+
+        tvYearInoperable = findViewById(R.id.tvYearInoperableImp);
+        spinYearInoperable = findViewById(R.id.spinYearInoperableImp);
+
+        tvConditionPresent = findViewById(R.id.tvConditionPresentImp);
+        spinConditionPresent = findViewById(R.id.spinConditionPresentImp);
+        tvImplementUnused = findViewById(R.id.tvImplementUnused);
+        multspinProblemsUnused = findViewById(R.id.multspinProblemsUnusedImp);
+        edtOtherProblems = findViewById(R.id.edtOtherProblemsImp);
+        tvLocation = findViewById(R.id.tvLocImp);
+
+        singlespinProvinces = findViewById(R.id.singlespinProvincesImp);
+        singlespinMunicipalities = findViewById(R.id.singlespinMunicipalitiesImp);
+        singlespinBarangays = findViewById(R.id.singlespinBarangaysImp);
+        tvLat = findViewById(R.id.tvLatitudeImp);
+        tvLong = findViewById(R.id.tvLongitudeImp);
+        tvAcc = findViewById(R.id.tvAccImp);
+        spinLocation = findViewById(R.id.spinLocationImp);
+        spinConditionAcquired = findViewById(R.id.spinConditionAcquiredImp);
+        edtModifications = findViewById(R.id.edtModifications);
+        btnSave = findViewById(R.id.btnSaveImp);
+
+
+        cbLandClear = findViewById(R.id.cbLandClearing);
+        cbPrePlant = findViewById(R.id.cbPrePlanting);
+        cbPlant = findViewById(R.id.cbPlanting);
+        cbFert = findViewById(R.id.cbFertilizer);
+        cbPest = findViewById(R.id.cbPesticide);
+        cbIrriDrain = findViewById(R.id.cbIrriDrain);
+        cbCult = findViewById(R.id.cbCultivation);
+        cbRatoon = findViewById(R.id.cbRatooning);
+        cbHarvest = findViewById(R.id.cbHarvest);
+        cbPostHarvest = findViewById(R.id.cbPostHarvest);
+        cbHaul = findViewById(R.id.cbHauling);
+
+//        edtTotalServiceAreaMain = findViewById(R.id.edtTotalServiceAreaMain);
+//        edtHoursPDayMain = findViewById(R.id.edtHoursPDayMain);
+//        edtDaysPSeasonMain = findViewById(R.id.edtDaysPSeasonMain);
+//        tvHaMain = findViewById(R.id.tvHaMain);
+//        tvHoursPDayMain = findViewById(R.id.tvHoursPDayMain);
+//        tvDaysPSeasonMain = findViewById(R.id.tvDaysPSeasonMain);
+//        edtTotalServiceAreaPlant = findViewById(R.id.edtTotalServiceAreaPlant);
+//        edtHoursPDayPlant = findViewById(R.id.edtHoursPDayPlant);
+//        edtDaysPSeasonPlant = findViewById(R.id.edtDaysPSeasonPlant);
+
+//        tvHaPlant = findViewById(R.id.tvHaPlant);
+//        tvHoursPDayPlant = findViewById(R.id.tvHoursPDayPlant);
+//        tvDaysPSeasonPlant = findViewById(R.id.tvDaysPSeasonPlant);
+//        edtTotalServiceAreaFert = findViewById(R.id.edtTotalServiceAreaFert);
+//        edtHoursPDayFert = findViewById(R.id.edtHoursPDayFert);
+//        edtDaysPSeasonFert = findViewById(R.id.edtDaysPSeasonFert);
+//        tvHaFert = findViewById(R.id.tvHaFert);
+//        tvHoursPDayFert = findViewById(R.id.tvHoursPDayFert);
+//        tvDaysPSeasonfFert = findViewById(R.id.tvDaysPSeasonFert);
+//        edtTotalServiceAreaHarvest = findViewById(R.id.edtTotalServiceAreaHarvest);
+//        edtHoursPDayHarvest = findViewById(R.id.edtHoursPDayHarvest);
+//        edtDaysPSeasonHarvest = findViewById(R.id.edtDaysPSeasonHarvest);
+//        tvHaHarvest = findViewById(R.id.tvHaHarvest);
+//        tvHoursPDayHarvest = findViewById(R.id.tvHoursPDayHarvest);
+//        tvDaysPSeasonHarvest = findViewById(R.id.tvDaysPSeasonHarvest);
+//        edtTotalServiceAreaGrab = findViewById(R.id.edtTotalServiceAreaGrab);
+//        edtHoursPDayGrab = findViewById(R.id.edtHoursPDayGrab);
+//        edtDaysPSeasonGrab = findViewById(R.id.edtDaysPSeasonGrab);
+//        edtNumberofLoadsGrab = findViewById(R.id.edtNumberofLoadsGrab);
+//        tvHaGrab = findViewById(R.id.tvHaGrab);
+//        tvHoursPDayGrab = findViewById(R.id.tvHoursPDayGrab);
+//        tvDaysPSeasonGrab = findViewById(R.id.tvDaysPSeasonGrab);
+//        tvLoadPHaGrab = findViewById(R.id.tvLoadPHaGrab);
+//        tvLoadCapGrab = findViewById(R.id.tvLoadCapGrab);
+//        edtTotalServiceAreaDitch = findViewById(R.id.edtTotalServiceAreaDitch);
+//        edtHoursPDayDitch = findViewById(R.id.edtHoursPDayDitch);
+//        edtDaysPSeasonDitch = findViewById(R.id.edtDaysPSeasonDitch);
+//        tvHoursPDayDitch = findViewById(R.id.tvHoursPDayDitch);
+//        tvDaysPSeasonDitch = findViewById(R.id.tvDaysPSeasonDitch);
+//        tvHaDitch = findViewById(R.id.tvHaDitch);
+        edtEffectiveAreaAccompMain = findViewById(R.id.edtEffectiveAreaAccompMain);
+        edtTimeUsedDuringOpMain = findViewById(R.id.edtTimeUsedDuringOpMain);
+        tvHaEAMain = findViewById(R.id.tvHaEAMain);
+        tvHoursPDayOpMain = findViewById(R.id.tvHoursPDayOpMain);
+        tvFieldCapacityMain = findViewById(R.id.tvFieldCapacityMain);
+        tvFieldCapacityResultMain = findViewById(R.id.tvFieldCapacityResultMain);
+
+        spinTypeOfPlanter = findViewById(R.id.spinTypeOfPlanterPlant);
+        edtNumberofRowsPlant = findViewById(R.id.edtNumberofRowsPlant);
+        edtDistanceofPlantMat = findViewById(R.id.edtDistanceOfPlantMatPlant);
+        edtEffectiveAreaAccompPlant = findViewById(R.id.edtEffectiveAreaAccompPlant);
+        edtTimeUsedDuringOpPlant = findViewById(R.id.edtTimeUsedDuringOpPlant);
+        tvHaEAPlant = findViewById(R.id.tvHaEAPlant);
+        tvHoursPDayOpPlant = findViewById(R.id.tvHoursPDayOpPlant);
+        tvFieldCapacityPlant = findViewById(R.id.tvFieldCapacityPlant);
+        tvFieldCapacityResultPlant = findViewById(R.id.tvFieldCapacityResultPlant);
+        tvNumRowsPlant = findViewById(R.id.tvNumRowsPlant);
+        tvTypeofPlant = findViewById(R.id.tvTypeofPlant);
+        tvDistanceofPlant = findViewById(R.id.tvDistancePlant);
+
+        edtEffectiveAreaAccompFert = findViewById(R.id.edtEffectiveAreaAccompFert);
+        edtTimeUsedDuringOpFert = findViewById(R.id.edtTimeUsedDuringOpFert);
+        edtWeightOfFert = findViewById(R.id.edtWeightOfFertFert);
+        tvHaEAFert = findViewById(R.id.tvHaEAFert);
+        tvHoursPDayOpFert = findViewById(R.id.tvHoursPDayOpFert);
+        tvFieldCapacityFert = findViewById(R.id.tvFieldCapacityFert);
+        tvFieldCapacityResultFert = findViewById(R.id.tvFieldCapacityResultFert);
+        tvWeightOfFert = findViewById(R.id.tvWeightFert);
+        tvDeliveryRateFert = findViewById(R.id.tvDeliveryRateFert);
+        tvDeliveryRateResultFert = findViewById(R.id.tvDeliveryRateResultFert);
+
+        edtEffectiveAreaAccompHarvest = findViewById(R.id.edtEffectiveAreaAccompHarvest);
+        edtTimeUsedDuringOpHarvest = findViewById(R.id.edtTimeUsedDuringOpHarvest);
+        edtAveYieldHarvest = findViewById(R.id.edtAveYieldHarvest);
+        tvHaEAHarvest = findViewById(R.id.tvHaEAHarvest);
+        tvHoursPDayOpHarvest = findViewById(R.id.tvHoursPDayOpHarvest);
+        tvFieldCapacityHarvest = findViewById(R.id.tvFieldCapacityHarvest);
+        tvFieldCapacityResultHarvest = findViewById(R.id.tvFieldCapacityResultHarvest);
+        tvTonCannesPHaHarvest = findViewById(R.id.tvTonCannesPHaHarvest);
+
+        edtEffectiveAreaAccompGrab = findViewById(R.id.edtEffectiveAreaAccompGrab);
+        edtTimeUsedDuringOpGrab = findViewById(R.id.edtTimeUsedDuringOpGrab);
+        edtLoadCapacityGrab = findViewById(R.id.edtLoadCapacityGrab);
+        tvHaEAGrab = findViewById(R.id.tvHaEAGrab);
+        tvHoursPDayOpGrab = findViewById(R.id.tvHoursPdayOpGrab);
+        tvLoadCapacityGrab = findViewById(R.id.tvLoadCapGrab);
+        tvFieldCapacityGrab = findViewById(R.id.tvFieldCapacityGrab);
+        tvFieldCapacityResultGrab = findViewById(R.id.tvFieldCapacityResultGrab);
+
+        edtDepthOfCutDitch = findViewById(R.id.edtDepthOfCutDitch);
+        tvDepthCutDitch = findViewById(R.id.tvDepthCutDitch);
+    }
+
     private void initAllLayoutParameters() {
 
 
@@ -1658,6 +1740,187 @@ public class AddImplementActivity extends AppCompatActivity {
         paramsEAGrab = (ConstraintLayout.LayoutParams) tvHaEAGrab.getLayoutParams();
         paramsDCDitch = (ConstraintLayout.LayoutParams) tvDepthCutDitch.getLayoutParams();
         paramsYearAcquired = (ConstraintLayout.LayoutParams) tvYearAcquired.getLayoutParams();
+
+        paramstvLocation = (ConstraintLayout.LayoutParams) tvLocation.getLayoutParams();
+        paramstvImplementUnused = (ConstraintLayout.LayoutParams) tvImplementUnused.getLayoutParams();
+        paramstvConditionPresent = (ConstraintLayout.LayoutParams) tvConditionPresent.getLayoutParams();
+
+        paramstvOwnership = (ConstraintLayout.LayoutParams) tvOwnership.getLayoutParams();
+    }
+
+    private void conditionModifications(int position) {
+        switch (position) {
+            default:
+                edtModifications.setVisibility(View.GONE);
+                paramstvConditionPresent.topToBottom = R.id.spinConditionAcquiredImp;
+                break;
+            case 2:
+                edtModifications.setVisibility(View.VISIBLE);
+                paramstvConditionPresent.topToBottom = R.id.edtModifications;
+                break;
+        }
+        paramstvConditionPresent.topMargin = bigMargin;
+        tvConditionPresent.setLayoutParams(paramstvConditionPresent);
+    }
+
+    private void problemsUnused(int position) {
+        String pos = spinConditionPresent.getItemAtPosition(position).toString();
+        List<KeyPairBoolData> selectedProb = pairingOfList(Arrays.asList(getResources().getStringArray(R.array.blank)));
+        int stringArray = R.array.blank;
+
+        switch (pos) {
+            case "FUNCTIONAL USED":
+            default:
+                multspinProblemsUnused.setVisibility(View.GONE);
+                edtOtherProblems.setVisibility(View.GONE);
+                tvImplementUnused.setVisibility(View.GONE);
+                tvYearInoperable.setVisibility(View.GONE);
+                spinYearInoperable.setVisibility(View.GONE);
+                paramstvLocation.topToBottom = R.id.spinConditionPresentImp;
+                break;
+            case "FUNCTIONAL UNUSED":
+                multspinProblemsUnused.setVisibility(View.VISIBLE);
+                tvImplementUnused.setText("Why is this machine unused?");
+                tvImplementUnused.setVisibility(View.VISIBLE);
+                tvYearInoperable.setVisibility(View.VISIBLE);
+                spinYearInoperable.setVisibility(View.VISIBLE);
+                stringArray = R.array.problems_unused;
+                paramstvImplementUnused.topToBottom = R.id.spinYearInoperableImp;
+                paramstvLocation.topToBottom = R.id.multspinProblemsUnusedImp;
+                break;
+            case "NON-FUNCTIONAL":
+                multspinProblemsUnused.setVisibility(View.VISIBLE);
+                tvImplementUnused.setText("Why is this machine non-functional?");
+                tvYearInoperable.setVisibility(View.GONE);
+                spinYearInoperable.setVisibility(View.GONE);
+                tvImplementUnused.setVisibility(View.VISIBLE);
+                stringArray = R.array.problems_nonfunctional;
+                paramstvImplementUnused.topToBottom = R.id.spinConditionPresentImp;
+                paramstvLocation.topToBottom = R.id.multspinProblemsUnusedImp;
+                break;
+        }
+
+        selectedProb = pairingOfList(Arrays.asList(getResources().getStringArray(stringArray)));
+        multspinProblemsUnused.setItems(selectedProb, new MultiSpinnerListener() {
+            @Override
+            public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+                String pos = "";
+                for (int i = 0; i < selectedItems.size(); i++) {
+                    pos = pos + " " + selectedItems.get(i).getName();
+                    Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+                }
+                listOfProblems = pos;
+                if (pos.contains("OTHERS")) {
+                    edtOtherProblems.setVisibility(View.VISIBLE);
+                    paramstvLocation.topToBottom = R.id.edtOtherProblemsImp;
+                    hasOtherProblems = true;
+                } else {
+                    hasOtherProblems = false;
+                    edtOtherProblems.setVisibility(View.GONE);
+                    edtOtherProblems.setText("");
+                }
+
+            }
+        });
+        paramstvLocation.topMargin = bigMargin;
+        tvLocation.setLayoutParams(paramstvLocation);
+
+    }
+
+    private void ownershipSelect(int position) {
+        String pos = spinOwnership.getItemAtPosition(position).toString();
+        List<String> stringListAgency = Arrays.asList(getResources().getStringArray(R.array.blank));
+
+        Log.d("GOT TO OWNERSHIP", pos);
+        switch (pos) {
+
+            case "PRIVATELY OWNED":
+                spinPurchGrantDono.setVisibility(View.GONE);
+                tvPurchGrantDono.setVisibility(View.VISIBLE);
+                spinAgency.setVisibility(View.GONE);
+                tvPurchGrantDono.setVisibility(View.GONE);
+                tvAgency.setVisibility(View.GONE);
+                paramsYearAcquired.topToBottom = R.id.spinOwnershipImp;
+                stringListAgency = Arrays.asList(getResources().getStringArray(R.array.agency_loan));
+                break;
+            case "COOPERATIVE/ASSOCIATION":
+            case "CUSTOM PROVIDER":
+            case "LGU":
+                spinPurchGrantDono.setVisibility(View.VISIBLE);
+                tvPurchGrantDono.setVisibility(View.VISIBLE);
+                paramsYearAcquired.topToBottom = R.id.spinPurchGrantDonoImp;
+                stringListAgency = Arrays.asList(getResources().getStringArray(R.array.agency));
+                break;
+            default:
+                spinPurchGrantDono.setVisibility(View.GONE);
+                spinAgency.setVisibility(View.GONE);
+                tvPurchGrantDono.setVisibility(View.GONE);
+                tvAgency.setVisibility(View.GONE);
+                paramsYearAcquired.topToBottom = R.id.spinOwnershipImp;
+                break;
+        }
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, stringListAgency);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinAgency.setAdapter(dataAdapter);
+//TODO ADD INENT AGENCY
+        paramsYearAcquired.topMargin = bigMargin;
+        tvYearAcquired.setLayoutParams(paramsYearAcquired);
+
+//        Intent intent = intentFromDb;
+//        if (intent != null && intent.hasExtra(EXTRA_ID)) {
+//            String stringCompare = intent.getStringExtra(EXTRA_AGENCY);
+//
+//            if (!isNullOrEmpty(stringCompare)) {
+//                position = dataAdapter.getPosition(stringCompare);
+//            }
+//            spinAgency.setSelection(position);
+//        }
+    }
+
+    private void purchGrantDonoSelect(int position) {
+        String pos = spinPurchGrantDono.getItemAtPosition(position).toString();
+
+        switch (pos) {
+            case "PURCHASED":
+            default:
+                Log.d("INSIDE PURCHASE", pos);
+                purchGrantDono = "PURCHASED";
+                spinAgency.setVisibility(View.GONE);
+                paramsYearAcquired.topToBottom = R.id.spinPurchGrantDonoImp;
+                tvAgency.setVisibility(View.GONE);
+                break;
+            case "GRANT":
+            case "DONATION":
+                if (pos.contains("GRANT")) {
+                    purchGrantDono = "GRANT";
+                } else if (pos.contains("DONATION")) {
+                    purchGrantDono = "DONATION";
+                }
+                spinAgency.setVisibility(View.VISIBLE);
+                tvAgency.setVisibility(View.VISIBLE);
+                paramsYearAcquired.topToBottom = R.id.spinAgencyImp;
+                break;
+        }
+
+        paramsYearAcquired.topMargin = bigMargin;
+        tvYearAcquired.setLayoutParams(paramsYearAcquired);
+    }
+
+    private void otherAgency(int position) {
+        String pos = spinAgency.getItemAtPosition(position).toString();
+
+        Log.d("POSITION OF AGENCY", pos);
+
+        if ("OTHERS".equals(pos)) {
+            paramsYearAcquired.topToBottom = R.id.edtOtherAgencyImp;
+            edtOtherAgency.setVisibility(View.VISIBLE);
+        } else {
+            paramsYearAcquired.topToBottom = R.id.spinAgencyImp;
+            edtOtherAgency.setVisibility(View.GONE);
+        }
+        paramsYearAcquired.topMargin = bigMargin;
+        tvYearAcquired.setLayoutParams(paramsYearAcquired);
     }
 
 
@@ -1692,16 +1955,17 @@ public class AddImplementActivity extends AppCompatActivity {
         return scaledBitmap;
     }
 
-    public void askCameraPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
-        } else {
-        }
-
-    }
+//        public void askCameraPermission () {
+//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
+//            } else {
+//            }
+//
+//        }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == CAMERA_PERM_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
