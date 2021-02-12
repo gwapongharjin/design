@@ -297,6 +297,15 @@
         <item>THE MACHINE WAS NOT TURNED OVER TO THE BENEFICIARIES</item>
         <item>OTHERS</item>
     </string-array>
+
+    <string-array name="problems_unused_implement">
+        <item>THE IMPLEMENT IS NOT SUITABLE TO THE CONDITIONS OF THE AREA</item>
+        <item>NO ONE IS SKILLED ENOUGH TO OPERATE THE IMPLEMENT</item>
+        <item>CUSTOM HIRING RATE OF IMPLEMENT IS TOO HIGH</item>
+        <item>THE IMPLEMENT WAS NOT TURNED OVER TO THE BENEFICIARIES</item>
+        <item>NO COMPATIBLE MACHINE AVAILABLE</item>
+        <item>OTHERS</item>
+    </string-array>
     <string-array name="problems_nonfunctional">
         <item>FOR REPAIR</item>
         <item>TOO OLD, UNREPAIRABLE</item>

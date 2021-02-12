@@ -1784,7 +1784,7 @@ public class AddImplementActivity extends AppCompatActivity {
                 tvImplementUnused.setVisibility(View.VISIBLE);
                 tvYearInoperable.setVisibility(View.VISIBLE);
                 spinYearInoperable.setVisibility(View.VISIBLE);
-                stringArray = R.array.problems_unused;
+                stringArray = R.array.problems_unused_implement;
                 paramstvImplementUnused.topToBottom = R.id.spinYearInoperableImp;
                 paramstvLocation.topToBottom = R.id.multspinProblemsUnusedImp;
                 break;

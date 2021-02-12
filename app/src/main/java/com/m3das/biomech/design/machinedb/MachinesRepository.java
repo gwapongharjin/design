@@ -10,7 +10,6 @@ import java.util.List;
 public class MachinesRepository {
     private final MachinesDAO machinesDAO;
     private final LiveData<List<Machines>> allMachines;
-    String idOfMachine;
 
     public MachinesRepository(Application application) {
         MachinesDatabase database = MachinesDatabase.getInstance(application);
