@@ -76,7 +76,7 @@ public class AddImplementActivity extends AppCompatActivity {
     SingleSpinnerSearch singlespinProvinces, singlespinMunicipalities, singlespinBarangays;
     MultiSpinnerSearch multspinProblemsUnused;
     ConstraintLayout.LayoutParams paramsYearAcquired, paramsEAMain, paramstvPlanter, paramsEAFert, paramsEAHarvest, paramsEAGrab, paramsDCDitch, paramstvImplementUnused, paramstvLocation, paramstvConditionPresent, paramstvOwnership;
-    EditText edtQRCode, edtOtherProblems, edtEffectiveAreaAccompMain, edtTimeUsedDuringOpMain, edtOtherAgency, edtModifications,
+    EditText edtQRCode, edtOtherProblems, edtEffectiveAreaAccompMain, edtTimeUsedDuringOpMain, edtOtherAgency, edtModifications, edtModel, edtBrand,
             edtNumberofRowsPlant, edtDistanceofPlantMat, edtEffectiveAreaAccompPlant, edtTimeUsedDuringOpPlant,
             edtEffectiveAreaAccompFert, edtTimeUsedDuringOpFert, edtWeightOfFert,
             edtEffectiveAreaAccompHarvest, edtTimeUsedDuringOpHarvest, edtAveYieldHarvest,
@@ -347,7 +347,7 @@ public class AddImplementActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                saveImplement();
+                saveImplement();
             }
         });
 
@@ -691,19 +691,12 @@ public class AddImplementActivity extends AppCompatActivity {
 
         edtQRCode.setText(intent.getStringExtra(EXTRA_IMP_QR));
 
+        edtBrand.setText(intent.getStringExtra(EXTRA_BRAND));
+        edtModel.setText(intent.getStringExtra(EXTRA_MODEL));
+
         dateToStr = intent.getStringExtra(EXTRA_DATE);
 
         //TODO please add machine select
-
-
-        cbPostHarvest.setOnClickListener(v -> {
-            if (cbPostHarvest.isChecked()) {
-                postHarvest = "POST HARVEST";
-            } else {
-                postHarvest = "";
-            }
-
-        });
 
         cbHaul.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -716,7 +709,6 @@ public class AddImplementActivity extends AppCompatActivity {
 
             }
         });
-
 
         if (!isNullOrEmpty(intent.getStringExtra(EXTRA_LAND_CLEAR))) {
             cbLandClear.setChecked(true);
@@ -772,21 +764,18 @@ public class AddImplementActivity extends AppCompatActivity {
         } else {
             harvest = "";
         }
-
         if (!isNullOrEmpty(intent.getStringExtra(EXTRA_POST_HARVEST))) {
             cbPostHarvest.setChecked(true);
             postHarvest = "POST HARVEST";
         } else {
             postHarvest = "";
         }
-
         if (!isNullOrEmpty(intent.getStringExtra(EXTRA_HAULING))) {
             cbHaul.setChecked(true);
             hauling = "HAULING";
         } else {
             hauling = "";
         }
-
 //        edtTotalServiceAreaMain.setText(intent.getStringExtra(EXTRA_TSA_MAIN));
 //        edtHoursPDayMain.setText(intent.getStringExtra(EXTRA_AVE_OP_HOURS_MAIN));
 //        edtDaysPSeasonMain.setText(intent.getStringExtra(EXTRA_AVE_OP_DAYS_MAIN));
@@ -840,6 +829,29 @@ public class AddImplementActivity extends AppCompatActivity {
 //        edtDaysPSeasonDitch.setText(intent.getStringExtra(EXTRA_AVE_OP_DAYS_DITCH));
         edtDepthOfCutDitch.setText(intent.getStringExtra(EXTRA_DEPTH_CUT_DITCH));
 
+        stringCompare = intent.getStringExtra(EXTRA_OWNERSHIP);
+        adaptercompare = ArrayAdapter.createFromResource(this, R.array.ownership_of_machine, android.R.layout.simple_spinner_item);
+        adaptercompare.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        if (!isNullOrEmpty(stringCompare)) {
+            position = adaptercompare.getPosition(stringCompare);
+        }
+        Log.d("Position OWNERSHIP", "Position is: " + intent.getStringExtra(EXTRA_OWNERSHIP) + " " + position);
+        spinOwnership.setSelection(position);
+
+        stringCompare = intent.getStringExtra(EXTRA_PURCH_GRANT_DONO);
+        adaptercompare = ArrayAdapter.createFromResource(this, R.array.purchasing_method, android.R.layout.simple_spinner_item);
+        adaptercompare.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        if (!isNullOrEmpty(stringCompare)) {
+            position = adaptercompare.getPosition(stringCompare);
+        }
+        Log.d("Position PURCHGRANTDONO", "Position is: " + intent.getStringExtra(EXTRA_PURCH_GRANT_DONO) + " " + position);
+        spinPurchGrantDono.setSelection(position);
+
+        edtOtherAgency.setText(intent.getStringExtra(EXTRA_AGENCY_SPECIFY));
+
+        edtModifications.setText(intent.getStringExtra(EXTRA_MODIFICATIONS));
+
+        edtOtherProblems.setText(intent.getStringExtra(EXTRA_PROBLEMS_SPECIFY));
 
         ArrayList<String> years = new ArrayList<String>();
         years.add("");
@@ -1601,6 +1613,9 @@ public class AddImplementActivity extends AppCompatActivity {
         spinYearAcquired = findViewById(R.id.spinYearAcquiredImp);
         tvYearAcquired = findViewById(R.id.tvYearAcquiredImp);
 
+        edtBrand = findViewById(R.id.edtBrandImp);
+        edtModel = findViewById(R.id.edtModelImp);
+
         tvOwnership = findViewById(R.id.tvOwnershipImp);
         spinOwnership = findViewById(R.id.spinOwnershipImp);
         tvPurchGrantDono = findViewById(R.id.tvPurchGrantDonoImp);
@@ -1873,15 +1888,15 @@ public class AddImplementActivity extends AppCompatActivity {
         paramsYearAcquired.topMargin = bigMargin;
         tvYearAcquired.setLayoutParams(paramsYearAcquired);
 
-//        Intent intent = intentFromDb;
-//        if (intent != null && intent.hasExtra(EXTRA_ID)) {
-//            String stringCompare = intent.getStringExtra(EXTRA_AGENCY);
-//
-//            if (!isNullOrEmpty(stringCompare)) {
-//                position = dataAdapter.getPosition(stringCompare);
-//            }
-//            spinAgency.setSelection(position);
-//        }
+        Intent intent = intentFromDb;
+        if (intent != null && intent.hasExtra(EXTRA_IMP_ID)) {
+            String stringCompare = intent.getStringExtra(EXTRA_AGENCY);
+
+            if (!isNullOrEmpty(stringCompare)) {
+                position = dataAdapter.getPosition(stringCompare);
+            }
+            spinAgency.setSelection(position);
+        }
     }
 
     private void purchGrantDonoSelect(int position) {

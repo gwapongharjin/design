@@ -794,7 +794,6 @@ public class AddMachineActivity extends AppCompatActivity {
         }
         Log.d("Position TYPE MILL", "Position is: " + intent1.getStringExtra(EXTRA_TYPE_MILL) + " " + position);
         spinTypeOfMill.setSelection(position);
-
 //        stringCompare = intent.getStringExtra(EXTRA_BRAND);
 //        adaptercompare = ArrayAdapter.createFromResource(this, R.array.all_machine_brands, android.R.layout.simple_spinner_item);
 //        adaptercompare.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -810,9 +809,7 @@ public class AddMachineActivity extends AppCompatActivity {
 //
 //        Log.d("Position BRAND", "Position is: " + intent.getStringExtra(EXTRA_BRAND) + " " + position);
 //        spinBrand.setSelection(position);
-
         edtOtherBrand.setText(intent1.getStringExtra(EXTRA_BRAND_SPECIFY));
-
 //        stringCompare = intent.getStringExtra(EXTRA_MODEL);
 //        adaptercompare = ArrayAdapter.createFromResource(this, R.array.all_models_machines, android.R.layout.simple_spinner_item);
 //        adaptercompare.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -821,11 +818,12 @@ public class AddMachineActivity extends AppCompatActivity {
 //        }
 //        Log.d("Position MODEL", "Position is: " + intent.getStringExtra(EXTRA_MODEL) + " " + position);
 //        spinModel.setSelection(position);
-
         edtOtherModel.setText(intent1.getStringExtra(EXTRA_MODEL_SPECIFY));
 
         edtRatedPower.setText(intent1.getStringExtra(EXTRA_RATED_POWER));
-        edtNewlyPlantedArea.setText(intent1.getStringExtra(EXTRA_SERVICE_AREA));
+        totalServiceArea = Double.parseDouble(intent1.getStringExtra(EXTRA_SERVICE_AREA));
+        edtNewlyPlantedArea.setText(intent1.getStringExtra(EXTRA_NEWLY_PLANTED_AREA));
+        edtRatoonArea.setText(intent1.getStringExtra(EXTRA_RATOONED_AREA));
         edtAveOpHours.setText(intent1.getStringExtra(EXTRA_AVE_OP_HOURS));
         edtAveOpDays.setText(intent1.getStringExtra(EXTRA_AVE_OP_DAYS));
         edtCapacity.setText(intent1.getStringExtra(EXTRA_CAPACITY));
@@ -899,11 +897,14 @@ public class AddMachineActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
 
         stringCompare = intent1.getStringExtra(EXTRA_YEAR_ACQUIRED);
+        String stringCompare2 = intent1.getStringExtra(EXTRA_YEAR_INOPERABLE);
+        Integer position2 = 0;
         if (!isNullOrEmpty(stringCompare)) {
             position = adapter.getPosition(stringCompare);
         }
         Log.d("Position YEAR", "Position is: " + intent1.getStringExtra(EXTRA_YEAR_ACQUIRED) + " " + position);
         spinYearAcquired.setSelection(position);
+        spinYearInoperable.setSelection(adapter.getPosition(stringCompare2));
 
 //        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Variable.getListResCode());
 //        stringCompare = intent.getStringExtra(EXTRA_RES_CODE);
@@ -932,16 +933,55 @@ public class AddMachineActivity extends AppCompatActivity {
         spinRental.setSelection(position);
         rentSelect(position);
 
-        edtCustomRate.setText(intent1.getStringExtra(EXTRA_CUSTOM_RATE));
+        edtCustomRate.setText(intent1.getStringExtra(EXTRA_MAIN_RENT_RATE));
+        edtPlowingRent.setText(intent1.getStringExtra(EXTRA_PLOW_RENT_RATE));
+        edtHarrowingRent.setText(intent1.getStringExtra(EXTRA_HARR_RENT_RATE));
+        edtFurrowingRent.setText(intent1.getStringExtra(EXTRA_FURR_RENT_RATE));
+        edtOtherRent.setText(intent1.getStringExtra(EXTRA_OTHR_RENT_RATE));
 
-        stringCompare = intent1.getStringExtra(EXTRA_CUSTOM_UNIT);
+        edtAveFuelConsPlow.setText(intent1.getStringExtra(EXTRA_AVE_FUEL_PLOW));
+        edtAveFuelConsHarr.setText(intent1.getStringExtra(EXTRA_AVE_FUEL_HARR));
+        edtAveFuelConsFurr.setText(intent1.getStringExtra(EXTRA_AVE_FUEL_FURR));
+
+        stringCompare = intent1.getStringExtra(EXTRA_MAIN_RENT_UNIT);
         adaptercompare = ArrayAdapter.createFromResource(this, R.array.custom_rate_units, android.R.layout.simple_spinner_item);
         adaptercompare.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         if (!isNullOrEmpty(stringCompare)) {
             position = adaptercompare.getPosition(stringCompare);
         }
-        Log.d("Position CUSTOM UNIT", "Position is: " + intent1.getStringExtra(EXTRA_CUSTOM_UNIT) + " " + position);
         spinCustomUnit.setSelection(position);
+
+        stringCompare = intent1.getStringExtra(EXTRA_PLOW_RENT_UNIT);
+        adaptercompare = ArrayAdapter.createFromResource(this, R.array.custom_rate_units, android.R.layout.simple_spinner_item);
+        adaptercompare.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        if (!isNullOrEmpty(stringCompare)) {
+            position = adaptercompare.getPosition(stringCompare);
+        }
+        spinPlowingRentUnit.setSelection(position);
+
+        stringCompare = intent1.getStringExtra(EXTRA_HARR_RENT_UNIT);
+        adaptercompare = ArrayAdapter.createFromResource(this, R.array.custom_rate_units, android.R.layout.simple_spinner_item);
+        adaptercompare.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        if (!isNullOrEmpty(stringCompare)) {
+            position = adaptercompare.getPosition(stringCompare);
+        }
+        spinHarrowingRentUnit.setSelection(position);
+
+        stringCompare = intent1.getStringExtra(EXTRA_FURR_RENT_UNIT);
+        adaptercompare = ArrayAdapter.createFromResource(this, R.array.custom_rate_units, android.R.layout.simple_spinner_item);
+        adaptercompare.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        if (!isNullOrEmpty(stringCompare)) {
+            position = adaptercompare.getPosition(stringCompare);
+        }
+        spinFurrowingRentUnit.setSelection(position);
+
+        stringCompare = intent1.getStringExtra(EXTRA_OTHR_RENT_UNIT);
+        adaptercompare = ArrayAdapter.createFromResource(this, R.array.custom_rate_units, android.R.layout.simple_spinner_item);
+        adaptercompare.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        if (!isNullOrEmpty(stringCompare)) {
+            position = adaptercompare.getPosition(stringCompare);
+        }
+        spinOtherRentUnit.setSelection(position);
 
 //        edtCustomRateUnit.setText(intent1.getStringExtra(EXTRA_CUSTOM_UNIT_SPECIFY));
 

@@ -75,9 +75,11 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             implementAveOpDaysMain, implementEFFAAMain, implementTUDOpMain, implementFieldCapMain, implementTypePlant, implementNumRowsPlant, implementDistMatPlant, implementTSAPlant,
             implementAveOpHoursPlant, implementAveOpDaysPlant, implementEFFAAPlant, implementTUDOpPlant, implementFieldCapPlant, implementTSAFert, implementAveOpHoursFert, implementAveOpDaysFert,
             implementEFFAAFert, implementTUDOpFert, implementFieldCapFert, implementWeightFert, implementDelRateFert, implementTSAHarvest, implementAveOpHoursHarvest, implementAveOpDaysHarvest,
-            implementEFFAAHarvest, implementTUDOpHarvest, implementFieldCapHarvest, implementAveYieldHarvest, implementTSAGrab, implementAveOpHoursGrab, implementAveOpDaysGrab, implementEFFAAGrab,
+            implementEFFAAHarvest, implementTUDOpHarvest, implementFieldCapHarvest, implementAveYieldHarvest, implementTUDOGrab, implementFieldCapGrab, implementTSAGrab, implementAveOpHoursGrab, implementAveOpDaysGrab, implementEFFAAGrab,
             implementLoadCapGrab, implementNumLoadsGrab, implementTSADitch, implementAveOpHoursDitch, implementAveOpDaysDitch, implementDepthCutDitch, implementYearAcq, implementCondition,
-            implementLocation, implementProvince, implementMunicipality, implementBrgy, implementImgBase64, implementLatitude, implementLongitude, implementAccuracy, enumCode;
+            implementLocation, implementProvince, implementMunicipality, implementBrgy, implementImgBase64, implementLatitude, implementLongitude, implementAccuracy, enumCode, plow_rate,
+            plow_unit, plow_unit_specify, harr_rate, harr_unit, harr_unit_specify, furr_rate, furr_unit, furr_unit_specify, othr_rate, othr_unit, othr_unit_specify, ave_fuel_plow, ave_fuel_harr,
+            ave_fuel_furr, year_inoperable, implementBrand, implementModel;
     private String profileResCode, profileProfile, profileProfileSpecify, profileOwnerType, profileNameRespondent, profileAddress, profileAge, profileSex, profileContactNumber, profileMobNum1,
             profileMobNum2, profileTelNum1, profileTelNum2, profileEducAttain;
 
@@ -232,9 +234,24 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     year_acquired = machines.get(i).getYear_acquired();
                     condition_acquired = machines.get(i).getCondition_acquired();
                     rental = machines.get(i).getRental();
-                    custom_rate = machines.get(i).getCustom_rate();
-                    custom_unit = machines.get(i).getCustom_unit();
-                    custom_unit_specify = machines.get(i).getSpecify_custom_unit();
+                    custom_rate = machines.get(i).getMain_custom_rent();
+                    custom_unit = machines.get(i).getMain_custom_rent_unit();
+                    custom_unit_specify = machines.get(i).getMain_custom_rent_unit_specify();
+                    plow_rate = machines.get(i).getPlow_custom_rent();
+                    plow_unit = machines.get(i).getPlow_custom_rent_unit();
+                    plow_unit_specify = machines.get(i).getPlow_custom_rent_unit_specify();
+                    harr_rate = machines.get(i).getHarr_custom_rent();
+                    harr_unit = machines.get(i).getHarr_custom_rent_unit();
+                    harr_unit_specify = machines.get(i).getHarr_custom_rent_unit_specify();
+                    furr_rate = machines.get(i).getFurr_custom_rent();
+                    furr_unit = machines.get(i).getFurr_custom_rent_unit();
+                    furr_unit_specify = machines.get(i).getFurr_custom_rent_unit_specify();
+                    othr_rate = machines.get(i).getOther_custom_rent();
+                    othr_unit = machines.get(i).getOther_custom_rent_unit();
+                    othr_unit_specify = machines.get(i).getOther_custom_rent_unit_specify();
+                    ave_fuel_plow = machines.get(i).getPlow_ave_fuel();
+                    ave_fuel_harr = machines.get(i).getHarr_ave_fuel();
+                    ave_fuel_furr = machines.get(i).getFurr_ave_fuel();
                     availablity = machines.get(i).getAvailability();
                     rent_prov = machines.get(i).getRent_prov();
                     rent_mun = machines.get(i).getRent_mun();
@@ -242,6 +259,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     condition = machines.get(i).getCondition();
                     problems = machines.get(i).getProblems();
                     problems_specify = machines.get(i).getSpecify_problems();
+                    year_inoperable = machines.get(i).getYear_inoperable();
                     location = machines.get(i).getLocation();
                     prov = machines.get(i).getProv();
                     mun = machines.get(i).getMun();
@@ -319,44 +337,38 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     implementHarvest = anImplements.get(i).getHarvest();
                     implementPostHarvest = anImplements.get(i).getPost_harvest();
                     implementHaul = anImplements.get(i).getHauling();
-                    implementTSAMain = anImplements.get(i).getTotal_service_area_main();
-                    implementAveOpHoursMain = anImplements.get(i).getAverage_operating_hours_main();
-                    implementAveOpDaysMain = anImplements.get(i).getAverage_operating_days_main();
+
+                    implementBrand = anImplements.get(i).getBrand();
+                    implementModel = anImplements.get(i).getModel();
+
                     implementEFFAAMain = anImplements.get(i).getEffective_area_accomplished_main();
                     implementTUDOpMain = anImplements.get(i).getTime_used_during_operation_main();
                     implementFieldCapMain = anImplements.get(i).getField_capacity_main();
                     implementTypePlant = anImplements.get(i).getType_of_planter();
                     implementNumRowsPlant = anImplements.get(i).getNumber_of_rows_planter();
                     implementDistMatPlant = anImplements.get(i).getDistance_of_materials_planter();
-                    implementTSAPlant = anImplements.get(i).getTotal_service_area_planter();
-                    implementAveOpHoursPlant = anImplements.get(i).getAverage_operating_hours_planter();
-                    implementAveOpDaysPlant = anImplements.get(i).getAverage_operating_days_planter();
+
+
                     implementEFFAAPlant = anImplements.get(i).getEffective_area_accomplished_planter();
                     implementTUDOpPlant = anImplements.get(i).getTime_used_during_operation_planter();
                     implementFieldCapPlant = anImplements.get(i).getField_capacity_planter();
-                    implementTSAFert = anImplements.get(i).getTotal_service_area_fertilizer();
-                    implementAveOpHoursFert = anImplements.get(i).getAverage_operating_hours_fertilizer();
-                    implementAveOpDaysFert = anImplements.get(i).getAverage_operating_days_fertilizer();
+
                     implementEFFAAFert = anImplements.get(i).getEffective_area_accomplished_fertilizer();
                     implementTUDOpFert = anImplements.get(i).getTime_used_during_operation_fertilizer();
                     implementFieldCapFert = anImplements.get(i).getField_capacity_fertilizer();
                     implementWeightFert = anImplements.get(i).getWeight_fertilizer();
                     implementDelRateFert = anImplements.get(i).getDelivery_rate_fetilizer();
-                    implementTSAHarvest = anImplements.get(i).getTotal_service_area_harvester();
-                    implementAveOpHoursHarvest = anImplements.get(i).getAverage_operating_hours_harvester();
-                    implementAveOpDaysHarvest = anImplements.get(i).getAverage_operating_days_harvester();
+
                     implementEFFAAHarvest = anImplements.get(i).getEffective_area_accomplished_harvester();
                     implementTUDOpHarvest = anImplements.get(i).getTime_used_during_operation_harvester();
                     implementFieldCapHarvest = anImplements.get(i).getField_capacity_harvester();
                     implementAveYieldHarvest = anImplements.get(i).getAverage_yield_harvester();
-                    implementTSAGrab = anImplements.get(i).getTotal_service_area_cane_grab_loader();
-                    implementAveOpHoursGrab = anImplements.get(i).getAverage_operating_hours_cane_grab_loader();
-                    implementAveOpDaysGrab = anImplements.get(i).getAverage_operating_days_cane_grab_loader();
+
+                    implementEFFAAGrab = anImplements.get(i).getEffective_area_accomplished_cane_grab_loader();
+                    implementTUDOGrab = anImplements.get(i).getTime_used_during_operation_cane_grab_loader();
                     implementLoadCapGrab = anImplements.get(i).getLoading_capacity_cane_grab_loader();
-                    implementNumLoadsGrab = anImplements.get(i).getNumber_loads_cane_grab_loader();
-                    implementTSADitch = anImplements.get(i).getTotal_service_area_ditcher();
-                    implementAveOpHoursDitch = anImplements.get(i).getAverage_operating_hours_ditcher();
-                    implementAveOpDaysDitch = anImplements.get(i).getAverage_operating_days_ditcher();
+                    implementFieldCapGrab = anImplements.get(i).getField_capacity_cane_grab_loader();
+
                     implementDepthCutDitch = anImplements.get(i).getDepth_cut_ditcher();
                     implementYearAcq = anImplements.get(i).getYear_acquired();
                     implementCondition = anImplements.get(i).getCondition();
@@ -660,9 +672,24 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     year_acquired = machines.get(i).getYear_acquired();
                     condition_acquired = machines.get(i).getCondition_acquired();
                     rental = machines.get(i).getRental();
-                    custom_rate = machines.get(i).getCustom_rate();
-                    custom_unit = machines.get(i).getCustom_unit();
-                    custom_unit_specify = machines.get(i).getSpecify_custom_unit();
+                    custom_rate = machines.get(i).getMain_custom_rent();
+                    custom_unit = machines.get(i).getMain_custom_rent_unit();
+                    custom_unit_specify = machines.get(i).getMain_custom_rent_unit_specify();
+                    plow_rate = machines.get(i).getPlow_custom_rent();
+                    plow_unit = machines.get(i).getPlow_custom_rent_unit();
+                    plow_unit_specify = machines.get(i).getPlow_custom_rent_unit_specify();
+                    harr_rate = machines.get(i).getHarr_custom_rent();
+                    harr_unit = machines.get(i).getHarr_custom_rent_unit();
+                    harr_unit_specify = machines.get(i).getHarr_custom_rent_unit_specify();
+                    furr_rate = machines.get(i).getFurr_custom_rent();
+                    furr_unit = machines.get(i).getFurr_custom_rent_unit();
+                    furr_unit_specify = machines.get(i).getFurr_custom_rent_unit_specify();
+                    othr_rate = machines.get(i).getOther_custom_rent();
+                    othr_unit = machines.get(i).getOther_custom_rent_unit();
+                    othr_unit_specify = machines.get(i).getOther_custom_rent_unit_specify();
+                    ave_fuel_plow = machines.get(i).getPlow_ave_fuel();
+                    ave_fuel_harr = machines.get(i).getHarr_ave_fuel();
+                    ave_fuel_furr = machines.get(i).getFurr_ave_fuel();
                     availablity = machines.get(i).getAvailability();
                     rent_prov = machines.get(i).getRent_prov();
                     rent_mun = machines.get(i).getRent_mun();
@@ -670,6 +697,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     condition = machines.get(i).getCondition();
                     problems = machines.get(i).getProblems();
                     problems_specify = machines.get(i).getSpecify_problems();
+                    year_inoperable = machines.get(i).getYear_inoperable();
                     location = machines.get(i).getLocation();
                     prov = machines.get(i).getProv();
                     mun = machines.get(i).getMun();
@@ -735,44 +763,38 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     implementHarvest = anImplements.get(i).getHarvest();
                     implementPostHarvest = anImplements.get(i).getPost_harvest();
                     implementHaul = anImplements.get(i).getHauling();
-                    implementTSAMain = anImplements.get(i).getTotal_service_area_main();
-                    implementAveOpHoursMain = anImplements.get(i).getAverage_operating_hours_main();
-                    implementAveOpDaysMain = anImplements.get(i).getAverage_operating_days_main();
+
+                    implementBrand = anImplements.get(i).getBrand();
+                    implementModel = anImplements.get(i).getModel();
+
                     implementEFFAAMain = anImplements.get(i).getEffective_area_accomplished_main();
                     implementTUDOpMain = anImplements.get(i).getTime_used_during_operation_main();
                     implementFieldCapMain = anImplements.get(i).getField_capacity_main();
                     implementTypePlant = anImplements.get(i).getType_of_planter();
                     implementNumRowsPlant = anImplements.get(i).getNumber_of_rows_planter();
                     implementDistMatPlant = anImplements.get(i).getDistance_of_materials_planter();
-                    implementTSAPlant = anImplements.get(i).getTotal_service_area_planter();
-                    implementAveOpHoursPlant = anImplements.get(i).getAverage_operating_hours_planter();
-                    implementAveOpDaysPlant = anImplements.get(i).getAverage_operating_days_planter();
+
+
                     implementEFFAAPlant = anImplements.get(i).getEffective_area_accomplished_planter();
                     implementTUDOpPlant = anImplements.get(i).getTime_used_during_operation_planter();
                     implementFieldCapPlant = anImplements.get(i).getField_capacity_planter();
-                    implementTSAFert = anImplements.get(i).getTotal_service_area_fertilizer();
-                    implementAveOpHoursFert = anImplements.get(i).getAverage_operating_hours_fertilizer();
-                    implementAveOpDaysFert = anImplements.get(i).getAverage_operating_days_fertilizer();
+
                     implementEFFAAFert = anImplements.get(i).getEffective_area_accomplished_fertilizer();
                     implementTUDOpFert = anImplements.get(i).getTime_used_during_operation_fertilizer();
                     implementFieldCapFert = anImplements.get(i).getField_capacity_fertilizer();
                     implementWeightFert = anImplements.get(i).getWeight_fertilizer();
                     implementDelRateFert = anImplements.get(i).getDelivery_rate_fetilizer();
-                    implementTSAHarvest = anImplements.get(i).getTotal_service_area_harvester();
-                    implementAveOpHoursHarvest = anImplements.get(i).getAverage_operating_hours_harvester();
-                    implementAveOpDaysHarvest = anImplements.get(i).getAverage_operating_days_harvester();
+
                     implementEFFAAHarvest = anImplements.get(i).getEffective_area_accomplished_harvester();
                     implementTUDOpHarvest = anImplements.get(i).getTime_used_during_operation_harvester();
                     implementFieldCapHarvest = anImplements.get(i).getField_capacity_harvester();
                     implementAveYieldHarvest = anImplements.get(i).getAverage_yield_harvester();
-                    implementTSAGrab = anImplements.get(i).getTotal_service_area_cane_grab_loader();
-                    implementAveOpHoursGrab = anImplements.get(i).getAverage_operating_hours_cane_grab_loader();
-                    implementAveOpDaysGrab = anImplements.get(i).getAverage_operating_days_cane_grab_loader();
+
+                    implementEFFAAGrab = anImplements.get(i).getEffective_area_accomplished_cane_grab_loader();
+                    implementTUDOGrab = anImplements.get(i).getTime_used_during_operation_cane_grab_loader();
                     implementLoadCapGrab = anImplements.get(i).getLoading_capacity_cane_grab_loader();
-                    implementNumLoadsGrab = anImplements.get(i).getNumber_loads_cane_grab_loader();
-                    implementTSADitch = anImplements.get(i).getTotal_service_area_ditcher();
-                    implementAveOpHoursDitch = anImplements.get(i).getAverage_operating_hours_ditcher();
-                    implementAveOpDaysDitch = anImplements.get(i).getAverage_operating_days_ditcher();
+                    implementFieldCapGrab = anImplements.get(i).getField_capacity_cane_grab_loader();
+
                     implementDepthCutDitch = anImplements.get(i).getDepth_cut_ditcher();
                     implementYearAcq = anImplements.get(i).getYear_acquired();
                     implementCondition = anImplements.get(i).getCondition();

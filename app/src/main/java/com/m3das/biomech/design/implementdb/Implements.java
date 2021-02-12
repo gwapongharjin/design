@@ -42,7 +42,7 @@ public class Implements {
     private final String effective_area_accomplished_fertilizer;
     private final String time_used_during_operation_fertilizer;
     private final String field_capacity_fertilizer;
-    private  final String weight_fertilizer;
+    private final String weight_fertilizer;
     private final String delivery_rate_fetilizer;
 
     private final String effective_area_accomplished_harvester;
@@ -152,6 +152,10 @@ public class Implements {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getImplement_type() {
