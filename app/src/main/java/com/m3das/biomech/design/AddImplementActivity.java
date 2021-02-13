@@ -156,7 +156,9 @@ public class AddImplementActivity extends AppCompatActivity {
     public static final String EXTRA_AGENCY_SPECIFY = "ADDIMPLEMENT_EXTRA_AGENCY_SPECIFY";
 
     public static final String EXTRA_YEAR_ACQUIRED = "ADDIMPLEMENT_EXTRA_YEAR_ACQUIRED";
-    public static final String EXTRA_CONDITION = "ADDIMPLEMENT_EXTRA_CONDITION";
+    public static final String EXTRA_CONDITION_ACQUIRED = "ADDIMPLEMENT_EXTRA_CONDITION_ACQUIRED";
+    public static final String EXTRA_CONDITION_PRESENT = "ADDIMPLEMENT_EXTRA_CONDITION_PRESENT";
+
 
     public static final String EXTRA_MODIFICATIONS = "ADDIMPLEMENT_EXTRA_MODIFICATIONS";
     public static final String EXTRA_PROBLEMS = "ADDIMPLEMENT_EXTRA_PROBLEMS";
@@ -213,6 +215,8 @@ public class AddImplementActivity extends AppCompatActivity {
         initAllLayoutParameters();
         setMarginSize();
         hideAll();
+        tvPrevious.setVisibility(View.INVISIBLE);
+        tvPrevMachine.setVisibility(View.INVISIBLE);
         setCheckBoxData();
         initTextViewData();
 
@@ -691,6 +695,10 @@ public class AddImplementActivity extends AppCompatActivity {
 
         if (intent.hasExtra(EXTRA_IMP_ID)) {
 
+            tvPrevMachine.setVisibility(View.VISIBLE);
+            tvPrevious.setVisibility(View.VISIBLE);
+            tvPrevMachine.setText(intent.getStringExtra(EXTRA_USED_ON));
+
             editItemSelected(intent);
 
         } else {
@@ -848,7 +856,10 @@ public class AddImplementActivity extends AppCompatActivity {
 //        edtHoursPDayGrab.setText(intent.getStringExtra(EXTRA_AVE_OP_HOURS_GRAB));
 //        edtDaysPSeasonGrab.setText(intent.getStringExtra(EXTRA_AVE_OP_DAYS_GRAB));
 //        edtNumberofLoadsGrab.setText(intent.getStringExtra(EXTRA_NUM_LOAD_GRAB));
+        edtEffectiveAreaAccompGrab.setText(intent.getStringExtra(EXTRA_EFF_AREA_ACC_GRAB));
+        edtTimeUsedDuringOpGrab.setText(intent.getStringExtra(EXTRA_TIME_USED_OP_GRAB));
         edtLoadCapacityGrab.setText(intent.getStringExtra(EXTRA_LOAD_CAP_GRAB));
+        tvFieldCapacityResultGrab.setText(intent.getStringExtra(EXTRA_FIELD_CAP_GRAB));
 
 //        edtTotalServiceAreaDitch.setText(intent.getStringExtra(EXTRA_TSA_DITCH));
 //        edtHoursPDayDitch.setText(intent.getStringExtra(EXTRA_AVE_OP_HOURS_DITCH));
@@ -879,11 +890,19 @@ public class AddImplementActivity extends AppCompatActivity {
 
         edtOtherProblems.setText(intent.getStringExtra(EXTRA_PROBLEMS_SPECIFY));
 
+        stringCompare = intent.getStringExtra(EXTRA_CONDITION_PRESENT);
+        adaptercompare = ArrayAdapter.createFromResource(this, R.array.condition, android.R.layout.simple_spinner_item);
+        adaptercompare.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        if (!isNullOrEmpty(stringCompare)) {
+            position = adaptercompare.getPosition(stringCompare);
+        }
+        Log.d("Position CONDITION", "Position is: " + intent.getStringExtra(EXTRA_CONDITION_PRESENT) + " " + position);
+        spinConditionPresent.setSelection(position);
+
         ArrayList<String> years = new ArrayList<String>();
         years.add("");
         for (int i = 1960; i <= Calendar.getInstance().get(Calendar.YEAR); i++) {
             years.add(Integer.toString(i));
-
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
         stringCompare = intent.getStringExtra(EXTRA_YEAR_ACQUIRED);
@@ -893,14 +912,51 @@ public class AddImplementActivity extends AppCompatActivity {
         Log.d("Position YEAR", "Position is: " + intent.getStringExtra(EXTRA_YEAR_ACQUIRED) + " " + position);
         spinYearAcquired.setSelection(position);
 
-        stringCompare = intent.getStringExtra(EXTRA_CONDITION);
-        adaptercompare = ArrayAdapter.createFromResource(this, R.array.condition, android.R.layout.simple_spinner_item);
+        stringCompare = intent.getStringExtra(EXTRA_CONDITION_ACQUIRED);
+        adaptercompare = ArrayAdapter.createFromResource(this, R.array.conditionImplement, android.R.layout.simple_spinner_item);
         adaptercompare.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         if (!isNullOrEmpty(stringCompare)) {
             position = adaptercompare.getPosition(stringCompare);
         }
-        Log.d("Position CONDITION", "Position is: " + intent.getStringExtra(EXTRA_CONDITION) + " " + position);
+        Log.d("Position CONDITION", "Position is: " + intent.getStringExtra(EXTRA_CONDITION_ACQUIRED) + " " + position);
         spinConditionAcquired.setSelection(position);
+
+//TODO PROBLEMS
+
+//        stringCompare = intent.getStringExtra(EXTRA_PROBLEMS);
+//        List<KeyPairBoolData> problems = null;
+//        if (spinConditionPresent.getSelectedItemPosition() == 2) {
+//            problems = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.problems_unused)), stringCompare, 1);
+//        } else if (spinConditionPresent.getSelectedItemPosition() == 3) {
+//            problems = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.problems_nonfunctional)), stringCompare, 1);
+//        } else {
+//            problems = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.problems_unused)), stringCompare, 1);
+//        }
+//
+//        if (stringCompare.contains("OTHERS")) {
+//            edtOtherProblems.setVisibility(View.VISIBLE);
+//            paramstvLocation.topToBottom = R.id.edtOtherProblems;
+//            hasOtherProblems = true;
+//            edtOtherProblems.setText(intent.getStringExtra(EXTRA_PROBLEMS_SPECIFY));
+//        } else {
+//            hasOtherProblems = false;
+//            edtOtherProblems.setVisibility(View.INVISIBLE);
+//        }
+//        multspinProblemsUnused.setItems(problems, new MultiSpinnerListener() {
+//            @Override
+//            public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+//            }
+//        });
+//        listOfProblems = intent.getStringExtra(EXTRA_PROBLEMS);
+
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
+        stringCompare = intent.getStringExtra(EXTRA_YEAR_INOPERABLE);
+        if (!isNullOrEmpty(stringCompare)) {
+            position = adapter2.getPosition(stringCompare);
+        }
+        Log.d("Position YEAR", "Position is: " + intent.getStringExtra(EXTRA_YEAR_INOPERABLE) + " " + position);
+        spinYearInoperable.setSelection(position);
 
         stringCompare = intent.getStringExtra(EXTRA_LOCATION);
         adaptercompare = ArrayAdapter.createFromResource(this, R.array.location, android.R.layout.simple_spinner_item);
@@ -958,10 +1014,7 @@ public class AddImplementActivity extends AppCompatActivity {
         tvLat.setText(intent.getStringExtra(EXTRA_LATITUDE));
         tvLong.setText(intent.getStringExtra(EXTRA_LONGITUDE));
         tvAcc.setText(intent.getStringExtra(EXTRA_ACCURACY));
-        
-        tvPrevMachine.setVisibility(View.VISIBLE);
-        tvPrevious.setVisibility(View.VISIBLE);
-        tvPrevMachine.setText(intent.getStringExtra(EXTRA_USED_ON));
+
         encodedImage = Variable.getStringImage();
 
         if (encodedImage == "Not yet Acquired") {
@@ -1114,6 +1167,8 @@ public class AddImplementActivity extends AppCompatActivity {
             dataAddImplement.putExtra(EXTRA_DATE, dateToStr);
             dataAddImplement.putExtra(EXTRA_USED_ON, temp1);
             dataAddImplement.putExtra(EXTRA_USED_COMPLETE, temp2);
+            dataAddImplement.putExtra(EXTRA_BRAND, edtBrand.getText().toString());
+            dataAddImplement.putExtra(EXTRA_MODEL, edtModel.getText().toString());
             dataAddImplement.putExtra(EXTRA_LAND_CLEAR, landClear);
             dataAddImplement.putExtra(EXTRA_PRE_PLANT, prePlant);
             dataAddImplement.putExtra(EXTRA_PLANTING, planting);
@@ -1159,14 +1214,28 @@ public class AddImplementActivity extends AppCompatActivity {
 //            dataAddImplement.putExtra(EXTRA_AVE_OP_HOURS_GRAB, edtHoursPDayGrab.getText().toString());
 //            dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_GRAB, edtDaysPSeasonGrab.getText().toString());
 //        dataAddImplement.putExtra(EXTRA_EFF_AREA_ACC_GRAB,effe);
+            dataAddImplement.putExtra(EXTRA_EFF_AREA_ACC_GRAB, edtEffectiveAreaAccompGrab.getText().toString());
+            dataAddImplement.putExtra(EXTRA_TIME_USED_OP_GRAB, edtTimeUsedDuringOpGrab.getText().toString());
             dataAddImplement.putExtra(EXTRA_LOAD_CAP_GRAB, edtLoadCapacityGrab.getText().toString());
+            dataAddImplement.putExtra(EXTRA_FIELD_CAP_GRAB, tvFieldCapacityResultGrab.getText().toString());
 //            dataAddImplement.putExtra(EXTRA_NUM_LOAD_GRAB, edtNumberofLoadsGrab.getText().toString());
 //            dataAddImplement.putExtra(EXTRA_TSA_DITCH, edtTotalServiceAreaDitch.getText().toString());
 //            dataAddImplement.putExtra(EXTRA_AVE_OP_HOURS_DITCH, edtHoursPDayDitch.getText().toString());
 //            dataAddImplement.putExtra(EXTRA_AVE_OP_DAYS_DITCH, edtDaysPSeasonDitch.getText().toString());
+            dataAddImplement.putExtra(EXTRA_OWNERSHIP, spinOwnership.getSelectedItem().toString());
+            dataAddImplement.putExtra(EXTRA_PURCH_GRANT_DONO, spinPurchGrantDono.getSelectedItem().toString());
+            dataAddImplement.putExtra(EXTRA_AGENCY, spinAgency.getSelectedItem().toString());
+            dataAddImplement.putExtra(EXTRA_AGENCY_SPECIFY, edtOtherAgency.getText().toString());
+            dataAddImplement.putExtra(EXTRA_MODIFICATIONS, edtModifications.getText().toString());
+            dataAddImplement.putExtra(EXTRA_YEAR_INOPERABLE, spinYearInoperable.getSelectedItem().toString());
+
+            dataAddImplement.putExtra(EXTRA_PROBLEMS, listOfProblems);
+            dataAddImplement.putExtra(EXTRA_PROBLEMS_SPECIFY, edtOtherProblems.getText().toString().toUpperCase());
+
             dataAddImplement.putExtra(EXTRA_DEPTH_CUT_DITCH, edtDepthOfCutDitch.getText().toString());
             dataAddImplement.putExtra(EXTRA_YEAR_ACQUIRED, spinYearAcquired.getSelectedItem().toString());
-            dataAddImplement.putExtra(EXTRA_CONDITION, spinConditionAcquired.getSelectedItem().toString());
+            dataAddImplement.putExtra(EXTRA_CONDITION_ACQUIRED, spinConditionAcquired.getSelectedItem().toString());
+            dataAddImplement.putExtra(EXTRA_CONDITION_PRESENT, spinConditionPresent.getSelectedItem().toString());
             dataAddImplement.putExtra(EXTRA_LOCATION, spinLocation.getSelectedItem().toString());
             dataAddImplement.putExtra(EXTRA_PROVINCE, singlespinProvinces.getSelectedItem().toString());
             dataAddImplement.putExtra(EXTRA_MUNICIPALITY, singlespinMunicipalities.getSelectedItem().toString());
@@ -1218,9 +1287,6 @@ public class AddImplementActivity extends AppCompatActivity {
             }
             if (!conditionAcquiredCheck) {
                 listIncomplete.add("Condition when Acquired");
-            }
-            if (!conditionPresentCheck) {
-                listIncomplete.add("Present Condition");
             }
             if (!otherProblemsCheck) {
                 listIncomplete.add("Problems with Machine");
@@ -1746,8 +1812,6 @@ public class AddImplementActivity extends AppCompatActivity {
 
         tvDepthCutDitch.setVisibility(View.GONE);
 
-        tvPrevious.setVisibility(View.INVISIBLE);
-        tvPrevMachine.setVisibility(View.INVISIBLE);
     }
 
     private void initViews() {
@@ -1996,9 +2060,52 @@ public class AddImplementActivity extends AppCompatActivity {
 
             }
         });
+
+        selectedProb = pairingOfList(Arrays.asList(getResources().getStringArray(stringArray)));
+        multspinProblemsUnused.setItems(selectedProb, new MultiSpinnerListener() {
+            @Override
+            public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+                String pos = "";
+                for (int i = 0; i < selectedItems.size(); i++) {
+                    pos = pos + " " + selectedItems.get(i).getName();
+                    Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+                }
+                listOfProblems = pos;
+                if (pos.contains("OTHERS")) {
+                    edtOtherProblems.setVisibility(View.VISIBLE);
+                    paramstvLocation.topToBottom = R.id.edtOtherProblems;
+                    hasOtherProblems = true;
+                } else {
+                    hasOtherProblems = false;
+                    edtOtherProblems.setVisibility(View.INVISIBLE);
+                    edtOtherProblems.setText("");
+                }
+
+            }
+        });
         paramstvLocation.topMargin = bigMargin;
         tvLocation.setLayoutParams(paramstvLocation);
 
+
+    }
+
+    public List<KeyPairBoolData> pairBoolDataSelectMulti(List<String> stringList, String compare, int valueOfString) {
+
+        final List<KeyPairBoolData> listArray1 = new ArrayList<>();
+        for (int i = 0; i < stringList.size(); i++) {
+            KeyPairBoolData h = new KeyPairBoolData();
+            h.setId(i + 1);
+            h.setName(stringList.get(i));
+            if (stringList.get(i).contains(compare)) {
+                h.setSelected(true);
+                Log.d("Selected item", "Item is: " + compare + " = " + stringList.get(i));
+                if (valueOfString == 1) {
+                    listOfProblems = listOfProblems + stringList.get(i);
+                }
+            }
+            listArray1.add(h);
+        }
+        return listArray1;
     }
 
     private void ownershipSelect(int position) {

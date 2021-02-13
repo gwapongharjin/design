@@ -65,6 +65,7 @@ public class Implements {
     private final String year_acquired;
     private final String condition;
 
+    private final String condition_present;
     private final String modifications;
     private final String problems;
     private final String problems_specify;
@@ -87,7 +88,7 @@ public class Implements {
                       String effective_area_accomplished_harvester, String time_used_during_operation_harvester, String field_capacity_harvester, String average_yield_harvester,
                       String effective_area_accomplished_cane_grab_loader, String time_used_during_operation_cane_grab_loader, String loading_capacity_cane_grab_loader,
                       String field_capacity_cane_grab_loader, String depth_cut_ditcher, String ownership, String purchase_grant_donation, String agency, String agency_specify,
-                      String year_acquired, String condition, String modifications, String problems, String problems_specify, String year_inoperable, String location, String province,
+                      String year_acquired, String condition, String condition_present, String modifications, String problems, String problems_specify, String year_inoperable, String location, String province,
                       String city, String barangay, String image_base64, String latitude, String longitude, String accuracy) {
         this.implement_type = implement_type;
         this.implement_qrcode = implement_qrcode;
@@ -136,6 +137,7 @@ public class Implements {
         this.agency_specify = agency_specify;
         this.year_acquired = year_acquired;
         this.condition = condition;
+        this.condition_present = condition_present;
         this.modifications = modifications;
         this.problems = problems;
         this.problems_specify = problems_specify;
@@ -224,6 +226,10 @@ public class Implements {
 
     public String getPost_harvest() {
         return post_harvest;
+    }
+
+    public String getCondition_present() {
+        return condition_present;
     }
 
     public String getHauling() {

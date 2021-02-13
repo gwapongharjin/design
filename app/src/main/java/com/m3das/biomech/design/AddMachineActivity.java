@@ -986,7 +986,6 @@ public class AddMachineActivity extends AppCompatActivity {
         }
         Log.d("Position RENTAL", "Position is: " + intent1.getStringExtra(EXTRA_RENTAL) + " " + position);
         spinRental.setSelection(position);
-        rentSelect(position);
 
         edtCustomRate.setText(intent1.getStringExtra(EXTRA_MAIN_RENT_RATE));
         edtPlowingRent.setText(intent1.getStringExtra(EXTRA_PLOW_RENT_RATE));
@@ -1846,11 +1845,11 @@ public class AddMachineActivity extends AppCompatActivity {
         } else {
             switch (pos) {
                 case "SPECIFY":
-                edtCustomRateUnit.setVisibility(View.VISIBLE);
+                    edtCustomRateUnit.setVisibility(View.VISIBLE);
                     paramstvMachineAvailability.topToBottom = R.id.edtCustomRateUnit;
                     break;
                 default:
-                edtCustomRateUnit.setVisibility(View.INVISIBLE);
+                    edtCustomRateUnit.setVisibility(View.INVISIBLE);
                     paramstvMachineAvailability.topToBottom = R.id.edtPlowingRent;
                     break;
             }
@@ -1914,8 +1913,6 @@ public class AddMachineActivity extends AppCompatActivity {
 
                 paramstvConditionPresent.topToBottom = R.id.spinRental;
 
-                paramstvConditionPresent.topMargin = bigMargin;
-                tvConditionPresent.setLayoutParams(paramstvConditionPresent);
                 break;
             case "YES":
 
@@ -1948,8 +1945,6 @@ public class AddMachineActivity extends AppCompatActivity {
                     spinAvailability.setVisibility(View.VISIBLE);
 
                     paramstvMachineAvailability.topToBottom = R.id.edtAveFuelConsumptionFurrowing;
-
-
                 } else {
                     edtCustomRate.setVisibility(View.VISIBLE);
                     spinCustomUnit.setVisibility(View.VISIBLE);
@@ -1983,16 +1978,17 @@ public class AddMachineActivity extends AppCompatActivity {
                     edtAveFuelConsFurr.setVisibility(View.INVISIBLE);
 
                     paramstvMachineAvailability.topToBottom = R.id.spinMainRentUnit;
-
                 }
-                paramstvConditionPresent.topToBottom = R.id.spinAvailability;
-                paramstvMachineAvailability.topMargin = bigMargin;
-                tvMachineAvailability.setLayoutParams(paramstvMachineAvailability);
-                paramstvConditionPresent.topMargin = bigMargin;
-                tvConditionPresent.setLayoutParams(paramstvConditionPresent);
+
                 break;
 
         }
+
+        paramstvMachineAvailability.topMargin = bigMargin;
+        tvMachineAvailability.setLayoutParams(paramstvMachineAvailability);
+
+        paramstvConditionPresent.topMargin = bigMargin;
+        tvConditionPresent.setLayoutParams(paramstvConditionPresent);
 
     }
 
@@ -2679,19 +2675,19 @@ public class AddMachineActivity extends AppCompatActivity {
 //            dataAddMachine.putExtra(EXTRA_CUSTOM_UNIT_SPECIFY, edtCustomRateUnit.getText().toString().toUpperCase());
             dataAddMachine.putExtra(EXTRA_MAIN_RENT_RATE, edtCustomRate.getText().toString());
             dataAddMachine.putExtra(EXTRA_MAIN_RENT_UNIT, spinCustomUnit.getSelectedItem().toString());
-            dataAddMachine.putExtra(EXTRA_MAIN_RENT_UNIT_SPECIFY, "NO TEXTBOX");
+            dataAddMachine.putExtra(EXTRA_MAIN_RENT_UNIT_SPECIFY, edtCustomRateUnit.getText().toString());
             dataAddMachine.putExtra(EXTRA_PLOW_RENT_RATE, edtPlowingRent.getText().toString());
             dataAddMachine.putExtra(EXTRA_PLOW_RENT_UNIT, spinPlowingRentUnit.getSelectedItem().toString());
-            dataAddMachine.putExtra(EXTRA_PLOW_RENT_UNIT_SPECIFY, "NO TEXTBOX");
+            dataAddMachine.putExtra(EXTRA_PLOW_RENT_UNIT_SPECIFY, edtPlowSpecifyUnit.getText().toString());
             dataAddMachine.putExtra(EXTRA_HARR_RENT_RATE, edtHarrowingRent.getText().toString());
             dataAddMachine.putExtra(EXTRA_HARR_RENT_UNIT, spinHarrowingRentUnit.getSelectedItem().toString());
-            dataAddMachine.putExtra(EXTRA_HARR_RENT_UNIT_SPECIFY, "NO TEXTBOX");
+            dataAddMachine.putExtra(EXTRA_HARR_RENT_UNIT_SPECIFY, edtHarrSpecifyUnit.getText().toString());
             dataAddMachine.putExtra(EXTRA_FURR_RENT_RATE, edtFurrowingRent.getText().toString());
             dataAddMachine.putExtra(EXTRA_FURR_RENT_UNIT, spinFurrowingRentUnit.getSelectedItem().toString());
-            dataAddMachine.putExtra(EXTRA_FURR_RENT_UNIT_SPECIFY, "NO TEXTBOX");
+            dataAddMachine.putExtra(EXTRA_FURR_RENT_UNIT_SPECIFY, edtFurrSpecifyUnit.getText().toString());
             dataAddMachine.putExtra(EXTRA_OTHR_RENT_RATE, edtOtherRent.getText().toString());
             dataAddMachine.putExtra(EXTRA_OTHR_RENT_UNIT, spinOtherRentUnit.getSelectedItem().toString());
-            dataAddMachine.putExtra(EXTRA_OTHR_RENT_UNIT_SPECIFY, "NO TEXTBOX");
+            dataAddMachine.putExtra(EXTRA_OTHR_RENT_UNIT_SPECIFY, edtOthrSpecifyUnit.getText().toString());
             dataAddMachine.putExtra(EXTRA_AVE_FUEL_PLOW, edtAveFuelConsPlow.getText().toString());
             dataAddMachine.putExtra(EXTRA_AVE_FUEL_HARR, edtAveFuelConsHarr.getText().toString());
             dataAddMachine.putExtra(EXTRA_AVE_FUEL_FURR, edtAveFuelConsFurr.getText().toString());

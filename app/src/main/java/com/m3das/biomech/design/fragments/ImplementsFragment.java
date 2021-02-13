@@ -151,9 +151,12 @@ public class ImplementsFragment extends Fragment {
                 editImplement.putExtra(AddImplementActivity.EXTRA_PURCH_GRANT_DONO, implement.getPurchase_grant_donation());
                 editImplement.putExtra(AddImplementActivity.EXTRA_AGENCY, implement.getAgency());
                 editImplement.putExtra(AddImplementActivity.EXTRA_AGENCY_SPECIFY, implement.getAgency_specify());
+                editImplement.putExtra(AddImplementActivity.EXTRA_YEAR_INOPERABLE, implement.getYear_inoperable());
+                editImplement.putExtra(AddImplementActivity.EXTRA_MODIFICATIONS, implement.getModifications());
 
                 editImplement.putExtra(AddImplementActivity.EXTRA_YEAR_ACQUIRED, implement.getYear_acquired());
-                editImplement.putExtra(AddImplementActivity.EXTRA_CONDITION, implement.getCondition());
+                editImplement.putExtra(AddImplementActivity.EXTRA_CONDITION_PRESENT, implement.getCondition_present());
+                editImplement.putExtra(AddImplementActivity.EXTRA_CONDITION_ACQUIRED, implement.getCondition());
 
                 editImplement.putExtra(AddImplementActivity.EXTRA_LOCATION, implement.getLocation());
                 editImplement.putExtra(AddImplementActivity.EXTRA_PROVINCE, implement.getProvince());
@@ -314,7 +317,9 @@ public class ImplementsFragment extends Fragment {
             String agency_specify = data.getStringExtra(AddImplementActivity.EXTRA_AGENCY_SPECIFY);
 
             String year_acquired = data.getStringExtra(AddImplementActivity.EXTRA_YEAR_ACQUIRED);
-            String condition = data.getStringExtra(AddImplementActivity.EXTRA_CONDITION);
+            String condition_present = data.getStringExtra(AddImplementActivity.EXTRA_CONDITION_PRESENT);
+            String condition_acquired = data.getStringExtra(AddImplementActivity.EXTRA_CONDITION_ACQUIRED);
+
 
             String modifications = data.getStringExtra(AddImplementActivity.EXTRA_MODIFICATIONS);
             String problems = data.getStringExtra(AddImplementActivity.EXTRA_PROBLEMS);
@@ -335,7 +340,7 @@ public class ImplementsFragment extends Fragment {
                     type_of_planter, number_of_rows_planter, distance_of_materials_planter, effective_area_accomplished_planter, time_used_during_operation_planter, field_capacity_planter, effective_area_accomplished_fertilizer,
                     time_used_during_operation_fertilizer, field_capacity_fertilizer, weight_fertilizer, delivery_rate_fetilizer, effective_area_accomplished_harvester, time_used_during_operation_harvester,
                     field_capacity_harvester, average_yield_harvester, effective_area_accomplished_cane_grab_loader, time_used_during_operation_cane_grab_loader, loading_capacity_cane_grab_loader,
-                    field_capacity_cane_grab_loader, depth_cut_ditcher, ownership, purchase_grant_dono, agency, agency_specify, year_acquired, condition, modifications, problems, problems_specify, year_inoperable,
+                    field_capacity_cane_grab_loader, depth_cut_ditcher, ownership, purchase_grant_dono, agency, agency_specify, year_acquired, condition_acquired, condition_present, modifications, problems, problems_specify, year_inoperable,
                     location, province, city, barangay, image_base64, latitude, longitude, accuracy);
 
             implementViewModel.insert(imp);
@@ -404,7 +409,8 @@ public class ImplementsFragment extends Fragment {
             String agency_specify = data.getStringExtra(AddImplementActivity.EXTRA_AGENCY_SPECIFY);
 
             String year_acquired = data.getStringExtra(AddImplementActivity.EXTRA_YEAR_ACQUIRED);
-            String condition = data.getStringExtra(AddImplementActivity.EXTRA_CONDITION);
+            String condition_present = data.getStringExtra(AddImplementActivity.EXTRA_CONDITION_PRESENT);
+            String condition_acquired = data.getStringExtra(AddImplementActivity.EXTRA_CONDITION_ACQUIRED);
 
             String modifications = data.getStringExtra(AddImplementActivity.EXTRA_MODIFICATIONS);
             String problems = data.getStringExtra(AddImplementActivity.EXTRA_PROBLEMS);
@@ -425,7 +431,7 @@ public class ImplementsFragment extends Fragment {
                     type_of_planter, number_of_rows_planter, distance_of_materials_planter, effective_area_accomplished_planter, time_used_during_operation_planter, field_capacity_planter, effective_area_accomplished_fertilizer,
                     time_used_during_operation_fertilizer, field_capacity_fertilizer, weight_fertilizer, delivery_rate_fetilizer, effective_area_accomplished_harvester, time_used_during_operation_harvester,
                     field_capacity_harvester, average_yield_harvester, effective_area_accomplished_cane_grab_loader, time_used_during_operation_cane_grab_loader, loading_capacity_cane_grab_loader,
-                    field_capacity_cane_grab_loader, depth_cut_ditcher, ownership, purchase_grant_dono, agency, agency_specify, year_acquired, condition, modifications, problems, problems_specify, year_inoperable,
+                    field_capacity_cane_grab_loader, depth_cut_ditcher, ownership, purchase_grant_dono, agency, agency_specify, year_acquired, condition_acquired, condition_present, modifications, problems, problems_specify, year_inoperable,
                     location, province, city, barangay, image_base64, latitude, longitude, accuracy);
 
             imp.setId(id);
