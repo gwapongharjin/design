@@ -74,10 +74,10 @@ public class AddMachineActivity extends AppCompatActivity {
     private ImageView selectedImage;
     private EditText edtQRCode, edtCapacity, edtAveYield, edtNumLoads, edtRate, edtAveOpHours, edtAveOpDays, edtNewlyPlantedArea, edtRatoonArea, edtNameOfOwnerOrg, edtCustomRate, edtOtherProblems,
             edtOtherAgency, edtOtherBrand, edtOtherModel, edtRatedPower, edtPlowingRent, edtHarrowingRent, edtFurrowingRent, edtOtherRent, edtAveFuelConsPlow, edtAveFuelConsHarr,
-            edtAveFuelConsFurr;
+            edtAveFuelConsFurr, edtPlowSpecifyUnit, edtHarrSpecifyUnit, edtFurrSpecifyUnit, edtOthrSpecifyUnit, edtCustomRateUnit;
     private TextView tvLat, tvLong, tvTypeOfMill, tvBrand, tvOwnership, tvTypeOfTubewells, tvMachineAvailability, tvConditionPresent, tvLocation, tvModel, tvProvRent, tvMunRent, tvBrgyRent,
             tvCustomRate, tvCustomUnit, tvMachineUnused, tvCapacity, tvAveYield, tvNumLoads, tvRate, tvPurchGrantDono, tvAgency, tvAcc, tvPlowingRent, tvCustomUnitOther, tvHarrowingRent,
-            tvFurrowingRent, tvOtherRent, tvAveFuelConsPlow, tvAveFuelConsHarr, tvAveFuelConsFurr, tvYearInoperable;
+            tvFurrowingRent, tvOtherRent, tvAveFuelConsPlow, tvAveFuelConsHarr, tvAveFuelConsFurr, tvYearInoperable, tvPrevious, tvPrevResp;
     private Spinner spinMachineType, spinTypeOfMill, spinRental, spinCustomUnit, spinAvailability, spinConditionPresent, spinRespName, spinTypeofTubeWells, spinOwnership,
             spinPurchGrantDono, spinAgency, spinBrand, spinModel, spinYearAcquired, spinConditionAcquired, spinLocationOfMachine, spinPlowingRentUnit, spinHarrowingRentUnit,
             spinFurrowingRentUnit, spinOtherRentUnit, spinYearInoperable
@@ -96,7 +96,7 @@ public class AddMachineActivity extends AppCompatActivity {
     private Intent intentFromDb;
     private boolean machineTypeInfoCheck, machineTypeSpecsCheck, respCheck, qrCheck, ownershipCheck, yearSelectCheck, conditionAcquiredCheck, hasOtherProblems, loanCashCheck,
             purchGrantDonoCheck, agencyCheck, rentSelectCheck, rentCustomCheck, rentAvailCheck, conditionPresentCheck, otherProblemsCheck, locationMachineCheck, locationGarageCheck,
-            machineTypeInfoBrandCheck, machineTypeInfoModelCheck, typeMillCheck, typeTubewellsCheck;
+            machineTypeInfoBrandCheck, machineTypeInfoModelCheck, typeMillCheck, typeTubewellsCheck, spinYearInoperableCheck;
     private ConstraintLayout.LayoutParams paramstvBrand, paramstvOwnership, paramsedtCapacity, paramsedtNumLoads, paramstvConditionPresent, paramstvLocation, paramstvModel, paramsedtRatedPower,
             paramsedtAveYield, paramsedtRate, paramstvTypeTubewells, paramsedtNameOfOwnerOrg, paramstvMachineAvailability, paramstvMachineUnused;
     private String machineSelected;
@@ -360,7 +360,6 @@ public class AddMachineActivity extends AppCompatActivity {
             }
         });
 
-
         spinConditionPresent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -386,6 +385,55 @@ public class AddMachineActivity extends AppCompatActivity {
         });
 
         spinCustomUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                customUnitSelect(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        spinPlowingRentUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                customUnitSelect(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinHarrowingRentUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                customUnitSelect(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinFurrowingRentUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                customUnitSelect(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinOtherRentUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 customUnitSelect(i);
@@ -444,6 +492,7 @@ public class AddMachineActivity extends AppCompatActivity {
 
             }
         });
+
         spinMachineType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -761,6 +810,9 @@ public class AddMachineActivity extends AppCompatActivity {
         int position = -1;
 
         intentFromDb = intent1;
+        tvPrevResp.setVisibility(View.VISIBLE);
+        tvPrevious.setVisibility(View.VISIBLE);
+        tvPrevResp.setText(intent1.getStringExtra(EXTRA_RES_NAME));
 
         String stringCompare = intent1.getStringExtra(EXTRA_MACHINE_TYPE);
         ArrayAdapter<CharSequence> adaptercompare = ArrayAdapter.createFromResource(this, R.array.machine_types, android.R.layout.simple_spinner_item);
@@ -929,6 +981,9 @@ public class AddMachineActivity extends AppCompatActivity {
         if (!isNullOrEmpty(stringCompare)) {
             position = adaptercompare.getPosition(stringCompare);
         }
+        if (!isNullOrEmpty(stringCompare)) {
+            position = adaptercompare.getPosition(stringCompare);
+        }
         Log.d("Position RENTAL", "Position is: " + intent1.getStringExtra(EXTRA_RENTAL) + " " + position);
         spinRental.setSelection(position);
         rentSelect(position);
@@ -938,6 +993,11 @@ public class AddMachineActivity extends AppCompatActivity {
         edtHarrowingRent.setText(intent1.getStringExtra(EXTRA_HARR_RENT_RATE));
         edtFurrowingRent.setText(intent1.getStringExtra(EXTRA_FURR_RENT_RATE));
         edtOtherRent.setText(intent1.getStringExtra(EXTRA_OTHR_RENT_RATE));
+
+        edtPlowSpecifyUnit.setText(intent1.getStringExtra(EXTRA_PLOW_RENT_UNIT_SPECIFY));
+        edtHarrSpecifyUnit.setText(intent1.getStringExtra(EXTRA_HARR_RENT_UNIT_SPECIFY));
+        edtFurrSpecifyUnit.setText(intent1.getStringExtra(EXTRA_FURR_RENT_UNIT_SPECIFY));
+        edtOthrSpecifyUnit.setText(intent1.getStringExtra(EXTRA_OTHR_RENT_UNIT_SPECIFY));
 
         edtAveFuelConsPlow.setText(intent1.getStringExtra(EXTRA_AVE_FUEL_PLOW));
         edtAveFuelConsHarr.setText(intent1.getStringExtra(EXTRA_AVE_FUEL_HARR));
@@ -1761,18 +1821,41 @@ public class AddMachineActivity extends AppCompatActivity {
     private void customUnitSelect(int position) {
         String pos = spinCustomUnit.getItemAtPosition(position).toString();
 
-        Log.d("UNIT SELECT", pos);
-
-        switch (pos) {
-            case "SPECIFY":
-//                edtCustomRateUnit.setVisibility(View.VISIBLE);
-                paramstvMachineAvailability.topToBottom = R.id.edtCustomRateUnit;
-                break;
-            default:
-//                edtCustomRateUnit.setVisibility(View.INVISIBLE);
-                paramstvMachineAvailability.topToBottom = R.id.edtPlowingRent;
-                break;
+        if (spinMachineType.getSelectedItem().toString().contains("TRACTOR")) {
+            if (spinPlowingRentUnit.getSelectedItemPosition() == 3) {
+                edtPlowSpecifyUnit.setVisibility(View.VISIBLE);
+            } else {
+                edtPlowSpecifyUnit.setVisibility(View.INVISIBLE);
+            }
+            if (spinFurrowingRentUnit.getSelectedItemPosition() == 3) {
+                edtFurrSpecifyUnit.setVisibility(View.VISIBLE);
+            } else {
+                edtFurrSpecifyUnit.setVisibility(View.INVISIBLE);
+            }
+            if (spinHarrowingRentUnit.getSelectedItemPosition() == 3) {
+                edtHarrSpecifyUnit.setVisibility(View.VISIBLE);
+            } else {
+                edtHarrSpecifyUnit.setVisibility(View.INVISIBLE);
+            }
+            if (spinOtherRentUnit.getSelectedItemPosition() == 3) {
+                edtOthrSpecifyUnit.setVisibility(View.VISIBLE);
+            } else {
+                edtOthrSpecifyUnit.setVisibility(View.INVISIBLE);
+            }
+            paramstvMachineAvailability.topToBottom = R.id.edtAveFuelConsumptionFurrowing;
+        } else {
+            switch (pos) {
+                case "SPECIFY":
+                edtCustomRateUnit.setVisibility(View.VISIBLE);
+                    paramstvMachineAvailability.topToBottom = R.id.edtCustomRateUnit;
+                    break;
+                default:
+                edtCustomRateUnit.setVisibility(View.INVISIBLE);
+                    paramstvMachineAvailability.topToBottom = R.id.edtPlowingRent;
+                    break;
+            }
         }
+
 
         paramstvMachineAvailability.topMargin = bigMargin;
         tvMachineAvailability.setLayoutParams(paramstvMachineAvailability);
@@ -1823,6 +1906,11 @@ public class AddMachineActivity extends AppCompatActivity {
                 edtAveFuelConsPlow.setVisibility(View.INVISIBLE);
                 edtAveFuelConsHarr.setVisibility(View.INVISIBLE);
                 edtAveFuelConsFurr.setVisibility(View.INVISIBLE);
+
+                edtPlowSpecifyUnit.setVisibility(View.INVISIBLE);
+                edtFurrSpecifyUnit.setVisibility(View.INVISIBLE);
+                edtHarrSpecifyUnit.setVisibility(View.INVISIBLE);
+                edtOthrSpecifyUnit.setVisibility(View.INVISIBLE);
 
                 paramstvConditionPresent.topToBottom = R.id.spinRental;
 
@@ -2393,7 +2481,6 @@ public class AddMachineActivity extends AppCompatActivity {
 
     private void otherAgency(int position) {
         String pos = spinAgency.getItemAtPosition(position).toString();
-
         Log.d("POSITION OF AGENCY", pos);
 
         if ("OTHERS".equals(pos)) {
@@ -2602,8 +2689,8 @@ public class AddMachineActivity extends AppCompatActivity {
             dataAddMachine.putExtra(EXTRA_FURR_RENT_RATE, edtFurrowingRent.getText().toString());
             dataAddMachine.putExtra(EXTRA_FURR_RENT_UNIT, spinFurrowingRentUnit.getSelectedItem().toString());
             dataAddMachine.putExtra(EXTRA_FURR_RENT_UNIT_SPECIFY, "NO TEXTBOX");
-            dataAddMachine.putExtra(EXTRA_OTHR_RENT_RATE, edtCustomRate.getText().toString());
-            dataAddMachine.putExtra(EXTRA_OTHR_RENT_UNIT, spinCustomUnit.getSelectedItem().toString());
+            dataAddMachine.putExtra(EXTRA_OTHR_RENT_RATE, edtOtherRent.getText().toString());
+            dataAddMachine.putExtra(EXTRA_OTHR_RENT_UNIT, spinOtherRentUnit.getSelectedItem().toString());
             dataAddMachine.putExtra(EXTRA_OTHR_RENT_UNIT_SPECIFY, "NO TEXTBOX");
             dataAddMachine.putExtra(EXTRA_AVE_FUEL_PLOW, edtAveFuelConsPlow.getText().toString());
             dataAddMachine.putExtra(EXTRA_AVE_FUEL_HARR, edtAveFuelConsHarr.getText().toString());
@@ -2723,6 +2810,7 @@ public class AddMachineActivity extends AppCompatActivity {
         locationGarageCheck = false;
         machineTypeInfoBrandCheck = false;
         machineTypeInfoModelCheck = false;
+        spinYearInoperableCheck = false;
 
 
         respCheck = spinRespName.getSelectedItemPosition() != 0;
@@ -2750,7 +2838,8 @@ public class AddMachineActivity extends AppCompatActivity {
                 }
                 machineTypeInfoCheck = machineTypeInfoBrandCheck && machineTypeInfoModelCheck;
 
-                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString());
+                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) &&
+                        !isNullOrEmpty(edtRatoonArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString());
                 // 2 Wheel Tractor
                 // 4 Wheel Tractor
                 break;
@@ -2777,8 +2866,8 @@ public class AddMachineActivity extends AppCompatActivity {
                     }
                 }
                 machineTypeInfoCheck = machineTypeInfoBrandCheck && machineTypeInfoModelCheck;
-                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) || !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) || !isNullOrEmpty(edtAveOpHours.getText().toString()) ||
-                        !isNullOrEmpty(edtCapacity.getText().toString());
+                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) &&
+                        !isNullOrEmpty(edtRatoonArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) && !isNullOrEmpty(edtCapacity.getText().toString());
                 // BoomSprayer
                 // PowerSprayer
                 // MechPlant
@@ -2804,8 +2893,8 @@ public class AddMachineActivity extends AppCompatActivity {
                     }
                 }
                 machineTypeInfoCheck = machineTypeInfoBrandCheck && machineTypeInfoModelCheck;
-                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
-                        !isNullOrEmpty(edtNumLoads.getText().toString());
+                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) &&
+                        !isNullOrEmpty(edtRatoonArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) && !isNullOrEmpty(edtNumLoads.getText().toString());
                 // Cane Grab Loader
                 break;
             case "COMBINE HARVESTER":
@@ -2827,7 +2916,8 @@ public class AddMachineActivity extends AppCompatActivity {
                     }
                 }
                 machineTypeInfoCheck = machineTypeInfoBrandCheck && machineTypeInfoModelCheck;
-                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
+                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) &&
+                        !isNullOrEmpty(edtRatoonArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
                         !isNullOrEmpty(edtCapacity.getText().toString()) && !isNullOrEmpty(edtAveYield.getText().toString());
                 // CombineHarvester
                 // Harvester
@@ -2854,7 +2944,8 @@ public class AddMachineActivity extends AppCompatActivity {
 
                 machineTypeInfoCheck = machineTypeInfoBrandCheck && machineTypeInfoModelCheck;
 
-                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
+                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) &&
+                        !isNullOrEmpty(edtRatoonArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
                         !isNullOrEmpty(edtCapacity.getText().toString()) && !isNullOrEmpty(edtRate.getText().toString());
                 //Dryer
                 //Sheller
@@ -2882,7 +2973,8 @@ public class AddMachineActivity extends AppCompatActivity {
 
                 machineTypeInfoCheck = machineTypeInfoBrandCheck && machineTypeInfoModelCheck && typeMillCheck;
 
-                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
+                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString())
+                        && !isNullOrEmpty(edtRatoonArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
                         !isNullOrEmpty(edtCapacity.getText().toString()) && !isNullOrEmpty(edtRate.getText().toString());
                 //Mill
                 break;
@@ -2908,7 +3000,8 @@ public class AddMachineActivity extends AppCompatActivity {
 
                 machineTypeInfoCheck = machineTypeInfoBrandCheck && machineTypeInfoModelCheck && typeTubewellsCheck;
 
-                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
+                machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtNewlyPlantedArea.getText().toString()) &&
+                        !isNullOrEmpty(edtRatoonArea.getText().toString()) && !isNullOrEmpty(edtAveOpHours.getText().toString()) &&
                         !isNullOrEmpty(edtCapacity.getText().toString());
                 //WaterPump
                 break;
@@ -2996,34 +3089,49 @@ public class AddMachineActivity extends AppCompatActivity {
 
         conditionAcquiredCheck = spinConditionAcquired.getSelectedItemPosition() != 0;
 
-//        switch (spinRental.getSelectedItemPosition()) {
-//            case 0:
-//                rentSelectCheck = false;
-//                break;
-//            case 1:
-//                rentSelectCheck = true;
-//                if (isNullOrEmpty(edtCustomRate.getText().toString()) || spinCustomUnit.getSelectedItemPosition() == 0) {
-//                    rentCustomCheck = false;
-//                } else
+        switch (spinRental.getSelectedItemPosition()) {
+            case 0:
+                rentSelectCheck = false;
+                break;
+            case 1:
+                rentSelectCheck = true;
+                if (spinMachineType.getSelectedItem().toString().contains("TRACTOR")) {
+                    if (isNullOrEmpty(edtPlowingRent.getText().toString()) || isNullOrEmpty(edtHarrowingRent.getText().toString()) ||
+                            isNullOrEmpty(edtHarrowingRent.getText().toString()) || isNullOrEmpty(edtOtherRent.getText().toString()) ||
+                            spinPlowingRentUnit.getSelectedItemPosition() == 0 || spinHarrowingRentUnit.getSelectedItemPosition() == 0 ||
+                            spinFurrowingRentUnit.getSelectedItemPosition() == 0 || spinOtherRentUnit.getSelectedItemPosition() == 0 ||
+                            isNullOrEmpty(edtAveFuelConsPlow.getText().toString()) || isNullOrEmpty(edtAveFuelConsHarr.getText().toString())
+                            || isNullOrEmpty(edtAveFuelConsFurr.getText().toString())) {
+                        rentCustomCheck = false;
+                    } else {
+                        rentCustomCheck = spinCustomUnit.getSelectedItemPosition() != 3; //TODO ADD SPECIFY UNIT HERE
+                    }
+                } else {
+                    if (isNullOrEmpty(edtCustomRate.getText().toString()) || spinCustomUnit.getSelectedItemPosition() == 0) {
+                        rentCustomCheck = false;
+                    } else
 //                    rentCustomCheck = spinCustomUnit.getSelectedItemPosition() != 3 || !isNullOrEmpty(edtCustomRateUnit.getText().toString());
-//                    switch (spinAvailability.getSelectedItemPosition()) {
-//                        case 0:
-//                            rentAvailCheck = false;
-//                            break;
-//                        case 1:
-//                            rentAvailCheck = true;
-//                            break;
-//                        case 2:
-//                            rentAvailCheck = listOfBrgyRent.length() >= 2 && munRent.length() >= 2 && provRent.length() >= 2;
-//                            break;
-//                    }
-//                break;
-//            case 2:
-//                rentSelectCheck = true;
-//                rentCustomCheck = true;
-//                rentAvailCheck = true;
-//                break;
-//        }
+                        rentCustomCheck = spinCustomUnit.getSelectedItemPosition() != 3; //TODO ADD SPECIFY UNIT HERE
+                }
+
+                switch (spinAvailability.getSelectedItemPosition()) {
+                    case 0:
+                        rentAvailCheck = false;
+                        break;
+                    case 1:
+                        rentAvailCheck = true;
+                        break;
+                    case 2:
+                        rentAvailCheck = listOfBrgyRent.length() >= 2 && munRent.length() >= 2 && provRent.length() >= 2;
+                        break;
+                }
+                break;
+            case 2:
+                rentSelectCheck = true;
+                rentCustomCheck = true;
+                rentAvailCheck = true;
+                break;
+        }
 
         switch (spinConditionPresent.getSelectedItemPosition()) {
             case 0:
@@ -3035,6 +3143,14 @@ public class AddMachineActivity extends AppCompatActivity {
                 otherProblemsCheck = true;
                 break;
             case 2:
+                conditionPresentCheck = listOfProblems.length() >= 5;
+                if (hasOtherProblems) {
+                    otherProblemsCheck = !isNullOrEmpty(edtOtherProblems.getText().toString());
+                } else {
+                    otherProblemsCheck = true;
+                }
+                spinYearInoperableCheck = spinYearInoperable.getSelectedItemPosition() != 0;
+                break;
             case 3:
                 conditionPresentCheck = listOfProblems.length() >= 5;
                 if (hasOtherProblems) {
@@ -3237,6 +3353,8 @@ public class AddMachineActivity extends AppCompatActivity {
         getLocation = findViewById(R.id.btnGetLocation);
         edtQRCode = findViewById(R.id.edtQRCode);
         btnScanQR = findViewById(R.id.btnScanQRCodeMach);
+        tvPrevResp = findViewById(R.id.tvPrevResp);
+        tvPrevious = findViewById(R.id.tvPrevious);
         tvLat = findViewById(R.id.tvLat);
         tvLong = findViewById(R.id.tvLong);
         tvAcc = findViewById(R.id.tvAccuracy);
@@ -3313,7 +3431,7 @@ public class AddMachineActivity extends AppCompatActivity {
         edtAveFuelConsFurr = findViewById(R.id.edtAveFuelConsumptionFurrowing);
 
 
-//        edtCustomRateUnit = findViewById(R.id.edtCustomRateUnit);//TODO Remove this
+        edtCustomRateUnit = findViewById(R.id.edtCustomRateUnit);//TODO Remove this
         tvMachineAvailability = findViewById(R.id.tvMachineAvailability);
         spinAvailability = findViewById(R.id.spinAvailability);
         tvConditionPresent = findViewById(R.id.tvConditionPresent);
@@ -3344,6 +3462,11 @@ public class AddMachineActivity extends AppCompatActivity {
 
         tvPurchGrantDono = findViewById(R.id.tvPurchGrantDono);
         tvAgency = findViewById(R.id.tvAgency);
+        edtPlowSpecifyUnit = findViewById(R.id.edtPlowSpecifyUnit);
+        edtHarrSpecifyUnit = findViewById(R.id.edtHarrSpecifyUnit);
+        edtFurrSpecifyUnit = findViewById(R.id.edtFurrSpecifyUnit);
+        edtOthrSpecifyUnit = findViewById(R.id.edtOthrSpecifyUnit);
+
     }
 
     private void hide() {
@@ -3378,6 +3501,7 @@ public class AddMachineActivity extends AppCompatActivity {
         tvPurchGrantDono.setVisibility(View.INVISIBLE);
         tvAgency.setVisibility(View.INVISIBLE);
         rgLoanCash.setVisibility(View.INVISIBLE);
+        edtCustomRateUnit.setVisibility(View.INVISIBLE);
 
 
         tvPlowingRent.setVisibility(View.INVISIBLE);
@@ -3403,6 +3527,14 @@ public class AddMachineActivity extends AppCompatActivity {
         edtAveFuelConsPlow.setVisibility(View.INVISIBLE);
         edtAveFuelConsHarr.setVisibility(View.INVISIBLE);
         edtAveFuelConsFurr.setVisibility(View.INVISIBLE);
+
+        tvPrevious.setVisibility(View.INVISIBLE);
+        tvPrevResp.setVisibility(View.INVISIBLE);
+
+        edtPlowSpecifyUnit.setVisibility(View.INVISIBLE);
+        edtFurrSpecifyUnit.setVisibility(View.INVISIBLE);
+        edtHarrSpecifyUnit.setVisibility(View.INVISIBLE);
+        edtOthrSpecifyUnit.setVisibility(View.INVISIBLE);
 
         //Hiding Location Spinners
 //        spinProvince.setVisibility(View.INVISIBLE);

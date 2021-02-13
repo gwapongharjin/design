@@ -170,13 +170,6 @@ public class ImplementsFragment extends Fragment {
         });
 
 
-        implementAdapter.setOnItemClickListener(new ImplementAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Implements implement) {
-                Toast.makeText(getContext(), "Editing implement still unavailable", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         fabDeleteImplement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -166,6 +166,7 @@ public class MachineListFragment extends Fragment {
                 intent.putExtra(AddMachineActivity.EXTRA_LONG, machines.getMachine_longitude());
                 Variable.setStringImage(machines.getMachine_image_base64());
                 intent.putExtra(AddMachineActivity.EXTRA_ACC, machines.getAccuracy());
+                intent.putExtra(AddMachineActivity.EXTRA_RES_NAME, machines.getResName());
                 intent.putExtra(AddMachineActivity.EXTRA_RES_CODE, machines.getResCode());
 
                 startActivityForResult(intent, EDIT_NOTE_REQUEST);

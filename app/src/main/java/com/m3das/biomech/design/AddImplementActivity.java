@@ -82,14 +82,13 @@ public class AddImplementActivity extends AppCompatActivity {
             edtEffectiveAreaAccompHarvest, edtTimeUsedDuringOpHarvest, edtAveYieldHarvest,
             edtEffectiveAreaAccompGrab, edtTimeUsedDuringOpGrab, edtLoadCapacityGrab,
             edtDepthOfCutDitch;
-
     TextView tvYearAcquired, tvYearInoperable, tvLat, tvLong, tvAcc, tvLocation, tvImplementUnused, tvOwnership, tvPurchGrantDono, tvAgency, tvConditionPresent,
             tvHaEAMain, tvHoursPDayOpMain, tvFieldCapacityMain, tvFieldCapacityResultMain,
             tvTypeofPlant, tvDistanceofPlant, tvNumRowsPlant, tvHaEAPlant, tvHoursPDayOpPlant, tvFieldCapacityPlant, tvFieldCapacityResultPlant,
             tvHaEAFert, tvHoursPDayOpFert, tvFieldCapacityFert, tvFieldCapacityResultFert, tvWeightOfFert, tvDeliveryRateFert, tvDeliveryRateResultFert,
             tvHaEAHarvest, tvHoursPDayOpHarvest, tvFieldCapacityHarvest, tvFieldCapacityResultHarvest, tvTonCannesPHaHarvest,
             tvHaEAGrab, tvHoursPDayOpGrab, tvLoadCapacityGrab, tvFieldCapacityGrab, tvFieldCapacityResultGrab,
-            tvDepthCutDitch;
+            tvDepthCutDitch, tvPrevMachine, tvPrevious;
     CheckBox cbLandClear, cbPrePlant, cbPlant, cbFert, cbPest, cbIrriDrain, cbCult, cbRatoon, cbHarvest, cbPostHarvest, cbHaul;
     int bigMargin, smallMargin;
     Double fieldCap = null;
@@ -173,7 +172,9 @@ public class AddImplementActivity extends AppCompatActivity {
     public static final String EXTRA_ACCURACY = "ADDIMPLEMENT_EXTRA_ACCURACY";
     ArrayList<MachineClass> machineArrayList = new ArrayList<>();
     String temp1, temp2;
-    private boolean implementSpecsCheck, qrCheck, machineUsingCheck, operationCheck, locationGarageCheck, locationImplementCheck, conditionPresentCheck, yearSelectCheck, hasOtherProblems;
+    private boolean implementSpecsCheck, qrCheck, machineUsingCheck, operationCheck, locationGarageCheck, locationImplementCheck, conditionPresentCheck, yearSelectCheck,
+            hasOtherProblems, ownershipCheck, purchGrantDonoCheck, agencyCheck, conditionAcquiredCheck, otherProblemsCheck;
+    ;
 
 
     private String resLat, resLong;
@@ -603,6 +604,30 @@ public class AddImplementActivity extends AppCompatActivity {
             }
         });
 
+        edtTimeUsedDuringOpGrab.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!isNullOrEmpty(edtEffectiveAreaAccompGrab.getText().toString()) && !isNullOrEmpty(edtTimeUsedDuringOpGrab.getText().toString())) {
+                    tvFieldCapacityResultGrab.setText(getFieldCapacity(edtEffectiveAreaAccompGrab.getText().toString(), edtTimeUsedDuringOpGrab.getText().toString()));
+
+                } else if (isNullOrEmpty(edtEffectiveAreaAccompGrab.getText().toString()) || isNullOrEmpty(edtTimeUsedDuringOpGrab.getText().toString())) {
+
+                    tvFieldCapacityResultGrab.setText(R.string.not_yet_acq);
+
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         spinConditionPresent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -679,6 +704,10 @@ public class AddImplementActivity extends AppCompatActivity {
         int position = -1;
 
         intentFromDb = intent;
+
+        tvPrevMachine.setVisibility(View.VISIBLE);
+        tvPrevious.setVisibility(View.VISIBLE);
+        tvPrevMachine.setText(intent.getStringExtra(EXTRA_USED_ON));
 
         String stringCompare = intent.getStringExtra(EXTRA_IMP_TYPE);
         ArrayAdapter<CharSequence> adaptercompare = ArrayAdapter.createFromResource(this, R.array.implements1, android.R.layout.simple_spinner_item);
@@ -1039,6 +1068,7 @@ public class AddImplementActivity extends AppCompatActivity {
         List<String> listIncomplete = new ArrayList<>();
 
 
+//        if (infoCheck()) {
         if (infoCheck()) {
 
             Intent dataAddImplement = new Intent();
@@ -1162,6 +1192,15 @@ public class AddImplementActivity extends AppCompatActivity {
             if (!operationCheck) {
                 listIncomplete.add("Operations");
             }
+            if (!ownershipCheck) {
+                listIncomplete.add("Type of Ownership");
+            }
+            if (!purchGrantDonoCheck) {
+                listIncomplete.add("Mode of Acquisition");
+            }
+            if (!agencyCheck) {
+                listIncomplete.add("Agency");
+            }
             if (!yearSelectCheck) {
                 listIncomplete.add("Year Acquired");
             }
@@ -1174,6 +1213,20 @@ public class AddImplementActivity extends AppCompatActivity {
             if (!locationGarageCheck) {
                 listIncomplete.add("Locatiton of Garage");
             }
+            if (!yearSelectCheck) {
+                listIncomplete.add("Year Acquired");
+            }
+            if (!conditionAcquiredCheck) {
+                listIncomplete.add("Condition when Acquired");
+            }
+            if (!conditionPresentCheck) {
+                listIncomplete.add("Present Condition");
+            }
+            if (!otherProblemsCheck) {
+                listIncomplete.add("Problems with Machine");
+            }
+
+
             String inc = "";
             for (int i = 0; i < listIncomplete.size(); i++) {
                 inc = inc + listIncomplete.get(i) + "\n";
@@ -1251,9 +1304,103 @@ public class AddImplementActivity extends AppCompatActivity {
                 !isNullOrEmpty(irrigationDrainage) || !isNullOrEmpty(cultivation) || !isNullOrEmpty(ratooning) || !isNullOrEmpty(harvest) || !isNullOrEmpty(postHarvest) ||
                 !isNullOrEmpty(hauling);
 
+        switch (spinOwnership.getSelectedItemPosition()) {
+            case 0:
+                ownershipCheck = false;
+                break;
+            //Please Select
+            case 1:
+                ownershipCheck = true;
+                purchGrantDonoCheck = true;
+                agencyCheck = true;
+
+                break;
+            //Private
+            case 2:
+            case 3:
+            case 4:
+                ownershipCheck = true;
+                switch (spinPurchGrantDono.getSelectedItemPosition()) {
+                    case 0:
+                        purchGrantDonoCheck = false;
+                        agencyCheck = false;
+                        break;
+                    case 1:
+                    default:
+                        purchGrantDonoCheck = true;
+                        agencyCheck = true;
+                        break;
+                    case 2:
+                    case 3:
+                        purchGrantDonoCheck = true;
+                        switch (spinAgency.getSelectedItemPosition()) {
+                            case 0:
+                                agencyCheck = false;
+                                break;
+                            case 5:
+                                agencyCheck = !isNullOrEmpty(edtOtherAgency.getText().toString());
+                                break;
+                            default:
+                                agencyCheck = true;
+                                agencyCheck = true;
+                                break;
+
+                        }
+                        break;
+
+                }
+                break;
+            //CoopCustomLgu
+            default:
+                ownershipCheck = true;
+                break;
+        }
+
         yearSelectCheck = spinYearAcquired.getSelectedItemPosition() != 0;
 
+        switch (spinConditionAcquired.getSelectedItemPosition()) {
+            case 0:
+                conditionAcquiredCheck = false;
+                break;
+            case 2:
+                if (isNullOrEmpty(edtModifications.getText().toString())) {
+                    conditionAcquiredCheck = false;
+                } else {
+                    conditionAcquiredCheck = true;
+                }
+            default:
+                conditionAcquiredCheck = true;
+                break;
+        }
+
         conditionPresentCheck = spinConditionAcquired.getSelectedItemPosition() != 0;
+
+        switch (spinConditionPresent.getSelectedItemPosition()) {
+            case 0:
+                conditionPresentCheck = false;
+                break;
+            case 1:
+            default:
+                conditionPresentCheck = true;
+                otherProblemsCheck = true;
+                break;
+            case 2:
+                    conditionPresentCheck = listOfProblems.length() >= 5 && spinYearInoperable.getSelectedItemPosition() != 0;
+                if (hasOtherProblems) {
+                    otherProblemsCheck = !isNullOrEmpty(edtOtherProblems.getText().toString());
+                } else {
+                    otherProblemsCheck = true;
+                }
+                break;
+            case 3:
+                conditionPresentCheck = listOfProblems.length() >= 5;
+                if (hasOtherProblems) {
+                    otherProblemsCheck = !isNullOrEmpty(edtOtherProblems.getText().toString());
+                } else {
+                    otherProblemsCheck = true;
+                }
+                break;
+        }
 
         locationImplementCheck = spinLocation.getSelectedItemPosition() != 0;
 
@@ -1269,7 +1416,7 @@ public class AddImplementActivity extends AppCompatActivity {
         Log.d("IMXCH", "Machine Loc: " + locationImplementCheck);
         Log.d("IMXCH", "Garage Loc: " + locationGarageCheck);
 
-        return machineUsingCheck && implementSpecsCheck && qrCheck && operationCheck && yearSelectCheck && conditionPresentCheck && locationImplementCheck && locationGarageCheck;
+        return machineUsingCheck && implementSpecsCheck && qrCheck && operationCheck && yearSelectCheck && conditionPresentCheck && locationImplementCheck && locationGarageCheck && ownershipCheck && purchGrantDonoCheck && agencyCheck && conditionAcquiredCheck && otherProblemsCheck;
     }
 
     public static boolean isNullOrPleaseSelect(String str) {
@@ -1598,6 +1745,9 @@ public class AddImplementActivity extends AppCompatActivity {
         tvTonCannesPHaHarvest.setVisibility(View.GONE);
 
         tvDepthCutDitch.setVisibility(View.GONE);
+
+        tvPrevious.setVisibility(View.INVISIBLE);
+        tvPrevMachine.setVisibility(View.INVISIBLE);
     }
 
     private void initViews() {
@@ -1749,6 +1899,9 @@ public class AddImplementActivity extends AppCompatActivity {
 
         edtDepthOfCutDitch = findViewById(R.id.edtDepthOfCutDitch);
         tvDepthCutDitch = findViewById(R.id.tvDepthCutDitch);
+
+        tvPrevMachine = findViewById(R.id.tvPrevMachine);
+        tvPrevious = findViewById(R.id.tvPreviousImp);
     }
 
     private void initAllLayoutParameters() {

@@ -56,24 +56,48 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvOwnerMachine" />
 
             <TextView
+                android:id="@+id/tvPrevious"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Previous Respondent:"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/textView5"
+                app:layout_constraintStart_toStartOf="@+id/tvOwnerMachine"
+                app:layout_constraintTop_toBottomOf="@+id/spinRespondentName" />
+
+            <TextView
+                android:id="@+id/tvPrevResp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="TextView"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/spinRespondentName"
+                app:layout_constraintStart_toEndOf="@+id/tvPrevious"
+                app:layout_constraintTop_toTopOf="@+id/tvPrevious" />
+
+            <TextView
                 android:id="@+id/tvQRCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="16dp"
                 android:text="QR Code"
                 app:layout_constraintStart_toStartOf="@+id/tvOwnerMachine"
-                app:layout_constraintTop_toBottomOf="@+id/spinRespondentName" />
+                app:layout_constraintTop_toBottomOf="@+id/tvPrevious" />
 
             <EditText
                 android:id="@+id/edtQRCode"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="QR CODE"
                 android:inputType="text"
+                android:maxLength="12"
                 app:layout_constraintEnd_toStartOf="@+id/btnScanQRCodeMach"
                 app:layout_constraintStart_toEndOf="@+id/tvQRCode"
                 app:layout_constraintTop_toTopOf="@+id/tvQRCode" />
@@ -82,7 +106,7 @@
                 android:id="@+id/btnScanQRCodeMach"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="32dp"
                 android:background="@drawable/custom_image_button"
                 app:layout_constraintBottom_toBottomOf="@+id/edtQRCode"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -224,21 +248,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="32dp"
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="Horsepower"
                 android:inputType="numberDecimal"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/spinModel"
                 app:layout_constraintStart_toEndOf="@+id/tvRatedPower"
                 app:layout_constraintTop_toBottomOf="@+id/spinModel" />
 
             <TextView
                 android:id="@+id/tvNewlyPlantedArea"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:text="Newly Planted Area"
+                android:text="Newly Planted Area that use this Machine"
+                app:layout_constraintEnd_toEndOf="@+id/tvOwnerMachine"
                 app:layout_constraintStart_toStartOf="@+id/tvRatedPower"
                 app:layout_constraintTop_toBottomOf="@+id/edtRatedPower" />
 
@@ -257,10 +281,11 @@
 
             <TextView
                 android:id="@+id/tvRatoonArea"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:text="Ratooned Area"
+                android:text="Ratooned Area that use this Machine"
+                app:layout_constraintEnd_toEndOf="@+id/tvNewlyPlantedArea"
                 app:layout_constraintStart_toStartOf="@+id/tvNewlyPlantedArea"
                 app:layout_constraintTop_toBottomOf="@+id/edtNewlyPlantedArea" />
 
@@ -381,14 +406,14 @@
 
             <EditText
                 android:id="@+id/edtAveYield"
-                android:layout_width="177dp"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="Ton/Hectares"
                 android:inputType="numberDecimal"
-                app:layout_constraintEnd_toEndOf="@+id/edtRatedPower"
+                app:layout_constraintEnd_toEndOf="@+id/edtAverageOperatingDays"
                 app:layout_constraintStart_toEndOf="@+id/tvAveYield"
                 app:layout_constraintTop_toBottomOf="@+id/edtCapacity" />
 
@@ -658,6 +683,19 @@
                 app:layout_constraintStart_toStartOf="@+id/spinRental"
                 app:layout_constraintTop_toBottomOf="@+id/tvCustomUnitMain" />
 
+            <EditText
+                android:id="@+id/edtCustomRateUnit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_edit_text"
+                android:ems="10"
+                android:hint="Specify Unit of Custom Rate"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@+id/spinRental"
+                app:layout_constraintStart_toStartOf="@+id/edtMainRent"
+                app:layout_constraintTop_toBottomOf="@+id/spinPlowingRentUnit" />
+
             <TextView
                 android:id="@+id/tvPlowingRent"
                 android:layout_width="0dp"
@@ -686,7 +724,6 @@
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="Custom Rate"
-                android:inputType="number"
                 app:layout_constraintBottom_toBottomOf="@+id/spinPlowingRentUnit"
                 app:layout_constraintEnd_toStartOf="@+id/spinPlowingRentUnit"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
@@ -703,6 +740,19 @@
                 app:layout_constraintStart_toStartOf="@+id/spinRental"
                 app:layout_constraintTop_toBottomOf="@+id/tvPlowingRent" />
 
+            <EditText
+                android:id="@+id/edtPlowSpecifyUnit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_edit_text"
+                android:ems="10"
+                android:hint="Custom Rate"
+                app:layout_constraintEnd_toEndOf="@+id/spinPlowingRentUnit"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/tvForRent"
+                app:layout_constraintTop_toBottomOf="@+id/edtPlowingRent" />
+
             <TextView
                 android:id="@+id/tvHarrowingRent"
                 android:layout_width="0dp"
@@ -711,7 +761,7 @@
                 android:text="Harrowing Custom Rate (in PHP)"
                 app:layout_constraintEnd_toEndOf="@+id/edtPlowingRent"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
-                app:layout_constraintTop_toBottomOf="@+id/edtPlowingRent" />
+                app:layout_constraintTop_toBottomOf="@+id/edtPlowSpecifyUnit" />
 
             <EditText
                 android:id="@+id/edtHarrowingRent"
@@ -739,6 +789,19 @@
                 app:layout_constraintStart_toStartOf="@+id/spinRental"
                 app:layout_constraintTop_toBottomOf="@+id/tvHarrowingRent" />
 
+            <EditText
+                android:id="@+id/edtHarrSpecifyUnit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_edit_text"
+                android:ems="10"
+                android:hint="Custom Rate"
+                app:layout_constraintEnd_toEndOf="@+id/spinHarrowingRentUnit"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/tvForRent"
+                app:layout_constraintTop_toBottomOf="@+id/edtHarrowingRent" />
+
             <TextView
                 android:id="@+id/tvFurrowingRent"
                 android:layout_width="0dp"
@@ -747,7 +810,7 @@
                 android:text="Furrowing Custom Rate (in PHP)"
                 app:layout_constraintEnd_toEndOf="@+id/edtHarrowingRent"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
-                app:layout_constraintTop_toBottomOf="@id/edtHarrowingRent" />
+                app:layout_constraintTop_toBottomOf="@+id/edtHarrSpecifyUnit" />
 
             <EditText
                 android:id="@+id/edtFurrowingRent"
@@ -774,6 +837,18 @@
                 app:layout_constraintStart_toStartOf="@+id/spinRental"
                 app:layout_constraintTop_toBottomOf="@+id/tvFurrowingRent" />
 
+            <EditText
+                android:id="@+id/edtFurrSpecifyUnit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_edit_text"
+                android:ems="10"
+                android:hint="Custom Rate"
+                app:layout_constraintEnd_toEndOf="@+id/spinFurrowingRentUnit"
+                app:layout_constraintStart_toStartOf="@+id/tvForRent"
+                app:layout_constraintTop_toBottomOf="@+id/edtFurrowingRent" />
+
             <TextView
                 android:id="@+id/tvOtherRent"
                 android:layout_width="0dp"
@@ -782,7 +857,7 @@
                 android:text="Other Operation Custom Rate (in PHP)"
                 app:layout_constraintEnd_toEndOf="@+id/edtFurrowingRent"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
-                app:layout_constraintTop_toBottomOf="@id/edtFurrowingRent" />
+                app:layout_constraintTop_toBottomOf="@+id/edtFurrSpecifyUnit" />
 
             <EditText
                 android:id="@+id/edtOtherRent"
@@ -810,18 +885,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvOtherRent" />
 
             <EditText
-                android:id="@+id/edtCustomRateUnit"
+                android:id="@+id/edtOthrSpecifyUnit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
-                android:hint="Specify Unit of Custom Rate"
-                android:inputType="textPersonName"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="@+id/spinRental"
-                app:layout_constraintStart_toStartOf="@+id/edtPlowingRent"
-                app:layout_constraintTop_toBottomOf="@+id/spinPlowingRentUnit" />
+                android:hint="Custom Rate"
+                app:layout_constraintEnd_toEndOf="@+id/spinOtherRentUnit"
+                app:layout_constraintStart_toStartOf="@+id/tvForRent"
+                app:layout_constraintTop_toBottomOf="@+id/edtOtherRent" />
 
             <TextView
                 android:id="@+id/tvAveFuelConsumptionPlowing"
@@ -833,7 +906,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/edtOtherRent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
-                app:layout_constraintTop_toBottomOf="@id/edtOtherRent" />
+                app:layout_constraintTop_toBottomOf="@+id/edtOthrSpecifyUnit" />
 
             <EditText
                 android:id="@+id/edtAveFuelConsumptionPlowing"

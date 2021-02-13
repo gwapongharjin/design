@@ -11,29 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/edtQRCodeImp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/custom_edit_text"
-            android:ems="10"
-            android:hint="QR CODE"
-            android:inputType="text"
-            app:layout_constraintStart_toStartOf="@+id/tvSelectMachine"
-            app:layout_constraintTop_toBottomOf="@+id/spinImplementType" />
-
-        <ImageButton
-            android:id="@+id/btnScanQRCodeImp"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:background="@drawable/custom_image_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/edtQRCodeImp"
-            app:layout_constraintTop_toTopOf="@+id/edtQRCodeImp"
-            app:srcCompat="@drawable/ic_outline_center_focus_strong_24" />
-
         <TextView
             android:id="@+id/tvImplementType"
             android:layout_width="wrap_content"
@@ -59,13 +36,72 @@
             app:layout_constraintTop_toBottomOf="@+id/tvImplementType" />
 
         <TextView
-            android:id="@+id/tvSelectMachine"
+            android:id="@+id/tvQRCodeImp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:text="QR Code"
+            app:layout_constraintStart_toStartOf="@+id/tvImplementType"
+            app:layout_constraintTop_toBottomOf="@+id/spinImplementType" />
+
+        <EditText
+            android:id="@+id/edtQRCodeImp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:ems="10"
+            android:hint="QR CODE"
+            android:inputType="text"
+            android:maxLength="12"
+            app:layout_constraintEnd_toStartOf="@+id/btnScanQRCodeImp"
+            app:layout_constraintStart_toEndOf="@+id/tvQRCodeImp"
+            app:layout_constraintTop_toBottomOf="@+id/spinImplementType" />
+
+        <ImageButton
+            android:id="@+id/btnScanQRCodeImp"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/custom_image_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/edtQRCodeImp"
+            app:srcCompat="@drawable/ic_outline_center_focus_strong_24" />
+
+        <TextView
+            android:id="@+id/tvPreviousImp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:text="Previous Respondent:"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/tvImplementType"
+            app:layout_constraintStart_toStartOf="@+id/tvQRCodeImp"
+            app:layout_constraintTop_toBottomOf="@+id/edtQRCodeImp" />
+
+        <TextView
+            android:id="@+id/tvPrevMachine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/spinRespondentName"
+            app:layout_constraintStart_toEndOf="@+id/tvPreviousImp"
+            app:layout_constraintTop_toTopOf="@+id/tvPreviousImp" />
+
+        <TextView
+            android:id="@+id/tvSelectMachine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="Machine Using this Implement"
             app:layout_constraintStart_toStartOf="@+id/tvImplementType"
-            app:layout_constraintTop_toBottomOf="@+id/edtQRCodeImp" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPreviousImp" />
 
         <Spinner
             android:id="@+id/spinMachineUsing"
@@ -94,9 +130,8 @@
             android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:gravity="left"
-            android:inputType="number"
             app:layout_constraintBottom_toBottomOf="@+id/tvBrandImp"
-            app:layout_constraintEnd_toEndOf="@+id/tvSelectMachine"
+            app:layout_constraintEnd_toEndOf="@+id/spinMachineUsing"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/tvBrandImp"
             app:layout_constraintTop_toTopOf="@+id/tvBrandImp"
@@ -118,9 +153,8 @@
             android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:gravity="left"
-            android:inputType="number"
             app:layout_constraintBottom_toBottomOf="@+id/tvModelImp"
-            app:layout_constraintEnd_toEndOf="@+id/tvSelectMachine"
+            app:layout_constraintEnd_toEndOf="@+id/edtBrandImp"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/edtBrandImp"
             app:layout_constraintTop_toTopOf="@+id/tvModelImp"
@@ -1148,7 +1182,6 @@
             android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:hint="Modifications"
-            android:inputType="number"
             app:layout_constraintEnd_toEndOf="@+id/spinConditionAcquiredImp"
             app:layout_constraintStart_toStartOf="@+id/cbHauling"
             app:layout_constraintTop_toBottomOf="@id/spinConditionAcquiredImp" />
