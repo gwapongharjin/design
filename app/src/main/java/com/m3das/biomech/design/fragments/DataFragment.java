@@ -47,6 +47,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -82,8 +83,6 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             ave_fuel_furr, year_inoperable, implementBrand, implementModel;
     private String profileResCode, profileProfile, profileProfileSpecify, profileOwnerType, profileNameRespondent, profileAddress, profileAge, profileSex, profileContactNumber, profileMobNum1,
             profileMobNum2, profileTelNum1, profileTelNum2, profileEducAttain;
-
-    private List<String[]> profileListSend, machineListSend, implementListSend;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -478,7 +477,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
         uploadMachines();
     }
 
-    public void exportData() {
+    public void exportData(List<String[]> machineList, List<String[]> implementList, List<String[]> profilesList) {
 
         Log.d("DFEXP", "Exporting Data");
 
@@ -486,14 +485,14 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
         String fileNameMach = "machine.csv";
         String fileNameImp = "implement.csv";
         String filePath = getContext().getExternalFilesDir(null).getPath() + "/";
+
         CSVWriter csvWriterProf, csvWriterMachine, csvWriterImplement;
 
+        File fileProfile = new File(filePath + fileNameProf);
+        File fileMachine = new File(filePath + fileNameMach);
+        File fileImplement = new File(filePath + fileNameImp);
 
         try {
-            File fileProfile = new File(filePath + fileNameProf);
-            File fileMachine = new File(filePath + fileNameMach);
-            File fileImplement = new File(filePath + fileNameImp);
-
             if (fileProfile.exists()) {
                 fileProfile.delete();
             }
@@ -509,53 +508,21 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             }
             fileImplement.createNewFile();
 
-            FileWriter fp = new FileWriter(fileProfile.getAbsoluteFile());
+            FileWriter fp = new FileWriter(fileProfile.getAbsoluteFile(),true);
             csvWriterProf = new CSVWriter(fp);
-
-            csvWriterProf.writeAll(profileListSend); // data is adding to csv
+            csvWriterProf.writeAll(profilesList); // data is adding to csv
+            csvWriterProf.flush();
             csvWriterProf.close();
 
-            FileWriter fm = new FileWriter(fileMachine.getAbsoluteFile());
+            FileWriter fm = new FileWriter(fileMachine.getAbsoluteFile(),true);
             csvWriterMachine = new CSVWriter(fm);
-
-            csvWriterMachine.writeAll(machineListSend); // data is adding to csv
+            csvWriterMachine.writeAll(machineList); // data is adding to csv
             csvWriterMachine.close();
 
-            FileWriter fi = new FileWriter(fileImplement.getAbsoluteFile());
+            FileWriter fi = new FileWriter(fileImplement.getAbsoluteFile(),true);
             csvWriterImplement = new CSVWriter(fi);
-
-            csvWriterImplement.writeAll(implementListSend); // data is adding to csv
+            csvWriterImplement.writeAll(implementList); // data is adding to csv
             csvWriterImplement.close();
-
-            Log.d("DFEXP", "File Path: " + filePath);
-
-            Uri u1 = FileProvider.getUriForFile(
-                    getContext(),
-                    BuildConfig.APPLICATION_ID + ".provider", //(use your app signature + ".provider" )
-                    fileProfile);
-
-            Uri u2 = FileProvider.getUriForFile(
-                    getContext(),
-                    BuildConfig.APPLICATION_ID + ".provider",
-                    fileMachine);
-
-            Uri u3 = FileProvider.getUriForFile(
-                    getContext(),
-                    BuildConfig.APPLICATION_ID + ".provider",
-                    fileImplement);
-
-            ArrayList<Uri> uris = new ArrayList<>();
-
-            uris.add(u1);
-            uris.add(u2);
-            uris.add(u3);
-
-            Intent sendIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-            sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Data for " + new SimpleDateFormat("MMM dd, yyyy").format(new Date()));
-            sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"biomech.m3das@gmail.com"});
-            sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
-            sendIntent.setType("text/plain");
-            startActivity(sendIntent);
 
         } catch (IOException e) {
             //error
@@ -601,11 +568,45 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
 //            Log.d("DFEXP", "Error: " + e.getMessage());
 //        }
 
+        Log.d("DFEXP", "File Path: " + filePath);
+
+        Uri u1 = FileProvider.getUriForFile(
+                getContext(),
+                BuildConfig.APPLICATION_ID + ".provider", //(use your app signature + ".provider" )
+                fileProfile);
+
+        Uri u2 = FileProvider.getUriForFile(
+                getContext(),
+                BuildConfig.APPLICATION_ID + ".provider",
+                fileMachine);
+
+        Uri u3 = FileProvider.getUriForFile(
+                getContext(),
+                BuildConfig.APPLICATION_ID + ".provider",
+                fileImplement);
+
+        ArrayList<Uri> uris = new ArrayList<>();
+
+//            Log.d("DFEXPPLS", profileListSend.get(1).toString());
+//            Log.d("DFEXPMLS", machineListSend.get(1).toString());
+//            Log.d("DFEXPILS", implementListSend.get(1).toString());
+        uris.add(u1);
+        uris.add(u2);
+        uris.add(u3);
+
+        Intent sendIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Data for " + new SimpleDateFormat("MMM dd, yyyy").format(new Date()));
+        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"biomech.m3das@gmail.com"});
+        sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
 
     }
 
     private void checkViewModels() {
-        profileListSend = new ArrayList<>();
+        List<String[]> profileListSend = new ArrayList<>();
+        List<String[]> implementListSend = new ArrayList<>();
+        List<String[]> machineListSend = new ArrayList<>();
 
         profileListSend.add(new String[]{"Respondent Code", "Respondent Profile", "Profile Specify", "Owner Type", "Name Respondent", "Address", "Age", "Sex", "Contact Number", "Mobile Number 1",
                 "Mobile Number 2", "Telephone Number 1", "Telephone Number 2", "Educational Attainment"});
@@ -637,8 +638,6 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                 }
             }
         });
-
-        machineListSend = new ArrayList<>();
 
         machineListSend.add(new String[]{".", ".", ".", ".", "Name Respondent", "Address", "Age", "Sex", "Contact Number", "Mobile Number 1",
                 "Mobile Number 2", "Telephone Number 1", "Telephone Number 2", "Educational Attainment"});
@@ -727,7 +726,6 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             }
         });
 
-        implementListSend = new ArrayList<>();
 
         implementListSend.add(new String[]{"Implement Type", "Implement QR Code", "Date of Survey", "Used on Machine", "Used on Machine Complete", "Land Clearing", "Pre Planting", "Planting",//8
                 "Fertilizer Application", "Pesticide Application", "Irrigation and Drainage", "Cultivation", "Ratooning", "Harvesting", "Post Harvest", "Hauling", "Total Service Area (Main)",//9
@@ -747,6 +745,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             public void onChanged(List<Implements> anImplements) {
 
                 for (int i = 0; i < anImplements.size(); i++) {
+                    Log.d("DFEXVALIMPVM", anImplements.get(i).getImplement_type() + ":" + i);
                     implementType = anImplements.get(i).getImplement_type();
                     implementQR = anImplements.get(i).getImplement_qrcode();
                     implementDateSurvey = anImplements.get(i).getDate_of_survey();
@@ -807,6 +806,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     implementLongitude = anImplements.get(i).getLongitude();
                     implementAccuracy = anImplements.get(i).getAccuracy();
 
+
                     implementListSend.add(new String[]{implementType, implementQR, implementDateSurvey, implementUsedOnMachine,
                             implementUsedOnMachineComplete, implementLandClearing, implementPrePlant, implementPlanting, implementFertApp, implementPestApp, implementIrriDrain, implementCult,
                             implementRatoon, implementHarvest, implementPostHarvest, implementHaul, implementTSAMain, implementAveOpHoursMain, implementAveOpDaysMain, implementEFFAAMain,
@@ -817,12 +817,12 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                             implementAveOpDaysGrab, implementEFFAAGrab, implementLoadCapGrab, implementNumLoadsGrab, implementTSADitch, implementAveOpHoursDitch, implementAveOpDaysDitch,
                             implementDepthCutDitch, implementYearAcq, implementCondition, implementLocation, implementProvince, implementMunicipality, implementBrgy, implementImgBase64,
                             implementLatitude, implementLongitude, implementAccuracy});
-
+                    Log.d("DFEXVALIMPVM", String.valueOf(implementListSend.size()));
                 }
             }
         });
 
-        exportData();
+        exportData(machineListSend, implementListSend, profileListSend);
     }
 
 }

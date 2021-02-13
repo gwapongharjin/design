@@ -691,13 +691,14 @@ public class AddImplementActivity extends AppCompatActivity {
             }
         });
 
+
         Intent intent = getIntent();
 
         if (intent.hasExtra(EXTRA_IMP_ID)) {
 
             tvPrevMachine.setVisibility(View.VISIBLE);
             tvPrevious.setVisibility(View.VISIBLE);
-            tvPrevMachine.setText(intent.getStringExtra(EXTRA_USED_ON));
+            tvPrevMachine.setText(intent.getStringExtra(EXTRA_USED_COMPLETE));
 
             editItemSelected(intent);
 
@@ -1142,7 +1143,7 @@ public class AddImplementActivity extends AppCompatActivity {
 
 
             temp1 = machineArrayList.get(spinMachineUsing.getSelectedItemPosition() - 1).code;
-            temp2 = machineArrayList.get(spinMachineUsing.getSelectedItemPosition() - 1).code + " : " + machineArrayList.get(spinMachineUsing.getSelectedItemPosition() - 1).type;
+            temp2 = machineArrayList.get(spinMachineUsing.getSelectedItemPosition() - 1).code + "\n" + machineArrayList.get(spinMachineUsing.getSelectedItemPosition() - 1).type;
 //        machineListViewModel.getAllMachines().observe(this, new Observer<List<Machines>>() {
 //            @Override
 //            public void onChanged(List<Machines> machines) {
@@ -1250,7 +1251,7 @@ public class AddImplementActivity extends AppCompatActivity {
         } else {
 
             if (!machineUsingCheck) {
-                listIncomplete.add("Machine Using...");
+                listIncomplete.add("Machine Using this Implement");
             }
             if (!qrCheck) {
                 listIncomplete.add("QR Code");

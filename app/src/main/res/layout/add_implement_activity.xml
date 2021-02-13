@@ -90,7 +90,7 @@
             android:text="TextView"
             android:textStyle="bold"
             android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@+id/spinRespondentName"
+            app:layout_constraintEnd_toEndOf="@+id/edtQRCodeImp"
             app:layout_constraintStart_toEndOf="@+id/tvPreviousImp"
             app:layout_constraintTop_toTopOf="@+id/tvPreviousImp" />
 
