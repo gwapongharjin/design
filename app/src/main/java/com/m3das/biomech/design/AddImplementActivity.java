@@ -705,9 +705,6 @@ public class AddImplementActivity extends AppCompatActivity {
 
         intentFromDb = intent;
 
-        tvPrevMachine.setVisibility(View.VISIBLE);
-        tvPrevious.setVisibility(View.VISIBLE);
-        tvPrevMachine.setText(intent.getStringExtra(EXTRA_USED_ON));
 
         String stringCompare = intent.getStringExtra(EXTRA_IMP_TYPE);
         ArrayAdapter<CharSequence> adaptercompare = ArrayAdapter.createFromResource(this, R.array.implements1, android.R.layout.simple_spinner_item);
@@ -961,7 +958,10 @@ public class AddImplementActivity extends AppCompatActivity {
         tvLat.setText(intent.getStringExtra(EXTRA_LATITUDE));
         tvLong.setText(intent.getStringExtra(EXTRA_LONGITUDE));
         tvAcc.setText(intent.getStringExtra(EXTRA_ACCURACY));
-
+        
+        tvPrevMachine.setVisibility(View.VISIBLE);
+        tvPrevious.setVisibility(View.VISIBLE);
+        tvPrevMachine.setText(intent.getStringExtra(EXTRA_USED_ON));
         encodedImage = Variable.getStringImage();
 
         if (encodedImage == "Not yet Acquired") {
@@ -1385,7 +1385,7 @@ public class AddImplementActivity extends AppCompatActivity {
                 otherProblemsCheck = true;
                 break;
             case 2:
-                    conditionPresentCheck = listOfProblems.length() >= 5 && spinYearInoperable.getSelectedItemPosition() != 0;
+                conditionPresentCheck = listOfProblems.length() >= 5 && spinYearInoperable.getSelectedItemPosition() != 0;
                 if (hasOtherProblems) {
                     otherProblemsCheck = !isNullOrEmpty(edtOtherProblems.getText().toString());
                 } else {
