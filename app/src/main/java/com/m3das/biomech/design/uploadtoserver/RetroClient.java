@@ -7,9 +7,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetroClient {
 
-    //    private static final String BASE_URL = "http://m3das-biomech.uplb.edu.ph/m3dasv2/";
+    private static final String BASE_URL = "http://m3das-biomech.uplb.edu.ph/m3dasv2/";
     //    192.168.1.12
-    private static final String BASE_URL = "http://192.168.1.12/m3dastest/";
+    //    private static final String BASE_URL = "http://192.168.1.12/m3dastest/";
     private static RetroClient myClient;
     private Retrofit retrofit;
 

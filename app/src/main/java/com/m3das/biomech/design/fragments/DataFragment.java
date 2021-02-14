@@ -297,7 +297,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
 
                         @Override
                         public void onFailure(Call<ResponsePojo> call, Throwable t) {
-                            Toast.makeText(getActivity(), "Network Failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), "Network Failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -404,7 +404,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
 
                         @Override
                         public void onFailure(Call<ResponsePojo> call, Throwable t) {
-                            Toast.makeText(getActivity(), "Network Failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), "Network Failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -465,7 +465,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
 
                         @Override
                         public void onFailure(Call<ResponsePojo> call, Throwable t) {
-                            Toast.makeText(getActivity(), "Network Failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), "Network Failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
