@@ -1620,215 +1620,211 @@ public class AddMachineActivity extends AppCompatActivity {
         listOfProblems = intent1.getStringExtra(EXTRA_PROBLEMS);
 
         List<KeyPairBoolData> rentProvinces = null;
+//        stringCompare = intent1.getStringExtra(EXTRA_RENT_PROV);
+//        if (stringCompare.contains("BATANGAS")) {
+//            rentProvinces = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.provinces)), stringCompare, 2);
+//            multSpinProvRent.setItems(rentProvinces, new MultiSpinnerListener() {
+//                @Override
+//                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+//                    String pos = new String();
+//                    for (int i = 0; i < selectedItems.size(); i++) {
+//                        pos = selectedItems.get(i).getName() + "; " + pos;
+//                        Log.d("MULTSPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+//                        Log.d("MULTSPIN", pos);
+//                    }
+//                }
+//            });
+//
+//
+//            stringCompare = intent1.getStringExtra(EXTRA_RENT_MUN);
+//            List<KeyPairBoolData> rentMunicipalities = null;
+//            rentMunicipalities = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.batangas_municipalities)), stringCompare, 3);
+//            multSpinMunRent.setItems(rentMunicipalities, new MultiSpinnerListener() {
+//                @Override
+//                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+//                    String pos = new String();
+//                    for (int i = 0; i < selectedItems.size(); i++) {
+//                        pos = selectedItems.get(i).getName() + "; " + pos;
+//                        Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+//                        Log.d("MULT SPIN", pos);
+//                    }
+//                    munRent = pos;
+//                }
+//            });
+//
+//            stringCompare = intent1.getStringExtra(EXTRA_RENT_BRGY);
+//            List<KeyPairBoolData> rentBarangays = null;
+//            List<String> barangaysStringList = new ArrayList<>();
+//
+//            if (stringCompare.contains("AGONCILLO")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_agoncillo_brgy)));
+//            }
+//            if (stringCompare.contains("ALITAGTAG")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_alitagtag_brgy)));
+//            }
+//            if (stringCompare.contains("BALAYAN")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_balayan_brgy)));
+//            }
+//            if (stringCompare.contains("BALETE")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_balete_brgy)));
+//            }
+//            if (stringCompare.contains("BATANGAS CITY")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_batangascity_brgy)));
+//            }
+//            if (stringCompare.contains("BAUAN")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_bauan_brgy)));
+//            }
+//            if (stringCompare.contains("CALACA")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_calaca_brgy)));
+//            }
+//            if (stringCompare.contains("CALATAGAN")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_calatagan_brgy)));
+//            }
+//            if (stringCompare.contains("CUENCA")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_cuenca_brgy)));
+//            }
+//            if (stringCompare.contains("IBAAN")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_ibaan_brgy)));
+//            }
+//            if (stringCompare.contains("LAUREL")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_laurel_brgy)));
+//            }
+//            if (stringCompare.contains("LEMERY")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lemery_brgy)));
+//            }
+//            if (stringCompare.contains("LIAN")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lian_brgy)));
+//            }
+//            if (stringCompare.contains("LIPA CITY")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lipacity_brgy)));
+//            }
+//            if (stringCompare.contains("LOBO")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lobo_brgy)));
+//            }
+//            if (stringCompare.contains("MABINI")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_mabini_brgy)));
+//            }
+//            if (stringCompare.contains("MALVAR")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_malvar_brgy)));
+//            }
+//            if (stringCompare.contains("MATAASNAKAHOY")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_mataasnakahoy_brgy)));
+//            }
+//            if (stringCompare.contains("NASUGBU")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_nasugbu_brgy)));
+//            }
+//            if (stringCompare.contains("PADRE GARCIA")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_padregarcia_brgy)));
+//            }
+//            if (stringCompare.contains("ROSARIO")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_rosario_brgy)));
+//            }
+//            if (stringCompare.contains("SAN JOSE")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanjose_brgy)));
+//            }
+//            if (stringCompare.contains("SAN JUAN")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanjuan_brgy)));
+//            }
+//            if (stringCompare.contains("SAN LUIS")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanluis_brgy)));
+//            }
+//            if (stringCompare.contains("SAN NICOLAS")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sannicolas_brgy)));
+//            }
+//            if (stringCompare.contains("SAN PASCUAL")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanpascual_brgy)));
+//            }
+//            if (stringCompare.contains("STA. TERESITA")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_staterisita_brgy)));
+//            }
+//            if (stringCompare.contains("STO. TOMAS")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_stotomas_brgy)));
+//            }
+//            if (stringCompare.contains("TAAL")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_taal_brgy)));
+//            }
+//            if (stringCompare.contains("TALISAY")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_talisay_brgy)));
+//            }
+//            if (stringCompare.contains("TANAUAN CITY")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_tanauancity_brgy)));
+//            }
+//            if (stringCompare.contains("TAYSAN")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_taysan_brgy)));
+//            }
+//            if (stringCompare.contains("TINGLOY")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_tingloy_brgy)));
+//            }
+//            if (stringCompare.contains("TUY")) {
+//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_tuy_brgy)));
+//            }
+//
+//            rentBarangays = pairBoolDataSelectMulti(barangaysStringList, stringCompare, 4);
+//            multSpinBrgyRent.setItems(rentBarangays, new MultiSpinnerListener() {
+//                @Override
+//                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+//                    String pos = new String();
+//                    for (int i = 0; i < selectedItems.size(); i++) {
+//                        pos = selectedItems.get(i).getName() + "; " + pos;
+//                        Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+//                        Log.d("MULT SPIN", pos);
+//                    }
+//                    listOfBrgyRent = pos;
+//                }
+//            });
+//
+//
+//        } else {
+//}
         stringCompare = intent1.getStringExtra(EXTRA_RENT_PROV);
-        if (stringCompare.contains("BATANGAS")) {
-            rentProvinces = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.provinces)), stringCompare, 2);
-            multSpinProvRent.setItems(rentProvinces, new MultiSpinnerListener() {
-                @Override
-                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
-                    String pos = new String();
-                    for (int i = 0; i < selectedItems.size(); i++) {
-                        pos = selectedItems.get(i).getName() + "; " + pos;
-                        Log.d("MULTSPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-                        Log.d("MULTSPIN", pos);
-                    }
+        rentProvinces = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.provinces)), stringCompare, 2);
+        multSpinProvRent.setItems(rentProvinces, new MultiSpinnerListener() {
+            @Override
+            public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+                String pos = new String();
+                for (int i = 0; i < selectedItems.size(); i++) {
+                    pos = selectedItems.get(i).getName() + "; " + pos;
+                    Log.d("MULTSPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+                    Log.d("MULTSPIN", pos);
                 }
-            });
 
 
-            stringCompare = intent1.getStringExtra(EXTRA_RENT_MUN);
-            List<KeyPairBoolData> rentMunicipalities = null;
-            rentMunicipalities = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.batangas_municipalities)), stringCompare, 3);
-            multSpinMunRent.setItems(rentMunicipalities, new MultiSpinnerListener() {
-                @Override
-                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
-                    String pos = new String();
-                    for (int i = 0; i < selectedItems.size(); i++) {
-                        pos = selectedItems.get(i).getName() + "; " + pos;
-                        Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-                        Log.d("MULT SPIN", pos);
-                    }
-                    munRent = pos;
-                }
-            });
-
-            stringCompare = intent1.getStringExtra(EXTRA_RENT_BRGY);
-            List<KeyPairBoolData> rentBarangays = null;
-            List<String> barangaysStringList = new ArrayList<>();
-
-            if (stringCompare.contains("AGONCILLO")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_agoncillo_brgy)));
             }
-            if (stringCompare.contains("ALITAGTAG")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_alitagtag_brgy)));
-            }
-            if (stringCompare.contains("BALAYAN")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_balayan_brgy)));
-            }
-            if (stringCompare.contains("BALETE")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_balete_brgy)));
-            }
-            if (stringCompare.contains("BATANGAS CITY")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_batangascity_brgy)));
-            }
-            if (stringCompare.contains("BAUAN")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_bauan_brgy)));
-            }
-            if (stringCompare.contains("CALACA")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_calaca_brgy)));
-            }
-            if (stringCompare.contains("CALATAGAN")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_calatagan_brgy)));
-            }
-            if (stringCompare.contains("CUENCA")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_cuenca_brgy)));
-            }
-            if (stringCompare.contains("IBAAN")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_ibaan_brgy)));
-            }
-            if (stringCompare.contains("LAUREL")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_laurel_brgy)));
-            }
-            if (stringCompare.contains("LEMERY")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lemery_brgy)));
-            }
-            if (stringCompare.contains("LIAN")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lian_brgy)));
-            }
-            if (stringCompare.contains("LIPA CITY")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lipacity_brgy)));
-            }
-            if (stringCompare.contains("LOBO")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lobo_brgy)));
-            }
-            if (stringCompare.contains("MABINI")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_mabini_brgy)));
-            }
-            if (stringCompare.contains("MALVAR")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_malvar_brgy)));
-            }
-            if (stringCompare.contains("MATAASNAKAHOY")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_mataasnakahoy_brgy)));
-            }
-            if (stringCompare.contains("NASUGBU")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_nasugbu_brgy)));
-            }
-            if (stringCompare.contains("PADRE GARCIA")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_padregarcia_brgy)));
-            }
-            if (stringCompare.contains("ROSARIO")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_rosario_brgy)));
-            }
-            if (stringCompare.contains("SAN JOSE")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanjose_brgy)));
-            }
-            if (stringCompare.contains("SAN JUAN")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanjuan_brgy)));
-            }
-            if (stringCompare.contains("SAN LUIS")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanluis_brgy)));
-            }
-            if (stringCompare.contains("SAN NICOLAS")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sannicolas_brgy)));
-            }
-            if (stringCompare.contains("SAN PASCUAL")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanpascual_brgy)));
-            }
-            if (stringCompare.contains("STA. TERESITA")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_staterisita_brgy)));
-            }
-            if (stringCompare.contains("STO. TOMAS")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_stotomas_brgy)));
-            }
-            if (stringCompare.contains("TAAL")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_taal_brgy)));
-            }
-            if (stringCompare.contains("TALISAY")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_talisay_brgy)));
-            }
-            if (stringCompare.contains("TANAUAN CITY")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_tanauancity_brgy)));
-            }
-            if (stringCompare.contains("TAYSAN")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_taysan_brgy)));
-            }
-            if (stringCompare.contains("TINGLOY")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_tingloy_brgy)));
-            }
-            if (stringCompare.contains("TUY")) {
-                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_tuy_brgy)));
-            }
-
-            rentBarangays = pairBoolDataSelectMulti(barangaysStringList, stringCompare, 4);
-            multSpinBrgyRent.setItems(rentBarangays, new MultiSpinnerListener() {
-                @Override
-                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
-                    String pos = new String();
-                    for (int i = 0; i < selectedItems.size(); i++) {
-                        pos = selectedItems.get(i).getName() + "; " + pos;
-                        Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-                        Log.d("MULT SPIN", pos);
-                    }
-                    listOfBrgyRent = pos;
-                }
-            });
-
-
-        } else {
-
-            stringCompare = intent1.getStringExtra(EXTRA_RENT_PROV);
-            rentProvinces = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.provinces)), stringCompare, 2);
-            multSpinProvRent.setItems(rentProvinces, new MultiSpinnerListener() {
-                @Override
-                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
-                    String pos = new String();
-                    for (int i = 0; i < selectedItems.size(); i++) {
-                        pos = selectedItems.get(i).getName() + "; " + pos;
-                        Log.d("MULTSPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-                        Log.d("MULTSPIN", pos);
-                    }
-
-
-                }
-            });
-            provRent = intent1.getStringExtra(EXTRA_RENT_PROV);
-
-            stringCompare = intent1.getStringExtra(EXTRA_RENT_MUN);
-            List<KeyPairBoolData> rentMunicipalities = null;
-            rentMunicipalities = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.municipalities)), stringCompare, 3);
-            multSpinMunRent.setItems(rentMunicipalities, new MultiSpinnerListener() {
-                @Override
-                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
-                    String pos = new String();
-                    for (int i = 0; i < selectedItems.size(); i++) {
-                        pos = selectedItems.get(i).getName() + "; " + pos;
-                        Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-                        Log.d("MULT SPIN", pos);
-                    }
-                    munRent = pos;
-                }
-            });
-            munRent = intent1.getStringExtra(EXTRA_RENT_MUN);
-
-            stringCompare = intent1.getStringExtra(EXTRA_RENT_BRGY);
-            List<KeyPairBoolData> rentBarangays = null;
-            rentBarangays = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.barangays)), stringCompare, 4);
-            multSpinBrgyRent.setItems(rentBarangays, new MultiSpinnerListener() {
-                @Override
-                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
-                    String pos = new String();
-                    for (int i = 0; i < selectedItems.size(); i++) {
-                        pos = selectedItems.get(i).getName() + "; " + pos;
-                        Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-                        Log.d("MULT SPIN", pos);
-                    }
-                    listOfBrgyRent = pos;
-                }
-            });
-
-        }
+        });
         provRent = intent1.getStringExtra(EXTRA_RENT_PROV);
+
+        stringCompare = intent1.getStringExtra(EXTRA_RENT_MUN);
+        List<KeyPairBoolData> rentMunicipalities = null;
+        rentMunicipalities = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.municipalities)), stringCompare, 3);
+        multSpinMunRent.setItems(rentMunicipalities, new MultiSpinnerListener() {
+            @Override
+            public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+                String pos = new String();
+                for (int i = 0; i < selectedItems.size(); i++) {
+                    pos = selectedItems.get(i).getName() + "; " + pos;
+                    Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+                    Log.d("MULT SPIN", pos);
+                }
+                munRent = pos;
+            }
+        });
         munRent = intent1.getStringExtra(EXTRA_RENT_MUN);
+
+        stringCompare = intent1.getStringExtra(EXTRA_RENT_BRGY);
+        List<KeyPairBoolData> rentBarangays = null;
+        rentBarangays = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.barangays)), stringCompare, 4);
+        multSpinBrgyRent.setItems(rentBarangays, new MultiSpinnerListener() {
+            @Override
+            public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+                String pos = new String();
+                for (int i = 0; i < selectedItems.size(); i++) {
+                    pos = selectedItems.get(i).getName() + "; " + pos;
+                    Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+                    Log.d("MULT SPIN", pos);
+                }
+                listOfBrgyRent = pos;
+            }
+        });
         listOfBrgyRent = intent1.getStringExtra(EXTRA_RENT_BRGY);
 
         stringCompare = intent1.getStringExtra(EXTRA_PROV);
