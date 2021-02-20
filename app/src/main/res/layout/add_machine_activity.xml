@@ -196,7 +196,7 @@
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="Specify Brand"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="@+id/spinBrand"
                 app:layout_constraintStart_toStartOf="@+id/spinBrand"
                 app:layout_constraintTop_toBottomOf="@+id/spinBrand" />
@@ -229,7 +229,7 @@
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="Specify Model"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="@+id/spinBrand"
                 app:layout_constraintStart_toStartOf="@+id/spinBrand"
                 app:layout_constraintTop_toBottomOf="@+id/spinModel" />
@@ -240,8 +240,18 @@
                 android:layout_height="wrap_content"
                 android:text="Rated Power"
                 app:layout_constraintStart_toStartOf="@+id/tvModel"
-                app:layout_constraintTop_toTopOf="@+id/edtRatedPower"
-                android:tooltipText="Ilagay ang hP ng makinarya"/>
+                app:layout_constraintTop_toTopOf="@+id/edtRatedPower"/>
+
+            <TextView
+                android:id="@+id/tvRatedPoweInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="ⓘ"
+                android:textColor="@color/ColorMaroon"
+                android:tooltipText="Ilagay ang hP ng makinarya"
+                app:layout_constraintStart_toEndOf="@+id/tvRatedPower"
+                app:layout_constraintTop_toTopOf="@+id/edtRatedPower" />
 
             <EditText
                 android:id="@+id/edtRatedPower"
@@ -254,56 +264,107 @@
                 android:hint="Horsepower"
                 android:inputType="numberDecimal"
                 app:layout_constraintEnd_toEndOf="@+id/spinModel"
-                app:layout_constraintStart_toEndOf="@+id/tvRatedPower"
+                app:layout_constraintStart_toEndOf="@+id/tvRatedPoweInfo"
                 app:layout_constraintTop_toBottomOf="@+id/spinModel" />
+
+            <TextView
+                android:id="@+id/tvTotalServiceAreaMachine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Total Service Area"
+                android:tooltipText="Ektarya para sa bagong pananim na tubo"
+                app:layout_constraintStart_toStartOf="@+id/tvRatedPower"
+                app:layout_constraintTop_toBottomOf="@+id/edtRatedPower" />
+
+            <EditText
+                android:id="@+id/edtTotalServiceAreaMachine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/custom_edit_text"
+                android:hint="Hectares"
+                android:inputType="numberDecimal"
+                app:layout_constraintEnd_toEndOf="@+id/edtRatedPower"
+                app:layout_constraintStart_toEndOf="@+id/tvTotalServiceAreaMachine"
+                app:layout_constraintTop_toTopOf="@+id/tvTotalServiceAreaMachine" />
 
             <TextView
                 android:id="@+id/tvNewlyPlantedArea"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:text="Newly Planted Area that use this Machine"
-                app:layout_constraintEnd_toEndOf="@+id/tvOwnerMachine"
+                app:layout_constraintEnd_toEndOf="@+id/tvTotalServiceAreaMachine"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/tvRatedPower"
-                app:layout_constraintTop_toBottomOf="@+id/edtRatedPower"
-                android:tooltipText="Ektarya para sa bagong pananim na tubo"/>
+                app:layout_constraintTop_toBottomOf="@+id/tvTotalServiceAreaMachine" />
+
+            <TextView
+                android:id="@+id/tvNewlyPlantedAreaInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="ⓘ"
+                android:textColor="@color/ColorMaroon"
+                app:layout_constraintStart_toEndOf="@+id/tvNewlyPlantedArea"
+                app:layout_constraintTop_toTopOf="@+id/tvNewlyPlantedArea" />
 
             <EditText
                 android:id="@+id/edtNewlyPlantedArea"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/custom_edit_text"
                 android:hint="Hectares"
                 android:inputType="numberDecimal"
                 app:layout_constraintEnd_toEndOf="@+id/edtRatedPower"
-                app:layout_constraintStart_toEndOf="@+id/tvNewlyPlantedArea"
-                app:layout_constraintTop_toBottomOf="@+id/edtRatedPower"/>
+                app:layout_constraintStart_toEndOf="@+id/tvNewlyPlantedAreaInfo"
+                app:layout_constraintTop_toBottomOf="@+id/edtTotalServiceAreaMachine" />
 
             <TextView
                 android:id="@+id/tvRatoonArea"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:text="Ratooned Area that use this Machine"
                 app:layout_constraintEnd_toEndOf="@+id/tvNewlyPlantedArea"
                 app:layout_constraintStart_toStartOf="@+id/tvNewlyPlantedArea"
-                app:layout_constraintTop_toBottomOf="@+id/edtNewlyPlantedArea"
-                android:tooltipText="Ektarya para sa niratoon na tubo"/>
+                app:layout_constraintTop_toBottomOf="@+id/tvNewlyPlantedArea" />
+
+            <TextView
+                android:id="@+id/tvRatoonAreaInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="ⓘ"
+                android:textColor="@color/ColorMaroon"
+                app:layout_constraintStart_toEndOf="@+id/tvRatoonArea"
+                app:layout_constraintTop_toTopOf="@+id/tvRatoonArea" />
 
             <EditText
                 android:id="@+id/edtRatoonArea"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="40dp"
                 android:background="@drawable/custom_edit_text"
                 android:hint="Hectares"
                 android:inputType="numberDecimal"
                 app:layout_constraintEnd_toEndOf="@+id/edtNewlyPlantedArea"
-                app:layout_constraintStart_toEndOf="@+id/tvRatoonArea"
-                app:layout_constraintTop_toBottomOf="@+id/edtNewlyPlantedArea" />
+                app:layout_constraintStart_toEndOf="@+id/tvRatoonAreaInfo"
+                app:layout_constraintTop_toTopOf="@+id/tvRatoonArea" />
+
+            <TextView
+                android:id="@+id/tvAveOpHoursInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="ⓘ"
+                android:textColor="@color/ColorMaroon"
+                android:tooltipText="Ektarya para sa bagong pananim na tubo"
+                app:layout_constraintStart_toEndOf="@+id/tvAveOpHours"
+                app:layout_constraintTop_toTopOf="@+id/tvAveOpHours" />
 
             <TextView
                 android:id="@+id/tvAveOpHours"
@@ -311,38 +372,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:text="Ave. Operating Hours"
+                android:tooltipText="Karaniwang oras ng operasyon ng makinarya kada araw"
                 app:layout_constraintStart_toStartOf="@+id/tvNewlyPlantedArea"
-                app:layout_constraintTop_toBottomOf="@+id/edtRatoonArea"
-                android:tooltipText="Karaniwang oras ng operasyon ng makinarya kada araw"/>
+                app:layout_constraintTop_toBottomOf="@+id/tvRatoonArea" />
 
             <EditText
                 android:id="@+id/edtAverageOperatingHours"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="40dp"
                 android:background="@drawable/custom_edit_text"
                 android:digits="0123456789."
                 android:ems="10"
                 android:hint="Hours/Day"
                 android:inputType="numberDecimal"
                 app:layout_constraintEnd_toEndOf="@+id/edtNewlyPlantedArea"
-                app:layout_constraintStart_toEndOf="@+id/tvAveOpHours"
-                app:layout_constraintTop_toBottomOf="@+id/edtRatoonArea" />
-
-            <TextView
-                android:id="@+id/tvSubInputHours"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Input in Hours per Day"
-                android:textColor="@color/colorAccent"
-                android:textSize="10sp"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/edtAverageOperatingHours"
-                app:layout_constraintTop_toBottomOf="@+id/edtAverageOperatingHours"
-                />
+                app:layout_constraintStart_toEndOf="@+id/tvAveOpHoursInfo"
+                app:layout_constraintTop_toTopOf="@+id/tvAveOpHours" />
 
             <TextView
                 android:id="@+id/tvAveOpDays"
@@ -350,9 +396,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:text="Ave. Operating Days"
+                android:tooltipText="Sumatutal na araw na ginagamit ang makinarya sa lahat ng operasyon sa bukid"
                 app:layout_constraintStart_toStartOf="@+id/tvNewlyPlantedArea"
-                app:layout_constraintTop_toBottomOf="@+id/edtAverageOperatingHours"
-                android:tooltipText="Sumatutal na araw na ginagamit ang makinarya sa lahat ng operasyon sa bukid"/>
+                app:layout_constraintTop_toBottomOf="@+id/edtAverageOperatingHours" />
+
+            <TextView
+                android:id="@+id/tvAveOpDaysInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="ⓘ"
+                android:textColor="@color/ColorMaroon"
+                app:layout_constraintStart_toEndOf="@+id/tvAveOpDays"
+                app:layout_constraintTop_toTopOf="@+id/tvAveOpDays" />
 
             <EditText
                 android:id="@+id/edtAverageOperatingDays"
@@ -365,20 +421,54 @@
                 android:hint="Days/Season"
                 android:inputType="number"
                 app:layout_constraintEnd_toEndOf="@+id/edtAverageOperatingHours"
-                app:layout_constraintStart_toEndOf="@+id/tvAveOpDays"
+                app:layout_constraintStart_toEndOf="@+id/tvAveOpDaysInfo"
                 app:layout_constraintTop_toBottomOf="@+id/edtAverageOperatingHours" />
 
             <TextView
-                android:id="@+id/tvSubInputDays"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvEffectiveAreaHarvester"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Input in Days per Season"
-                android:textColor="@color/colorAccent"
-                android:textSize="10sp"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="@+id/tvSubInputHours"
+                android:text="Effective Area Accomplished"
+                app:layout_constraintEnd_toEndOf="@+id/tvAveOpDays"
+                app:layout_constraintStart_toStartOf="@+id/tvAveOpDays"
+                app:layout_constraintTop_toTopOf="@+id/edtEffectiveAreaHarvester" />
+
+            <EditText
+                android:id="@+id/edtEffectiveAreaHarvester"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/custom_edit_text"
+                android:ems="10"
+                android:hint="Hectares"
+                android:inputType="numberDecimal"
+                app:layout_constraintEnd_toEndOf="@+id/edtAverageOperatingDays"
+                app:layout_constraintStart_toEndOf="@+id/tvEffectiveAreaHarvester"
                 app:layout_constraintTop_toBottomOf="@+id/edtAverageOperatingDays" />
+
+            <TextView
+                android:id="@+id/tvTimeUsedWorkingHarvester"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Time Used Working"
+                app:layout_constraintEnd_toEndOf="@+id/tvAveOpDays"
+                app:layout_constraintStart_toStartOf="@+id/tvAveOpDays"
+                app:layout_constraintTop_toTopOf="@+id/edtTimeUsedWorkingHarvester" />
+
+            <EditText
+                android:id="@+id/edtTimeUsedWorkingHarvester"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/custom_edit_text"
+                android:ems="10"
+                android:hint="Hours"
+                android:inputType="numberDecimal"
+                app:layout_constraintEnd_toEndOf="@+id/edtAverageOperatingDays"
+                app:layout_constraintStart_toEndOf="@+id/tvEffectiveAreaHarvester"
+                app:layout_constraintTop_toBottomOf="@+id/edtEffectiveAreaHarvester" />
 
             <TextView
                 android:id="@+id/tvCapacity"
@@ -393,14 +483,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="40dp"
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="Hectares/Hour"
                 android:inputType="numberDecimal"
                 app:layout_constraintEnd_toEndOf="@+id/edtAverageOperatingDays"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/tvCapacity"
-                app:layout_constraintTop_toBottomOf="@+id/tvSubInputDays" />
+                tools:layout_editor_absoluteY="1017dp" />
 
             <TextView
                 android:id="@+id/tvAveYield"
@@ -554,7 +644,7 @@
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="Specify Agency"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="@+id/spinAgency"
                 app:layout_constraintStart_toStartOf="@+id/spinAgency"
                 app:layout_constraintTop_toBottomOf="@+id/spinAgency" />
@@ -565,9 +655,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="Name of Owner/Organization"
+                android:tooltipText="Ilagay ang pangalan ng organisasyon o pribadong indibidwal benepisyaryong"
                 app:layout_constraintBottom_toTopOf="@id/edtNameOfOwnerOrOrganization"
-                app:layout_constraintStart_toStartOf="@+id/tvAgency"
-                android:tooltipText="Ilagay ang pangalan ng organisasyon o pribadong indibidwal benepisyaryong"/>
+                app:layout_constraintStart_toStartOf="@+id/tvAgency" />
+
+            <TextView
+                android:id="@+id/tvNameOfOwnerOrOrganizationInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="ⓘ"
+                android:textColor="@color/ColorMaroon"
+                app:layout_constraintStart_toEndOf="@+id/tvNameOfOwnerOrOrganization"
+                app:layout_constraintTop_toTopOf="@+id/tvNameOfOwnerOrOrganization" />
 
             <EditText
                 android:id="@+id/edtNameOfOwnerOrOrganization"
@@ -577,7 +677,7 @@
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="Name"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="@+id/spinOwnership"
                 app:layout_constraintStart_toStartOf="@+id/spinOwnership"
                 app:layout_constraintTop_toBottomOf="@+id/spinAgency" />
@@ -610,6 +710,17 @@
                 app:layout_constraintStart_toStartOf="@+id/tvOwnership"
                 app:layout_constraintTop_toBottomOf="@+id/spinYearAcquired" />
 
+            <TextView
+                android:id="@+id/tvConditionAcquiredInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="ⓘ"
+                android:textColor="@color/ColorMaroon"
+                app:layout_constraintStart_toEndOf="@+id/tvConditionAcquired"
+                app:layout_constraintTop_toBottomOf="@+id/tvConditionAcquired"
+                app:layout_constraintTop_toTopOf="@+id/tvConditionAcquired" />
+
             <Spinner
                 android:id="@+id/spinConditionAcquired"
                 android:layout_width="0dp"
@@ -619,8 +730,7 @@
                 android:entries="@array/condition_when_bought"
                 app:layout_constraintEnd_toEndOf="@+id/spinOwnership"
                 app:layout_constraintStart_toStartOf="@+id/spinOwnership"
-                app:layout_constraintTop_toBottomOf="@+id/tvConditionAcquired"
-                android:tooltipText="Kondisyon ng makinarya noon ito ay iyong nakuha"/>
+                app:layout_constraintTop_toBottomOf="@+id/tvConditionAcquired" />
 
             <TextView
                 android:id="@+id/tvForRent"
@@ -711,8 +821,17 @@
                 android:text="Plowing Custom Rate (in PHP)"
                 app:layout_constraintEnd_toEndOf="@+id/edtPlowingRent"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
-                app:layout_constraintTop_toBottomOf="@+id/tvForRent"
-                android:tooltipText="Ilagay ang halaga ng renta ng pagpapaararo"/>
+                app:layout_constraintTop_toBottomOf="@+id/tvForRent" />
+
+            <TextView
+                android:id="@+id/tvPlowingRentInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="ⓘ"
+                android:textColor="@color/ColorMaroon"
+                app:layout_constraintStart_toEndOf="@+id/tvPlowingRent"
+                app:layout_constraintTop_toTopOf="@+id/tvPlowingRent" />
 
             <TextView
                 android:id="@+id/tvCustomUnitOther"
@@ -732,6 +851,7 @@
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="Custom Rate"
+                android:inputType="number"
                 app:layout_constraintBottom_toBottomOf="@+id/spinPlowingRentUnit"
                 app:layout_constraintEnd_toStartOf="@+id/spinPlowingRentUnit"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
@@ -756,8 +876,8 @@
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="Custom Rate"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="@+id/spinPlowingRentUnit"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
                 app:layout_constraintTop_toBottomOf="@+id/edtPlowingRent" />
 
@@ -769,8 +889,17 @@
                 android:text="Harrowing Custom Rate (in PHP)"
                 app:layout_constraintEnd_toEndOf="@+id/edtPlowingRent"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
-                app:layout_constraintTop_toBottomOf="@+id/edtPlowSpecifyUnit"
-                android:tooltipText="Ilagay ang halaga ng renta sa pagrarastilyo"/>
+                app:layout_constraintTop_toBottomOf="@+id/edtPlowSpecifyUnit"/>
+
+            <TextView
+                android:id="@+id/tvHarrowingRentInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="ⓘ"
+                android:textColor="@color/ColorMaroon"
+                app:layout_constraintStart_toEndOf="@id/tvHarrowingRent"
+                app:layout_constraintTop_toTopOf="@id/tvHarrowingRent" />
 
             <EditText
                 android:id="@+id/edtHarrowingRent"
@@ -806,8 +935,8 @@
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="Custom Rate"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="@+id/spinHarrowingRentUnit"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
                 app:layout_constraintTop_toBottomOf="@+id/edtHarrowingRent" />
 
@@ -819,8 +948,17 @@
                 android:text="Furrowing Custom Rate (in PHP)"
                 app:layout_constraintEnd_toEndOf="@+id/edtHarrowingRent"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
-                app:layout_constraintTop_toBottomOf="@+id/edtHarrSpecifyUnit"
-                android:tooltipText="Ilagay ang halaga ng renta sa pagtutudling"/>
+                app:layout_constraintTop_toBottomOf="@+id/edtHarrSpecifyUnit"/>
+
+            <TextView
+                android:id="@+id/tvFurrowingRentInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="ⓘ"
+                android:textColor="@color/ColorMaroon"
+                app:layout_constraintStart_toEndOf="@id/tvFurrowingRent"
+                app:layout_constraintTop_toTopOf="@id/tvFurrowingRent" />
 
             <EditText
                 android:id="@+id/edtFurrowingRent"
@@ -855,6 +993,7 @@
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="Custom Rate"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="@+id/spinFurrowingRentUnit"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
                 app:layout_constraintTop_toBottomOf="@+id/edtFurrowingRent" />
@@ -870,6 +1009,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/edtFurrSpecifyUnit" />
 
             <EditText
+                android:id="@+id/edtOthrSpecifyOperation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_edit_text"
+                android:ems="10"
+                android:hint="Specify Operation"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="@+id/spinOtherRentUnit"
+                app:layout_constraintStart_toStartOf="@+id/tvForRent"
+                app:layout_constraintTop_toBottomOf="@+id/tvOtherRent" />
+
+            <EditText
                 android:id="@+id/edtOtherRent"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -881,7 +1033,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/spinOtherRentUnit"
                 app:layout_constraintEnd_toEndOf="@+id/tvOtherRent"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
-                app:layout_constraintTop_toBottomOf="@+id/tvOtherRent" />
+                app:layout_constraintTop_toBottomOf="@+id/edtOthrSpecifyOperation" />
 
             <Spinner
                 android:id="@+id/spinOtherRentUnit"
@@ -892,7 +1044,7 @@
                 android:entries="@array/custom_rate_units"
                 app:layout_constraintEnd_toEndOf="@+id/spinRental"
                 app:layout_constraintStart_toStartOf="@+id/spinRental"
-                app:layout_constraintTop_toBottomOf="@+id/tvOtherRent" />
+                app:layout_constraintTop_toBottomOf="@+id/edtOthrSpecifyOperation" />
 
             <EditText
                 android:id="@+id/edtOthrSpecifyUnit"
@@ -902,6 +1054,7 @@
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="Custom Rate"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="@+id/spinOtherRentUnit"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
                 app:layout_constraintTop_toBottomOf="@+id/edtOtherRent" />
@@ -926,7 +1079,7 @@
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="Liters/Hectare"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 app:layout_constraintBottom_toBottomOf="@+id/tvAveFuelConsumptionPlowing"
                 app:layout_constraintEnd_toEndOf="@+id/spinOtherRentUnit"
                 app:layout_constraintStart_toEndOf="@+id/tvAveFuelConsumptionPlowing"
@@ -951,7 +1104,7 @@
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="Liters/Hectare"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 app:layout_constraintBottom_toBottomOf="@+id/tvAveFuelConsumptionHarrowing"
                 app:layout_constraintEnd_toEndOf="@+id/edtAveFuelConsumptionPlowing"
                 app:layout_constraintStart_toStartOf="@+id/edtAveFuelConsumptionPlowing"
@@ -975,7 +1128,7 @@
                 android:background="@drawable/custom_edit_text"
                 android:ems="10"
                 android:hint="Liters/Hectare"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 app:layout_constraintBottom_toBottomOf="@+id/tvAveFuelConsumptionFurrowing"
                 app:layout_constraintEnd_toEndOf="@+id/edtAveFuelConsumptionHarrowing"
                 app:layout_constraintStart_toEndOf="@+id/tvAveFuelConsumptionHarrowing"
@@ -990,8 +1143,7 @@
                 android:layout_marginTop="32dp"
                 android:text="Machine Availability"
                 app:layout_constraintStart_toStartOf="@+id/tvForRent"
-                app:layout_constraintTop_toBottomOf="@+id/edtAveFuelConsumptionFurrowing"
-                android:tooltipText="Ilagay kung ipinaparenta sa ibang barangay ang makinarya"/>
+                app:layout_constraintTop_toBottomOf="@+id/edtAveFuelConsumptionFurrowing"/>
 
             <!--
             <Spinner
@@ -1007,6 +1159,16 @@
                 app:layout_constraintTop_toBottomOf="@id/spinAvailability" />
                 -->
 
+
+            <TextView
+                android:id="@+id/tvMachineAvailabilityInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="ⓘ"
+                android:textColor="@color/ColorMaroon"
+                app:layout_constraintStart_toEndOf="@id/tvMachineAvailability"
+                app:layout_constraintTop_toTopOf="@id/tvMachineAvailability" />
 
             <TextView
                 android:id="@+id/tvProvinceRent"

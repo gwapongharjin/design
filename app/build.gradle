@@ -74,4 +74,8 @@ dependencies {
     implementation('com.github.douglasjunior:android-simple-tooltip:master-SNAPSHOT') {
         changing = true // Gradle will then check for updates every 24 hours
     }
+
+    implementation('com.github.douglasjunior:android-simple-tooltip:master-SNAPSHOT') {
+        changing = true // Gradle will then check for updates every 24 hours
+    }
 }

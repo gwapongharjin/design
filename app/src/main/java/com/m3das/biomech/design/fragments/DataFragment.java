@@ -61,6 +61,9 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
     private ImplementViewModel implementViewModel;
     private ProfileViewModel profileViewModel;
 
+    public DataFragment() {
+    }
+
     public static DataFragment newInstance() {
         return new DataFragment();
     }
@@ -80,7 +83,8 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             implementLoadCapGrab, implementNumLoadsGrab, implementTSADitch, implementAveOpHoursDitch, implementAveOpDaysDitch, implementDepthCutDitch, implementYearAcq, implementCondition,
             implementLocation, implementProvince, implementMunicipality, implementBrgy, implementImgBase64, implementLatitude, implementLongitude, implementAccuracy, enumCode, plow_rate,
             plow_unit, plow_unit_specify, harr_rate, harr_unit, harr_unit_specify, furr_rate, furr_unit, furr_unit_specify, othr_rate, othr_unit, othr_unit_specify, ave_fuel_plow, ave_fuel_harr,
-            ave_fuel_furr, year_inoperable, implementBrand, implementModel;
+            ave_fuel_furr, year_inoperable, implementBrand, implementModel, newly_planted_area, ratooned_area, implementAgency, implementOwnership, implementPurch_grant_dono,
+            implementAgency_specify, implementModifications, implementProblems, implementProblemsSpecify, implementYearInoperable;
     private String profileResCode, profileProfile, profileProfileSpecify, profileOwnerType, profileNameRespondent, profileAddress, profileAge, profileSex, profileContactNumber, profileMobNum1,
             profileMobNum2, profileTelNum1, profileTelNum2, profileEducAttain;
 
@@ -508,18 +512,18 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             }
             fileImplement.createNewFile();
 
-            FileWriter fp = new FileWriter(fileProfile.getAbsoluteFile(),true);
+            FileWriter fp = new FileWriter(fileProfile.getAbsoluteFile(), true);
             csvWriterProf = new CSVWriter(fp);
             csvWriterProf.writeAll(profilesList); // data is adding to csv
             csvWriterProf.flush();
             csvWriterProf.close();
 
-            FileWriter fm = new FileWriter(fileMachine.getAbsoluteFile(),true);
+            FileWriter fm = new FileWriter(fileMachine.getAbsoluteFile(), true);
             csvWriterMachine = new CSVWriter(fm);
             csvWriterMachine.writeAll(machineList); // data is adding to csv
             csvWriterMachine.close();
 
-            FileWriter fi = new FileWriter(fileImplement.getAbsoluteFile(),true);
+            FileWriter fi = new FileWriter(fileImplement.getAbsoluteFile(), true);
             csvWriterImplement = new CSVWriter(fi);
             csvWriterImplement.writeAll(implementList); // data is adding to csv
             csvWriterImplement.close();
@@ -639,8 +643,19 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             }
         });
 
-        machineListSend.add(new String[]{".", ".", ".", ".", "Name Respondent", "Address", "Age", "Sex", "Contact Number", "Mobile Number 1",
-                "Mobile Number 2", "Telephone Number 1", "Telephone Number 2", "Educational Attainment"});
+        machineListSend.add(new String[]{"machineType", "machineQRCode", "typeOfTubewells", "typeOfMill", "Date of Survey",
+                "machineBrand", "machineBrandSpecify", "machineModel", "machineModelSpecify", "ratedPower",
+                "serviceArea", "newlyPlantedArea", "ratoonedArea", "Average Operating Hours", "Average Operating Days",
+                "Capacity", "averageYield", "numberLoads", "rate", "ownership",
+                "purchGrantDono", "agency", "agency_specify", "nameOwnerOrg", "yearAcquired",
+                "conditionAcquired", "rental", "mainRent", "mainRateRentUnit", "mainRateRentUnitSpecify",
+                "plowingRent", "plowingRentUnit", "plowingRentUnitSpecify", "harrowingRent", "harrowingRentUnit",
+                "harrowingRentUnitSpecify", "furrowingRent", "furrowingRentUnit", "furrowingRentUnitSpecify", "otherOperationRent",
+                "otherOperationRentUnit", "otherOperationRentUnitSpecify", "Plowing Ave Fuel Consumption", "Harrowing Ave Fuel Consumption", "Furrowing Ave Fuel Consumption",
+                "availability", "rentProvince", "rentMunicipality", "rentBarangay", "problems",
+                "problemsSpecify", "yearInoperable", "ConditionPresent", "Location", "Province",
+                "Municipality", "Barangay", "Latitude", "Longitude", "Accuracy",
+                "Respondent Code", "Respondent Name", "Image",});
 
         machineListViewModel.getAllMachines().observe(getActivity(), new Observer<List<Machines>>() {
             @Override
@@ -650,13 +665,18 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
 
                     machineType = machines.get(i).getMachine_type();
                     machineQRCode = machines.get(i).getMachine_qrcode();
+                    tubewells = machines.get(i).getType_tubewells();
+                    type_mill = machines.get(i).getType_mill();
                     datesurvey = machines.get(i).getDate_of_survey();
                     brand = machines.get(i).getMachine_brand();
                     brand_specify = machines.get(i).getMachine_brand_specify();
                     model = machines.get(i).getMachine_model();
                     model_specify = machines.get(i).getMachine_model_specify();
                     rated_power = machines.get(i).getRated_power();
+
                     service_area = machines.get(i).getService_area();
+                    newly_planted_area = machines.get(i).getNewly_planted_area();
+                    ratooned_area = machines.get(i).getRatooned_area();
                     ave_op_hours = machines.get(i).getAve_op_hours();
                     ave_op_days = machines.get(i).getAve_op_days();
                     capacity = machines.get(i).getCapacity();
@@ -664,6 +684,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     num_loads = machines.get(i).getNum_loads();
                     rate = machines.get(i).getRate();
                     ownership = machines.get(i).getOwnership();
+
                     purch_grant_dono = machines.get(i).getPurch_grant_dono();
                     agency = machines.get(i).getAgency();
                     agency_specify = machines.get(i).getAgency_specify();
@@ -674,6 +695,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     custom_rate = machines.get(i).getMain_custom_rent();
                     custom_unit = machines.get(i).getMain_custom_rent_unit();
                     custom_unit_specify = machines.get(i).getMain_custom_rent_unit_specify();
+
                     plow_rate = machines.get(i).getPlow_custom_rent();
                     plow_unit = machines.get(i).getPlow_custom_rent_unit();
                     plow_unit_specify = machines.get(i).getPlow_custom_rent_unit_specify();
@@ -684,6 +706,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     furr_unit = machines.get(i).getFurr_custom_rent_unit();
                     furr_unit_specify = machines.get(i).getFurr_custom_rent_unit_specify();
                     othr_rate = machines.get(i).getOther_custom_rent();
+
                     othr_unit = machines.get(i).getOther_custom_rent_unit();
                     othr_unit_specify = machines.get(i).getOther_custom_rent_unit_specify();
                     ave_fuel_plow = machines.get(i).getPlow_ave_fuel();
@@ -694,6 +717,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     rent_mun = machines.get(i).getRent_mun();
                     rent_brgy = machines.get(i).getRent_brgy();
                     condition = machines.get(i).getCondition();
+
                     problems = machines.get(i).getProblems();
                     problems_specify = machines.get(i).getSpecify_problems();
                     year_inoperable = machines.get(i).getYear_inoperable();
@@ -704,9 +728,8 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     latitude = machines.get(i).getMachine_latitude();
                     longitude = machines.get(i).getMachine_longitude();
                     imageString = machines.get(i).getMachine_image_base64();
+
                     accuracy = machines.get(i).getAccuracy();
-                    tubewells = machines.get(i).getType_tubewells();
-                    type_mill = machines.get(i).getType_mill();
                     resCode = machines.get(i).getResCode();
                     resName = machines.get(i).getResName();
 
@@ -718,27 +741,28 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                         accuracy = "";
                     }
 
-                    machineListSend.add(new String[]{machineType, tubewells, type_mill, machineQRCode, datesurvey, brand, brand_specify, model,
-                            model_specify, rated_power, service_area, ave_op_hours, ave_op_days, capacity, ave_yield, num_loads, rate, ownership, purch_grant_dono, agency, agency_specify, name_owner, year_acquired,
-                            condition_acquired, rental, custom_rate, custom_unit, custom_unit_specify, availablity, rent_prov, rent_mun, rent_brgy, condition, problems, problems_specify, location, prov, mun, brgy, latitude,
-                            longitude, imageString, accuracy, resCode, resName});
+                    machineListSend.add(new String[]{machineType, machineQRCode, tubewells, type_mill, datesurvey, brand, brand_specify, model, model_specify, rated_power, service_area,
+                            newly_planted_area, ratooned_area, ave_op_hours, ave_op_days, capacity, ave_yield, num_loads, rate, ownership, purch_grant_dono, agency, agency_specify, name_owner,
+                            year_acquired, condition_acquired, rental, custom_rate, custom_unit, custom_unit_specify, plow_rate, plow_unit, plow_unit_specify, harr_rate, harr_unit,
+                            harr_unit_specify, furr_rate, furr_unit, furr_unit_specify, othr_rate, othr_unit, othr_unit_specify, ave_fuel_plow, ave_fuel_harr, ave_fuel_furr, availablity, rent_prov,
+                            rent_mun, rent_brgy, condition, problems, problems_specify, year_inoperable, location, prov, mun, brgy, latitude, longitude, accuracy, resCode, resName, imageString});
                 }
             }
         });
 
 
-        implementListSend.add(new String[]{"Implement Type", "Implement QR Code", "Date of Survey", "Used on Machine", "Used on Machine Complete", "Land Clearing", "Pre Planting", "Planting",//8
-                "Fertilizer Application", "Pesticide Application", "Irrigation and Drainage", "Cultivation", "Ratooning", "Harvesting", "Post Harvest", "Hauling", "Total Service Area (Main)",//9
-                "Average Operating Hours (Main)", "Average Operating Days (Main)", "Effective Area Accomplished (Main)", "Time Used During Operation (Main)", "Field Capacity (Main)",//5
-                "Type of Planter", "Number of Rows (Planter)", "Distance of Materials (Planter)", "Total Service Area (Planter)", "Average Operating Hours (Planter)",//5
-                "Average Operating Days (Planter)", "Effective Area Accomplished (Planter)", "Time Used During Operation (Planter)", "Field Capacity (Planter)",//4
-                "Total Service Area (Fertilizer Applicator)", "Average Operating Hours (Fertilizer Applicator)", "Average Operating Days (Fertilizer Applicator)",//3
-                "Effective Area Accomplished (Fertilizer Applicator)", "Time Used During Operation (Fertilizer Applicator)", "Field Capacity (Fertilizer Applicator)",//3
-                "Weight of Fertilizer (Fertilizer Applicator)", "Delivery Rate (Fertilizer Applicator)", "Total Service Area (Harvester)", "Average Operating Hours (Harvester)",//4
-                "Average Operating Days (Harvester)", "Effective Area Accomplished (Harvester)", "Time Used During Operation (Harvester)", "Field Capacity (Harvester)", "Average Yield (Harvester)",//5
-                "Total Service Area (Cane Grab Loader)", "Average Operating Hours (Cane Grab Loader)", "Average Operating Days (Cane Grab Loader)", "Effective Area Accomplished (Cane Grab Loader)",//4
-                "Load Capacity (Cane Grab Loader)", "Number of Loads (Cane Grab Loader)", "Total Service Area (Ditcher)", "Average Operating Hours (Ditcher)", "Average Operating Days (Ditcher)",//5
-                "Depth of Cut (Ditcher)", "Year Acquired", "Condition", "Location", "Province", "Municipality", "Barangay", "Image", "Latitude", "Longitude", "Accuracy"});//12
+        implementListSend.add(new String[]{"implementType", "implementQRCode", "implementUsedOnMachine", "implementUsedOnMachineComplete", "dateOfSurvey",
+                "Brand", "Model", "LandClearing", "PrePlanting", "Planting",
+                "FertilizerApplication", "PesticideApplication", "IrrigationDrainage", "Cultivation", "Ratooning",
+                "Harvesting", "PostHarvesting", "Hauling", "EffectiveAreaAccomplishedMain", "TimeUsedDuringOperationMain",
+                "FieldCapacityMain", "TypeOfPlanter", "NumberOfRowsPlanter", "DistanceOfMaterialsPlanter", "EffectiveAreaAccomplishedPlanter",
+                "TimeUsedDuringOperationPlanter", "FieldCapacityPlanter", "EffectiveAreaAccomplishedFertilizerApplicator", "TimeUsedDuringOperationFertilizerApplicator", "FieldCapacityFertilizerApplicator",
+                "WeightOfFertilizer", "DeliveryRateOfFertilizerApplicator", "EffectiveAreaAccomplishedHarvester", "TimeUsedDuringOperationHarvester", "FieldCapacityHarvester",
+                "AverageYieldHarvester", "EffectiveAreaAccomplishedCaneGrabLoader", "TimeUsedDuringOperationCaneGrabLoader", "LoadCapacityCaneGrabLoader", "FieldCapacityCaneGrabLoader",
+                "DepthOfCutDitcher", "ownership", "purchGrantDono", "agency", "agencySpecify",
+                "YearAcquired", "ConditionPresentImplement", "modifications", "problems", "problemsSpecify",
+                "yearInoperable", "Location", "Province", "Munincipality", "Barangay",
+                "Latitude", "Longitude", "Accuracy", "Image"});
 
         implementViewModel.getAllImplements().observe(getActivity(), new Observer<List<Implements>>() {
             @Override
@@ -748,9 +772,13 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     Log.d("DFEXVALIMPVM", anImplements.get(i).getImplement_type() + ":" + i);
                     implementType = anImplements.get(i).getImplement_type();
                     implementQR = anImplements.get(i).getImplement_qrcode();
-                    implementDateSurvey = anImplements.get(i).getDate_of_survey();
                     implementUsedOnMachine = anImplements.get(i).getUsed_on_machine();
                     implementUsedOnMachineComplete = anImplements.get(i).getUsed_on_machine_complete();
+                    implementDateSurvey = anImplements.get(i).getDate_of_survey();
+
+                    implementBrand = anImplements.get(i).getBrand();
+                    implementModel = anImplements.get(i).getModel();
+
                     implementLandClearing = anImplements.get(i).getLand_clearing();
                     implementPrePlant = anImplements.get(i).getPre_planting();
                     implementPlanting = anImplements.get(i).getPlanting();
@@ -763,17 +791,13 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     implementPostHarvest = anImplements.get(i).getPost_harvest();
                     implementHaul = anImplements.get(i).getHauling();
 
-                    implementBrand = anImplements.get(i).getBrand();
-                    implementModel = anImplements.get(i).getModel();
-
                     implementEFFAAMain = anImplements.get(i).getEffective_area_accomplished_main();
                     implementTUDOpMain = anImplements.get(i).getTime_used_during_operation_main();
                     implementFieldCapMain = anImplements.get(i).getField_capacity_main();
+
                     implementTypePlant = anImplements.get(i).getType_of_planter();
                     implementNumRowsPlant = anImplements.get(i).getNumber_of_rows_planter();
                     implementDistMatPlant = anImplements.get(i).getDistance_of_materials_planter();
-
-
                     implementEFFAAPlant = anImplements.get(i).getEffective_area_accomplished_planter();
                     implementTUDOpPlant = anImplements.get(i).getTime_used_during_operation_planter();
                     implementFieldCapPlant = anImplements.get(i).getField_capacity_planter();
@@ -795,28 +819,34 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     implementFieldCapGrab = anImplements.get(i).getField_capacity_cane_grab_loader();
 
                     implementDepthCutDitch = anImplements.get(i).getDepth_cut_ditcher();
+                    implementOwnership = anImplements.get(i).getOwnership();
+                    implementPurch_grant_dono = anImplements.get(i).getPurchase_grant_donation();
+                    implementAgency = anImplements.get(i).getAgency();
+                    implementAgency_specify = anImplements.get(i).getAgency_specify();
+
                     implementYearAcq = anImplements.get(i).getYear_acquired();
                     implementCondition = anImplements.get(i).getCondition();
+                    implementModifications = anImplements.get(i).getModifications();
+                    implementProblems = anImplements.get(i).getProblems();
+                    implementProblemsSpecify = anImplements.get(i).getProblems_specify();
+                    implementYearInoperable = anImplements.get(i).getYear_inoperable();
+
                     implementLocation = anImplements.get(i).getLocation();
                     implementProvince = anImplements.get(i).getProvince();
                     implementMunicipality = anImplements.get(i).getCity();
                     implementBrgy = anImplements.get(i).getBarangay();
-                    implementImgBase64 = anImplements.get(i).getImage_base64();
                     implementLatitude = anImplements.get(i).getLatitude();
                     implementLongitude = anImplements.get(i).getLongitude();
                     implementAccuracy = anImplements.get(i).getAccuracy();
+                    implementImgBase64 = anImplements.get(i).getImage_base64();
 
 
-                    implementListSend.add(new String[]{implementType, implementQR, implementDateSurvey, implementUsedOnMachine,
-                            implementUsedOnMachineComplete, implementLandClearing, implementPrePlant, implementPlanting, implementFertApp, implementPestApp, implementIrriDrain, implementCult,
-                            implementRatoon, implementHarvest, implementPostHarvest, implementHaul, implementTSAMain, implementAveOpHoursMain, implementAveOpDaysMain, implementEFFAAMain,
-                            implementTUDOpMain, implementFieldCapMain, implementTypePlant, implementNumRowsPlant, implementDistMatPlant, implementTSAPlant, implementAveOpHoursPlant,
-                            implementAveOpDaysPlant, implementEFFAAPlant, implementTUDOpPlant, implementFieldCapPlant, implementTSAFert, implementAveOpHoursFert, implementAveOpDaysFert,
-                            implementEFFAAFert, implementTUDOpFert, implementFieldCapFert, implementWeightFert, implementDelRateFert, implementTSAHarvest, implementAveOpHoursHarvest,
-                            implementAveOpDaysHarvest, implementEFFAAHarvest, implementTUDOpHarvest, implementFieldCapHarvest, implementAveYieldHarvest, implementTSAGrab, implementAveOpHoursGrab,
-                            implementAveOpDaysGrab, implementEFFAAGrab, implementLoadCapGrab, implementNumLoadsGrab, implementTSADitch, implementAveOpHoursDitch, implementAveOpDaysDitch,
-                            implementDepthCutDitch, implementYearAcq, implementCondition, implementLocation, implementProvince, implementMunicipality, implementBrgy, implementImgBase64,
-                            implementLatitude, implementLongitude, implementAccuracy});
+                    implementListSend.add(new String[]{implementType, implementQR, implementUsedOnMachine, implementUsedOnMachineComplete, implementDateSurvey, implementBrand, implementModel, implementLandClearing, implementPrePlant, implementPlanting,
+                            implementFertApp, implementPestApp, implementIrriDrain, implementCult, implementRatoon, implementHarvest, implementPostHarvest, implementHaul, implementEFFAAMain, implementTUDOpMain,
+                            implementFieldCapMain, implementTypePlant, implementNumRowsPlant, implementDistMatPlant, implementEFFAAPlant, implementTUDOpPlant, implementFieldCapPlant, implementEFFAAFert, implementTUDOpFert, implementFieldCapFert,
+                            implementWeightFert, implementDelRateFert, implementEFFAAHarvest, implementTUDOpHarvest, implementFieldCapHarvest, implementAveYieldHarvest, implementEFFAAGrab, implementTUDOGrab, implementLoadCapGrab, implementFieldCapGrab,
+                            implementDepthCutDitch, implementOwnership, implementPurch_grant_dono, implementAgency, implementAgency_specify, implementYearAcq, implementCondition, implementModifications, implementProblems, implementProblemsSpecify,
+                            implementYearInoperable, implementLocation, implementProvince, implementMunicipality, implementBrgy, implementLatitude, implementLongitude, implementAccuracy, implementImgBase64});
                     Log.d("DFEXVALIMPVM", String.valueOf(implementListSend.size()));
                 }
             }

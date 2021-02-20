@@ -316,6 +316,7 @@
         <item>Please Select...</item>
         <item>PHP/HOUR</item>
         <item>PHP/HECTARE</item>
+        <item>PHP/TON</item>
         <item>SPECIFY</item>
     </string-array>
     <string-array name="yes_no">

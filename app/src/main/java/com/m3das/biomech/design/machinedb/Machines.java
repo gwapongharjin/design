@@ -24,6 +24,8 @@ public class Machines {
     private final String ratooned_area;
     private final String ave_op_hours;
     private final String ave_op_days;
+    private final String effective_area;
+    private final String time_used;
     private final String capacity;
     private final String ave_yield;
     private final String num_loads;
@@ -48,6 +50,7 @@ public class Machines {
     private final String furr_custom_rent;
     private final String furr_custom_rent_unit;
     private final String furr_custom_rent_unit_specify;
+    private final String other_unit_operation;
     private final String other_custom_rent;
     private final String other_custom_rent_unit;
     private final String other_custom_rent_unit_specify;
@@ -79,10 +82,10 @@ public class Machines {
 
     public Machines(String machine_type, String type_tubewells, String type_mill, String machine_qrcode, String date_of_survey, String machine_brand, String machine_brand_specify,
                     String machine_model, String machine_model_specify, String rated_power, String service_area, String newly_planted_area, String ratooned_area, String ave_op_hours,
-                    String ave_op_days, String capacity, String ave_yield, String num_loads, String rate, String ownership, String purch_grant_dono, String agency, String agency_specify,
+                    String ave_op_days, String effective_area, String time_used, String capacity, String ave_yield, String num_loads, String rate, String ownership, String purch_grant_dono, String agency, String agency_specify,
                     String name_owner, String year_acquired, String condition_acquired, String rental, String main_custom_rent, String main_custom_rent_unit, String main_custom_rent_unit_specify,
                     String plow_custom_rent, String plow_custom_rent_unit, String plow_custom_rent_unit_specify, String harr_custom_rent, String harr_custom_rent_unit,
-                    String harr_custom_rent_unit_specify, String furr_custom_rent, String furr_custom_rent_unit, String furr_custom_rent_unit_specify, String other_custom_rent,
+                    String harr_custom_rent_unit_specify, String furr_custom_rent, String furr_custom_rent_unit, String furr_custom_rent_unit_specify, String other_unit_operation, String other_custom_rent,
                     String other_custom_rent_unit, String other_custom_rent_unit_specify, String plow_ave_fuel, String harr_ave_fuel, String furr_ave_fuel, String availability,
                     String rent_prov, String rent_mun, String rent_brgy, String condition, String problems, String specify_problems, String year_inoperable, String location, String prov, String mun, String brgy,
                     String machine_latitude, String machine_longitude, String machine_image_base64, String accuracy, String resCode, String resName) {
@@ -101,6 +104,8 @@ public class Machines {
         this.ratooned_area = ratooned_area;
         this.ave_op_hours = ave_op_hours;
         this.ave_op_days = ave_op_days;
+        this.effective_area = effective_area;
+        this.time_used = time_used;
         this.capacity = capacity;
         this.ave_yield = ave_yield;
         this.num_loads = num_loads;
@@ -125,6 +130,7 @@ public class Machines {
         this.furr_custom_rent = furr_custom_rent;
         this.furr_custom_rent_unit = furr_custom_rent_unit;
         this.furr_custom_rent_unit_specify = furr_custom_rent_unit_specify;
+        this.other_unit_operation = other_unit_operation;
         this.other_custom_rent = other_custom_rent;
         this.other_custom_rent_unit = other_custom_rent_unit;
         this.other_custom_rent_unit_specify = other_custom_rent_unit_specify;
@@ -162,6 +168,7 @@ public class Machines {
     public String getType_tubewells() {
         return type_tubewells;
     }
+
 
     public String getType_mill() {
         return type_mill;
@@ -217,6 +224,14 @@ public class Machines {
 
     public String getCapacity() {
         return capacity;
+    }
+
+    public String getEffective_area() {
+        return effective_area;
+    }
+
+    public String getTime_used() {
+        return time_used;
     }
 
     public String getAve_yield() {
@@ -309,6 +324,10 @@ public class Machines {
 
     public String getFurr_custom_rent_unit_specify() {
         return furr_custom_rent_unit_specify;
+    }
+
+    public String getOther_unit_operation() {
+        return other_unit_operation;
     }
 
     public String getOther_custom_rent() {

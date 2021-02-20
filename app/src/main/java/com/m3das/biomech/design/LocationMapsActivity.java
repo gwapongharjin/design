@@ -1,3 +1,4 @@
+
 package com.m3das.biomech.design;
 
 import android.annotation.TargetApi;
@@ -103,7 +104,7 @@ public class LocationMapsActivity extends FragmentActivity implements OnMapReady
                 Toast.makeText(this, "Please get your location first before saving", Toast.LENGTH_SHORT).show();
             } else if (latitude == 0 && longitude == 0 && accuracy == 0) {
                 Toast.makeText(this, "Please get your location first before saving", Toast.LENGTH_SHORT).show();
-            } else if (accuracy > 8) {
+            } else if (accuracy >= 8) {
                 Toast.makeText(this, "Unable to save. Please wait until the accuracy is below 8 or the indicator is yellow/green.", Toast.LENGTH_LONG).show();
             } else {
                 String strLat = String.format("%.8f", latitude);

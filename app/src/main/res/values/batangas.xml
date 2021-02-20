@@ -1,0 +1,1219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="batangas_municipalities">
+        <item>	AGONCILLO	</item>
+        <item>	ALITAGTAG 	</item>
+        <item>	BALAYAN	</item>
+        <item>	BALETE 	</item>
+        <item>	BATANGAS CITY	</item>
+        <item>	BAUAN	</item>
+        <item>	CALACA	</item>
+        <item>	CALATAGAN	</item>
+        <item>	CUENCA	</item>
+        <item>	IBAAN	</item>
+        <item>	LAUREL	</item>
+        <item>	LEMERY	</item>
+        <item>	LIAN	</item>
+        <item>	LIPA CITY	</item>
+        <item>	LOBO	</item>
+        <item>	MABINI	</item>
+        <item>	MALVAR	</item>
+        <item>	MATAASNAKAHOY	</item>
+        <item>	NASUGBU	</item>
+        <item>	PADRE GARCIA	</item>
+        <item>	ROSARIO	</item>
+        <item>	SAN JOSE	</item>
+        <item>	SAN JUAN	</item>
+        <item>	SAN LUIS	</item>
+        <item>	SAN NICOLAS	</item>
+        <item>	SAN PASCUAL	</item>
+        <item>	STA. TERESITA	</item>
+        <item>	STO. TOMAS	</item>
+        <item>	TAAL	</item>
+        <item>	TALISAY 	</item>
+        <item>	TANAUAN CITY	</item>
+        <item>	TAYSAN	</item>
+        <item>	TINGLOY	</item>
+        <item>	TUY	</item>
+    </string-array>
+
+    <string-array name="batangas_agoncillo_brgy">
+        <item>	ADIA 		</item>
+        <item>	BAGONG SIKAT 		</item>
+        <item>	BALANGON 		</item>
+        <item>	BANGIN 		</item>
+        <item>	BANYAGA 		</item>
+        <item>	BARIGON 		</item>
+        <item>	BILIBINWANG		</item>
+        <item>	CORAL NA MUNTI 		</item>
+        <item>	GUITNA 		</item>
+        <item>	MABINI 		</item>
+        <item>	PAMIGA 		</item>
+        <item>	PANHULAN 		</item>
+        <item>	PANSIPIT 		</item>
+        <item>	POBLACION 		</item>
+        <item>	POOK 		</item>
+        <item>	SAN JACINTO 		</item>
+        <item>	SAN TEODORO 		</item>
+        <item>	SANTA CRUZ 		</item>
+        <item>	SANTO TOMAS 		</item>
+        <item>	SUBIC IBABA 		</item>
+        <item>	SUBIC ILAYA 		</item>
+    </string-array>
+
+    <string-array name="batangas_alitagtag_brgy">
+        <item>	BALAGBAG 		</item>
+        <item>	CONCEPCION 		</item>
+        <item>	CONCORDIA		</item>
+        <item>	DALIPIT EAST		</item>
+        <item>	DALIPIT WEST 		</item>
+        <item>	DOMINADOR EAST 		</item>
+        <item>	DOMINADOR WEST 		</item>
+        <item>	MUNLAWIN NORTE 		</item>
+        <item>	MUNLAWIN SUR 		</item>
+        <item>	MUZON PRIMERO 		</item>
+        <item>	MUZON SEGUNDO		</item>
+        <item>	PINAGKURUSAN 		</item>
+        <item>	PING-AS 		</item>
+        <item>	POBLACION EAST 		</item>
+        <item>	POBLACION WEST 		</item>
+        <item>	SAN JOSE 		</item>
+        <item>	SAN JUAN 		</item>
+        <item>	SANTA CRUZ 		</item>
+        <item>	TADLAC 		</item>
+    </string-array>
+
+    <string-array name="batangas_balayan_brgy">
+        <item>	BACLARAN 		</item>
+        <item>	BARANGAY 1 (POB.) 		</item>
+        <item>	BARANGAY 10 (POB.) 		</item>
+        <item>	BARANGAY 11 (POB.) 		</item>
+        <item>	BARANGAY 12 (POB.) 		</item>
+        <item>	BARANGAY 2 (POB.) 		</item>
+        <item>	BARANGAY 3 (POB.) 		</item>
+        <item>	BARANGAY 4 (POB.) 		</item>
+        <item>	BARANGAY 5 (POB.) 		</item>
+        <item>	BARANGAY 6 (POB.) 		</item>
+        <item>	BARANGAY 7 (POB.) 		</item>
+        <item>	BARANGAY 8 (POB.) 		</item>
+        <item>	BARANGAY 9 (POB.)		</item>
+        <item>	CALAN 		</item>
+        <item>	CALOOCAN 		</item>
+        <item>	CALZADA 		</item>
+        <item>	CANDA 		</item>
+        <item>	CARENAHAN 		</item>
+        <item>	CAYBUNGA 		</item>
+        <item>	CAYPONCE 		</item>
+        <item>	DALIG 		</item>
+        <item>	DAO 		</item>
+        <item>	DILAO 		</item>
+        <item>	DUHATAN 		</item>
+        <item>	DURUNGAO 		</item>
+        <item>	GIMALAS 		</item>
+        <item>	GUMAMELA 		</item>
+        <item>	LAGNAS 		</item>
+        <item>	LANATAN		</item>
+        <item>	LANGGANGAN		</item>
+        <item>	LUCBAN POOK 		</item>
+        <item>	LUCBAN PUTOL 		</item>
+        <item>	MAGABE 		</item>
+        <item>	MALALAY 		</item>
+        <item>	MUNTING TUBIG		</item>
+        <item>	NAVOTAS		</item>
+        <item>	PALIKPIKAN 		</item>
+        <item>	PATUGO 		</item>
+        <item>	POOC 		</item>
+        <item>	SAMBAT		</item>
+        <item>	SAMPAGA		</item>
+        <item>	SAN JUAN 		</item>
+        <item>	SAN PIRO 		</item>
+        <item>	SANTOL 		</item>
+        <item>	SUKOL 		</item>
+        <item>	TACTAC 		</item>
+        <item>	TALUDTUD		</item>
+        <item>	TANGGOY		</item>
+    </string-array>
+
+    <string-array name="batangas_balete_brgy">
+        <item>	ALANGILAN 		</item>
+        <item>	CALAWIT 		</item>
+        <item>	LOOC 		</item>
+        <item>	MAGAPI 		</item>
+        <item>	MAKINA 		</item>
+        <item>	MALABANAN		</item>
+        <item>	PALIGAWAN		</item>
+        <item>	PALSARA		</item>
+        <item>	POBLACION 		</item>
+        <item>	SALA 		</item>
+        <item>	SAMPALOCAN 		</item>
+        <item>	SAN SEBASTIAN		</item>
+        <item>	SOLIS		</item>
+    </string-array>
+
+    <string-array name="batangas_batangascity_brgy">
+        <item>	ALANGILAN 		</item>
+        <item>	BALAGTAS 		</item>
+        <item>	BALETE 		</item>
+        <item>	BANABA CENTER		</item>
+        <item>	BANABA IBABA 		</item>
+        <item>	BANABA KANLURAN 		</item>
+        <item>	BANABA SILANGAN 		</item>
+        <item>	BARANGAY 1 (POB.)		</item>
+        <item>	BARANGAY 10 (POB.) 		</item>
+        <item>	BARANGAY 11 (POB.)		</item>
+        <item>	BARANGAY 12 (POB.)		</item>
+        <item>	BARANGAY 13 (POB.)		</item>
+        <item>	BARANGAY 14 (POB.)		</item>
+        <item>	BARANGAY 15 (POB.) 		</item>
+        <item>	BARANGAY 16 (POB.) 		</item>
+        <item>	BARANGAY 17 (POB.) 		</item>
+        <item>	BARANGAY 18 (POB.)		</item>
+        <item>	BARANGAY 19 (POB.) 		</item>
+        <item>	BARANGAY 2 (POB.) 		</item>
+        <item>	BARANGAY 20 (POB.) 		</item>
+        <item>	BARANGAY 21 (POB.) 		</item>
+        <item>	BARANGAY 22 (POB.)		</item>
+        <item>	BARANGAY 23 (POB.)		</item>
+        <item>	BARANGAY 24 (POB.) 		</item>
+        <item>	BARANGAY 3 (POB.)		</item>
+        <item>	BARANGAY 4 (POB.)		</item>
+        <item>	BARANGAY 5 (POB.) 		</item>
+        <item>	BARANGAY 6 (POB.) 		</item>
+        <item>	BARANGAY 7 (POB.)		</item>
+        <item>	BARANGAY 8 (POB.) 		</item>
+        <item>	BARANGAY 9 (POB.)		</item>
+        <item>	BILOGO 		</item>
+        <item>	BOLBOK 		</item>
+        <item>	BUKAL 		</item>
+        <item>	CALICANTO		</item>
+        <item>	CATANDALA 		</item>
+        <item>	CONCEPCION		</item>
+        <item>	CONDE ITAAS 		</item>
+        <item>	CONDE LABAK 		</item>
+        <item>	CUTA 		</item>
+        <item>	DALIG 		</item>
+        <item>	DELA PAZ 		</item>
+        <item>	DELA PAZ PULOT APLAYA		</item>
+        <item>	DELA PAZ PULOT ITAAS		</item>
+        <item>	DOMOCLAY 		</item>
+        <item>	DUMANTAY 		</item>
+        <item>	GULOD ITAAS		</item>
+        <item>	GULOD LABAK 		</item>
+        <item>	HALIGUE KANLURAN 		</item>
+        <item>	HALIGUE SILANGAN 		</item>
+        <item>	ILIHAN		</item>
+        <item>	KUMBA 		</item>
+        <item>	KUMINTANG IBABA 		</item>
+        <item>	KUMINTANG ILAYA 		</item>
+        <item>	LIBJO		</item>
+        <item>	LIPONPON, ISLA VERDE 		</item>
+        <item>	MAAPAS 		</item>
+        <item>	MABACONG (MATOCO) 		</item>
+        <item>	MAHABANG DAHILIG 		</item>
+        <item>	MAHABANG PARANG 		</item>
+        <item>	MAHACOT KANLURAN		</item>
+        <item>	MAHACOT SILANGAN 		</item>
+        <item>	MALALIM 		</item>
+        <item>	MALIBAYO		</item>
+        <item>	MALITAM		</item>
+        <item>	MARUCLAP 		</item>
+        <item>	PAGKILATAN 		</item>
+        <item>	PAHARANG KANLURAN 		</item>
+        <item>	PAHARANG SILANGAN		</item>
+        <item>	PALLOCAN KANLURAN 		</item>
+        <item>	PALLOCAN SILANGAN 		</item>
+        <item>	PINAMUCAN		</item>
+        <item>	PINAMUCAN IBABA		</item>
+        <item>	PINAMUCAN SILANGAN 		</item>
+        <item>	SAMPAGA 		</item>
+        <item>	SAN AGAPITO, ISLA VERDE		</item>
+        <item>	SAN AGUSTIN KANLURAN, ISLA VERDE 		</item>
+        <item>	SAN AGUSTIN SILANGAN, ISLA VERDE 		</item>
+        <item>	SAN ANDRES, ISLA VERDE		</item>
+        <item>	SAN ANTONIO, ISLA VERDE 		</item>
+        <item>	SAN ISIDRO		</item>
+        <item>	SAN JOSE SICO		</item>
+        <item>	SAN MIGUEL 		</item>
+        <item>	SAN PEDRO		</item>
+        <item>	SANTA CLARA 		</item>
+        <item>	SANTA RITA APLAYA		</item>
+        <item>	SANTA RITA KARSADA 		</item>
+        <item>	SANTO DOMINGO		</item>
+        <item>	SANTO NIÑO 		</item>
+        <item>	SIMLONG 		</item>
+        <item>	SIRANG LUPA 		</item>
+        <item>	SOROSORO IBABA		</item>
+        <item>	SOROSORO ILAYA 		</item>
+        <item>	SOROSORO KARSADA 		</item>
+        <item>	TABANGAO AMBULONG		</item>
+        <item>	TABANGAO APLAYA (TABANGAO PROPER) 		</item>
+        <item>	TABANGAO DAO		</item>
+        <item>	TALAHIB PANDAYAN 		</item>
+        <item>	TALAHIB PAYAPA 		</item>
+        <item>	TALUMPOK KANLURAN		</item>
+        <item>	TALUMPOK SILANGAN 		</item>
+        <item>	TINGA ITAAS 		</item>
+        <item>	TINGA LABAK 		</item>
+        <item>	TULO		</item>
+        <item>	WAWA		</item>
+    </string-array>
+
+    <string-array name="batangas_bauan_brgy">
+        <item>	ALAGAO		</item>
+        <item>	APLAYA		</item>
+        <item>	AS-IS		</item>
+        <item>	BAGONG SILANG		</item>
+        <item>	BAGUILAWA		</item>
+        <item>	BALAYONG		</item>
+        <item>	BARANGAY I (POB.)		</item>
+        <item>	BARANGAY II (POB.)		</item>
+        <item>	BARANGAY III (POB.)		</item>
+        <item>	BARANGAY IV (POB.)		</item>
+        <item>	BOLO		</item>
+        <item>	COLVO		</item>
+        <item>	CUPANG		</item>
+        <item>	DURUNGAO		</item>
+        <item>	GULIBAY		</item>
+        <item>	INICBULAN		</item>
+        <item>	LOCLOC		</item>
+        <item>	MAGALANG-GALANG		</item>
+        <item>	MALINDIG		</item>
+        <item>	MANALUPONG		</item>
+        <item>	MANGHINAO PROPER		</item>
+        <item>	MANGHINAO UNO		</item>
+        <item>	NEW DANGLAYAN		</item>
+        <item>	ORENSE		</item>
+        <item>	PITUGO		</item>
+        <item>	RIZAL		</item>
+        <item>	SAMPAGUITA		</item>
+        <item>	SAN AGUSTIN		</item>
+        <item>	SAN ANDRES PROPER		</item>
+        <item>	SAN ANDRES UNO		</item>
+        <item>	SAN DIEGO		</item>
+        <item>	SAN MIGUEL 		</item>
+        <item>	SAN PABLO		</item>
+        <item>	SAN PEDRO		</item>
+        <item>	SAN ROQUE		</item>
+        <item>	SAN TEODORO		</item>
+        <item>	SAN VICENTE		</item>
+        <item>	SANTA MARIA		</item>
+        <item>	SANTO DOMINGO		</item>
+        <item>	SINALA		</item>
+    </string-array>
+
+    <string-array name="batangas_calaca_brgy">
+        <item>	BACLAS		</item>
+        <item>	BAGONG TUBIG		</item>
+        <item>	BALIMBING		</item>
+        <item>	BAMBANG		</item>
+        <item>	BARANGAY 1 (POB.)		</item>
+        <item>	BARANGAY 2 (POB.) 		</item>
+        <item>	BARANGAY 3 (POB.)		</item>
+        <item>	BARANGAY 4 (POB.)		</item>
+        <item>	BARANGAY 5 (POB.) 		</item>
+        <item>	BARANGAY 6 (POB.) 		</item>
+        <item>	BISAYA		</item>
+        <item>	CAHIL		</item>
+        <item>	CALANTAS		</item>
+        <item>	CALUANGAN		</item>
+        <item>	CAMASTILISAN		</item>
+        <item>	CORAL NI BACAL 		</item>
+        <item>	CORAL NI LOPEZ (SUGOD)		</item>
+        <item>	DACANLAO		</item>
+        <item>	DILA		</item>
+        <item>	LOMA		</item>
+        <item>	LUMBANG CALZADA		</item>
+        <item>	LUMBANG NA BATA		</item>
+        <item>	LUMBANG NA MATANDA		</item>
+        <item>	MADALUNOT		</item>
+        <item>	MAKINA		</item>
+        <item>	MATIPOK		</item>
+        <item>	MUNTING CORAL		</item>
+        <item>	NIYUGAN		</item>
+        <item>	PANTAY		</item>
+        <item>	PUTING BATO EAST		</item>
+        <item>	PUTING BATO WEST		</item>
+        <item>	PUTING KAHOY		</item>
+        <item>	QUISUMBING		</item>
+        <item>	SALONG		</item>
+        <item>	SAN RAFAEL		</item>
+        <item>	SINISIAN		</item>
+        <item>	TAKLANG ANAK		</item>
+        <item>	TALISAY		</item>
+        <item>	TAMAYO		</item>
+        <item>	TIMBAIN		</item>
+    </string-array>
+
+    <string-array name="batangas_calatagan_brgy">
+        <item>	BAGONG SILANG		</item>
+        <item>	BAHA		</item>
+        <item>	BALIBAGO		</item>
+        <item>	BALITOC		</item>
+        <item>	BIGA		</item>
+        <item>	BUCAL		</item>
+        <item>	CARLOSA		</item>
+        <item>	CARRETUNAN		</item>
+        <item>	ENCARNACION		</item>
+        <item>	GULOD		</item>
+        <item>	HUKAY		</item>
+        <item>	LUCSUHIN		</item>
+        <item>	LUYA		</item>
+        <item>	PARAISO		</item>
+        <item>	BARANGAY 1 (POB.)		</item>
+        <item>	BARANGAY 2 (POB.) 		</item>
+        <item>	BARANGAY 3 (POB.)		</item>
+        <item>	BARANGAY 4 (POB.)		</item>
+        <item>	QUILITISAN		</item>
+        <item>	REAL		</item>
+        <item>	SAMBUNGAN		</item>
+        <item>	SANTA ANA		</item>
+        <item>	TALIBAYOG		</item>
+        <item>	TALISAY		</item>
+        <item>	TANAGAN		</item>
+    </string-array>
+
+    <string-array name="batangas_cuenca_brgy">
+        <item>	BALAGBAG		</item>
+        <item>	BARANGAY 1 (POB.)		</item>
+        <item>	BARANGAY 2 (POB.) 		</item>
+        <item>	BARANGAY 3 (POB.)		</item>
+        <item>	BARANGAY 4 (POB.)		</item>
+        <item>	BARANGAY 5 (POB.) 		</item>
+        <item>	BARANGAY 6 (POB.) 		</item>
+        <item>	BARANGAY 7 (POB.)		</item>
+        <item>	BARANGAY 8 (POB.) 		</item>
+        <item>	BUNGAHAN		</item>
+        <item>	CALUMAYIN		</item>
+        <item>	DALIPIT EAST		</item>
+        <item>	DALIPIT WEST 		</item>
+        <item>	DITA		</item>
+        <item>	DON JAUN		</item>
+        <item>	EMMANUEL		</item>
+        <item>	IBABAO		</item>
+        <item>	LABAC		</item>
+        <item>	PINAGKAISAHAN		</item>
+        <item>	SAN FELIPE		</item>
+        <item>	SAN ISIDRO		</item>
+    </string-array>
+
+    <string-array name="batangas_ibaan_brgy">
+        <item>	BAGO		</item>
+        <item>	BALANGA		</item>
+        <item>	BUNGAHAN		</item>
+        <item>	CALAMIAS		</item>
+        <item>	CATANDALA		</item>
+        <item>	COLIAT		</item>
+        <item>	DAYAPAN		</item>
+        <item>	LAPU-LAPU		</item>
+        <item>	LUCSUHIN		</item>
+        <item>	MABALOR		</item>
+        <item>	MALAININ		</item>
+        <item>	MATALA		</item>
+        <item>	MUNTING-TUBIG		</item>
+        <item>	PALINDAN		</item>
+        <item>	PANGAO		</item>
+        <item>	PANGHAYAAN		</item>
+        <item>	POBLACION		</item>
+        <item>	QUILO		</item>
+        <item>	SABANG		</item>
+        <item>	SALABAN I 		</item>
+        <item>	SALABAN III		</item>
+        <item>	SAN AGUSTIN		</item>
+        <item>	SANDALAN		</item>
+        <item>	SANTO NIÑO		</item>
+        <item>	TALAIBON		</item>
+        <item>	TULAY NA PATPAT		</item>
+    </string-array>
+
+    <string-array name="batangas_laurel_brgy">
+        <item>	AS-IS		</item>
+        <item>	BALAKILONG		</item>
+        <item>	BARANGAY 1 (POB.)		</item>
+        <item>	BARANGAY 2 (POB.) 		</item>
+        <item>	BARANGAY 3 (POB.)		</item>
+        <item>	BARANGAY 4 (POB.)		</item>
+        <item>	BARANGAY 5 (POB.) 		</item>
+        <item>	BERINAYAN		</item>
+        <item>	BUGAAN EAST		</item>
+        <item>	BUGAAN WEST		</item>
+        <item>	BUSO-BUSO		</item>
+        <item>	DAYAP ITAAS		</item>
+        <item>	GULOD		</item>
+        <item>	J. LEVISTE		</item>
+        <item>	MOLINETE		</item>
+        <item>	NIYUGAN		</item>
+        <item>	PALIPARAN		</item>
+        <item>	SAN GABRIEL		</item>
+        <item>	SAN GREGORIO		</item>
+        <item>	SANTA MARIA		</item>
+        <item>	TICUB		</item>
+    </string-array>
+
+    <string-array name="batangas_lemery_brgy">
+        <item>	ANAK-DAGAT		</item>
+        <item>	ARUMAHAN		</item>
+        <item>	AYAO-IYAO		</item>
+        <item>	BAGONG POOK		</item>
+        <item>	BAGONG SIKAT		</item>
+        <item>	BALANGA		</item>
+        <item>	BUKAL		</item>
+        <item>	CAHILAN I		</item>
+        <item>	CAHILAN II		</item>
+        <item>	DAYAPAN		</item>
+        <item>	DISTRICT I (POB.)		</item>
+        <item>	DISTRICT II (POB.)		</item>
+        <item>	DISTRICT III (POB.)		</item>
+        <item>	DISTRICT IV (POB.)		</item>
+        <item>	DITA		</item>
+        <item>	GULOD		</item>
+        <item>	LUCKY		</item>
+        <item>	MAGUIHAN		</item>
+        <item>	MAHABANG DAHILIG 		</item>
+        <item>	MAHAYAHAY		</item>
+        <item>	MAIGSING DAHILIG		</item>
+        <item>	MALIGAYA		</item>
+        <item>	MALINIS		</item>
+        <item>	MASALISI		</item>
+        <item>	MATAAS NA BAYAN		</item>
+        <item>	MATINGAIN I		</item>
+        <item>	MATINGAIN II		</item>
+        <item>	MAYASANG		</item>
+        <item>	NIUGAN		</item>
+        <item>	NONONG CASTO		</item>
+        <item>	PALANAS		</item>
+        <item>	PAYAPA IBABA		</item>
+        <item>	PAYAPA ILAYA		</item>
+        <item>	RIZAL		</item>
+        <item>	SAMBAL IBABA		</item>
+        <item>	SAMBAL ILAYA		</item>
+        <item>	SAN ISIDRO IBABA		</item>
+        <item>	SAN ISIDRO ITAAS		</item>
+        <item>	SANGALANG		</item>
+        <item>	SINISIAN EAST		</item>
+        <item>	SINISIAN WEST		</item>
+        <item>	TALAGA		</item>
+        <item>	TUBIGAN		</item>
+        <item>	TUBUAN		</item>
+        <item>	WAWA IBABA		</item>
+        <item>	WAWA ILAYA		</item>
+    </string-array>
+
+    <string-array name="batangas_lian_brgy">
+        <item>	BAGONG POOK		</item>
+        <item>	BALIBAGO		</item>
+        <item>	BARANGAY 1 (POB.)		</item>
+        <item>	BARANGAY 2 (POB.) 		</item>
+        <item>	BARANGAY 3 (POB.)		</item>
+        <item>	BARANGAY 4 (POB.)		</item>
+        <item>	BARANGAY 5 (POB.) 		</item>
+        <item>	BINUBUSAN		</item>
+        <item>	BUNGAHAN		</item>
+        <item>	CUMBA		</item>
+        <item>	HUMAYINGAN		</item>
+        <item>	KAPITO		</item>
+        <item>	LUMANIAG		</item>
+        <item>	LUYAHAN		</item>
+        <item>	MALARUHATAN		</item>
+        <item>	MATABUNGKAY		</item>
+        <item>	PRENZA		</item>
+        <item>	PUTING-KAHOY		</item>
+        <item>	SAN DIEGO		</item>
+    </string-array>
+
+    <string-array name="batangas_lipacity_brgy">
+        <item>	ADYA		</item>
+        <item>	ANILAO		</item>
+        <item>	ANILAO-LABAC		</item>
+        <item>	ANTIPOLO DEL NORTE		</item>
+        <item>	ANTIPOLO DEL SUR		</item>
+        <item>	BAGONG POOK		</item>
+        <item>	BALINTAWAK		</item>
+        <item>	BANAYBANAY		</item>
+        <item>	BARANGAY 12 (POB.)		</item>
+        <item>	BOLBOK		</item>
+        <item>	BUGTONG NA PULO		</item>
+        <item>	BULACNIN		</item>
+        <item>	BULAKLAKAN		</item>
+        <item>	CALAMIAS		</item>
+        <item>	CUMBA		</item>
+        <item>	DAGATAN		</item>
+        <item>	DUHATAN		</item>
+        <item>	HALANG		</item>
+        <item>	INOSLOBAN		</item>
+        <item>	KAYUMANGGI		</item>
+        <item>	LATAG		</item>
+        <item>	LODLOD		</item>
+        <item>	LUMBANG		</item>
+        <item>	MABINI		</item>
+        <item>	MALAGONLONG		</item>
+        <item>	MALITLIT		</item>
+        <item>	MARAUOY		</item>
+        <item>	MATAAS NA LUPA		</item>
+        <item>	MUNTING PULO		</item>
+        <item>	PAGOLINGIN BATA		</item>
+        <item>	PAGOLINGIN EAST		</item>
+        <item>	PAGOLINGIN WEST		</item>
+        <item>	PANGAO		</item>
+        <item>	PINAGKAWITAN		</item>
+        <item>	PINAGTONGULAN		</item>
+        <item>	PLARIDEL		</item>
+        <item>	POBLACION BARANGAY 1 		</item>
+        <item>	POBLACION BARANGAY 1 0		</item>
+        <item>	POBLACION BARANGAY 11		</item>
+        <item>	POBLACION BARANGAY 2		</item>
+        <item>	POBLACION BARANGAY 3		</item>
+        <item>	POBLACION BARANGAY 4		</item>
+        <item>	POBLACION BARANGAY 5		</item>
+        <item>	POBLACION BARANGAY 6		</item>
+        <item>	POBLACION BARANGAY 7		</item>
+        <item>	POBLACION BARANGAY 8		</item>
+        <item>	POBLACION BARANGAY 9		</item>
+        <item>	POBLACION BARANGAY 9-A		</item>
+        <item>	PUSIL		</item>
+        <item>	QUEZON		</item>
+        <item>	RIZAL		</item>
+        <item>	SABANG		</item>
+        <item>	SAMPAGUITA		</item>
+        <item>	SAN BENITO		</item>
+        <item>	SAN CARLOS		</item>
+        <item>	SAN CELESTINO		</item>
+        <item>	SAN FRANCISCO		</item>
+        <item>	SAN GUILLERMO		</item>
+        <item>	SAN JOSE		</item>
+        <item>	SAN LUCAS		</item>
+        <item>	SAN SALVADOR		</item>
+        <item>	SAN SEBASTIAN (BALAGBAG)		</item>
+        <item>	SANTO NIÑO		</item>
+        <item>	SANTO TORIBIO		</item>
+        <item>	SAPAC		</item>
+        <item>	SICO		</item>
+        <item>	TALISAY		</item>
+        <item>	TAMBO		</item>
+        <item>	TANGOB		</item>
+        <item>	TANGUAY		</item>
+        <item>	TIBIG		</item>
+        <item>	TIPACAN		</item>
+    </string-array>
+
+    <string-array name="batangas_lobo_brgy">
+        <item>	APAR		</item>
+        <item>	BALATBAT		</item>
+        <item>	BALIBAGO		</item>
+        <item>	BANALO		</item>
+        <item>	BIGA		</item>
+        <item>	BIGNAY		</item>
+        <item>	CALO		</item>
+        <item>	CALUMPIT		</item>
+        <item>	FABRICA		</item>
+        <item>	JAYBANGA		</item>
+        <item>	LAGADLARIN		</item>
+        <item>	MABILOG NA BUNDOK		</item>
+        <item>	MALABRIGO		</item>
+        <item>	MALALIM NA SANOG		</item>
+        <item>	MALAPAD NA PARANG		</item>
+        <item>	MASAGUITSIT		</item>
+        <item>	NAGTALONGTONG		</item>
+        <item>	NAGTOCTOC		</item>
+        <item>	OLO-OLO		</item>
+        <item>	PINAGHAWANAN		</item>
+        <item>	POBLACION		</item>
+        <item>	SAN MIGUEL 		</item>
+        <item>	SAN NICOLAS		</item>
+        <item>	SAWANG		</item>
+        <item>	SOLOC		</item>
+        <item>	TAYUMAN		</item>
+    </string-array>
+
+    <string-array name="batangas_mabini_brgy">
+        <item>	ANILAO EAST		</item>
+        <item>	ANILAO PROPER		</item>
+        <item>	BAGALANGIT		</item>
+        <item>	BULACAN		</item>
+        <item>	CALAMIAS		</item>
+        <item>	ESTRELLA		</item>
+        <item>	GASANG		</item>
+        <item>	LAUREL		</item>
+        <item>	LIGAYA		</item>
+        <item>	MAINAGA		</item>
+        <item>	MAINIT		</item>
+        <item>	MAJUBEN		</item>
+        <item>	MALIMATOC I		</item>
+        <item>	MALIMATOC II		</item>
+        <item>	NAG-IBA		</item>
+        <item>	PILAHAN		</item>
+        <item>	POBLACION		</item>
+        <item>	PULANG LUPA		</item>
+        <item>	PULONG ANAHAO		</item>
+        <item>	PULONG BALIBAGUHAN		</item>
+        <item>	PULONG NIOGAN		</item>
+        <item>	SAGUING		</item>
+        <item>	SAMPAGUITA		</item>
+        <item>	SAN FRANCISCO		</item>
+        <item>	SAN JOSE		</item>
+        <item>	SAN JUAN		</item>
+        <item>	SAN TEODORO		</item>
+        <item>	SANTA ANA		</item>
+        <item>	SANTA MESA		</item>
+        <item>	SANTO NIÑO		</item>
+        <item>	SANTO TOMAS		</item>
+        <item>	SOLO		</item>
+        <item>	TALAGA EAST		</item>
+        <item>	TALAGA PROPER		</item>
+    </string-array>
+
+    <string-array name="batangas_malvar_brgy">
+        <item>	BAGONG POOK		</item>
+        <item>	BILUCAO (SAN ISIDRO WESTERN)		</item>
+        <item>	BULIHAN		</item>
+        <item>	SAN GREGORIO		</item>
+        <item>	LUTA DEL NORTE		</item>
+        <item>	LUTA DEL SUR		</item>
+        <item>	POBLACION		</item>
+        <item>	SAN ANDRES		</item>
+        <item>	SAN FERNANDO		</item>
+        <item>	SAN ISIDRO EAST		</item>
+        <item>	SAN JUAN		</item>
+        <item>	SAN PEDRO II (WESTERN)		</item>
+        <item>	SAN PEDRO I (EASTERN)		</item>
+        <item>	SAN PIOQUINTO		</item>
+        <item>	SANTIAGO		</item>
+    </string-array>
+
+    <string-array name="batangas_mataasnakahoy_brgy">
+        <item>	DISTRICT I (POB.)		</item>
+        <item>	DISTRICT II (POB.)		</item>
+        <item>	DISTRICT III (POB.)		</item>
+        <item>	DISTRICT IV (POB.)		</item>
+        <item>	BAYORBOR		</item>
+        <item>	BUBUYAN		</item>
+        <item>	CALINGATAN		</item>
+        <item>	KINALAGLAGAN		</item>
+        <item>	LOOB		</item>
+        <item>	LUMANG LIPA		</item>
+        <item>	MANGGAHAN		</item>
+        <item>	NANGKAAN		</item>
+        <item>	SAN SEBASTIAN		</item>
+        <item>	SANTOL		</item>
+        <item>	UPA		</item>
+        <item>	BARANGAY II-A (POB.)		</item>
+    </string-array>
+
+    <string-array name="batangas_nasugbu_brgy">
+        <item>AGA</item>
+        <item>BALAYTIGUI</item>
+        <item>BANILAD</item>
+        <item>BARANGAY 10 (POB.)</item>
+        <item>BARANGAY 11 (POB.)</item>
+        <item>BARANGAY 12 (POB.)</item>
+        <item>BARANGAY 2 (POB.)</item>
+        <item>BARANGAY 3 (POB.)</item>
+        <item>BARANGAY 4 (POB.)</item>
+        <item>BARANGAY 5 (POB.)</item>
+        <item>BARANGAY 6 (POB.)</item>
+        <item>BARANGAY 7 (POB.)</item>
+        <item>BARANGAY 8 (POB.)</item>
+        <item>BARANGAY 9 (POB.)</item>
+        <item>BILARAN</item>
+        <item>BUCANA</item>
+        <item>BULIHAN</item>
+        <item>BUNDUCAN</item>
+        <item>BUTUCAN</item>
+        <item>CALAYO</item>
+        <item>CATANDAAN</item>
+        <item>KAYLAWAY</item>
+        <item>KAYRILAW</item>
+        <item>COGUNAN</item>
+        <item>DAYAP</item>
+        <item>LATAG</item>
+        <item>LOOC</item>
+        <item>LUMBANGAN</item>
+        <item>MALAPAD NA BATO</item>
+        <item>MATAAS NA PULO</item>
+        <item>MAUGAT</item>
+        <item>MUNTING INDAN</item>
+        <item>NATIPUAN</item>
+        <item>PANTALAN</item>
+        <item>PAPAYA</item>
+        <item>PUTAT</item>
+        <item>REPARO</item>
+        <item>TALANGAN</item>
+        <item>TUMALIM</item>
+        <item>UTOD</item>
+        <item>WAWA</item>
+        <item>BARANGAY 1 (POB.)</item>
+    </string-array>
+
+    <string-array name="batangas_padregarcia_brgy">
+        <item>BANABA</item>
+        <item>BANAYBANAY</item>
+        <item>BAWI</item>
+        <item>BUKAL</item>
+        <item>CASTILLO</item>
+        <item>CAWONGAN</item>
+        <item>MANGGAS</item>
+        <item>MAUGAT EAST</item>
+        <item>MAUGAT WEST</item>
+        <item>PANSOL</item>
+        <item>PAYAPA</item>
+        <item>POBLACION</item>
+        <item>QUILO-QUILO NORTH</item>
+        <item>QUILO-QUILO SOUTH</item>
+        <item>SAN FELIPE</item>
+        <item>SAN MIGUEL</item>
+        <item>TAMAK</item>
+        <item>TANGOB</item>
+    </string-array>
+
+    <string-array name="batangas_rosario_brgy">
+        <item>ALUPAY</item>
+        <item>ANTIPOLO</item>
+        <item>BAGONG POOK</item>
+        <item>BALIBAGO</item>
+        <item>BAYAWANG</item>
+        <item>BAYBAYIN</item>
+        <item>BULIHAN</item>
+        <item>CAHIGAM</item>
+        <item>CALANTAS</item>
+        <item>COLONGAN</item>
+        <item>ITLUGAN</item>
+        <item>LUMBANGAN</item>
+        <item>MAALAS-AS</item>
+        <item>MABATO</item>
+        <item>MABUNGA</item>
+        <item>MACALAMCAM A</item>
+        <item>MACALAMCAM B</item>
+        <item>MALAYA</item>
+        <item>MALIGAYA</item>
+        <item>MARILAG</item>
+        <item>MASAYA</item>
+        <item>MATAMIS</item>
+        <item>MAVALOR</item>
+        <item>MAYURO</item>
+        <item>NAMUCO</item>
+        <item>NAMUNGA</item>
+        <item>NATU</item>
+        <item>NASI</item>
+        <item>PALAKPAK</item>
+        <item>PINAGSIBAAN</item>
+        <item>BARANGAY A (POB.)</item>
+        <item>BARANGAY B (POB.)</item>
+        <item>BARANGAY C (POB.)</item>
+        <item>BARANGAY D (POB.)</item>
+        <item>BARANGAY E (POB.)</item>
+        <item>PUTINGKAHOY</item>
+        <item>QUILIB</item>
+        <item>SALAO</item>
+        <item>SAN CARLOS</item>
+        <item>SAN IGNACIO</item>
+        <item>SAN ISIDRO</item>
+        <item>SAN JOSE</item>
+        <item>SAN ROQUE</item>
+        <item>SANTA CRUZ</item>
+        <item>TIMBUGAN</item>
+        <item>TIQUIWAN</item>
+        <item>LEVISTE (TUBAHAN)</item>
+        <item>TULOS</item>
+    </string-array>
+
+    <string-array name="batangas_sanjose_brgy">
+        <item>AGUILA</item>
+        <item>ANUS</item>
+        <item>AYA</item>
+        <item>BAGONG POOK</item>
+        <item>BALAGTASIN</item>
+        <item>BALAGTASIN I</item>
+        <item>BANAYBANAY I</item>
+        <item>BANAYBANAY II</item>
+        <item>BIGAIN I</item>
+        <item>BIGAIN II</item>
+        <item>CALANSAYAN</item>
+        <item>DAGATAN</item>
+        <item>DON LUIS</item>
+        <item>GALAMAY-AMO</item>
+        <item>LALAYAT</item>
+        <item>LAPOLAPO I</item>
+        <item>LAPOLAPO II</item>
+        <item>LEPUTE</item>
+        <item>LUMIL</item>
+        <item>NATUNUAN</item>
+        <item>PALANCA</item>
+        <item>PINAGTUNG-ULAN</item>
+        <item>POBLACION BARANGAY I</item>
+        <item>POBLACION BARANGAY II</item>
+        <item>POBLACION BARANGAY III</item>
+        <item>POBLACION BARANGAY IV</item>
+        <item>SABANG</item>
+        <item>SALABAN</item>
+        <item>SANTO CRISTO</item>
+        <item>MOJON-TAMPOY</item>
+        <item>TAYSAN</item>
+        <item>TUGTUG</item>
+        <item>BIGAIN SOUTH</item>
+    </string-array>
+
+    <string-array name="batangas_sanjuan_brgy">
+        <item>ABUNG</item>
+        <item>BALAGBAG</item>
+        <item>BARUALTE</item>
+        <item>BATAAN</item>
+        <item>BUHAY NA SAPA</item>
+        <item>BULSA</item>
+        <item>CALICANTO</item>
+        <item>CALITCALIT</item>
+        <item>CALUBCUB I</item>
+        <item>CALUBCUB II</item>
+        <item>CATMON</item>
+        <item>COLOCONTO</item>
+        <item>ESCRIBANO</item>
+        <item>HUGOM</item>
+        <item>IMELDA (TUBOG)</item>
+        <item>JANAOJANAO</item>
+        <item>LAIYA-IBABAO</item>
+        <item>LAIYA-APLAYA</item>
+        <item>LIBATO</item>
+        <item>LIPAHAN</item>
+        <item>MABALANOY</item>
+        <item>NAGSAULAY</item>
+        <item>MARAYKIT</item>
+        <item>MUZON</item>
+        <item>PALAHANAN I</item>
+        <item>PALAHANAN II</item>
+        <item>PALINGOWAK</item>
+        <item>PINAGBAYANAN</item>
+        <item>POBLACION</item>
+        <item>POCTOL</item>
+        <item>PULANGBATO</item>
+        <item>PUTINGBUHANGIN</item>
+        <item>QUIPOT</item>
+        <item>SAMPIRO</item>
+        <item>SAPANGAN</item>
+        <item>SICO I</item>
+        <item>SICO II</item>
+        <item>SUBUKIN</item>
+        <item>TALAHIBAN I</item>
+        <item>TALAHIBAN II</item>
+        <item>TICALAN</item>
+        <item>TIPAZ</item>
+    </string-array>
+
+    <string-array name="batangas_sanluis_brgy">
+        <item>ABIACAO</item>
+        <item>BAGONG TUBIG</item>
+        <item>BALAGTASIN</item>
+        <item>BALITE</item>
+        <item>BANOYO</item>
+        <item>BOBOY</item>
+        <item>BONLIW</item>
+        <item>CALUMPANG WEST</item>
+        <item>CALUMPANG EAST</item>
+        <item>DULANGAN</item>
+        <item>DURUNGAO</item>
+        <item>LOCLOC</item>
+        <item>LUYA</item>
+        <item>MAHABANG PARANG</item>
+        <item>MANGGAHAN</item>
+        <item>MUZON</item>
+        <item>SAN ANTONIO</item>
+        <item>SAN ISIDRO</item>
+        <item>SAN JOSE</item>
+        <item>SAN MARTIN</item>
+        <item>SANTA MONICA</item>
+        <item>TALIBA</item>
+        <item>TALON</item>
+        <item>TEJERO</item>
+        <item>TUNGAL</item>
+        <item>POBLACION</item>
+    </string-array>
+
+    <string-array name="batangas_sannicolas_brgy">
+        <item>ABELO</item>
+        <item>BALETE</item>
+        <item>BALUK-BALUK</item>
+        <item>BANCORO</item>
+        <item>BANGIN</item>
+        <item>CALANGAY</item>
+        <item>HIPIT</item>
+        <item>MAABUD NORTH</item>
+        <item>MAABUD SOUTH</item>
+        <item>MUNLAWIN</item>
+        <item>PANSIPIT</item>
+        <item>POBLACION</item>
+        <item>SANTO NIÑO</item>
+        <item>SINTURISAN</item>
+        <item>TAGUDTOD</item>
+        <item>TALANG</item>
+        <item>ALAS-AS</item>
+        <item>PULANG-BATO</item>
+    </string-array>
+
+    <string-array name="batangas_sanpascual_brgy">
+        <item>	ALALUM	</item>
+        <item>	ANTIPOLO	</item>
+        <item>	BALIMBING	</item>
+        <item>	BANABA	</item>
+        <item>	BAYANAN	</item>
+        <item>	DANGLAYAN	</item>
+        <item>	DEL PILAR	</item>
+        <item>	GELERANG KAWAYAN	</item>
+        <item>	ILAT NORTH	</item>
+        <item>	ILAT SOUTH	</item>
+        <item>	KAINGIN	</item>
+        <item>	LAUREL	</item>
+        <item>	MALAKING POOK	</item>
+        <item>	MATAAS NA LUPA	</item>
+        <item>	NATUNUAN NORTH	</item>
+        <item>	NATUNUAN SOUTH	</item>
+        <item>	PADRE CASTILLO	</item>
+        <item>	PALSAHINGIN	</item>
+        <item>	PILA	</item>
+        <item>	POBLACION	</item>
+        <item>	POOK NI BANAL	</item>
+        <item>	POOK NI KAPITAN	</item>
+        <item>	RESPLANDOR	</item>
+        <item>	SAMBAT	</item>
+        <item>	SAN ANTONIO	</item>
+        <item>	SAN MARIANO	</item>
+        <item>	SAN MATEO	</item>
+        <item>	SANTA ELENA	</item>
+        <item>	SANTO NIÑO	</item>
+    </string-array>
+
+    <string-array name="batangas_staterisita_brgy">
+        <item>ANTIPOLO</item>
+        <item>BIHIS</item>
+        <item>BUROL</item>
+        <item>CALAYAAN</item>
+        <item>CALUMALA</item>
+        <item>CUTA EAST</item>
+        <item>CUTANG CAWAYAN</item>
+        <item>IRUKAN</item>
+        <item>PACIFICO</item>
+        <item>POBLACION I</item>
+        <item>SAIMSIM</item>
+        <item>SAMPA</item>
+        <item>SINIPIAN</item>
+        <item>TAMBO IBABA</item>
+        <item>TAMBO ILAYA</item>
+        <item>POBLACION II</item>
+        <item>POBLACION III</item>
+    </string-array>
+
+    <string-array name="batangas_stotomas_brgy">
+        <item>BARANGAY I (POB.)</item>
+        <item>BARANGAY II (POB.)</item>
+        <item>BARANGAY III (POB.)</item>
+        <item>BARANGAY IV (POB.)</item>
+        <item>SAN AGUSTIN</item>
+        <item>SAN ANTONIO</item>
+        <item>SAN BARTOLOME</item>
+        <item>SAN FELIX</item>
+        <item>SAN FERNANDO</item>
+        <item>SAN FRANCISCO</item>
+        <item>SAN ISIDRO NORTE</item>
+        <item>SAN ISIDRO SUR</item>
+        <item>SAN JOAQUIN</item>
+        <item>SAN JOSE</item>
+        <item>SAN JUAN</item>
+        <item>SAN LUIS</item>
+        <item>SAN MIGUEL</item>
+        <item>SAN PABLO</item>
+        <item>SAN PEDRO</item>
+        <item>SAN RAFAEL</item>
+        <item>SAN ROQUE</item>
+        <item>SAN VICENTE</item>
+        <item>SANTA ANA</item>
+        <item>SANTA ANASTACIA</item>
+        <item>SANTA CLARA</item>
+        <item>SANTA CRUZ</item>
+        <item>SANTA ELENA</item>
+        <item>SANTA MARIA</item>
+        <item>SANTIAGO</item>
+        <item>SANTA TERESITA</item>
+    </string-array>
+
+    <string-array name="batangas_taal_brgy">
+        <item>APACAY</item>
+        <item>BALISONG</item>
+        <item>BIHIS</item>
+        <item>BOLBOK</item>
+        <item>BULI</item>
+        <item>BUTONG</item>
+        <item>CARASUCHE</item>
+        <item>CAWIT</item>
+        <item>CAYSASAY</item>
+        <item>CUBAMBA</item>
+        <item>CULTIHAN</item>
+        <item>GAHOL</item>
+        <item>HALANG</item>
+        <item>IBA</item>
+        <item>ILOG</item>
+        <item>IMAMAWO</item>
+        <item>IPIL</item>
+        <item>LUNTAL</item>
+        <item>MAHABANG LODLOD</item>
+        <item>NIOGAN</item>
+        <item>PANSOL</item>
+        <item>POBLACION 1</item>
+        <item>POBLACION 12</item>
+        <item>POBLACION 2</item>
+        <item>POBLACION 3</item>
+        <item>POBLACION 4</item>
+        <item>POBLACION 5</item>
+        <item>POBLACION 6</item>
+        <item>POBLACION 7</item>
+        <item>POBLACION 8</item>
+        <item>POBLACION 9</item>
+        <item>POBLACION 10</item>
+        <item>POBLACION 11</item>
+        <item>POBLACION 13</item>
+        <item>POBLACION 14</item>
+        <item>POOK</item>
+        <item>SEIRAN</item>
+        <item>LAGUILE</item>
+        <item>LATAG</item>
+        <item>TIERRA ALTA</item>
+        <item>TULO</item>
+        <item>TATLONG MARIA</item>
+    </string-array>
+
+    <string-array name="batangas_talisay_brgy">
+        <item>AYA</item>
+        <item>BALAS</item>
+        <item>BANGA</item>
+        <item>BUCO</item>
+        <item>CALOOCAN</item>
+        <item>LEYNES</item>
+        <item>MIRANDA</item>
+        <item>POBLACION BARANGAY 1</item>
+        <item>POBLACION BARANGAY 2</item>
+        <item>POBLACION BARANGAY 3</item>
+        <item>POBLACION BARANGAY 4</item>
+        <item>POBLACION BARANGAY 5</item>
+        <item>POBLACION BARANGAY 6</item>
+        <item>POBLACION BARANGAY 7</item>
+        <item>POBLACION BARANGAY 8</item>
+        <item>QUILING</item>
+        <item>SAMPALOC</item>
+        <item>SAN GUILLERMO</item>
+        <item>SANTA MARIA</item>
+        <item>TRANCA</item>
+        <item>TUMAWAY</item>
+    </string-array>
+
+    <string-array name="batangas_tanauancity_brgy">
+        <item>ALTURA BATA</item>
+        <item>ALTURA MATANDA</item>
+        <item>ALTURA-SOUTH</item>
+        <item>AMBULONG</item>
+        <item>BANADERO</item>
+        <item>BAGBAG</item>
+        <item>BAGUMBAYAN</item>
+        <item>BALELE</item>
+        <item>BANJO EAST</item>
+        <item>BANJO LAUREL (BANJO WEST)</item>
+        <item>BILOG-BILOG</item>
+        <item>BOOT</item>
+        <item>CALE</item>
+        <item>DARASA</item>
+        <item>PAGASPAS</item>
+        <item>GONZALES</item>
+        <item>HIDALGO</item>
+        <item>JANOPOL</item>
+        <item>JANOPOL ORIENTAL</item>
+        <item>LAUREL</item>
+        <item>LUYOS</item>
+        <item>MABINI</item>
+        <item>MALAKING PULO</item>
+        <item>MARIA PAZ</item>
+        <item>MAUGAT</item>
+        <item>MONTAÑA (IK-IK)</item>
+        <item>NATATAS</item>
+        <item>PANTAY MATANDA</item>
+        <item>PANTAY BATA</item>
+        <item>POBLACION BARANGAY 1</item>
+        <item>POBLACION BARANGAY 2</item>
+        <item>POBLACION BARANGAY 3</item>
+        <item>POBLACION BARANGAY 4</item>
+        <item>POBLACION BARANGAY 5</item>
+        <item>POBLACION BARANGAY 6</item>
+        <item>POBLACION BARANGAY 7</item>
+        <item>SALA</item>
+        <item>SAMBAT</item>
+        <item>SAN JOSE</item>
+        <item>SANTOL (DOÑA JACOBA GARCIA)</item>
+        <item>SANTOR</item>
+        <item>SULPOC</item>
+        <item>SUPLANG</item>
+        <item>TALAGA</item>
+        <item>TINURIK</item>
+        <item>TRAPICHE</item>
+        <item>ULANGO</item>
+        <item>WAWA</item>
+    </string-array>
+
+    <string-array name="batangas_taysan_brgy">
+        <item>BACAO</item>
+        <item>BILOGO</item>
+        <item>BUKAL</item>
+        <item>DAGATAN</item>
+        <item>GUINHAWA</item>
+        <item>LAUREL</item>
+        <item>MABAYABAS</item>
+        <item>MAHANADIONG</item>
+        <item>MAPULO</item>
+        <item>MATAAS NA LUPA</item>
+        <item>PAG-ASA</item>
+        <item>PANGHAYAAN</item>
+        <item>PIÑA</item>
+        <item>PINAGBAYANAN</item>
+        <item>POBLACION EAST</item>
+        <item>POBLACION WEST</item>
+        <item>SAN ISIDRO</item>
+        <item>SAN MARCELINO</item>
+        <item>SANTO NIÑO</item>
+        <item>TILAMBO</item>
+    </string-array>
+
+    <string-array name="batangas_tingloy_brgy">
+        <item>CORONA</item>
+        <item>GAMAO</item>
+        <item>MAKAWAYAN</item>
+        <item>MARIKABAN</item>
+        <item>PAPAYA</item>
+        <item>PISA</item>
+        <item>BARANGAY 13 (POBLACION 1)</item>
+        <item>BARANGAY 14 (POBLACION 2)</item>
+        <item>BARANGAY 15 (POBLACION 3)</item>
+        <item>SAN ISIDRO</item>
+        <item>SAN JOSE</item>
+        <item>SAN JUAN</item>
+        <item>SAN PEDRO</item>
+        <item>SANTO TOMAS</item>
+        <item>TALAHIB</item>
+    </string-array>
+
+    <string-array name="batangas_tuy_brgy">
+        <item>ACLE</item>
+        <item>BAYUDBUD</item>
+        <item>BOLBOC</item>
+        <item>DALIMA</item>
+        <item>DAO</item>
+        <item>GUINHAWA</item>
+        <item>LUMBANGAN</item>
+        <item>LUNTAL</item>
+        <item>MAGAHIS</item>
+        <item>MALIBU</item>
+        <item>MATAYWANAC</item>
+        <item>PALINCARO</item>
+        <item>LUNA (POB.)</item>
+        <item>BURGOS (POB.)</item>
+        <item>RIZAL (POB.)</item>
+        <item>RILLO (POB.)</item>
+        <item>PUTOL</item>
+        <item>SABANG</item>
+        <item>SAN JOSE</item>
+        <item>TALON</item>
+        <item>TOONG</item>
+        <item>TUYON-TUYON</item>
+    </string-array>
+</resources>

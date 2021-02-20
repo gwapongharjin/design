@@ -314,38 +314,17 @@ public class AddImplementActivity extends AppCompatActivity {
             public void onItemsSelected(KeyPairBoolData selectedItem) {
 
                 Log.d("Single Prov", selectedItem.getName());
+                if (selectedItem.getName().contains("BATANGAS")) {
+                    sortBatangasSingle();
+                } else {
+                    sortUnavailableSingle();
+                }
 
             }
 
             @Override
             public void onClear() {
 
-            }
-        });
-
-        List<KeyPairBoolData> allMunicipalities = pairingOfList(Arrays.asList(getResources().getStringArray(R.array.municipalities)));
-        singlespinMunicipalities.setItems(allMunicipalities, new SingleSpinnerListener() {
-            @Override
-            public void onItemsSelected(KeyPairBoolData selectedItem) {
-
-                Log.d("Single Mun", selectedItem.getName());
-
-            }
-
-            @Override
-            public void onClear() {
-            }
-        });
-
-        List<KeyPairBoolData> allBarangays = pairingOfList(Arrays.asList(getResources().getStringArray(R.array.barangays)));
-        singlespinBarangays.setItems(allBarangays, new SingleSpinnerListener() {
-            @Override
-            public void onItemsSelected(KeyPairBoolData selectedItem) {
-                Log.d("Single Brgy", selectedItem.getName());
-            }
-
-            @Override
-            public void onClear() {
             }
         });
 
@@ -706,6 +685,167 @@ public class AddImplementActivity extends AppCompatActivity {
             setTitle("Adding Implement");
         }
 
+    }
+
+    private void sortUnavailableSingle() {
+        List<KeyPairBoolData> allMunicipalities = pairingOfList(Arrays.asList(getResources().getStringArray(R.array.municipalities)));
+        List<KeyPairBoolData> allBarangays = pairingOfList(Arrays.asList(getResources().getStringArray(R.array.barangays)));
+
+        singlespinMunicipalities.setItems(allMunicipalities, new SingleSpinnerListener() {
+            @Override
+            public void onItemsSelected(KeyPairBoolData selectedItem) {
+                Log.d("Single Brgy", selectedItem.getName());
+            }
+
+            @Override
+            public void onClear() {
+            }
+        });
+
+        singlespinBarangays.setItems(allBarangays, new SingleSpinnerListener() {
+            @Override
+            public void onItemsSelected(KeyPairBoolData selectedItem) {
+                Log.d("Single Brgy", selectedItem.getName());
+            }
+
+            @Override
+            public void onClear() {
+
+            }
+        });
+    }
+
+    private void sortBatangasSingle() {
+        List<KeyPairBoolData> allMunBatangas = pairingOfList(Arrays.asList(getResources().getStringArray(R.array.batangas_municipalities)));
+
+
+        List<String> barangaysStringList = new ArrayList<>();
+
+        singlespinMunicipalities.setItems(allMunBatangas, new SingleSpinnerListener() {
+            @Override
+            public void onItemsSelected(KeyPairBoolData selectedItem) {
+                Log.d("Single Brgy", selectedItem.getName());
+
+                if (selectedItem.getName().contains("AGONCILLO")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_agoncillo_brgy)));
+                }
+                if (selectedItem.getName().contains("ALITAGTAG")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_alitagtag_brgy)));
+                }
+                if (selectedItem.getName().contains("BALAYAN")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_balayan_brgy)));
+                }
+                if (selectedItem.getName().contains("BALETE")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_balete_brgy)));
+                }
+                if (selectedItem.getName().contains("BATANGAS CITY")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_batangascity_brgy)));
+                }
+                if (selectedItem.getName().contains("BAUAN")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_bauan_brgy)));
+                }
+                if (selectedItem.getName().contains("CALACA")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_calaca_brgy)));
+                }
+                if (selectedItem.getName().contains("CALATAGAN")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_calatagan_brgy)));
+                }
+                if (selectedItem.getName().contains("CUENCA")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_cuenca_brgy)));
+                }
+                if (selectedItem.getName().contains("IBAAN")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_ibaan_brgy)));
+                }
+                if (selectedItem.getName().contains("LAUREL")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_laurel_brgy)));
+                }
+                if (selectedItem.getName().contains("LEMERY")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lemery_brgy)));
+                }
+                if (selectedItem.getName().contains("LIAN")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lian_brgy)));
+                }
+                if (selectedItem.getName().contains("LIPA CITY")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lipacity_brgy)));
+                }
+                if (selectedItem.getName().contains("LOBO")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lobo_brgy)));
+                }
+                if (selectedItem.getName().contains("MABINI")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_mabini_brgy)));
+                }
+                if (selectedItem.getName().contains("MALVAR")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_malvar_brgy)));
+                }
+                if (selectedItem.getName().contains("MATAASNAKAHOY")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_mataasnakahoy_brgy)));
+                }
+                if (selectedItem.getName().contains("NASUGBU")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_nasugbu_brgy)));
+                }
+                if (selectedItem.getName().contains("PADRE GARCIA")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_padregarcia_brgy)));
+                }
+                if (selectedItem.getName().contains("ROSARIO")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_rosario_brgy)));
+                }
+                if (selectedItem.getName().contains("SAN JOSE")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanjose_brgy)));
+                }
+                if (selectedItem.getName().contains("SAN JUAN")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanjuan_brgy)));
+                }
+                if (selectedItem.getName().contains("SAN LUIS")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanluis_brgy)));
+                }
+                if (selectedItem.getName().contains("SAN NICOLAS")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sannicolas_brgy)));
+                }
+                if (selectedItem.getName().contains("SAN PASCUAL")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanpascual_brgy)));
+                }
+                if (selectedItem.getName().contains("STA. TERESITA")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_staterisita_brgy)));
+                }
+                if (selectedItem.getName().contains("STO. TOMAS")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_stotomas_brgy)));
+                }
+                if (selectedItem.getName().contains("TAAL")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_taal_brgy)));
+                }
+                if (selectedItem.getName().contains("TALISAY")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_talisay_brgy)));
+                }
+                if (selectedItem.getName().contains("TANAUAN CITY")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_tanauancity_brgy)));
+                }
+                if (selectedItem.getName().contains("TAYSAN")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_taysan_brgy)));
+                }
+                if (selectedItem.getName().contains("TINGLOY")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_tingloy_brgy)));
+                }
+                if (selectedItem.getName().contains("TUY")) {
+                    barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_tuy_brgy)));
+                }
+
+                singlespinBarangays.setItems(pairingOfList(barangaysStringList), new SingleSpinnerListener() {
+                    @Override
+                    public void onItemsSelected(KeyPairBoolData selectedItem) {
+                        Log.d("Single Brgy", selectedItem.getName());
+                    }
+
+                    @Override
+                    public void onClear() {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onClear() {
+            }
+        });
     }
 
     private void editItemSelected(Intent intent) {
@@ -2019,7 +2159,7 @@ public class AddImplementActivity extends AppCompatActivity {
                 break;
             case "FUNCTIONAL UNUSED":
                 multspinProblemsUnused.setVisibility(View.VISIBLE);
-                tvImplementUnused.setText("Why is this machine unused?");
+                tvImplementUnused.setText("Why is this Implement unused?");
                 tvImplementUnused.setVisibility(View.VISIBLE);
                 tvYearInoperable.setVisibility(View.VISIBLE);
                 spinYearInoperable.setVisibility(View.VISIBLE);
@@ -2029,15 +2169,16 @@ public class AddImplementActivity extends AppCompatActivity {
                 break;
             case "NON-FUNCTIONAL":
                 multspinProblemsUnused.setVisibility(View.VISIBLE);
-                tvImplementUnused.setText("Why is this machine non-functional?");
-                tvYearInoperable.setVisibility(View.GONE);
-                spinYearInoperable.setVisibility(View.GONE);
+                tvImplementUnused.setText("Why is this Implement non-functional?");
+                tvYearInoperable.setVisibility(View.VISIBLE);
+                spinYearInoperable.setVisibility(View.VISIBLE);
                 tvImplementUnused.setVisibility(View.VISIBLE);
                 stringArray = R.array.problems_nonfunctional;
-                paramstvImplementUnused.topToBottom = R.id.spinConditionPresentImp;
+                paramstvImplementUnused.topToBottom = R.id.spinYearInoperableImp;
                 paramstvLocation.topToBottom = R.id.multspinProblemsUnusedImp;
                 break;
         }
+
 
         selectedProb = pairingOfList(Arrays.asList(getResources().getStringArray(stringArray)));
         multspinProblemsUnused.setItems(selectedProb, new MultiSpinnerListener() {
@@ -2056,29 +2197,7 @@ public class AddImplementActivity extends AppCompatActivity {
                 } else {
                     hasOtherProblems = false;
                     edtOtherProblems.setVisibility(View.GONE);
-                    edtOtherProblems.setText("");
-                }
-
-            }
-        });
-
-        selectedProb = pairingOfList(Arrays.asList(getResources().getStringArray(stringArray)));
-        multspinProblemsUnused.setItems(selectedProb, new MultiSpinnerListener() {
-            @Override
-            public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
-                String pos = "";
-                for (int i = 0; i < selectedItems.size(); i++) {
-                    pos = pos + " " + selectedItems.get(i).getName();
-                    Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-                }
-                listOfProblems = pos;
-                if (pos.contains("OTHERS")) {
-                    edtOtherProblems.setVisibility(View.VISIBLE);
-                    paramstvLocation.topToBottom = R.id.edtOtherProblems;
-                    hasOtherProblems = true;
-                } else {
-                    hasOtherProblems = false;
-                    edtOtherProblems.setVisibility(View.INVISIBLE);
+                    paramstvLocation.topToBottom = R.id.multspinProblemsUnusedImp;
                     edtOtherProblems.setText("");
                 }
 

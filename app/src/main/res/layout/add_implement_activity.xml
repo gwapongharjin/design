@@ -130,6 +130,7 @@
             android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:gravity="left"
+            android:inputType="text"
             app:layout_constraintBottom_toBottomOf="@+id/tvBrandImp"
             app:layout_constraintEnd_toEndOf="@+id/spinMachineUsing"
             app:layout_constraintHorizontal_bias="0.0"
@@ -153,6 +154,7 @@
             android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:gravity="left"
+            android:inputType="text"
             app:layout_constraintBottom_toBottomOf="@+id/tvModelImp"
             app:layout_constraintEnd_toEndOf="@+id/edtBrandImp"
             app:layout_constraintHorizontal_bias="0.0"
@@ -1263,10 +1265,10 @@
             android:id="@+id/tvLocImp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="54dp"
             android:text="Location of Implement During Survey"
             app:layout_constraintStart_toStartOf="@+id/tvConditionPresentImp"
-            app:layout_constraintTop_toBottomOf="@+id/edtOtherProblemsImp" />
+            app:layout_constraintTop_toBottomOf="@+id/multspinProblemsUnusedImp" />
 
         <Spinner
             android:id="@+id/spinLocationImp"
