@@ -261,7 +261,7 @@ public class ProfileFragment extends Fragment {
         } else if (requestCode == EDIT_PROFILE_REQUEST && resultCode == Activity.RESULT_OK) {
             int id = data.getIntExtra(AddProfile.EXTRA_PROFILE_ID, -1);
             if (id == -1) {
-                Toast.makeText(getActivity(), "Profile can't be updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Profile can't be updated", Toast.LENGTH_SHORT).show();
                 return;
             }
             String resCode = data.getStringExtra(AddProfile.EXTRA_PROFILE_RESCODE);
@@ -285,9 +285,9 @@ public class ProfileFragment extends Fragment {
             profile.setId(id);
             profileViewModel.update(profile);
 
-            Toast.makeText(getActivity(), "Profile updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Profile updated", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getActivity(), "Profile not saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Profile not saved", Toast.LENGTH_SHORT).show();
         }
 
     }

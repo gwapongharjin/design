@@ -1,3 +1,4 @@
+
 package com.m3das.biomech.design.fragments;
 
 import android.app.Activity;
@@ -371,11 +372,11 @@ public class MachineListFragment extends Fragment {
 
             machineListViewModel.insert(machines);
 
-            Toast.makeText(getActivity(), "Machine saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Machine saved", Toast.LENGTH_SHORT).show();
         } else if (requestCode == EDIT_NOTE_REQUEST && resultCode == Activity.RESULT_OK) {
             int id = data.getIntExtra(AddMachineActivity.EXTRA_ID, -1);
             if (id == -1) {
-                Toast.makeText(getActivity(), "Machine can't be updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Machine can't be updated", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -459,9 +460,9 @@ public class MachineListFragment extends Fragment {
             machines.setId(id);
             machineListViewModel.update(machines);
 
-            Toast.makeText(getActivity(), "Machine updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Machine updated", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getActivity(), "Machine not saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Machine not saved", Toast.LENGTH_SHORT).show();
             Log.d("Is note saved", "Machine Not Saved");
         }
 

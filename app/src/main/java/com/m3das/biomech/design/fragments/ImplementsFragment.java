@@ -345,11 +345,11 @@ public class ImplementsFragment extends Fragment {
 
             implementViewModel.insert(imp);
 
-            Toast.makeText(getActivity(), "Implement saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Implement saved", Toast.LENGTH_SHORT).show();
         } else if (requestCode == EDIT_IMPLEMENT_REQUEST && resultCode == Activity.RESULT_OK) {
             int id = data.getIntExtra(AddImplementActivity.EXTRA_IMP_ID, -1);
             if (id == -1) {
-                Toast.makeText(getActivity(), "Implement can't be updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Implement can't be updated", Toast.LENGTH_SHORT).show();
                 return;
             }
             String implement_type = data.getStringExtra(AddImplementActivity.EXTRA_IMP_TYPE);
@@ -437,9 +437,9 @@ public class ImplementsFragment extends Fragment {
             imp.setId(id);
             implementViewModel.update(imp);
 
-            Toast.makeText(getActivity(), "Implement updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Implement updated", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getActivity(), "Implement not saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Implement not saved", Toast.LENGTH_SHORT).show();
             Log.d("Is note saved", "Implement Not Saved");
         }
 

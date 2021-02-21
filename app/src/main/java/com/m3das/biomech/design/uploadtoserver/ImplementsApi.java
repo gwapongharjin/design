@@ -15,6 +15,10 @@ public interface ImplementsApi {
             @Field("impDateSurveyPost") String dateSurvey,
             @Field("impUsedOnMachPost") String implementUsedOnMachine,
             @Field("impUsedOnMachCompPost") String implementUsedOnMachineComplete,
+
+            @Field("brandPost") String brand,
+            @Field("modelPost") String model,
+
             @Field("impLandClearPost") String implementLandClearing,
             @Field("impPrePlantPost") String implementPrePlant,
             @Field("impPlantPost") String implementPlanting,
@@ -27,9 +31,6 @@ public interface ImplementsApi {
             @Field("impPostHarvestPost") String implementPostHarvest,
             @Field("impHaulPost") String implementHaul,
 
-            @Field("impTSAMainPost") String implementTSAMain,
-            @Field("impAOHMainPost") String implementAveOpHoursMain,
-            @Field("impAODMainPost") String implementAveOpDaysMain,
             @Field("impEFFAAMainPost") String implementEFFAAMain,
             @Field("impTUDOpMaintPost") String implementTUDOpMain,
             @Field("impFieldCapMainPost") String implementFieldCapMain,
@@ -37,44 +38,45 @@ public interface ImplementsApi {
             @Field("impTypePlantPost") String implementTypePlant,
             @Field("impNumRowsPlantPost") String implementNumRowsPlant,
             @Field("impDistMatPlantPost") String implementDistMatPlant,
-            @Field("impTSAPlantPost") String implementTSAPlant,
-            @Field("impAOHPlantPost") String implementAveOpHoursPlant,
-            @Field("impAODPlantPost") String implementAveOpDaysPlant,
             @Field("impEFFAAPlantPost") String implementEFFAAPlant,
             @Field("impTUDOpPlantPost") String implementTUDOpPlant,
             @Field("impFieldCapPlantPost") String implementFieldCapPlant,
 
-            @Field("impTSAFertPost") String implementTSAFert,
-            @Field("impAOHFertPost") String implementAveOpHoursFert,
-            @Field("impAODFertPost") String implementAveOpDaysFert,
+
             @Field("impEFFAAFertPost") String implementEFFAAFert,
             @Field("impTUDOpFertPost") String implementTUDOpFert,
             @Field("impFieldCapFertPost") String implementFieldCapFert,
             @Field("impWeightFertPost") String implementWeightFert,
             @Field("impDelRateFertPost") String implementDelRateFert,
 
-            @Field("impTSAHarvestPost") String implementTSAHarvest,
-            @Field("impAOHHarvestPost") String implementAveOpHoursHarvest,
-            @Field("impAODHarvestPost") String implementAveOpDaysHarvest,
+
             @Field("impEFFAAHarvestPost") String implementEFFAAHarvest,
             @Field("impTUDOpHarvestPost") String implementTUDOpHarvest,
             @Field("impFieldCapHarvestPost") String implementFieldCapHarvest,
             @Field("impAveYieldHarvestPost") String implementAveYieldHarvest,
 
-            @Field("impTSAGrabPost") String implementTSAGrab,
-            @Field("impAOHGrabPost") String implementAveOpHoursGrab,
-            @Field("impAODGrabPost") String implementAveOpDaysGrab,
-            @Field("impEFFAAGrabPost") String implementEFFAAGrab,
-            @Field("impLoadCapGrabPost") String implementLoadCapGrab,
-            @Field("impNumLoadsGrabPost") String implementNumLoadsGrab,
 
-            @Field("impTSADitchPost") String implementTSADitch,
-            @Field("impAOHDitchPost") String implementAveOpHoursDitch,
-            @Field("impAODDitchPost") String implementAveOpDaysDitch,
+            @Field("impEFFAAGrabPost") String implementEFFAAGrab,
+            @Field("impTUDOpGrabPost") String implementTUDOpGrab,
+            @Field("impLoadCapGrabPost") String implementLoadCapGrab,
+            @Field("impFieldCapGrabPost") String implementFieldCapGrab,
+
             @Field("impDepthCutDitchPost") String implementDepthCutDitch,
+
+
+            @Field("impOwnershipPost")String ownership,
+            @Field("impPurchGrantDonoPost")String purchGrantDono,
+            @Field("impAgencyPost")String agency,
+            @Field("impAgencySpecifyPost")String agencySpecify,
 
             @Field("impYearAcqPost") String implementYearAcq,
             @Field("impConditionPost") String implementCondition,
+
+            @Field("impModificationsPost")String modifications,
+            @Field("impProblemsPost")String problems,
+            @Field("impProblemsSpecifyPost")String problemsSpecify,
+            @Field("impYearInoperablePost")String yearInoperable,
+
             @Field("impLocationPost") String implementLocation,
             @Field("impProvPost") String implementProvince,
             @Field("impMunPost") String implementMunicipality,

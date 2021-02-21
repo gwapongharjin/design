@@ -1370,6 +1370,11 @@ public class AddImplementActivity extends AppCompatActivity {
             dataAddImplement.putExtra(EXTRA_MODIFICATIONS, edtModifications.getText().toString());
             dataAddImplement.putExtra(EXTRA_YEAR_INOPERABLE, spinYearInoperable.getSelectedItem().toString());
 
+
+            if (isNullOrEmpty(listOfProblems)) {
+                listOfProblems = "";
+            }
+            
             dataAddImplement.putExtra(EXTRA_PROBLEMS, listOfProblems);
             dataAddImplement.putExtra(EXTRA_PROBLEMS_SPECIFY, edtOtherProblems.getText().toString().toUpperCase());
 

@@ -33,6 +33,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_button2"
+        android:text="Delete Data"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnExportData" />
+
+    <Button
         android:id="@+id/btnViewMachinesList"
         android:layout_width="0dp"
         android:layout_height="80dp"

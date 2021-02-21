@@ -2773,6 +2773,7 @@ public class AddMachineActivity extends AppCompatActivity {
 
                 tvCapacity.setText("Tank Capacity");
                 tvCapacity.setVisibility(View.VISIBLE);
+                tvEffectiveArea.setVisibility(View.INVISIBLE);
                 tvRate.setVisibility(View.INVISIBLE);
                 tvNumLoads.setVisibility(View.INVISIBLE);
                 tvAveYield.setVisibility(View.INVISIBLE);
