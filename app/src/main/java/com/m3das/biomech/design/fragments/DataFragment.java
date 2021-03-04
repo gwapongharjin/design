@@ -82,9 +82,10 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             implementLocation, implementProvince, implementMunicipality, implementBrgy, implementImgBase64, implementLatitude, implementLongitude, implementAccuracy, enumCode, plow_rate,
             plow_unit, plow_unit_specify, harr_rate, harr_unit, harr_unit_specify, furr_rate, furr_unit, furr_unit_specify, othr_rent_operation, othr_rate, othr_unit, othr_unit_specify, ave_fuel_plow, ave_fuel_harr,
             ave_fuel_furr, year_inoperable, implementBrand, implementModel, newly_planted_area, ratooned_area, implementAgency, implementOwnership, implementPurch_grant_dono,
-            implementAgency_specify, implementModifications, implementProblems, implementProblemsSpecify, implementYearInoperable;
+            implementAgency_specify, implementModifications, implementProblems, implementProblemsSpecify, implementYearInoperable, time_used_harvester,effaa_harvester;
     private String profileResCode, profileProfile, profileProfileSpecify, profileOwnerType, profileNameRespondent, profileAddress, profileAge, profileSex, profileContactNumber, profileMobNum1,
             profileMobNum2, profileTelNum1, profileTelNum2, profileEducAttain;
+    private ArrayList<Uri> uriArrayList;
 
     private int profileID;
 
@@ -138,6 +139,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                                             .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
+                                                    Log.d("DFUPLNEWERR", "Inside UPLOAD DATA");
                                                     uploadData(response.body().isStatus());
                                                 }
                                             }).show();
@@ -170,7 +172,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
         btnExport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkViewModels();
+                exportData();
             }
         });
 
@@ -192,14 +194,14 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             }
         });
 
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                machineListViewModel.deleteAll();
-                implementViewModel.deleteAll();
-                profileViewModel.deleteAll();
-            }
-        });
+//        btnDelete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                machineListViewModel.deleteAll();
+//                implementViewModel.deleteAll();
+//                profileViewModel.deleteAll();
+//            }
+//        });
 
 
         return v;
@@ -212,6 +214,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
 
     private void uploadData(boolean status) {
         if (status) {
+            Log.d("DFUPLNEWERR", "UPLOADING DATA");
             Log.d("ENUM", enumCode);
             uploadingProfiles(status);
         } else {
@@ -328,7 +331,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                         });
                     }
                     Log.d("Count FORLOOP", machines.size() + ", " + countMachine);
-
+                    machineListViewModel.deleteAll();
                     dialogUpload.dismissDialog();
                 }
             });
@@ -453,17 +456,19 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                         });
                     }
                     Log.d("Count FORLOOP", anImplements.size() + ", " + countImplement);
-
+                    implementViewModel.deleteAll();
                     dialogUpload.dismissDialog();
                 }
             });
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle("Upload Complete")
-                    .setMessage("You have uploaded all your data.")
+                    .setMessage("You have uploaded all your data. Now the app will Exit")
                     .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                            getActivity().finishAffinity();
+                            System.exit(0);
                         }
                     }).show();
         } else {
@@ -473,7 +478,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
 
     private void uploadingProfiles(boolean status) {
         if (status) {
-
+            Log.d("DFUPLNEWERR", "UPLOADING PROFILES");
             DialogUpload dialogUpload = new DialogUpload(getActivity());
 
             dialogUpload.startLoadingDialog();
@@ -483,7 +488,6 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                 public void onChanged(List<Profile> profiles) {
 
                     for (int i = 0; i < profiles.size(); i++) {
-                        profileID = profiles.get(i).getId();
                         profileResCode = profiles.get(i).getResCode();
                         profileProfile = profiles.get(i).getProfile();
                         profileProfileSpecify = profiles.get(i).getProfile_specify();
@@ -530,8 +534,10 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
         }
     }
 
-    public void exportData(List<String[]> machineList, List<String[]> implementList, List<String[]> profilesList) {
+    public void exportData() {
 
+        checkViewModels();
+        uriArrayList = new ArrayList<>();
         Log.d("DFEXP", "Exporting Data");
 
         String fileNameProf = "profile.csv";
@@ -539,87 +545,10 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
         String fileNameImp = "implement.csv";
         String filePath = getContext().getExternalFilesDir(null).getPath() + "/";
 
-        CSVWriter csvWriterProf, csvWriterMachine, csvWriterImplement;
 
         File fileProfile = new File(filePath + fileNameProf);
         File fileMachine = new File(filePath + fileNameMach);
         File fileImplement = new File(filePath + fileNameImp);
-
-        try {
-            if (fileProfile.exists()) {
-                fileProfile.delete();
-            }
-            fileProfile.createNewFile();
-
-            if (fileMachine.exists()) {
-                fileMachine.delete();
-            }
-            fileMachine.createNewFile();
-
-            if (fileImplement.exists()) {
-                fileImplement.delete();
-            }
-            fileImplement.createNewFile();
-
-            FileWriter fp = new FileWriter(fileProfile.getAbsoluteFile(), true);
-            csvWriterProf = new CSVWriter(fp);
-            csvWriterProf.writeAll(profilesList); // data is adding to csv
-            csvWriterProf.flush();
-            csvWriterProf.close();
-
-            FileWriter fm = new FileWriter(fileMachine.getAbsoluteFile(), true);
-            csvWriterMachine = new CSVWriter(fm);
-            csvWriterMachine.writeAll(machineList); // data is adding to csv
-            csvWriterMachine.close();
-
-            FileWriter fi = new FileWriter(fileImplement.getAbsoluteFile(), true);
-            csvWriterImplement = new CSVWriter(fi);
-            csvWriterImplement.writeAll(implementList); // data is adding to csv
-            csvWriterImplement.close();
-
-        } catch (IOException e) {
-            //error
-            Log.d("DFEXP", "Error: " + e.getMessage());
-        }
-//        Log.d("DFEXP", "Exporting Data");
-//
-//        String fileName = "profile.csv";
-//        String filePath = getContext().getExternalFilesDir(null).getPath() + "/" + fileName;
-//        CSVWriter csvWriter;
-//
-//
-//        try {
-//            File fileProfile = new File(filePath);
-//
-//            if (fileProfile.exists()) {
-//                fileProfile.delete();
-//            }
-//            fileProfile.createNewFile();
-//
-//            FileWriter fw = new FileWriter(fileProfile.getAbsoluteFile());
-//            csvWriter = new CSVWriter(fw);
-//
-//            csvWriter.writeAll(profileListSend); // data is adding to csv
-//            csvWriter.close();
-//
-//            Log.d("DFEXP", "File Path: " + filePath);
-//
-//            Uri u1 = FileProvider.getUriForFile(
-//                    getContext(),
-//                    BuildConfig.APPLICATION_ID + ".provider", //(use your app signature + ".provider" )
-//                    fileProfile);
-//
-//            Intent sendIntent = new Intent(Intent.ACTION_SEND);
-//            sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Data for " + new SimpleDateFormat("MMM dd, yyyy").format(new Date()));
-//            sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"biomech.m3das@gmail.com"});
-//            sendIntent.putExtra(Intent.EXTRA_STREAM, u1);
-//            sendIntent.setType("text/richtext");
-//            startActivity(sendIntent);
-//
-//        } catch (IOException e) {
-//            //error
-//            Log.d("DFEXP", "Error: " + e.getMessage());
-//        }
 
         Log.d("DFEXP", "File Path: " + filePath);
 
@@ -638,23 +567,118 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                 BuildConfig.APPLICATION_ID + ".provider",
                 fileImplement);
 
-        ArrayList<Uri> uris = new ArrayList<>();
+//        ArrayList<Uri> uris = new ArrayList<>();
 
 //            Log.d("DFEXPPLS", profileListSend.get(1).toString());
 //            Log.d("DFEXPMLS", machineListSend.get(1).toString());
 //            Log.d("DFEXPILS", implementListSend.get(1).toString());
-        uris.add(u1);
-        uris.add(u2);
-        uris.add(u3);
+        uriArrayList.add(u1);
+        uriArrayList.add(u2);
+        uriArrayList.add(u3);
 
         Intent sendIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
         sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Data for " + new SimpleDateFormat("MMM dd, yyyy").format(new Date()));
         sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"biomech.m3das@gmail.com"});
-        sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+        sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
         sendIntent.setType("text/plain");
         startActivity(sendIntent);
 
     }
+
+    public void exportDataProfile(List<String[]> profilesList) {
+
+        Log.d("DFEXPPROF", "Exporting Data");
+
+        String fileNameProf = "profile.csv";
+        String filePath = getContext().getExternalFilesDir(null).getPath() + "/";
+
+        CSVWriter csvWriterProf;
+
+        File fileProfile = new File(filePath + fileNameProf);
+
+
+        try {
+            if (fileProfile.exists()) {
+                fileProfile.delete();
+            }
+            fileProfile.createNewFile();
+
+            FileWriter fp = new FileWriter(fileProfile.getAbsoluteFile(), true);
+            csvWriterProf = new CSVWriter(fp);
+            csvWriterProf.writeAll(profilesList); // data is adding to csv
+            csvWriterProf.flush();
+            csvWriterProf.close();
+
+        } catch (IOException e) {
+            //error
+            Log.d("DFEXPPROF", "Error: " + e.getMessage());
+        }
+
+        Log.d("DFEXPPROF", "File Path: " + filePath);
+    }
+
+    public void exportDataMachine(List<String[]> machineList) {
+
+        Log.d("DFEXPPROF", "Exporting Data");
+
+        String fileNameProf = "profile.csv";
+        String filePath = getContext().getExternalFilesDir(null).getPath() + "/";
+
+        CSVWriter csvWriterMachine;
+        String fileNameMach = "machine.csv";
+        File fileMachine = new File(filePath + fileNameMach);
+
+
+        try {
+            if (fileMachine.exists()) {
+                fileMachine.delete();
+            }
+            fileMachine.createNewFile();
+
+            FileWriter fm = new FileWriter(fileMachine.getAbsoluteFile(), true);
+            csvWriterMachine = new CSVWriter(fm);
+            csvWriterMachine.writeAll(machineList); // data is adding to csv
+            csvWriterMachine.flush();
+            csvWriterMachine.close();
+
+        } catch (IOException e) {
+            //error
+            Log.d("DFEXPPROF", "Error: " + e.getMessage());
+        }
+
+        Log.d("DFEXPPROF", "File Path: " + filePath);
+    }
+
+    public void exportDataImplement(List<String[]> implementList) {
+
+        Log.d("DFEXPPROF", "Exporting Data");
+
+        String filePath = getContext().getExternalFilesDir(null).getPath() + "/";
+
+        String fileNameImp = "implement.csv";
+        File fileImp = new File(filePath + fileNameImp);
+        CSVWriter csvWriterImplement;
+
+        try {
+            if (fileImp.exists()) {
+                fileImp.delete();
+            }
+            fileImp.createNewFile();
+
+            FileWriter fi = new FileWriter(fileImp.getAbsoluteFile(), true);
+            csvWriterImplement = new CSVWriter(fi);
+            csvWriterImplement.writeAll(implementList); // data is adding to csv
+            csvWriterImplement.flush();
+            csvWriterImplement.close();
+
+        } catch (IOException e) {
+            //error
+            Log.d("DFEXPPROF", "Error: " + e.getMessage());
+        }
+
+        Log.d("DFEXPPROF", "File Path: " + filePath);
+    }
+
 
     private void checkViewModels() {
         List<String[]> profileListSend = new ArrayList<>();
@@ -667,8 +691,6 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
         profileViewModel.getAllProfiles().observe(getActivity(), new Observer<List<Profile>>() {
             @Override
             public void onChanged(List<Profile> profiles) {
-
-
                 for (int i = 0; i < profiles.size(); i++) {
                     profileResCode = profiles.get(i).getResCode();
                     profileProfile = profiles.get(i).getProfile();
@@ -689,12 +711,14 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     profileListSend.add(new String[]{profileResCode, profileProfile, profileProfileSpecify, profileOwnerType, profileNameRespondent,
                             profileAddress, profileAge, profileSex, profileContactNumber, profileMobNum1, profileMobNum2, profileTelNum1, profileTelNum2, profileEducAttain});
                 }
+                exportDataProfile(profileListSend);
             }
         });
 
         machineListSend.add(new String[]{"machineType", "machineQRCode", "typeOfTubewells", "typeOfMill", "Date of Survey",
                 "machineBrand", "machineBrandSpecify", "machineModel", "machineModelSpecify", "ratedPower",
                 "serviceArea", "newlyPlantedArea", "ratoonedArea", "Average Operating Hours", "Average Operating Days",
+                "Effective Area Accomplished","Time Used Working",
                 "Capacity", "averageYield", "numberLoads", "rate", "ownership",
                 "purchGrantDono", "agency", "agency_specify", "nameOwnerOrg", "yearAcquired",
                 "conditionAcquired", "rental", "mainRent", "mainRateRentUnit", "mainRateRentUnitSpecify",
@@ -728,11 +752,14 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     ratooned_area = machines.get(i).getRatooned_area();
                     ave_op_hours = machines.get(i).getAve_op_hours();
                     ave_op_days = machines.get(i).getAve_op_days();
+                    effaa_harvester = machines.get(i).getEffective_area();
+                    time_used_harvester = machines.get(i).getTime_used();
                     capacity = machines.get(i).getCapacity();
                     ave_yield = machines.get(i).getAve_yield();
                     num_loads = machines.get(i).getNum_loads();
                     rate = machines.get(i).getRate();
                     ownership = machines.get(i).getOwnership();
+
 
                     purch_grant_dono = machines.get(i).getPurch_grant_dono();
                     agency = machines.get(i).getAgency();
@@ -779,7 +806,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     brgy = machines.get(i).getBrgy();
                     latitude = machines.get(i).getMachine_latitude();
                     longitude = machines.get(i).getMachine_longitude();
-                    imageString = machines.get(i).getMachine_image_base64();
+                    imageString = machines.get(i).getMachine_image_base64().substring(0,16);
 
                     accuracy = machines.get(i).getAccuracy();
                     resCode = machines.get(i).getResCode();
@@ -794,11 +821,12 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     }
 
                     machineListSend.add(new String[]{machineType, machineQRCode, tubewells, type_mill, datesurvey, brand, brand_specify, model, model_specify, rated_power, service_area,
-                            newly_planted_area, ratooned_area, ave_op_hours, ave_op_days, capacity, ave_yield, num_loads, rate, ownership, purch_grant_dono, agency, agency_specify, name_owner,
+                            newly_planted_area, ratooned_area, ave_op_hours, ave_op_days, effaa_harvester,time_used_harvester, capacity, ave_yield, num_loads, rate, ownership, purch_grant_dono, agency, agency_specify, name_owner,
                             year_acquired, condition_acquired, rental, custom_rate, custom_unit, custom_unit_specify, plow_rate, plow_unit, plow_unit_specify, harr_rate, harr_unit,
                             harr_unit_specify, furr_rate, furr_unit, furr_unit_specify, othr_rent_operation, othr_rate, othr_unit, othr_unit_specify, ave_fuel_plow, ave_fuel_harr, ave_fuel_furr, availablity, rent_prov,
                             rent_mun, rent_brgy, condition, problems, problems_specify, year_inoperable, location, prov, mun, brgy, latitude, longitude, accuracy, resCode, resName, imageString});
                 }
+                exportDataMachine(machineListSend);
             }
         });
 
@@ -890,7 +918,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     implementLatitude = anImplements.get(i).getLatitude();
                     implementLongitude = anImplements.get(i).getLongitude();
                     implementAccuracy = anImplements.get(i).getAccuracy();
-                    implementImgBase64 = anImplements.get(i).getImage_base64();
+                    implementImgBase64 = anImplements.get(i).getImage_base64().substring(0,16);
 
 
                     implementListSend.add(new String[]{implementType, implementQR, implementUsedOnMachine, implementUsedOnMachineComplete, implementDateSurvey, implementBrand, implementModel, implementLandClearing, implementPrePlant, implementPlanting,
@@ -901,10 +929,11 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                             implementYearInoperable, implementLocation, implementProvince, implementMunicipality, implementBrgy, implementLatitude, implementLongitude, implementAccuracy, implementImgBase64});
                     Log.d("DFEXVALIMPVM", String.valueOf(implementListSend.size()));
                 }
+                exportDataImplement(implementListSend);
             }
         });
 
-        exportData(machineListSend, implementListSend, profileListSend);
+//        exportData(machineListSend, implementListSend, profileListSend);
     }
 
 }

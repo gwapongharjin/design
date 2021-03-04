@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -55,6 +56,7 @@ public class ViewImplements extends AppCompatActivity {
                     text.setText(impList); // <-- does it really compile without the + sign?
                     MainLL.addView(text);
                 }
+                Toast.makeText(getApplicationContext(),"",Toast.LENGTH_SHORT).show();
             }
         });
 

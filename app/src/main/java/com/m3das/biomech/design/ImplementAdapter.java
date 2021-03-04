@@ -3,6 +3,7 @@ package com.m3das.biomech.design;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,25 @@ public class ImplementAdapter extends RecyclerView.Adapter<ImplementAdapter.Impl
         holder.ImpQr.setText(currentImplement.getImplement_qrcode());
         holder.LatLong.setText(currentImplement.getLatitude() + ", " + currentImplement.getLongitude());
         holder.MachineAttachedto.setText(currentImplement.getUsed_on_machine());
+
+        if (currentImplement.getOwnership().contains("Acquired") || currentImplement.getYear_acquired().contains("Acquired") || currentImplement.getCondition().contains("Acquired") ||
+                currentImplement.getCondition_present().contains("Acquired")) {
+            holder.WarningItem.setVisibility(View.VISIBLE);
+        } else {
+            holder.WarningItem.setVisibility(View.INVISIBLE);
+        }
+
+        if (currentImplement.getImage_base64().contains("Acquired")) {
+            holder.ImageItem.setVisibility(View.VISIBLE);
+        } else {
+            holder.ImageItem.setVisibility(View.INVISIBLE);
+        }
+
+        if (currentImplement.getAccuracy().contains("Acquired")) {
+            holder.MapItem.setVisibility(View.VISIBLE);
+        } else {
+            holder.MapItem.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -53,6 +73,7 @@ public class ImplementAdapter extends RecyclerView.Adapter<ImplementAdapter.Impl
     class ImplementHolder extends RecyclerView.ViewHolder {
 
         private final TextView Type, ImpQr, LatLong, MachineAttachedto;
+        private final ImageView WarningItem, MapItem, ImageItem;
 
         public ImplementHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +82,9 @@ public class ImplementAdapter extends RecyclerView.Adapter<ImplementAdapter.Impl
             LatLong = itemView.findViewById(R.id.tvImplementLatLongItem);
             ImpQr = itemView.findViewById(R.id.tvImplmentQRCodeItem);
             MachineAttachedto = itemView.findViewById(R.id.tvAttachedToMachineItem);
+            WarningItem = itemView.findViewById(R.id.imgWarningImplementItem);
+            MapItem = itemView.findViewById(R.id.imgMapImplementItem);
+            ImageItem = itemView.findViewById(R.id.imgImageImplementItem);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

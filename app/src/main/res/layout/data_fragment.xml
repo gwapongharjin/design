@@ -14,7 +14,6 @@
         android:background="@drawable/custom_button2"
         android:text="Export Data"
         android:textSize="20sp"
-        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/btnUpload"
         app:layout_constraintStart_toStartOf="@+id/btnUpload"
         app:layout_constraintTop_toBottomOf="@+id/btnUpload" />
@@ -40,6 +39,7 @@
         android:background="@drawable/custom_button2"
         android:text="Delete Data"
         android:textSize="20sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"

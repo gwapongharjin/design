@@ -127,7 +127,7 @@ public class AddProfile extends AppCompatActivity {
                 String pos = "";
                 for (int i = 0; i < selectedItems.size(); i++) {
                     //Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-                    pos = pos + "," + selectedItems.get(i).getName();
+                    pos = selectedItems.get(i).getName() + " : " + pos;
                 }
                 contactNum(pos);
                 contactNumType = pos;
@@ -142,7 +142,7 @@ public class AddProfile extends AppCompatActivity {
                 String pos = "";
                 for (int i = 0; i < selectedItems.size(); i++) {
                     Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-                    pos = pos + " " + selectedItems.get(i).getName();
+                    pos = pos + " : " + selectedItems.get(i).getName();
                     Log.d("POS VALUE", pos);
                 }
                 ownerType = pos;
@@ -171,23 +171,6 @@ public class AddProfile extends AppCompatActivity {
                 } else {
                     sex = "";
                 }
-            }
-        });
-
-        nameResp.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.d("POS VAL", ownerType);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
             }
         });
 

@@ -154,11 +154,6 @@
         <item>SPECIFY</item>
     </string-array>
 
-    <string-array name="ownership">
-        <item></item>
-        <item>Owned</item>
-        <item>Rented</item>
-    </string-array>
     <string-array name="type_of_tubewells">
         <item>Please Select...</item>
         <item>SHALLOW TUBEWELL</item>
@@ -228,12 +223,14 @@
     </string-array>
     <string-array name="condition_when_bought">
         <item>Please Select...</item>
+        <item>To Be Acquired...</item>
         <item>BRAND NEW</item>
         <item>SECONDHAND</item>
         <item>RECONDITIONED</item>
     </string-array>
     <string-array name="ownership_of_machine">
         <item>Please Select...</item>
+        <item>To Be Acquired...</item>
         <item>PRIVATELY OWNED</item>
         <item>COOPERATIVE/ASSOCIATION</item>
         <item>CUSTOM PROVIDER</item>
@@ -256,6 +253,7 @@
 
     <string-array name="condition">
         <item>Please Select...</item>
+        <item>To Be Acquired...</item>
         <item>FUNCTIONAL USED</item>
         <item>FUNCTIONAL UNUSED</item>
         <item>NON-FUNCTIONAL</item>
@@ -263,6 +261,7 @@
 
     <string-array name="conditionImplement">
         <item>Please Select...</item>
+        <item>To Be Acquired...</item>
         <item>BRAND NEW</item>
         <item>BRAND NEW AND MODIFIED</item>
         <item>SECOND HAND</item>
@@ -314,6 +313,7 @@
     </string-array>
     <string-array name="custom_rate_units">
         <item>Please Select...</item>
+        <item>Not Applicable</item>
         <item>PHP/HOUR</item>
         <item>PHP/HECTARE</item>
         <item>PHP/TON</item>
@@ -321,6 +321,7 @@
     </string-array>
     <string-array name="yes_no">
         <item>Please Select...</item>
+        <item>To Be Acquired...</item>
         <item>YES</item>
         <item>NO</item>
     </string-array>

@@ -156,12 +156,14 @@
             android:id="@+id/edtMobileNumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="54dp"
+            android:layout_marginTop="44dp"
             android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:inputType="phone"
+            android:inputType="number|phone"
             android:maxLength="11"
+            android:digits="0123456789"
             app:layout_constraintEnd_toEndOf="@+id/multspinContactNumber"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/multspinContactNumber"
             app:layout_constraintTop_toBottomOf="@+id/multspinContactNumber" />
 
@@ -172,11 +174,26 @@
             android:layout_marginTop="40dp"
             android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|phone"
             android:maxLength="11"
+            android:digits="0123456789"
             app:layout_constraintEnd_toEndOf="@+id/edtMobileNumber"
             app:layout_constraintStart_toStartOf="@+id/edtMobileNumber"
             app:layout_constraintTop_toBottomOf="@+id/edtMobileNumber" />
+
+        <EditText
+            android:id="@+id/edtAreaCodeTelNum1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edit_text"
+            android:ems="10"
+            android:inputType="number|phone"
+            android:maxLength="3"
+            android:digits="0123456789"
+            app:layout_constraintEnd_toEndOf="@+id/radioGroup"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/radioGroup"
+            app:layout_constraintTop_toTopOf="@+id/edtTelephoneNumber" />
 
         <EditText
             android:id="@+id/edtTelephoneNumber"
@@ -186,12 +203,27 @@
             android:layout_marginTop="60dp"
             android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:inputType="phone"
+            android:inputType="number|phone"
             android:maxLength="8"
+            android:digits="0123456789"
             app:layout_constraintEnd_toEndOf="@+id/multspinContactNumber"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/radioGroup"
             app:layout_constraintTop_toBottomOf="@+id/edtMobileNumber2" />
+
+        <EditText
+            android:id="@+id/edtAreaCodeTelNum2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/custom_edit_text"
+            android:ems="10"
+            android:inputType="number|phone"
+            android:maxLength="3"
+            android:digits="0123456789"
+            app:layout_constraintEnd_toEndOf="@+id/edtAreaCodeTelNum1"
+            app:layout_constraintStart_toStartOf="@+id/edtAreaCodeTelNum1"
+            app:layout_constraintTop_toBottomOf="@+id/edtAreaCodeTelNum1" />
 
         <EditText
             android:id="@+id/edtTelephoneNumber2"
@@ -201,8 +233,9 @@
             android:layout_marginTop="32dp"
             android:background="@drawable/custom_edit_text"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|phone"
             android:maxLength="8"
+            android:digits="0123456789"
             app:layout_constraintEnd_toEndOf="@+id/edtTelephoneNumber"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/radioGroup"
@@ -217,56 +250,6 @@
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/edtTelephoneNumber2" />
-
-        <Spinner
-            android:id="@+id/spinEduc"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/custom_spinner"
-            android:entries="@array/educ_attain"
-            android:spinnerMode="dropdown"
-            app:layout_constraintEnd_toEndOf="@+id/multspinContactNumber"
-            app:layout_constraintStart_toStartOf="@+id/multspinContactNumber"
-            app:layout_constraintTop_toBottomOf="@+id/tvEduc" />
-
-        <Button
-            android:id="@+id/btnSaveProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
-            android:background="@drawable/custom_button"
-            android:text="SAVE"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinEduc" />
-
-        <EditText
-            android:id="@+id/edtAreaCodeTelNum1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_edit_text"
-            android:ems="10"
-            android:inputType="number"
-            android:maxLength="3"
-            app:layout_constraintEnd_toEndOf="@+id/radioGroup"
-            app:layout_constraintStart_toStartOf="@+id/radioGroup"
-            app:layout_constraintTop_toTopOf="@+id/edtTelephoneNumber" />
-
-        <EditText
-            android:id="@+id/edtAreaCodeTelNum2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/custom_edit_text"
-            android:ems="10"
-            android:inputType="number"
-            android:maxLength="3"
-            app:layout_constraintEnd_toEndOf="@+id/edtAreaCodeTelNum1"
-            app:layout_constraintStart_toStartOf="@+id/edtAreaCodeTelNum1"
-            app:layout_constraintTop_toBottomOf="@+id/edtAreaCodeTelNum1" />
 
         <TextView
             android:id="@+id/tvAreaCode1"
@@ -358,6 +341,31 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/edtAGE"
             app:layout_constraintStart_toStartOf="@+id/textView14" />
+
+        <Button
+            android:id="@+id/btnSaveProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/custom_button"
+            android:text="SAVE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinEduc" />
+
+        <Spinner
+            android:id="@+id/spinEduc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/custom_spinner"
+            android:entries="@array/educ_attain"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="@+id/multspinContactNumber"
+            app:layout_constraintStart_toStartOf="@+id/multspinContactNumber"
+            app:layout_constraintTop_toBottomOf="@+id/tvEduc" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

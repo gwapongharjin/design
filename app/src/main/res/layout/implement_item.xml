@@ -61,12 +61,40 @@
             android:id="@+id/tvAttachedToMachineItem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:text="Attached to Machine"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/tvImplementLatLongItem"
-            app:layout_constraintStart_toEndOf="@+id/tvAttachedTo"
-            app:layout_constraintTop_toBottomOf="@id/tvImplementLatLongItem" />
+            app:layout_constraintEnd_toStartOf="@+id/imgImageImplementItem"
+            app:layout_constraintStart_toStartOf="@+id/tvAttachedTo"
+            app:layout_constraintTop_toBottomOf="@+id/tvAttachedTo" />
+
+        <ImageView
+            android:id="@+id/imgWarningImplementItem"
+            android:layout_width="40dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgMapImplementItem"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_outline_warning_24" />
+
+        <ImageView
+            android:id="@+id/imgImageImplementItem"
+            android:layout_width="40dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imgMapImplementItem"
+            app:layout_constraintTop_toTopOf="@+id/tvAttachedTo"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_outline_photo_camera_inc_24" />
+
+        <ImageView
+            android:id="@+id/imgMapImplementItem"
+            android:layout_width="40dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imgWarningImplementItem"
+            app:layout_constraintTop_toTopOf="@+id/imgImageImplementItem"
+            app:srcCompat="@drawable/ic_outline_pin_drop_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

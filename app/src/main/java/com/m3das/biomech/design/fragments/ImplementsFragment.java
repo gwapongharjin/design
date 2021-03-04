@@ -129,7 +129,7 @@ public class ImplementsFragment extends Fragment {
                 editImplement.putExtra(AddImplementActivity.EXTRA_TIME_USED_OP_PLANT, implement.getTime_used_during_operation_planter());
                 editImplement.putExtra(AddImplementActivity.EXTRA_FIELD_CAP_PLANT, implement.getField_capacity_planter());
 
-                editImplement.putExtra(AddImplementActivity.EXTRA_EFF_AREA_ACC_FERT, implement.getEffective_area_accomplished_planter());
+                editImplement.putExtra(AddImplementActivity.EXTRA_EFF_AREA_ACC_FERT, implement.getEffective_area_accomplished_fertilizer());
                 editImplement.putExtra(AddImplementActivity.EXTRA_TIME_USED_OP_FERT, implement.getTime_used_during_operation_fertilizer());
                 editImplement.putExtra(AddImplementActivity.EXTRA_FIELD_CAP_FERT, implement.getField_capacity_fertilizer());
                 editImplement.putExtra(AddImplementActivity.EXTRA_WEIGHT_FERT, implement.getWeight_fertilizer());

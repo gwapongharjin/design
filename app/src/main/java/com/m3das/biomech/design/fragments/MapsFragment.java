@@ -83,6 +83,7 @@ public class MapsFragment extends Fragment {
     private MachineListViewModel machineListViewModel;
     LatLng locationImp;
     LatLng locationMach;
+
     FloatingActionButton fabRefresh;
     private GoogleMap gMap;
     private LocationTrack locationTrack;

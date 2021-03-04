@@ -44,11 +44,9 @@
             android:id="@+id/tvMachineLatLongItem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvMacineQRCodeItem"
-            android:layout_toEndOf="@id/tvMachineTypeItem"
             android:maxLines="1"
             android:text="LatLong"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imgImageMachineListItem"
             app:layout_constraintStart_toStartOf="@+id/tvMachineTypeItem"
             app:layout_constraintTop_toBottomOf="@+id/tvMachineTypeItem" />
 
@@ -58,9 +56,38 @@
             android:layout_height="wrap_content"
             android:text="Name of Respondent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tvMachineLatLongItem"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvMachineLatLongItem" />
+
+        <ImageView
+            android:id="@+id/imgWarningMachineListItem"
+            android:layout_width="40dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvMachineLatLongItem"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_outline_warning_24" />
+
+        <ImageView
+            android:id="@+id/imgImageMachineListItem"
+            android:layout_width="40dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imgMapMachineListItem"
+            app:layout_constraintTop_toTopOf="@+id/tvMachineLatLongItem"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_outline_photo_camera_inc_24" />
+
+        <ImageView
+            android:id="@+id/imgMapMachineListItem"
+            android:layout_width="40dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imgWarningMachineListItem"
+            app:layout_constraintTop_toTopOf="@+id/tvMachineLatLongItem"
+            app:srcCompat="@drawable/ic_outline_pin_drop_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
