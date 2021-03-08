@@ -31,6 +31,7 @@ import com.m3das.biomech.design.ViewImplements;
 import com.m3das.biomech.design.ViewMachines;
 import com.m3das.biomech.design.implementdb.Implements;
 import com.m3das.biomech.design.machinedb.Machines;
+import com.m3das.biomech.design.machinedb.MachinesDAO;
 import com.m3das.biomech.design.profiledb.Profile;
 import com.m3das.biomech.design.uploadtoserver.ResponsePojo;
 import com.m3das.biomech.design.uploadtoserver.RetroClient;
@@ -71,22 +72,22 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
     private String countImplement, countProf, countMachine;
 
     private Button btnExport, btnUpload, btnViewMachines, btnViewImplements, btnDelete;
-    private String machineType, machineQRCode, datesurvey, brand, brand_specify, model, model_specify, rated_power, service_area, ave_op_hours, ave_op_days, capacity, ave_yield, num_loads, rate,
+    private String machineType, machineQRCode, datesurvey, brand, brand_specify, model, model_specify, rated_power, service_area, ave_op_hours, ave_op_days, capacity, ave_yield, rate,
             ownership, purch_grant_dono, agency, agency_specify, name_owner, year_acquired, condition_acquired, rental, custom_rate, custom_unit, custom_unit_specify, availablity, rent_prov,
-            rent_mun, rent_brgy, condition, problems, problems_specify, location, prov, mun, brgy, latitude, longitude, imageString, accuracy, tubewells, type_mill, resCode, resName;
+            rent_mun, rent_brgy, condition_present, problems, problems_specify, location, prov, mun, brgy, latitude, longitude, imageString, accuracy, tubewells, type_mill, resCode, resName;
     private String implementType, implementQR, implementDateSurvey, implementUsedOnMachine, implementUsedOnMachineComplete, implementLandClearing, implementPrePlant, implementPlanting,
             implementFertApp, implementPestApp, implementIrriDrain, implementCult, implementRatoon, implementHarvest, implementPostHarvest, implementHaul, implementEFFAAMain,
             implementTUDOpMain, implementFieldCapMain, implementTypePlant, implementNumRowsPlant, implementDistMatPlant, implementEFFAAPlant, implementTUDOpPlant, implementFieldCapPlant,
             implementEFFAAFert, implementTUDOpFert, implementFieldCapFert, implementWeightFert, implementDelRateFert, implementEFFAAHarvest, implementTUDOpHarvest, implementFieldCapHarvest,
             implementAveYieldHarvest, implementTUDOGrab, implementFieldCapGrab, implementEFFAAGrab, implementLoadCapGrab, implementDepthCutDitch, implementYearAcq, implementCondition,
             implementLocation, implementProvince, implementMunicipality, implementBrgy, implementImgBase64, implementLatitude, implementLongitude, implementAccuracy, enumCode, plow_rate,
-            plow_unit, plow_unit_specify, harr_rate, harr_unit, harr_unit_specify, furr_rate, furr_unit, furr_unit_specify, othr_rent_operation, othr_rate, othr_unit, othr_unit_specify, ave_fuel_plow, ave_fuel_harr,
-            ave_fuel_furr, year_inoperable, implementBrand, implementModel, newly_planted_area, ratooned_area, implementAgency, implementOwnership, implementPurch_grant_dono,
-            implementAgency_specify, implementModifications, implementProblems, implementProblemsSpecify, implementYearInoperable, time_used_harvester,effaa_harvester;
+            plow_unit, plow_unit_specify, harr_rate, harr_unit, harr_unit_specify, furr_rate, furr_unit, furr_unit_specify, othr_rent_operation, othr_rate, othr_unit, othr_unit_specify,
+            ave_fuel_plow, ave_fuel_harr, ave_fuel_furr, year_inoperable, implementBrand, implementModel, newly_planted_area, ratooned_area, implementAgency, implementOwnership,
+            implementPurch_grant_dono, waterpump_unit, ave_fuel_main,
+            implementAgency_specify, implementModifications, implementProblems, implementProblemsSpecify, implementYearInoperable, time_used_harvester, effaa_harvester;
     private String profileResCode, profileProfile, profileProfileSpecify, profileOwnerType, profileNameRespondent, profileAddress, profileAge, profileSex, profileContactNumber, profileMobNum1,
             profileMobNum2, profileTelNum1, profileTelNum2, profileEducAttain;
     private ArrayList<Uri> uriArrayList;
-
     private int profileID;
 
     @Override
@@ -133,16 +134,16 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                             @Override
                             public void onResponse(Call<ResponsePojo> call, Response<ResponsePojo> response) {
                                 if (response.body().isStatus()) {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                                    builder.setTitle("Uploading Data")
-                                            .setMessage("You will be Uploading your data")
-                                            .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    Log.d("DFUPLNEWERR", "Inside UPLOAD DATA");
-                                                    uploadData(response.body().isStatus());
-                                                }
-                                            }).show();
+//                                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                                    builder.setTitle("Uploading Data")
+//                                            .setMessage("You will be Uploading your data")
+//                                            .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(DialogInterface dialogInterface, int i) {
+//                                                }
+//                                            }).show();
+                                    Log.d("DFUPLNEWERR", "Inside UPLOAD DATA");
+                                    uploadData(response.body().isStatus());
                                 } else {
                                     Toast.makeText(getContext(), "Enumerator Code is " + response.body().getRemarks() + "\n\nPlease check the spelling of your code or\ncontact your coordinator to verify your code", Toast.LENGTH_LONG).show();
                                 }
@@ -229,7 +230,6 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             DialogUpload dialogUpload = new DialogUpload(getActivity());
 
             dialogUpload.startLoadingDialog();
-
             machineListViewModel.getAllMachines().observe(this, new Observer<List<Machines>>() {
                 @Override
                 public void onChanged(List<Machines> machines) {
@@ -247,10 +247,16 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                         service_area = machines.get(i).getService_area();
                         ave_op_hours = machines.get(i).getAve_op_hours();
                         ave_op_days = machines.get(i).getAve_op_days();
+
+                        effaa_harvester = machines.get(i).getEffective_area();
+                        time_used_harvester = machines.get(i).getTime_used();
+
                         capacity = machines.get(i).getCapacity();
                         ave_yield = machines.get(i).getAve_yield();
-                        num_loads = machines.get(i).getNum_loads();
+//                        num_loads = machines.get(i).getNum_loads();
                         rate = machines.get(i).getRate();
+                        waterpump_unit = machines.get(i).getWaterpump_unit();
+
                         ownership = machines.get(i).getOwnership();
                         purch_grant_dono = machines.get(i).getPurch_grant_dono();
                         agency = machines.get(i).getAgency();
@@ -262,6 +268,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                         custom_rate = machines.get(i).getMain_custom_rent();
                         custom_unit = machines.get(i).getMain_custom_rent_unit();
                         custom_unit_specify = machines.get(i).getMain_custom_rent_unit_specify();
+                        ave_fuel_main = machines.get(i).getMain_ave_fuel();
                         plow_rate = machines.get(i).getPlow_custom_rent();
                         plow_unit = machines.get(i).getPlow_custom_rent_unit();
                         plow_unit_specify = machines.get(i).getPlow_custom_rent_unit_specify();
@@ -282,7 +289,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                         rent_prov = machines.get(i).getRent_prov();
                         rent_mun = machines.get(i).getRent_mun();
                         rent_brgy = machines.get(i).getRent_brgy();
-                        condition = machines.get(i).getCondition();
+                        condition_present = machines.get(i).getCondition();
                         problems = machines.get(i).getProblems();
                         problems_specify = machines.get(i).getSpecify_problems();
                         year_inoperable = machines.get(i).getYear_inoperable();
@@ -308,10 +315,10 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                         }
 
                         Call<ResponsePojo> responsePojoCall = RetroClient.getInstance().getMachinesApi().uploadMachines(machineType, tubewells, type_mill, machineQRCode, datesurvey, brand,
-                                brand_specify, model, model_specify, rated_power, service_area, newly_planted_area, ratooned_area, ave_op_hours, ave_op_days, capacity, ave_yield, num_loads,
-                                rate, ownership, purch_grant_dono, agency, agency_specify, name_owner, year_acquired, condition_acquired, rental, custom_rate, custom_unit, custom_unit_specify,
+                                brand_specify, model, model_specify, rated_power, service_area, newly_planted_area, ratooned_area, ave_op_hours, ave_op_days, effaa_harvester, time_used_harvester, capacity, ave_yield, rate, waterpump_unit,
+                                ownership, purch_grant_dono, agency, agency_specify, name_owner, year_acquired, condition_acquired, rental, custom_rate, custom_unit, custom_unit_specify, ave_fuel_main,
                                 plow_rate, plow_unit, plow_unit_specify, harr_rate, harr_unit, harr_unit_specify, furr_rate, furr_unit, furr_unit_specify, othr_rent_operation, othr_rate,
-                                othr_unit, othr_unit_specify, ave_fuel_plow, ave_fuel_harr, ave_fuel_furr, availablity, rent_prov, rent_mun, rent_brgy, condition, problems, problems_specify,
+                                othr_unit, othr_unit_specify, ave_fuel_plow, ave_fuel_harr, ave_fuel_furr, availablity, rent_prov, rent_mun, rent_brgy, condition_present, problems, problems_specify,
                                 year_inoperable, location, prov, mun, brgy, latitude, longitude, imageString, accuracy, resCode, resName, enumCode);
 
                         responsePojoCall.enqueue(new Callback<ResponsePojo>() {
@@ -461,16 +468,16 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                 }
             });
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Upload Complete")
-                    .setMessage("You have uploaded all your data. Now the app will Exit")
-                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            getActivity().finishAffinity();
-                            System.exit(0);
-                        }
-                    }).show();
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//            builder.setTitle("Upload Complete")
+//                    .setMessage("You have uploaded all your data. Now the app will Exit")
+//                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialogInterface, int i) {
+//                            getActivity().finishAffinity();
+//                            System.exit(0);
+//                        }
+//                    }).show();
         } else {
             Toast.makeText(getContext(), "TOAST no upload", Toast.LENGTH_LONG).show();
         }
@@ -718,17 +725,18 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
         machineListSend.add(new String[]{"machineType", "machineQRCode", "typeOfTubewells", "typeOfMill", "Date of Survey",
                 "machineBrand", "machineBrandSpecify", "machineModel", "machineModelSpecify", "ratedPower",
                 "serviceArea", "newlyPlantedArea", "ratoonedArea", "Average Operating Hours", "Average Operating Days",
-                "Effective Area Accomplished","Time Used Working",
-                "Capacity", "averageYield", "numberLoads", "rate", "ownership",
-                "purchGrantDono", "agency", "agency_specify", "nameOwnerOrg", "yearAcquired",
-                "conditionAcquired", "rental", "mainRent", "mainRateRentUnit", "mainRateRentUnitSpecify",
-                "plowingRent", "plowingRentUnit", "plowingRentUnitSpecify", "harrowingRent", "harrowingRentUnit",
-                "harrowingRentUnitSpecify", "furrowingRent", "furrowingRentUnit", "furrowingRentUnitSpecify", "otherRentOperation", "otherOperationRent",
-                "otherOperationRentUnit", "otherOperationRentUnitSpecify", "Plowing Ave Fuel Consumption", "Harrowing Ave Fuel Consumption", "Furrowing Ave Fuel Consumption",
-                "availability", "rentProvince", "rentMunicipality", "rentBarangay", "problems",
-                "problemsSpecify", "yearInoperable", "ConditionPresent", "Location", "Province",
-                "Municipality", "Barangay", "Latitude", "Longitude", "Accuracy",
-                "Respondent Code", "Respondent Name", "Image",});
+                "Effective Area Accomplished", "Time Used Working", "Capacity", "averageYield", "rate",
+                "waterpumpUnit", "ownership", "purchGrantDono", "agency", "agency_specify",
+                "nameOwnerOrg", "yearAcquired", "conditionAcquired", "rental", "mainRent",
+                "mainRateRentUnit", "mainRateRentUnitSpecify", "Main Ave Fuel Consumption", "plowingRent", "plowingRentUnit",
+                "plowingRentUnitSpecify", "harrowingRent", "harrowingRentUnit", "harrowingRentUnitSpecify", "furrowingRent",
+                "furrowingRentUnit", "furrowingRentUnitSpecify", "otherRentOperation", "otherOperationRent", "otherOperationRentUnit",
+                "otherOperationRentUnitSpecify", "Plowing Ave Fuel Consumption", "Harrowing Ave Fuel Consumption", "Furrowing Ave Fuel Consumption", "availability",
+                "rentProvince", "rentMunicipality", "rentBarangay", "problems", "problemsSpecify",
+                "yearInoperable", "ConditionPresent", "Location", "Province", "Municipality",
+                "Barangay", "Latitude", "Longitude", "Accuracy", "Respondent Code",
+                "Respondent Name", "Image"});
+
 
         machineListViewModel.getAllMachines().observe(getActivity(), new Observer<List<Machines>>() {
             @Override
@@ -756,10 +764,10 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     time_used_harvester = machines.get(i).getTime_used();
                     capacity = machines.get(i).getCapacity();
                     ave_yield = machines.get(i).getAve_yield();
-                    num_loads = machines.get(i).getNum_loads();
+//                    num_loads = machines.get(i).getNum_loads();
                     rate = machines.get(i).getRate();
+                    waterpump_unit = machines.get(i).getWaterpump_unit();
                     ownership = machines.get(i).getOwnership();
-
 
                     purch_grant_dono = machines.get(i).getPurch_grant_dono();
                     agency = machines.get(i).getAgency();
@@ -771,6 +779,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     custom_rate = machines.get(i).getMain_custom_rent();
                     custom_unit = machines.get(i).getMain_custom_rent_unit();
                     custom_unit_specify = machines.get(i).getMain_custom_rent_unit_specify();
+                    ave_fuel_main = machines.get(i).getMain_ave_fuel();
 
                     plow_rate = machines.get(i).getPlow_custom_rent();
                     plow_unit = machines.get(i).getPlow_custom_rent_unit();
@@ -795,7 +804,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     rent_prov = machines.get(i).getRent_prov();
                     rent_mun = machines.get(i).getRent_mun();
                     rent_brgy = machines.get(i).getRent_brgy();
-                    condition = machines.get(i).getCondition();
+                    condition_present = machines.get(i).getCondition();
 
                     problems = machines.get(i).getProblems();
                     problems_specify = machines.get(i).getSpecify_problems();
@@ -806,7 +815,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     brgy = machines.get(i).getBrgy();
                     latitude = machines.get(i).getMachine_latitude();
                     longitude = machines.get(i).getMachine_longitude();
-                    imageString = machines.get(i).getMachine_image_base64().substring(0,16);
+                    imageString = machines.get(i).getMachine_image_base64().substring(0, 16);
 
                     accuracy = machines.get(i).getAccuracy();
                     resCode = machines.get(i).getResCode();
@@ -820,11 +829,21 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                         accuracy = "";
                     }
 
-                    machineListSend.add(new String[]{machineType, machineQRCode, tubewells, type_mill, datesurvey, brand, brand_specify, model, model_specify, rated_power, service_area,
-                            newly_planted_area, ratooned_area, ave_op_hours, ave_op_days, effaa_harvester,time_used_harvester, capacity, ave_yield, num_loads, rate, ownership, purch_grant_dono, agency, agency_specify, name_owner,
-                            year_acquired, condition_acquired, rental, custom_rate, custom_unit, custom_unit_specify, plow_rate, plow_unit, plow_unit_specify, harr_rate, harr_unit,
-                            harr_unit_specify, furr_rate, furr_unit, furr_unit_specify, othr_rent_operation, othr_rate, othr_unit, othr_unit_specify, ave_fuel_plow, ave_fuel_harr, ave_fuel_furr, availablity, rent_prov,
-                            rent_mun, rent_brgy, condition, problems, problems_specify, year_inoperable, location, prov, mun, brgy, latitude, longitude, accuracy, resCode, resName, imageString});
+                    machineListSend.add(new String[]{
+                            machineType, machineQRCode, tubewells, type_mill, datesurvey,
+                            brand, brand_specify, model, model_specify, rated_power,
+                            service_area, newly_planted_area, ratooned_area, ave_op_hours, ave_op_days,
+                            effaa_harvester, time_used_harvester, capacity, ave_yield, rate,
+                            waterpump_unit, ownership, purch_grant_dono, agency, agency_specify,
+                            name_owner, year_acquired, condition_acquired, rental, custom_rate,
+                            custom_unit, custom_unit_specify, ave_fuel_main, plow_rate, plow_unit,
+                            plow_unit_specify, harr_rate, harr_unit, harr_unit_specify, furr_rate,
+                            furr_unit, furr_unit_specify, othr_rent_operation, othr_rate, othr_unit,
+                            othr_unit_specify, ave_fuel_plow, ave_fuel_harr, ave_fuel_furr, availablity,
+                            rent_prov, rent_mun, rent_brgy, problems, problems_specify,
+                            year_inoperable, condition_present, location, prov, mun,
+                            brgy, latitude, longitude, accuracy, resCode,
+                            resName, imageString});
                 }
                 exportDataMachine(machineListSend);
             }
@@ -918,7 +937,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     implementLatitude = anImplements.get(i).getLatitude();
                     implementLongitude = anImplements.get(i).getLongitude();
                     implementAccuracy = anImplements.get(i).getAccuracy();
-                    implementImgBase64 = anImplements.get(i).getImage_base64().substring(0,16);
+                    implementImgBase64 = anImplements.get(i).getImage_base64().substring(0, 16);
 
 
                     implementListSend.add(new String[]{implementType, implementQR, implementUsedOnMachine, implementUsedOnMachineComplete, implementDateSurvey, implementBrand, implementModel, implementLandClearing, implementPrePlant, implementPlanting,

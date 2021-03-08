@@ -19,7 +19,7 @@
             android:text="R06ILOM00001"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#B71C1C"
+            android:textColor="#f05545"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvMachineLatLongItem"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="LatLong"
-            app:layout_constraintEnd_toStartOf="@+id/imgImageMachineListItem"
+            app:layout_constraintEnd_toStartOf="@+id/imgWarningMachineListItem"
             app:layout_constraintStart_toStartOf="@+id/tvMachineTypeItem"
             app:layout_constraintTop_toBottomOf="@+id/tvMachineTypeItem" />
 
@@ -69,25 +69,6 @@
             app:layout_constraintTop_toTopOf="@+id/tvMachineLatLongItem"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/ic_outline_warning_24" />
-
-        <ImageView
-            android:id="@+id/imgImageMachineListItem"
-            android:layout_width="40dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imgMapMachineListItem"
-            app:layout_constraintTop_toTopOf="@+id/tvMachineLatLongItem"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/ic_outline_photo_camera_inc_24" />
-
-        <ImageView
-            android:id="@+id/imgMapMachineListItem"
-            android:layout_width="40dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imgWarningMachineListItem"
-            app:layout_constraintTop_toTopOf="@+id/tvMachineLatLongItem"
-            app:srcCompat="@drawable/ic_outline_pin_drop_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

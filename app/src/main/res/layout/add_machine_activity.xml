@@ -577,28 +577,30 @@
             android:layout_height="wrap_content"
             android:text="Unit"
             app:layout_constraintStart_toStartOf="@+id/tvAveOpDays"
-            app:layout_constraintTop_toTopOf="@id/edtRateWaterPumpUnit" />
+            app:layout_constraintTop_toTopOf="@id/spinWaterPumpUnit" />
 
-        <TextView
-            android:id="@+id/tvRateWaterPumpUnitSample"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="L/s L/m, L/h\ngal/min etc"
-            app:layout_constraintStart_toEndOf="@+id/tvRateWaterPumpUnit"
-            app:layout_constraintTop_toTopOf="@id/tvRateWaterPumpUnit" />
-
-        <EditText
-            android:id="@+id/edtRateWaterPumpUnit"
+        <Spinner
+            android:id="@+id/spinWaterPumpUnit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:background="@drawable/custom_edit_text"
-            android:ems="10"
-            android:inputType="numberDecimal"
+            android:layout_marginStart="32dp"
+            android:background="@drawable/custom_spinner"
+            android:entries="@array/waterpump_unit"
             app:layout_constraintEnd_toEndOf="@+id/edtRatedPower"
-            app:layout_constraintStart_toEndOf="@+id/tvRateWaterPumpUnitSample"
+            app:layout_constraintStart_toEndOf="@+id/tvRateWaterPumpUnit"
             app:layout_constraintTop_toBottomOf="@+id/edtRate" />
+
+<!--        <EditText-->
+<!--            android:id="@+id/edtRateWaterPumpUnit"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:background="@drawable/custom_edit_text"-->
+<!--            android:ems="10"-->
+<!--            android:inputType="text"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/edtRatedPower"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/tvRateWaterPumpUnitSample"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/edtRate" />-->
 
         <TextView
             android:id="@+id/tvOwnership"
@@ -860,6 +862,32 @@
             app:layout_constraintTop_toBottomOf="@+id/spinPlowingRentUnit" />
 
         <TextView
+            android:id="@+id/tvAveFuelConsumptionMain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:text="Fuel Consumption\n(L/ha)"
+            app:layout_constraintEnd_toEndOf="@id/edtMainRent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvForRent"
+            app:layout_constraintTop_toBottomOf="@id/edtCustomRateUnit" />
+
+        <EditText
+            android:id="@+id/edtAveFuelConsumptionMain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/custom_edit_text"
+            android:ems="10"
+            android:hint="Liters/Hectare"
+            android:inputType="numberDecimal"
+            app:layout_constraintBottom_toBottomOf="@id/tvAveFuelConsumptionMain"
+            app:layout_constraintEnd_toEndOf="@id/spinMainRentUnit"
+            app:layout_constraintStart_toEndOf="@id/tvAveFuelConsumptionMain"
+            app:layout_constraintTop_toTopOf="@id/tvAveFuelConsumptionMain" />
+
+        <TextView
             android:id="@+id/tvPlowingRent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -932,7 +960,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Harrowing Custom Rate (in PHP)"
+            android:text="Harrowing Custom Rate\n(in PHP)"
             app:layout_constraintEnd_toEndOf="@+id/edtPlowingRent"
             app:layout_constraintStart_toStartOf="@+id/tvForRent"
             app:layout_constraintTop_toBottomOf="@+id/edtPlowSpecifyUnit" />
@@ -1111,11 +1139,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
-            android:text="Fuel Consumption during Plowing"
+            android:text="Fuel Consumption during Plowing\n(L/ha)"
             app:layout_constraintEnd_toEndOf="@+id/edtOtherRent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tvForRent"
             app:layout_constraintTop_toBottomOf="@+id/edtOthrSpecifyUnit" />
+
+
 
         <EditText
             android:id="@+id/edtAveFuelConsumptionPlowing"
@@ -1131,13 +1161,12 @@
             app:layout_constraintStart_toEndOf="@+id/tvAveFuelConsumptionPlowing"
             app:layout_constraintTop_toTopOf="@+id/tvAveFuelConsumptionPlowing" />
 
-
         <TextView
             android:id="@+id/tvAveFuelConsumptionHarrowing"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Fuel Consumption during Harrowing"
+            android:text="Fuel Consumption during Harrowing\n(L/ha)"
             app:layout_constraintEnd_toEndOf="@+id/tvAveFuelConsumptionPlowing"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tvForRent"
@@ -1161,7 +1190,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Fuel Consumption during Furrowing"
+            android:text="Fuel Consumption during Furrowing\n(L/ha)"
             app:layout_constraintEnd_toEndOf="@+id/tvAveFuelConsumptionHarrowing"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tvForRent"
@@ -1280,8 +1309,8 @@
         <com.androidbuts.multispinnerfilter.MultiSpinnerSearch
             android:id="@+id/multSpinBrgyRent"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/custom_spinner"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="@+id/multSpinMunRent"

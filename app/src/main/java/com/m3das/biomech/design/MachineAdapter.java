@@ -37,24 +37,12 @@ public class MachineAdapter extends RecyclerView.Adapter<MachineAdapter.MachineH
         holder.NameResp.setText(currentMachine.getResName());
 
         if (currentMachine.getOwnership().contains("Acquired") || currentMachine.getYear_acquired().contains("Acquired") || currentMachine.getCondition_acquired().contains("Acquired") ||
-                currentMachine.getRental().contains("Acquired") || currentMachine.getCondition().contains("Acquired")) {
+                currentMachine.getRental().contains("Acquired") || currentMachine.getCondition().contains("Acquired") || currentMachine.getMachine_image_base64().contains("Acquired") ||
+                currentMachine.getAccuracy().contains("Acquired")) {
             holder.WarningItem.setVisibility(View.VISIBLE);
         } else {
             holder.WarningItem.setVisibility(View.INVISIBLE);
         }
-
-        if (currentMachine.getMachine_image_base64().contains("Acquired")) {
-            holder.ImageItem.setVisibility(View.VISIBLE);
-        } else {
-            holder.ImageItem.setVisibility(View.INVISIBLE);
-        }
-
-        if (currentMachine.getAccuracy().contains("Acquired")) {
-            holder.MapItem.setVisibility(View.VISIBLE);
-        } else {
-            holder.MapItem.setVisibility(View.INVISIBLE);
-        }
-
 
     }
 
@@ -75,7 +63,7 @@ public class MachineAdapter extends RecyclerView.Adapter<MachineAdapter.MachineH
 
     class MachineHolder extends RecyclerView.ViewHolder {
         private final TextView LatLong, Type, QRCode, NameResp;
-        private final ImageView WarningItem, ImageItem, MapItem;
+        private final ImageView WarningItem;
 
 
         public MachineHolder(View itemView) {
@@ -85,8 +73,6 @@ public class MachineAdapter extends RecyclerView.Adapter<MachineAdapter.MachineH
             QRCode = itemView.findViewById(R.id.tvMacineQRCodeItem);
             NameResp = itemView.findViewById(R.id.tvNameRespitemC);
             WarningItem = itemView.findViewById(R.id.imgWarningMachineListItem);
-            MapItem = itemView.findViewById(R.id.imgMapMachineListItem);
-            ImageItem = itemView.findViewById(R.id.imgImageMachineListItem);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

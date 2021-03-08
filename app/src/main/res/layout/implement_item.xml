@@ -17,7 +17,7 @@
             android:text="R04BAT87253"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#1A237E"
+            android:textColor="#000070"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvImplementLatLongItem"
@@ -51,9 +51,10 @@
 
         <TextView
             android:id="@+id/tvAttachedTo"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Attached to Machine:"
+            app:layout_constraintEnd_toStartOf="@+id/imgWarningImplementItem"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvImplementLatLongItem" />
 
@@ -63,7 +64,7 @@
             android:layout_height="wrap_content"
             android:text="Attached to Machine"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imgImageImplementItem"
+            app:layout_constraintEnd_toStartOf="@+id/imgWarningImplementItem"
             app:layout_constraintStart_toStartOf="@+id/tvAttachedTo"
             app:layout_constraintTop_toBottomOf="@+id/tvAttachedTo" />
 
@@ -73,28 +74,8 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imgMapImplementItem"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/ic_outline_warning_24" />
-
-        <ImageView
-            android:id="@+id/imgImageImplementItem"
-            android:layout_width="40dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imgMapImplementItem"
             app:layout_constraintTop_toTopOf="@+id/tvAttachedTo"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/ic_outline_photo_camera_inc_24" />
-
-        <ImageView
-            android:id="@+id/imgMapImplementItem"
-            android:layout_width="40dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/imgWarningImplementItem"
-            app:layout_constraintTop_toTopOf="@+id/imgImageImplementItem"
-            app:srcCompat="@drawable/ic_outline_pin_drop_24" />
+            app:srcCompat="@drawable/ic_outline_warning_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

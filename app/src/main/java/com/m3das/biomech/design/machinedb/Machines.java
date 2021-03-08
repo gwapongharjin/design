@@ -28,8 +28,8 @@ public class Machines {
     private final String time_used;
     private final String capacity;
     private final String ave_yield;
-    private final String num_loads;
     private final String rate;
+    private final String waterpump_unit;
     private final String ownership;
     private final String purch_grant_dono;
     private final String agency;
@@ -41,6 +41,7 @@ public class Machines {
     private final String main_custom_rent;
     private final String main_custom_rent_unit;
     private final String main_custom_rent_unit_specify;
+    private final String main_ave_fuel;
     private final String plow_custom_rent;
     private final String plow_custom_rent_unit;
     private final String plow_custom_rent_unit_specify;
@@ -82,9 +83,9 @@ public class Machines {
 
     public Machines(String machine_type, String type_tubewells, String type_mill, String machine_qrcode, String date_of_survey, String machine_brand, String machine_brand_specify,
                     String machine_model, String machine_model_specify, String rated_power, String service_area, String newly_planted_area, String ratooned_area, String ave_op_hours,
-                    String ave_op_days, String effective_area, String time_used, String capacity, String ave_yield, String num_loads, String rate, String ownership, String purch_grant_dono, String agency, String agency_specify,
+                    String ave_op_days, String effective_area, String time_used, String capacity, String ave_yield, String rate, String waterpump_unit, String ownership, String purch_grant_dono, String agency, String agency_specify,
                     String name_owner, String year_acquired, String condition_acquired, String rental, String main_custom_rent, String main_custom_rent_unit, String main_custom_rent_unit_specify,
-                    String plow_custom_rent, String plow_custom_rent_unit, String plow_custom_rent_unit_specify, String harr_custom_rent, String harr_custom_rent_unit,
+                    String main_ave_fuel, String plow_custom_rent, String plow_custom_rent_unit, String plow_custom_rent_unit_specify, String harr_custom_rent, String harr_custom_rent_unit,
                     String harr_custom_rent_unit_specify, String furr_custom_rent, String furr_custom_rent_unit, String furr_custom_rent_unit_specify, String other_unit_operation, String other_custom_rent,
                     String other_custom_rent_unit, String other_custom_rent_unit_specify, String plow_ave_fuel, String harr_ave_fuel, String furr_ave_fuel, String availability,
                     String rent_prov, String rent_mun, String rent_brgy, String condition, String problems, String specify_problems, String year_inoperable, String location, String prov, String mun, String brgy,
@@ -108,7 +109,8 @@ public class Machines {
         this.time_used = time_used;
         this.capacity = capacity;
         this.ave_yield = ave_yield;
-        this.num_loads = num_loads;
+        this.waterpump_unit = waterpump_unit;
+        this.main_ave_fuel = main_ave_fuel;
         this.rate = rate;
         this.ownership = ownership;
         this.purch_grant_dono = purch_grant_dono;
@@ -238,12 +240,12 @@ public class Machines {
         return ave_yield;
     }
 
-    public String getNum_loads() {
-        return num_loads;
-    }
-
     public String getRate() {
         return rate;
+    }
+
+    public String getWaterpump_unit() {
+        return waterpump_unit;
     }
 
     public String getOwnership() {
@@ -288,6 +290,10 @@ public class Machines {
 
     public String getMain_custom_rent_unit_specify() {
         return main_custom_rent_unit_specify;
+    }
+
+    public String getMain_ave_fuel() {
+        return main_ave_fuel;
     }
 
     public String getPlow_custom_rent() {

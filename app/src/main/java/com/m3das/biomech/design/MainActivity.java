@@ -15,7 +15,9 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayoutMain;
     public PageAdapter pagerAdapter;
+    private ImageView cropSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initViews();
         tryThis();
+
+        String cropType;
+        if (Variable.getCrop() == 1) {
+            cropSelected.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.corn));
+            cropType = "Corn";
+        } else if (Variable.getCrop() == 2) {
+            cropSelected.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.rice));
+            cropType = "Rice";
+        } else {
+            cropSelected.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.sugarcane));
+            cropType = "Sugarcane";
+        }
+
+        cropSelected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Your selected crop is " + cropType, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         pagerAdapter = new PageAdapter(getSupportFragmentManager(), tabLayoutMain.getTabCount());
         viewPager.setAdapter(pagerAdapter);
@@ -74,11 +96,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
-    private void initViews(){
+    private void initViews() {
 
         tabMap = findViewById(R.id.tabMap);
         tabInfo = findViewById(R.id.tabInfo);
@@ -87,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         tabQR = findViewById(R.id.tabImplements);
         tabLayoutMain = findViewById(R.id.tabLayoutMain);
         viewPager = findViewById(R.id.viewpager);
+        cropSelected = findViewById(R.id.imgCropSelected);
     }
 
 }

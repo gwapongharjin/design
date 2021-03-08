@@ -23,8 +23,10 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -67,30 +69,31 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 
 public class AddMachineActivity extends AppCompatActivity {
     private ImageButton camera, gallery, getLocation, btnScanQR;
     private Button btnSave;
-    private int bigMargin, smallMargin, biggerMargin;
-    private int stringArrayValue;
+    private int bigMargin, smallMargin, biggerMargin, machineTypeArray;
     private ImageView selectedImage;
 
     private EditText edtQRCode, edtCapacity, edtAveYield, edtRate, edtAveOpHours, edtAveOpDays, edtNewlyPlantedArea, edtRatoonArea, edtNameOfOwnerOrg, edtCustomRate,
             edtOtherProblems, edtOtherAgency, edtOtherBrand, edtOtherModel, edtRatedPower, edtPlowingRent, edtHarrowingRent, edtFurrowingRent, edtOtherRent, edtAveFuelConsPlow,
             edtAveFuelConsHarr, edtAveFuelConsFurr, edtPlowSpecifyUnit, edtHarrSpecifyUnit, edtFurrSpecifyUnit, edtOthrSpecifyUnit, edtCustomRateUnit, edtOthrSpecifyOperation,
-            edtTotalServiceArea, edtTimeUsedWorking, edtEffectiveArea;
+            edtTotalServiceArea, edtTimeUsedWorking, edtEffectiveArea, edtAveFuelConsMain;
     private TextView tvLat, tvLong, tvTypeOfMill, tvBrand, tvOwnership, tvTypeOfTubewells, tvMachineAvailability, tvConditionPresent, tvLocation, tvModel, tvProvRent, tvMunRent, tvBrgyRent,
             tvCustomRate, tvCustomUnit, tvMachineUnused, tvCapacity, tvAveYield, tvRate, tvPurchGrantDono, tvAgency, tvAcc, tvPlowingRent, tvCustomUnitOther, tvHarrowingRent,
             tvFurrowingRent, tvOtherRent, tvAveFuelConsPlow, tvAveFuelConsHarr, tvAveFuelConsFurr, tvYearInoperable, tvPrevious, tvPrevResp, tvNewlyPlantedArea, tvRatoonArea, tvTotalServiceArea,
             tvNewlyPlantedAreaInfo, tvRatoonAreaInfo, tvPlowingRentInfo, tvHarrowingRentInfo, tvFurrowingRentInfo, tvMachineAvailabilityInfo, tvRatedPower, tvAveOpHours, tvAveOpDays,
             tvNameOfOwnerOrOrganization, tvConditionAcquired, tvRatedPowerInfo, tvAveOpHoursInfo, tvAveOpDaysInfo, tvNameOfOwnerOrOrganizationInfo, tvConditionAcquiredInfo, tvTimeUsedWorking,
-            tvEffectiveArea, tvTotalServiceAreaInfo;
+            tvEffectiveArea, tvTotalServiceAreaInfo, tvWaterPumpUnit, tvAveFuelConsMain;
     private Spinner spinMachineType, spinTypeOfMill, spinRental, spinCustomUnit, spinAvailability, spinConditionPresent, spinRespName, spinTypeofTubeWells, spinOwnership,
             spinPurchGrantDono, spinAgency, spinBrand, spinModel, spinYearAcquired, spinConditionAcquired, spinLocationOfMachine, spinPlowingRentUnit, spinHarrowingRentUnit,
-            spinFurrowingRentUnit, spinOtherRentUnit, spinYearInoperable
+            spinFurrowingRentUnit, spinOtherRentUnit, spinYearInoperable, spinWaterPumpUnit
             //spinRentProv, spinRentMun, spinProvince, spinMunicipality
             ;
     private RadioGroup rgLoanCash;
@@ -106,18 +109,19 @@ public class AddMachineActivity extends AppCompatActivity {
     private Intent intentFromDb;
     private boolean machineTypeInfoCheck, machineTypeSpecsCheck, respCheck, qrCheck, ownershipCheck, yearSelectCheck, conditionAcquiredCheck, hasOtherProblems, loanCashCheck,
             purchGrantDonoCheck, agencyCheck, rentSelectCheck, rentCustomCheck, rentAvailCheck, conditionPresentCheck, otherProblemsCheck, locationMachineCheck, locationGarageCheck,
-            machineTypeInfoBrandCheck, machineTypeInfoModelCheck, typeMillCheck, typeTubewellsCheck, spinYearInoperableCheck;
+            machineTypeInfoBrandCheck, machineTypeInfoModelCheck, typeMillCheck, typeTubewellsCheck, spinYearInoperableCheck, nameOwnerOrgCheck;
     private ConstraintLayout.LayoutParams paramstvBrand, paramstvOwnership, paramsedtCapacity, paramstvConditionPresent, paramstvLocation, paramstvModel, paramsedtRatedPower,
-            paramsedtAveYield, paramsedtRate, paramstvTypeTubewells, paramsedtNameOfOwnerOrg, paramstvMachineAvailability, paramstvMachineUnused, paramstvAveOpHours;
+            paramsedtAveYield, paramsedtRate, paramstvTypeTubewells, paramsedtNameOfOwnerOrg, paramstvMachineAvailability, paramstvMachineUnused, paramstvAveOpHours, paramsedtWaterPump;
     private String machineSelected;
     private MachineListViewModel machineListViewModel;
     private ProfileViewModel profileViewModel;
     private ArrayList<String> profilesListAfterSet = new ArrayList<>();
+    public static final int WRITE_PERM_CODE = 279;
     public static final int CAMERA_PERM_CODE = 101;
     public static final int CAMERA_REQUEST_CODE = 102;
     public static final int GALLERY_REQUEST_CODE = 105;
+    public static final int SCAN_QR_REQUEST_CODE = 107;
     public static final int LOCATION_REQUEST_CODE = 127;
-    public static final int WRITE_PERM_CODE = 279;
     public static final String EXTRA_MACHINE_TYPE = "ADDMACHINE_EXTRA_MACHINE_TYPE";
     public static final String EXTRA_TYPE_TUBEWELLS = "ADDMACHINE_EXTRA_TYPE_TUBEWELLS";
     public static final String EXTRA_TYPE_MILL = "ADDMACHINE_EXTRA_TYPE_MILL";
@@ -142,6 +146,7 @@ public class AddMachineActivity extends AppCompatActivity {
     public static final String EXTRA_AVE_YIELD = "ADDMACHINE_EXTRA_AVE_YIELD";
     public static final String EXTRA_NUM_LOADS = "ADDMACHINE_EXTRA_NUM_LOADS";
     public static final String EXTRA_RATE = "ADDMACHINE_EXTRA_RATE";
+    public static final String EXTRA_WATERPUMP_UNIT = "ADDMACHINE_EXTRA_WATERPUMP_UNIT";
     public static final String EXTRA_OWNERSHIP = "ADDMACHINE_EXTRA_OWNERSHIP";
     public static final String EXTRA_PURCH_GRANT_DONO = "ADDMACHINE_EXTRA_PURCH_GRANT_DONO";
     public static final String EXTRA_AGENCY = "ADDMACHINE_EXTRA_AGENCY";
@@ -155,6 +160,7 @@ public class AddMachineActivity extends AppCompatActivity {
     public static final String EXTRA_MAIN_RENT_RATE = "ADDMACHINE_EXTRA_MAIN_RATE";
     public static final String EXTRA_MAIN_RENT_UNIT = "ADDMACHINE_EXTRA_MAIN_UNIT";
     public static final String EXTRA_MAIN_RENT_UNIT_SPECIFY = "ADDMACHINE_EXTRA_MAIN_RATE_SPECIFY";
+    public static final String EXTRA_AVE_FUEL_MAIN = "ADDMACHINE_EXTRA_AVE_FUEL_MAIN";
     public static final String EXTRA_PLOW_RENT_RATE = "ADDMACHINE_EXTRA_PLOW_RATE";
     public static final String EXTRA_PLOW_RENT_UNIT = "ADDMACHINE_EXTRA_PLOW_UNIT";
     public static final String EXTRA_PLOW_RENT_UNIT_SPECIFY = "ADDMACHINE_EXTRA_PLOW_RATE_SPECIFY";
@@ -190,6 +196,7 @@ public class AddMachineActivity extends AppCompatActivity {
     static Uri capturedImageUri = null;
     float dpWidth;
     ArrayList<Respondent> respondentArrayList = new ArrayList<Respondent>();
+    ArrayAdapter<String> adapterProfiles;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -220,19 +227,27 @@ public class AddMachineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_machine_activity);
 
-        askCameraPermission();
-        requestExternalPermission();
-
-        if (!checkExternalPermission()) {
-            // Code for above or equal 23 API Oriented Device
-            // Your Permission granted already .Do next code
-            requestExternalPermission();
-        }  // Code for permission
-
+        askPermission();
+//        askCameraPermission();
+//        requestExternalPermission();
+//
+//        if (!checkExternalPermission()) {
+//            // Code for above or equal 23 API Oriented Device
+//            // Your Permission granted already .Do next code
+//            requestExternalPermission();
+//        }  // Code for permission
 
         setMargins();
         initViews();
         hide();
+
+        if (Variable.getCrop() == 1) {
+            machineTypeArray = R.array.machine_types_corn;
+        } else if (Variable.getCrop() == 2) {
+            machineTypeArray = R.array.machine_types_rice;
+        } else {
+            machineTypeArray = R.array.machine_types_sugarcane;
+        }
 
         DisplayMetrics displayMetrics = getApplicationContext().getResources().getDisplayMetrics();
         dpWidth = displayMetrics.widthPixels / displayMetrics.density;
@@ -256,15 +271,32 @@ public class AddMachineActivity extends AppCompatActivity {
             public void onChanged(List<Profile> profiles) {
                 ArrayList<String> stringArrayList = new ArrayList<>();
                 stringArrayList.add("Please Select...");
+
                 for (int i = 0; i < profiles.size(); i++) {
                     stringArrayList.add((i + 1) + " | " + profiles.get(i).getName_respondent());
                     respondentArrayList.add(new Respondent(profiles.get(i).getName_respondent(), profiles.get(i).getResCode()));
 //                    Log.d("XRES LOOP1", respondentArrayList.get(i).name + " " + respondentArrayList.get(i).code);
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, stringArrayList);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinRespName.setAdapter(adapter);
+                adapterProfiles = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, stringArrayList);
+                adapterProfiles.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinRespName.setAdapter(adapterProfiles);
+
+                Log.d("ADMEDTRESC", "size" + respondentArrayList.size());
+                Log.d("ADMEDTRESC", "extra" + getIntent().getStringExtra(EXTRA_RES_CODE));
+                if (getIntent().hasExtra(EXTRA_ID)) {
+                    String comp = getIntent().getStringExtra(EXTRA_RES_CODE);
+                    int position = 0;
+                    for (int i = 0; i < respondentArrayList.size(); i++) {
+                        Log.d("ADMEDTRESC", "name" + respondentArrayList.get(i).name);
+                        Log.d("ADMEDTRESC", "code" + respondentArrayList.get(i).code);
+                        if (respondentArrayList.get(i).code.equals(comp)) {
+                            position = i + 1;
+                        }
+                    }
+                    spinRespName.setSelection(position);
+                }
+
             }
         });
 
@@ -278,6 +310,10 @@ public class AddMachineActivity extends AppCompatActivity {
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
         spinYearAcquired.setAdapter(adapter);
+
+        ArrayAdapter<String> adapterMachineType = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Arrays.asList(getResources().getStringArray(machineTypeArray)));
+        adapterMachineType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinMachineType.setAdapter(adapterMachineType);
 
 
         ArrayList<String> yearFaulty = new ArrayList<String>();
@@ -316,8 +352,9 @@ public class AddMachineActivity extends AppCompatActivity {
         });
 
         btnScanQR.setOnClickListener(view -> {
+            clearCursor();
             Intent intent = new Intent(AddMachineActivity.this, ScanBarcodeActivity.class);
-            startActivityForResult(intent, 0);
+            startActivityForResult(intent, SCAN_QR_REQUEST_CODE);
             Toast.makeText(AddMachineActivity.this, "Scanning QR", Toast.LENGTH_SHORT).show();
         });
 
@@ -508,7 +545,7 @@ public class AddMachineActivity extends AppCompatActivity {
 
                 } else {
                     edtOtherRent.setEnabled(true);
-                    edtOthrSpecifyOperation.setEnabled(true );
+                    edtOthrSpecifyOperation.setEnabled(true);
                 }
                 customUnitSelect(i);
                 clearCursor();
@@ -635,7 +672,7 @@ public class AddMachineActivity extends AppCompatActivity {
         singlespinProvince.setItems(allProvinces, new SingleSpinnerListener() {
             @Override
             public void onItemsSelected(KeyPairBoolData selectedItem) {
-
+                clearCursor();
                 Log.d("Single Prov", selectedItem.getName());
                 locProvince = selectedItem.getName();
                 if (selectedItem.getName().contains("BATANGAS")) {
@@ -658,11 +695,9 @@ public class AddMachineActivity extends AppCompatActivity {
         multSpinProvRent.setSearchHint("Please Select...");
 
         multSpinMunRent.setSearchHint("Please Select...");
-        multSpinMunRent.setShowSelectAllButton(true);
         multSpinMunRent.setEnabled(false);
 
         multSpinBrgyRent.setHintText("Please Select...");
-        multSpinBrgyRent.setShowSelectAllButton(true);
         multSpinBrgyRent.setEnabled(false);
 
 
@@ -980,7 +1015,7 @@ public class AddMachineActivity extends AppCompatActivity {
         edtAveOpDays.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                setFocusOnEdt(edtAveOpHours);
+                setFocusOnEdt(edtAveOpDays);
                 return false;
             }
         });
@@ -1142,6 +1177,14 @@ public class AddMachineActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        edtAveFuelConsMain.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                setFocusOnEdt(edtAveFuelConsMain);
+                return false;
+            }
+        });
     }
 
     private void clearCursor() {
@@ -1157,6 +1200,7 @@ public class AddMachineActivity extends AppCompatActivity {
         edtEffectiveArea.setFocusable(false);
         edtTimeUsedWorking.setFocusable(false);
         edtCapacity.setFocusable(false);
+        spinWaterPumpUnit.setFocusable(false);
         edtAveYield.setFocusable(false);
 //        edtNumLoads.setFocusable(false);
         edtRate.setFocusable(false);
@@ -1164,6 +1208,7 @@ public class AddMachineActivity extends AppCompatActivity {
 
         edtCustomRate.setFocusable(false);
         edtCustomRateUnit.setFocusable(false);
+        edtAveFuelConsMain.setFocusable(false);
 
         edtPlowingRent.setFocusable(false);
         edtPlowSpecifyUnit.setFocusable(false);
@@ -1180,6 +1225,7 @@ public class AddMachineActivity extends AppCompatActivity {
         edtAveFuelConsFurr.setFocusable(false);
 
         edtOtherProblems.setFocusable(false);
+
 
     }
 
@@ -1417,6 +1463,7 @@ public class AddMachineActivity extends AppCompatActivity {
                     Log.d("ADMMULTSPIN", pos);
                 }
                 munRent = pos;
+                barangaysStringList.add("ALL BARANGAYS");
                 if (munRent.contains("AGONCILLO")) {
                     barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_agoncillo_brgy)));
                 }
@@ -1561,6 +1608,7 @@ public class AddMachineActivity extends AppCompatActivity {
         paramsedtRatedPower = (ConstraintLayout.LayoutParams) edtRatedPower.getLayoutParams();
         paramstvMachineUnused = (ConstraintLayout.LayoutParams) tvMachineUnused.getLayoutParams();
         paramstvAveOpHours = (ConstraintLayout.LayoutParams) tvAveOpHours.getLayoutParams();
+        paramsedtWaterPump = (ConstraintLayout.LayoutParams) spinWaterPumpUnit.getLayoutParams();
 //        paramstvMachineAvailability.topToBottom = R.id.spinRental;
 //        paramstvMachineAvailability.topMargin = bigMargin;
 //        tvMachineAvailability.setLayoutParams(paramstvMachineAvailability);
@@ -1743,7 +1791,7 @@ public class AddMachineActivity extends AppCompatActivity {
         tvPrevResp.setText(intent1.getStringExtra(EXTRA_RES_NAME));
 
         String stringCompare = intent1.getStringExtra(EXTRA_MACHINE_TYPE);
-        ArrayAdapter<CharSequence> adaptercompare = ArrayAdapter.createFromResource(this, R.array.machine_types, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adaptercompare = ArrayAdapter.createFromResource(this, machineTypeArray, android.R.layout.simple_spinner_item);
         adaptercompare.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         if (stringCompare != null) {
             position = adaptercompare.getPosition(stringCompare);
@@ -1819,7 +1867,15 @@ public class AddMachineActivity extends AppCompatActivity {
 //        edtNumLoads.setText(intent1.getStringExtra(EXTRA_NUM_LOADS));
         edtRate.setText(intent1.getStringExtra(EXTRA_RATE));
 
-        //TODO PURCHGRANTDONO AGENCY
+        stringCompare = intent1.getStringExtra(EXTRA_WATERPUMP_UNIT);
+        adaptercompare = ArrayAdapter.createFromResource(this, R.array.waterpump_unit, android.R.layout.simple_spinner_item);
+        adaptercompare.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        if (!isNullOrEmpty(stringCompare)) {
+            position = adaptercompare.getPosition(stringCompare);
+        }
+        Log.d("Position OWNERSHIP", "Position is: " + intent1.getStringExtra(EXTRA_WATERPUMP_UNIT) + " " + position);
+        spinOwnership.setSelection(position);
+        spinWaterPumpUnit.setSelection(position);
 
         stringCompare = intent1.getStringExtra(EXTRA_OWNERSHIP);
         adaptercompare = ArrayAdapter.createFromResource(this, R.array.ownership_of_machine, android.R.layout.simple_spinner_item);
@@ -1930,12 +1986,14 @@ public class AddMachineActivity extends AppCompatActivity {
         edtFurrowingRent.setText(intent1.getStringExtra(EXTRA_FURR_RENT_RATE));
         edtOtherRent.setText(intent1.getStringExtra(EXTRA_OTHR_RENT_RATE));
 
+        edtCustomRateUnit.setText(intent1.getStringExtra(EXTRA_MAIN_RENT_UNIT_SPECIFY));
         edtPlowSpecifyUnit.setText(intent1.getStringExtra(EXTRA_PLOW_RENT_UNIT_SPECIFY));
         edtHarrSpecifyUnit.setText(intent1.getStringExtra(EXTRA_HARR_RENT_UNIT_SPECIFY));
         edtFurrSpecifyUnit.setText(intent1.getStringExtra(EXTRA_FURR_RENT_UNIT_SPECIFY));
         edtOthrSpecifyOperation.setText(intent1.getStringExtra(EXTRA_OTHR_RENT_OPERATION));
         edtOthrSpecifyUnit.setText(intent1.getStringExtra(EXTRA_OTHR_RENT_UNIT_SPECIFY));
 
+        edtAveFuelConsMain.setText(intent1.getStringExtra(EXTRA_AVE_FUEL_MAIN));
         edtAveFuelConsPlow.setText(intent1.getStringExtra(EXTRA_AVE_FUEL_PLOW));
         edtAveFuelConsHarr.setText(intent1.getStringExtra(EXTRA_AVE_FUEL_HARR));
         edtAveFuelConsFurr.setText(intent1.getStringExtra(EXTRA_AVE_FUEL_FURR));
@@ -2025,9 +2083,9 @@ public class AddMachineActivity extends AppCompatActivity {
 //        Log.d("Position LOCATION", "Position is: " + intent1.getStringExtra(EXTRA_PROV) + " " + position)
         stringCompare = intent1.getStringExtra(EXTRA_PROBLEMS);
         List<KeyPairBoolData> problems = null;
-        if (spinConditionPresent.getSelectedItemPosition() == 2) {
+        if (spinConditionPresent.getSelectedItemPosition() == 3) {
             problems = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.problems_unused)), stringCompare, 1);
-        } else if (spinConditionPresent.getSelectedItemPosition() == 3) {
+        } else if (spinConditionPresent.getSelectedItemPosition() == 4) {
             problems = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.problems_nonfunctional)), stringCompare, 1);
         } else {
             problems = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.problems_unused)), stringCompare, 1);
@@ -2050,210 +2108,210 @@ public class AddMachineActivity extends AppCompatActivity {
         listOfProblems = intent1.getStringExtra(EXTRA_PROBLEMS);
 
         List<KeyPairBoolData> rentProvinces = null;
-//        stringCompare = intent1.getStringExtra(EXTRA_RENT_PROV);
-//        if (stringCompare.contains("BATANGAS")) {
-//            rentProvinces = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.provinces)), stringCompare, 2);
-//            multSpinProvRent.setItems(rentProvinces, new MultiSpinnerListener() {
-//                @Override
-//                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
-//                    String pos = new String();
-//                    for (int i = 0; i < selectedItems.size(); i++) {
-//                        pos = selectedItems.get(i).getName() + "; " + pos;
-//                        Log.d("MULTSPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-//                        Log.d("MULTSPIN", pos);
-//                    }
-//                }
-//            });
-//
-//
-//            stringCompare = intent1.getStringExtra(EXTRA_RENT_MUN);
-//            List<KeyPairBoolData> rentMunicipalities = null;
-//            rentMunicipalities = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.batangas_municipalities)), stringCompare, 3);
-//            multSpinMunRent.setItems(rentMunicipalities, new MultiSpinnerListener() {
-//                @Override
-//                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
-//                    String pos = new String();
-//                    for (int i = 0; i < selectedItems.size(); i++) {
-//                        pos = selectedItems.get(i).getName() + "; " + pos;
-//                        Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-//                        Log.d("MULT SPIN", pos);
-//                    }
-//                    munRent = pos;
-//                }
-//            });
-//
-//            stringCompare = intent1.getStringExtra(EXTRA_RENT_BRGY);
-//            List<KeyPairBoolData> rentBarangays = null;
-//            List<String> barangaysStringList = new ArrayList<>();
-//
-//            if (stringCompare.contains("AGONCILLO")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_agoncillo_brgy)));
-//            }
-//            if (stringCompare.contains("ALITAGTAG")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_alitagtag_brgy)));
-//            }
-//            if (stringCompare.contains("BALAYAN")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_balayan_brgy)));
-//            }
-//            if (stringCompare.contains("BALETE")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_balete_brgy)));
-//            }
-//            if (stringCompare.contains("BATANGAS CITY")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_batangascity_brgy)));
-//            }
-//            if (stringCompare.contains("BAUAN")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_bauan_brgy)));
-//            }
-//            if (stringCompare.contains("CALACA")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_calaca_brgy)));
-//            }
-//            if (stringCompare.contains("CALATAGAN")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_calatagan_brgy)));
-//            }
-//            if (stringCompare.contains("CUENCA")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_cuenca_brgy)));
-//            }
-//            if (stringCompare.contains("IBAAN")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_ibaan_brgy)));
-//            }
-//            if (stringCompare.contains("LAUREL")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_laurel_brgy)));
-//            }
-//            if (stringCompare.contains("LEMERY")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lemery_brgy)));
-//            }
-//            if (stringCompare.contains("LIAN")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lian_brgy)));
-//            }
-//            if (stringCompare.contains("LIPA CITY")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lipacity_brgy)));
-//            }
-//            if (stringCompare.contains("LOBO")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lobo_brgy)));
-//            }
-//            if (stringCompare.contains("MABINI")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_mabini_brgy)));
-//            }
-//            if (stringCompare.contains("MALVAR")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_malvar_brgy)));
-//            }
-//            if (stringCompare.contains("MATAASNAKAHOY")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_mataasnakahoy_brgy)));
-//            }
-//            if (stringCompare.contains("NASUGBU")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_nasugbu_brgy)));
-//            }
-//            if (stringCompare.contains("PADRE GARCIA")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_padregarcia_brgy)));
-//            }
-//            if (stringCompare.contains("ROSARIO")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_rosario_brgy)));
-//            }
-//            if (stringCompare.contains("SAN JOSE")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanjose_brgy)));
-//            }
-//            if (stringCompare.contains("SAN JUAN")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanjuan_brgy)));
-//            }
-//            if (stringCompare.contains("SAN LUIS")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanluis_brgy)));
-//            }
-//            if (stringCompare.contains("SAN NICOLAS")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sannicolas_brgy)));
-//            }
-//            if (stringCompare.contains("SAN PASCUAL")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanpascual_brgy)));
-//            }
-//            if (stringCompare.contains("STA. TERESITA")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_staterisita_brgy)));
-//            }
-//            if (stringCompare.contains("STO. TOMAS")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_stotomas_brgy)));
-//            }
-//            if (stringCompare.contains("TAAL")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_taal_brgy)));
-//            }
-//            if (stringCompare.contains("TALISAY")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_talisay_brgy)));
-//            }
-//            if (stringCompare.contains("TANAUAN CITY")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_tanauancity_brgy)));
-//            }
-//            if (stringCompare.contains("TAYSAN")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_taysan_brgy)));
-//            }
-//            if (stringCompare.contains("TINGLOY")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_tingloy_brgy)));
-//            }
-//            if (stringCompare.contains("TUY")) {
-//                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_tuy_brgy)));
-//            }
-//
-//            rentBarangays = pairBoolDataSelectMulti(barangaysStringList, stringCompare, 4);
-//            multSpinBrgyRent.setItems(rentBarangays, new MultiSpinnerListener() {
-//                @Override
-//                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
-//                    String pos = new String();
-//                    for (int i = 0; i < selectedItems.size(); i++) {
-//                        pos = selectedItems.get(i).getName() + "; " + pos;
-//                        Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-//                        Log.d("MULT SPIN", pos);
-//                    }
-//                    listOfBrgyRent = pos;
-//                }
-//            });
-//
-//
-//        } else {
-//}
         stringCompare = intent1.getStringExtra(EXTRA_RENT_PROV);
-        rentProvinces = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.provinces)), stringCompare, 2);
-        multSpinProvRent.setItems(rentProvinces, new MultiSpinnerListener() {
-            @Override
-            public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
-                String pos = new String();
-                for (int i = 0; i < selectedItems.size(); i++) {
-                    pos = selectedItems.get(i).getName() + " : " + pos;
-                    Log.d("MULTSPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-                    Log.d("MULTSPIN", pos);
+        if (stringCompare.contains("BATANGAS")) {
+            rentProvinces = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.provinces)), stringCompare, 2);
+            multSpinProvRent.setItems(rentProvinces, new MultiSpinnerListener() {
+                @Override
+                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+                    String pos = new String();
+                    for (int i = 0; i < selectedItems.size(); i++) {
+                        pos = selectedItems.get(i).getName() + "; " + pos;
+                        Log.d("MULTSPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+                        Log.d("MULTSPIN", pos);
+                    }
                 }
-            }
-        });
-        provRent = intent1.getStringExtra(EXTRA_RENT_PROV);
+            });
 
-        stringCompare = intent1.getStringExtra(EXTRA_RENT_MUN);
-        List<KeyPairBoolData> rentMunicipalities = null;
-        rentMunicipalities = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.municipalities)), stringCompare, 3);
-        multSpinMunRent.setItems(rentMunicipalities, new MultiSpinnerListener() {
-            @Override
-            public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
-                String pos = new String();
-                for (int i = 0; i < selectedItems.size(); i++) {
-                    pos = selectedItems.get(i).getName() + " : " + pos;
-                    Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-                    Log.d("MULT SPIN", pos);
+            stringCompare = intent1.getStringExtra(EXTRA_RENT_MUN);
+            List<KeyPairBoolData> rentMunicipalities = null;
+            rentMunicipalities = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.batangas_municipalities)), stringCompare, 3);
+            multSpinMunRent.setItems(rentMunicipalities, new MultiSpinnerListener() {
+                @Override
+                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+                    String pos = new String();
+                    for (int i = 0; i < selectedItems.size(); i++) {
+                        pos = selectedItems.get(i).getName() + "; " + pos;
+                        Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+                        Log.d("MULT SPIN", pos);
+                    }
+                    munRent = pos;
                 }
-                munRent = pos;
-            }
-        });
-        munRent = intent1.getStringExtra(EXTRA_RENT_MUN);
+            });
 
-        stringCompare = intent1.getStringExtra(EXTRA_RENT_BRGY);
-        List<KeyPairBoolData> rentBarangays = null;
-        rentBarangays = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.barangays)), stringCompare, 4);
-        multSpinBrgyRent.setItems(rentBarangays, new MultiSpinnerListener() {
-            @Override
-            public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
-                String pos = new String();
-                for (int i = 0; i < selectedItems.size(); i++) {
-                    pos = selectedItems.get(i).getName() + " : " + pos;
-                    Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
-                    Log.d("MULT SPIN", pos);
-                }
-                listOfBrgyRent = pos;
+            stringCompare = intent1.getStringExtra(EXTRA_RENT_BRGY);
+            List<KeyPairBoolData> rentBarangays = null;
+            List<String> barangaysStringList = new ArrayList<>();
+            barangaysStringList.add("ALL BARANGAYS");
+            if (stringCompare.contains("AGONCILLO")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_agoncillo_brgy)));
             }
-        });
-        listOfBrgyRent = intent1.getStringExtra(EXTRA_RENT_BRGY);
+            if (stringCompare.contains("ALITAGTAG")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_alitagtag_brgy)));
+            }
+            if (stringCompare.contains("BALAYAN")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_balayan_brgy)));
+            }
+            if (stringCompare.contains("BALETE")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_balete_brgy)));
+            }
+            if (stringCompare.contains("BATANGAS CITY")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_batangascity_brgy)));
+            }
+            if (stringCompare.contains("BAUAN")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_bauan_brgy)));
+            }
+            if (stringCompare.contains("CALACA")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_calaca_brgy)));
+            }
+            if (stringCompare.contains("CALATAGAN")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_calatagan_brgy)));
+            }
+            if (stringCompare.contains("CUENCA")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_cuenca_brgy)));
+            }
+            if (stringCompare.contains("IBAAN")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_ibaan_brgy)));
+            }
+            if (stringCompare.contains("LAUREL")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_laurel_brgy)));
+            }
+            if (stringCompare.contains("LEMERY")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lemery_brgy)));
+            }
+            if (stringCompare.contains("LIAN")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lian_brgy)));
+            }
+            if (stringCompare.contains("LIPA CITY")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lipacity_brgy)));
+            }
+            if (stringCompare.contains("LOBO")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_lobo_brgy)));
+            }
+            if (stringCompare.contains("MABINI")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_mabini_brgy)));
+            }
+            if (stringCompare.contains("MALVAR")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_malvar_brgy)));
+            }
+            if (stringCompare.contains("MATAASNAKAHOY")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_mataasnakahoy_brgy)));
+            }
+            if (stringCompare.contains("NASUGBU")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_nasugbu_brgy)));
+            }
+            if (stringCompare.contains("PADRE GARCIA")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_padregarcia_brgy)));
+            }
+            if (stringCompare.contains("ROSARIO")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_rosario_brgy)));
+            }
+            if (stringCompare.contains("SAN JOSE")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanjose_brgy)));
+            }
+            if (stringCompare.contains("SAN JUAN")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanjuan_brgy)));
+            }
+            if (stringCompare.contains("SAN LUIS")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanluis_brgy)));
+            }
+            if (stringCompare.contains("SAN NICOLAS")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sannicolas_brgy)));
+            }
+            if (stringCompare.contains("SAN PASCUAL")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_sanpascual_brgy)));
+            }
+            if (stringCompare.contains("STA. TERESITA")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_staterisita_brgy)));
+            }
+            if (stringCompare.contains("STO. TOMAS")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_stotomas_brgy)));
+            }
+            if (stringCompare.contains("TAAL")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_taal_brgy)));
+            }
+            if (stringCompare.contains("TALISAY")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_talisay_brgy)));
+            }
+            if (stringCompare.contains("TANAUAN CITY")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_tanauancity_brgy)));
+            }
+            if (stringCompare.contains("TAYSAN")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_taysan_brgy)));
+            }
+            if (stringCompare.contains("TINGLOY")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_tingloy_brgy)));
+            }
+            if (stringCompare.contains("TUY")) {
+                barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_tuy_brgy)));
+            }
+
+            rentBarangays = pairBoolDataSelectMulti(barangaysStringList, stringCompare, 4);
+            multSpinBrgyRent.setItems(rentBarangays, new MultiSpinnerListener() {
+                @Override
+                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+                    String pos = new String();
+                    for (int i = 0; i < selectedItems.size(); i++) {
+                        pos = selectedItems.get(i).getName() + "; " + pos;
+                        Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+                        Log.d("MULT SPIN", pos);
+                    }
+                    listOfBrgyRent = pos;
+                }
+            });
+
+
+        } else {
+            stringCompare = intent1.getStringExtra(EXTRA_RENT_PROV);
+            rentProvinces = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.provinces)), stringCompare, 2);
+            multSpinProvRent.setItems(rentProvinces, new MultiSpinnerListener() {
+                @Override
+                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+                    String pos = new String();
+                    for (int i = 0; i < selectedItems.size(); i++) {
+                        pos = selectedItems.get(i).getName() + " : " + pos;
+                        Log.d("MULTSPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+                        Log.d("MULTSPIN", pos);
+                    }
+                    provRent = pos;
+                }
+            });
+            provRent = intent1.getStringExtra(EXTRA_RENT_PROV);
+
+            stringCompare = intent1.getStringExtra(EXTRA_RENT_MUN);
+            List<KeyPairBoolData> rentMunicipalities = null;
+            rentMunicipalities = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.municipalities)), stringCompare, 3);
+            multSpinMunRent.setItems(rentMunicipalities, new MultiSpinnerListener() {
+                @Override
+                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+                    String pos = new String();
+                    for (int i = 0; i < selectedItems.size(); i++) {
+                        pos = selectedItems.get(i).getName() + " : " + pos;
+                        Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+                        Log.d("MULT SPIN", pos);
+                    }
+                    munRent = pos;
+                }
+            });
+            munRent = intent1.getStringExtra(EXTRA_RENT_MUN);
+
+            stringCompare = intent1.getStringExtra(EXTRA_RENT_BRGY);
+            List<KeyPairBoolData> rentBarangays = null;
+            rentBarangays = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.barangays)), stringCompare, 4);
+            multSpinBrgyRent.setItems(rentBarangays, new MultiSpinnerListener() {
+                @Override
+                public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+                    String pos = new String();
+                    for (int i = 0; i < selectedItems.size(); i++) {
+                        pos = selectedItems.get(i).getName() + " : " + pos;
+                        Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+                        Log.d("MULT SPIN", pos);
+                    }
+                    listOfBrgyRent = pos;
+                }
+            });
+            listOfBrgyRent = intent1.getStringExtra(EXTRA_RENT_BRGY);
+        }
 
         stringCompare = intent1.getStringExtra(EXTRA_PROV);
         List<KeyPairBoolData> selectProvinces = pairBoolDataSelect(Arrays.asList(getResources().getStringArray(R.array.provinces)), stringCompare);
@@ -2836,6 +2894,7 @@ public class AddMachineActivity extends AppCompatActivity {
 //    }
 
     private void problemsUnused(int position) {
+        clearCursor();
         String pos = spinConditionPresent.getItemAtPosition(position).toString();
         List<KeyPairBoolData> selectedProb = pairingOfList(Arrays.asList(getResources().getStringArray(R.array.blank)));
         int stringArray = R.array.blank;
@@ -2964,13 +3023,14 @@ public class AddMachineActivity extends AppCompatActivity {
             switch (pos) {
                 case "SPECIFY":
                     edtCustomRateUnit.setVisibility(View.VISIBLE);
-                    paramstvMachineAvailability.topToBottom = R.id.edtCustomRateUnit;
+//                    paramstvMachineAvailability.topToBottom = R.id.edtAveFuelConsumptionMain;
                     break;
                 default:
                     edtCustomRateUnit.setVisibility(View.INVISIBLE);
-                    paramstvMachineAvailability.topToBottom = R.id.edtPlowingRent;
+//                    paramstvMachineAvailability.topToBottom = R.id.edtPlowingRent;
                     break;
             }
+            paramstvMachineAvailability.topToBottom = R.id.edtAveFuelConsumptionMain;
         }
 
 
@@ -3007,6 +3067,10 @@ public class AddMachineActivity extends AppCompatActivity {
                 tvFurrowingRent.setVisibility(View.INVISIBLE);
                 tvOtherRent.setVisibility(View.INVISIBLE);
                 tvCustomUnitOther.setVisibility(View.INVISIBLE);
+
+                tvAveFuelConsMain.setVisibility(View.INVISIBLE);
+                edtAveFuelConsMain.setVisibility(View.INVISIBLE);
+
 
                 tvPlowingRentInfo.setVisibility(View.INVISIBLE);
                 tvHarrowingRentInfo.setVisibility(View.INVISIBLE);
@@ -3063,6 +3127,9 @@ public class AddMachineActivity extends AppCompatActivity {
                     spinHarrowingRentUnit.setVisibility(View.VISIBLE);
                     spinOtherRentUnit.setVisibility(View.VISIBLE);
 
+                    tvAveFuelConsMain.setVisibility(View.INVISIBLE);
+                    edtAveFuelConsMain.setVisibility(View.INVISIBLE);
+
                     tvAveFuelConsPlow.setVisibility(View.VISIBLE);
                     tvAveFuelConsHarr.setVisibility(View.VISIBLE);
                     tvAveFuelConsFurr.setVisibility(View.VISIBLE);
@@ -3084,6 +3151,10 @@ public class AddMachineActivity extends AppCompatActivity {
                     spinAvailability.setVisibility(View.VISIBLE);
                     tvCustomRate.setVisibility(View.VISIBLE);
                     tvCustomUnit.setVisibility(View.VISIBLE);
+
+                    tvAveFuelConsMain.setVisibility(View.VISIBLE);
+                    edtAveFuelConsMain.setVisibility(View.VISIBLE);
+
 
                     tvPlowingRent.setVisibility(View.INVISIBLE);
                     tvHarrowingRent.setVisibility(View.INVISIBLE);
@@ -3110,7 +3181,7 @@ public class AddMachineActivity extends AppCompatActivity {
                     edtAveFuelConsHarr.setVisibility(View.INVISIBLE);
                     edtAveFuelConsFurr.setVisibility(View.INVISIBLE);
 
-                    paramstvMachineAvailability.topToBottom = R.id.spinMainRentUnit;
+                    paramstvMachineAvailability.topToBottom = R.id.edtAveFuelConsumptionMain;
                 }
                 paramstvConditionPresent.topToBottom = R.id.spinAvailability;
                 break;
@@ -3161,6 +3232,9 @@ public class AddMachineActivity extends AppCompatActivity {
                 edtTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtEffectiveArea.setVisibility(View.INVISIBLE);
 
+                tvWaterPumpUnit.setVisibility(View.INVISIBLE);
+                spinWaterPumpUnit.setVisibility(View.INVISIBLE);
+
                 getParams(1);
                 stringArrayId = R.array.wheel2_tractor_brand;
                 break;
@@ -3193,6 +3267,9 @@ public class AddMachineActivity extends AppCompatActivity {
                 tvTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtEffectiveArea.setVisibility(View.INVISIBLE);
+
+                tvWaterPumpUnit.setVisibility(View.INVISIBLE);
+                spinWaterPumpUnit.setVisibility(View.INVISIBLE);
 
                 stringArrayId = R.array.wheel4_tractor_brand;
                 getParams(1);
@@ -3228,6 +3305,9 @@ public class AddMachineActivity extends AppCompatActivity {
                 tvEffectiveArea.setVisibility(View.INVISIBLE);
                 tvRate.setVisibility(View.INVISIBLE);
                 tvAveYield.setVisibility(View.INVISIBLE);
+
+                tvWaterPumpUnit.setVisibility(View.INVISIBLE);
+                spinWaterPumpUnit.setVisibility(View.INVISIBLE);
 //                edtNumLoads.setVisibility(View.INVISIBLE);
 //                tvNumLoads.setVisibility(View.INVISIBLE);
 
@@ -3266,6 +3346,9 @@ public class AddMachineActivity extends AppCompatActivity {
                 tvTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtEffectiveArea.setVisibility(View.INVISIBLE);
+
+                tvWaterPumpUnit.setVisibility(View.INVISIBLE);
+                spinWaterPumpUnit.setVisibility(View.INVISIBLE);
 
                 edtCapacity.setHint("Tons/Load");
                 tvCapacity.setText("Loading Capacity (tons/load)");
@@ -3306,6 +3389,9 @@ public class AddMachineActivity extends AppCompatActivity {
                 tvTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtEffectiveArea.setVisibility(View.INVISIBLE);
+
+                tvWaterPumpUnit.setVisibility(View.INVISIBLE);
+                spinWaterPumpUnit.setVisibility(View.INVISIBLE);
 
                 tvCapacity.setText("Capacity (ha/hour)");
                 edtCapacity.setHint("Hectares/Hour");
@@ -3352,6 +3438,8 @@ public class AddMachineActivity extends AppCompatActivity {
                 tvAveYield.setVisibility(View.VISIBLE);
 //                tvNumLoads.setVisibility(View.INVISIBLE);
 //                edtNumLoads.setVisibility(View.INVISIBLE);
+                tvWaterPumpUnit.setVisibility(View.INVISIBLE);
+                spinWaterPumpUnit.setVisibility(View.INVISIBLE);
 
                 tvEffectiveArea.setVisibility(View.VISIBLE);
                 tvTimeUsedWorking.setVisibility(View.VISIBLE);
@@ -3396,6 +3484,9 @@ public class AddMachineActivity extends AppCompatActivity {
                 tvTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtEffectiveArea.setVisibility(View.INVISIBLE);
+
+                tvWaterPumpUnit.setVisibility(View.INVISIBLE);
+                spinWaterPumpUnit.setVisibility(View.INVISIBLE);
 
                 edtCapacity.setHint("Kilograms");
                 tvCapacity.setText("Capacity (kg)");
@@ -3444,6 +3535,10 @@ public class AddMachineActivity extends AppCompatActivity {
                 edtTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtEffectiveArea.setVisibility(View.INVISIBLE);
 
+                tvWaterPumpUnit.setVisibility(View.INVISIBLE);
+                spinWaterPumpUnit.setVisibility(View.INVISIBLE);
+
+
                 edtCapacity.setHint("Tons/Load");
                 tvCapacity.setText("Capacity (tons/load)");
                 stringArrayId = R.array.specify_only_brand_boom_sprayer_cane_grab_infield;
@@ -3486,6 +3581,9 @@ public class AddMachineActivity extends AppCompatActivity {
                 edtTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtEffectiveArea.setVisibility(View.INVISIBLE);
 
+                tvWaterPumpUnit.setVisibility(View.INVISIBLE);
+                spinWaterPumpUnit.setVisibility(View.INVISIBLE);
+
                 edtCapacity.setHint("Hectares/Hour");
                 tvCapacity.setText("Capacity (ha/hour)");
 
@@ -3527,6 +3625,9 @@ public class AddMachineActivity extends AppCompatActivity {
                 tvTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtEffectiveArea.setVisibility(View.INVISIBLE);
+
+                tvWaterPumpUnit.setVisibility(View.INVISIBLE);
+                spinWaterPumpUnit.setVisibility(View.INVISIBLE);
 
                 edtCapacity.setHint("Kilograms");
                 tvCapacity.setText("Capacity (kg)");
@@ -3571,6 +3672,9 @@ public class AddMachineActivity extends AppCompatActivity {
                 tvTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtEffectiveArea.setVisibility(View.INVISIBLE);
+
+                tvWaterPumpUnit.setVisibility(View.INVISIBLE);
+                spinWaterPumpUnit.setVisibility(View.INVISIBLE);
 
                 edtCapacity.setHint("Kilograms");
                 tvCapacity.setText("Capacity (kg)");
@@ -3620,6 +3724,9 @@ public class AddMachineActivity extends AppCompatActivity {
                 edtTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtEffectiveArea.setVisibility(View.INVISIBLE);
 
+                tvWaterPumpUnit.setVisibility(View.INVISIBLE);
+                spinWaterPumpUnit.setVisibility(View.INVISIBLE);
+
                 edtCapacity.setHint("Kilograms");
                 tvCapacity.setText("Capacity(kg)");
                 tvRate.setText("Threshing Rate (tons/hour)");
@@ -3665,9 +3772,11 @@ public class AddMachineActivity extends AppCompatActivity {
                 edtTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtEffectiveArea.setVisibility(View.INVISIBLE);
 
-                
+                tvWaterPumpUnit.setVisibility(View.VISIBLE);
+                spinWaterPumpUnit.setVisibility(View.VISIBLE);
 
-                edtCapacity.setHint("Liters/Second");
+
+                edtCapacity.setHint("Amount");
                 tvCapacity.setText("Capacity");
                 stringArrayId = R.array.waterpump_brands;
                 getParams(6);
@@ -3701,6 +3810,8 @@ public class AddMachineActivity extends AppCompatActivity {
                 tvTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtTimeUsedWorking.setVisibility(View.INVISIBLE);
                 edtEffectiveArea.setVisibility(View.INVISIBLE);
+                tvWaterPumpUnit.setVisibility(View.INVISIBLE);
+                spinWaterPumpUnit.setVisibility(View.INVISIBLE);
 
                 edtCapacity.setEnabled(true);
                 edtCapacity.setOnClickListener(null);
@@ -3733,7 +3844,6 @@ public class AddMachineActivity extends AppCompatActivity {
     }
 
     private void loanCashSelect() {
-        spinPurchGrantDono.setSelection(0);
 
         if (rbCash.isChecked()) {
             loanCash = "CASH";
@@ -3801,6 +3911,7 @@ public class AddMachineActivity extends AppCompatActivity {
         switch (pos) {
 
             case "PRIVATELY OWNED":
+                spinPurchGrantDono.setSelection(0);
                 spinPurchGrantDono.setVisibility(View.INVISIBLE);
                 tvPurchGrantDono.setVisibility(View.VISIBLE);
                 spinAgency.setVisibility(View.INVISIBLE);
@@ -3808,6 +3919,9 @@ public class AddMachineActivity extends AppCompatActivity {
                 rgLoanCash.setVisibility(View.VISIBLE);
                 paramsedtNameOfOwnerOrg.topToBottom = R.id.edtOtherAgency;
                 stringListAgency = Arrays.asList(getResources().getStringArray(R.array.agency_loan));
+                edtNameOfOwnerOrg.setVisibility(View.VISIBLE);
+                tvNameOfOwnerOrOrganization.setVisibility(View.VISIBLE);
+                tvNameOfOwnerOrOrganizationInfo.setVisibility(View.VISIBLE);
                 break;
             case "COOPERATIVE/ASSOCIATION":
             case "CUSTOM PROVIDER":
@@ -3821,6 +3935,9 @@ public class AddMachineActivity extends AppCompatActivity {
                 rgLoanCash.setVisibility(View.INVISIBLE);
                 paramsedtNameOfOwnerOrg.topToBottom = R.id.edtOtherAgency;
                 stringListAgency = Arrays.asList(getResources().getStringArray(R.array.agency));
+                edtNameOfOwnerOrg.setVisibility(View.VISIBLE);
+                tvNameOfOwnerOrOrganization.setVisibility(View.VISIBLE);
+                tvNameOfOwnerOrOrganizationInfo.setVisibility(View.VISIBLE);
                 break;
             default:
                 spinPurchGrantDono.setVisibility(View.INVISIBLE);
@@ -3830,6 +3947,9 @@ public class AddMachineActivity extends AppCompatActivity {
                 rgLoanCash.setVisibility(View.INVISIBLE);
                 loanCash = "";
                 paramsedtNameOfOwnerOrg.topToBottom = R.id.edtOtherAgency;
+                edtNameOfOwnerOrg.setVisibility(View.INVISIBLE);
+                tvNameOfOwnerOrOrganization.setVisibility(View.INVISIBLE);
+                tvNameOfOwnerOrOrganizationInfo.setVisibility(View.INVISIBLE);
                 break;
         }
 
@@ -3911,9 +4031,10 @@ public class AddMachineActivity extends AppCompatActivity {
             case 6:
                 paramstvTypeTubewells.topToBottom = R.id.edtQRCode;
                 paramstvBrand.topToBottom = R.id.spinTypeOfTubewells;
-                paramstvOwnership.topToBottom = R.id.edtCapacity;
+                paramstvOwnership.topToBottom = R.id.tvRateWaterPumpUnit;
                 paramsedtCapacity.topToBottom = R.id.edtAverageOperatingDays;
                 paramstvAveOpHours.topToBottom = R.id.tvTotalServiceAreaMachine;
+                paramsedtWaterPump.topToBottom = R.id.edtCapacity;
                 break;
             case 7:
                 paramstvBrand.topToBottom = R.id.spinTypeMill;
@@ -3938,12 +4059,15 @@ public class AddMachineActivity extends AppCompatActivity {
         paramsedtRate.topMargin = biggerMargin;
         paramstvAveOpHours.topMargin = biggerMargin;
 
+        paramsedtWaterPump.topMargin = biggerMargin;
+
         tvAveOpHours.setLayoutParams(paramstvAveOpHours);
         tvBrand.setLayoutParams(paramstvBrand);
         tvOwnership.setLayoutParams(paramstvOwnership);
         edtCapacity.setLayoutParams(paramsedtCapacity);
 //        edtNumLoads.setLayoutParams(paramsedtNumLoads);
         edtAveYield.setLayoutParams(paramsedtAveYield);
+        spinWaterPumpUnit.setLayoutParams(paramsedtWaterPump);
     }
 
     public static boolean isNullOrEmpty(String str) {
@@ -4059,6 +4183,7 @@ public class AddMachineActivity extends AppCompatActivity {
 //            dataAddMachine.putExtra(EXTRA_NUM_LOADS, edtNumLoads.getText().toString());
             dataAddMachine.putExtra(EXTRA_NUM_LOADS, "");
             dataAddMachine.putExtra(EXTRA_RATE, edtRate.getText().toString());
+            dataAddMachine.putExtra(EXTRA_WATERPUMP_UNIT, spinWaterPumpUnit.getSelectedItem().toString());
             dataAddMachine.putExtra(EXTRA_OWNERSHIP, spinOwnership.getSelectedItem().toString());
             dataAddMachine.putExtra(EXTRA_PURCH_GRANT_DONO, modeOfPurchase);
             dataAddMachine.putExtra(EXTRA_AGENCY, spinAgency.getSelectedItem().toString());
@@ -4073,6 +4198,8 @@ public class AddMachineActivity extends AppCompatActivity {
             dataAddMachine.putExtra(EXTRA_MAIN_RENT_RATE, edtCustomRate.getText().toString());
             dataAddMachine.putExtra(EXTRA_MAIN_RENT_UNIT, spinCustomUnit.getSelectedItem().toString());
             dataAddMachine.putExtra(EXTRA_MAIN_RENT_UNIT_SPECIFY, edtCustomRateUnit.getText().toString());
+            dataAddMachine.putExtra(EXTRA_AVE_FUEL_MAIN, edtAveFuelConsMain.getText().toString());
+
             dataAddMachine.putExtra(EXTRA_PLOW_RENT_RATE, edtPlowingRent.getText().toString());
             dataAddMachine.putExtra(EXTRA_PLOW_RENT_UNIT, spinPlowingRentUnit.getSelectedItem().toString());
             dataAddMachine.putExtra(EXTRA_PLOW_RENT_UNIT_SPECIFY, edtPlowSpecifyUnit.getText().toString());
@@ -4136,6 +4263,9 @@ public class AddMachineActivity extends AppCompatActivity {
             if (!agencyCheck) {
                 listIncomplete.add("Agency");
             }
+            if (!nameOwnerOrgCheck) {
+                listIncomplete.add("Name of Owner Organization");
+            }
             if (!yearSelectCheck) {
                 listIncomplete.add("Year Acquired");
             }
@@ -4193,6 +4323,7 @@ public class AddMachineActivity extends AppCompatActivity {
         loanCashCheck = false;
         purchGrantDonoCheck = false;
         agencyCheck = false;
+        nameOwnerOrgCheck = false;
         yearSelectCheck = false;
         conditionAcquiredCheck = false;
         rentSelectCheck = false;
@@ -4413,10 +4544,10 @@ public class AddMachineActivity extends AppCompatActivity {
 
                 typeTubewellsCheck = spinTypeofTubeWells.getSelectedItemPosition() != 0;
 
-                machineTypeInfoCheck = machineTypeInfoBrandCheck && machineTypeInfoModelCheck && typeTubewellsCheck;
+                machineTypeInfoCheck = machineTypeInfoBrandCheck && machineTypeInfoModelCheck;
 
                 machineTypeSpecsCheck = !isNullOrEmpty(edtRatedPower.getText().toString()) && !isNullOrEmpty(edtTotalServiceArea.getText().toString()) &&
-                        !isNullOrEmpty(edtAveOpHours.getText().toString()) && !isNullOrEmpty(edtCapacity.getText().toString());
+                        !isNullOrEmpty(edtAveOpHours.getText().toString()) && !isNullOrEmpty(edtCapacity.getText().toString()) && (spinWaterPumpUnit.getSelectedItemPosition() !=0);
                 //WaterPump
                 break;
             default:
@@ -4457,6 +4588,7 @@ public class AddMachineActivity extends AppCompatActivity {
                         loanCashCheck = false;
                         break;
                 }
+                nameOwnerOrgCheck = !isNullOrEmpty(edtNameOfOwnerOrg.getText().toString());
                 break;
             //Private
             case 3:
@@ -4490,8 +4622,8 @@ public class AddMachineActivity extends AppCompatActivity {
 
                         }
                         break;
-
                 }
+                nameOwnerOrgCheck = !isNullOrEmpty(edtNameOfOwnerOrg.getText().toString());
                 break;
             //CoopCustomLgu
             default:
@@ -4499,12 +4631,14 @@ public class AddMachineActivity extends AppCompatActivity {
                 loanCashCheck = true;
                 agencyCheck = true;
                 purchGrantDonoCheck = true;
+                nameOwnerOrgCheck = true;
                 break;
         }
 
         yearSelectCheck = spinYearAcquired.getSelectedItemPosition() != 0;
 
         conditionAcquiredCheck = spinConditionAcquired.getSelectedItemPosition() != 0;
+
 
         switch (spinRental.getSelectedItemPosition()) {
             case 0:
@@ -4525,7 +4659,7 @@ public class AddMachineActivity extends AppCompatActivity {
                                 spinFurrowingRentUnit.getSelectedItemPosition() != 5 || !isNullOrEmpty(edtFurrSpecifyUnit.getText().toString());
                     }
                 } else {
-                    if (isNullOrEmpty(edtCustomRate.getText().toString()) || spinCustomUnit.getSelectedItemPosition() == 0) {
+                    if (isNullOrEmpty(edtCustomRate.getText().toString()) || spinCustomUnit.getSelectedItemPosition() == 0 || isNullOrEmpty(edtAveFuelConsMain.getText().toString())) {
                         rentCustomCheck = false;
                     } else {
                         rentCustomCheck = spinCustomUnit.getSelectedItemPosition() != 5 || !isNullOrEmpty(edtCustomRateUnit.getText().toString());
@@ -4551,25 +4685,25 @@ public class AddMachineActivity extends AppCompatActivity {
                 break;
         }
 
+
         switch (spinConditionPresent.getSelectedItemPosition()) {
             case 0:
                 conditionPresentCheck = false;
                 break;
-            case 1:
             default:
                 conditionPresentCheck = true;
                 otherProblemsCheck = true;
-
                 break;
-            case 2:
             case 3:
-                conditionPresentCheck = listOfProblems.length() >= 5;
+            case 4:
+                spinYearInoperableCheck = spinYearInoperable.getSelectedItemPosition() != 0;
+                conditionPresentCheck = listOfProblems.length() >= 5 && spinYearInoperableCheck;
                 if (hasOtherProblems) {
                     otherProblemsCheck = !isNullOrEmpty(edtOtherProblems.getText().toString());
                 } else {
                     otherProblemsCheck = true;
                 }
-                spinYearInoperableCheck = spinYearInoperable.getSelectedItemPosition() != 0;
+
                 break;
         }
         Log.d("PRBMACH", "hasProblems: " + hasOtherProblems + "ConditionPresent: " + conditionPresentCheck + "All List of Problems" + listOfProblems);
@@ -4602,24 +4736,24 @@ public class AddMachineActivity extends AppCompatActivity {
 
         return (respCheck && qrCheck && machineTypeInfoCheck && machineTypeSpecsCheck && ownershipCheck && loanCashCheck && purchGrantDonoCheck && agencyCheck &&
                 yearSelectCheck && conditionAcquiredCheck && rentSelectCheck && rentCustomCheck && rentAvailCheck && conditionPresentCheck && otherProblemsCheck &&
-                locationMachineCheck && locationGarageCheck);
+                locationMachineCheck && locationGarageCheck && nameOwnerOrgCheck && typeTubewellsCheck);
     }
 
     private Bitmap scale(Bitmap bitmap) {
         // Determine the constrained dimension, which determines both dimensions.
         int width;
         int height;
-        float widthRatio = (float) bitmap.getWidth() / 1440;
+        float widthRatio = (float) bitmap.getWidth() / 900;
         float heightRatio;
-        heightRatio = (float) bitmap.getHeight() / 2560;
+        heightRatio = (float) bitmap.getHeight() / 1600;
         // Width constrained.
         if (widthRatio >= heightRatio) {
-            width = 1080;
+            width = 900;
             height = (int) (((float) width / bitmap.getWidth()) * bitmap.getHeight());
         }
         // Height constrained.
         else {
-            height = 1920;
+            height = 1600;
             width = (int) (((float) height / bitmap.getHeight()) * bitmap.getWidth());
         }
         Bitmap scaledBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -4637,13 +4771,104 @@ public class AddMachineActivity extends AppCompatActivity {
         return scaledBitmap;
     }
 
-    public void askCameraPermission() {
+
+    public void askPermission() {
+
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
+//                ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//        }
+        final List<String> permissionsList = new ArrayList<String>();
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
-        }  //TODO ADD PICTURE INTENT
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
+            permissionsList.add(Manifest.permission.CAMERA);
+        }
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_PERM_CODE);
+            permissionsList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
 
+        if (permissionsList.size() > 0) {
+            ActivityCompat.requestPermissions(this, permissionsList.toArray(new String[permissionsList.size()]), 11);
+        }
     }
+
+//    private void askPermissions(boolean isForOpen) {
+//        isRationale = false;
+//        List permissionsRequired = new ArrayList();
+//
+//        final List<String> permissionsList = new ArrayList<String>();
+//        if (!checkPermission(permissionsList, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+//            permissionsRequired.add("Write External Storage");
+//
+//        if (!checkPermission(permissionsList, Manifest.permission.CAMERA))
+//            permissionsRequired.add("Camera");
+//
+////        if (!checkPermission(permissionsList, Manifest.permission.CALL_PHONE))
+////            permissionsRequired.add("Call phone");
+////        if (!checkPermission(permissionsList, Manifest.permission.READ_PHONE_STATE))
+////            permissionsRequired.add("Read phone state");
+////        if (!checkPermission(permissionsList, Manifest.permission.READ_CONTACTS))
+////            permissionsRequired.add("Read Contacts");
+////        if (!checkPermission(permissionsList, Manifest.permission.RECEIVE_SMS))
+////            permissionsRequired.add("Receive SMS");
+////        if (!checkPermission(permissionsList, Manifest.permission.GET_ACCOUNTS))
+////            permissionsRequired.add("Get Accounts");
+////        if (!checkPermission(permissionsList, Manifest.permission.ACCESS_COARSE_LOCATION))
+////            permissionsRequired.add("Location");
+////        if (!checkPermission(permissionsList, Manifest.permission.ACCESS_FINE_LOCATION))
+////            permissionsRequired.add("Location");
+//
+//        if (permissionsList.size() > 0 && !isRationale) {
+//            if (permissionsRequired.size() > 0) {
+//
+//            }
+//            if (isForOpen) {
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                    ActivityCompat.requestPermissions(this, permissionsList.toArray(new String[permissionsList.size()]),
+//                            11);
+//                }
+//            }
+//
+//        } else if (isRationale) {
+//            if (isForOpen) {
+//
+//                new AlertDialog.Builder(this)
+//                        .setTitle("Permission Alert")
+//                        .setMessage("You need to grant permissions manually. Go to permission and grant all permissions.")
+//                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                dialog.dismiss();
+//                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+//                                Uri uri = Uri.fromParts("package", getPackageName(), null);
+//                                intent.setData(uri);
+//                                startActivityForResult(intent, 123);
+//                            }
+//                        })
+//                        .show();
+//            }
+//        } else {
+//
+//        }
+//    }
+
+//    private boolean checkPermission(List permissionsList, String permission) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+//                permissionsList.add(permission);
+//                // Check for Rationale Option
+//                if (!isFirst) {
+//                    if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
+//                        isRationale = true;
+//                        return false;
+//                    }
+//                }
+//            }
+//        }
+//        return true;
+//    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -4654,7 +4879,8 @@ public class AddMachineActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Camera Permission is Required to Use camera.", Toast.LENGTH_SHORT).show();
             }
-        } else if (requestCode == WRITE_PERM_CODE) {
+        }
+        if (requestCode == WRITE_PERM_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Log.e("value", "Write Permission granted");
             } else {
@@ -4664,19 +4890,41 @@ public class AddMachineActivity extends AppCompatActivity {
         }
     }
 
-    private boolean checkExternalPermission() {
-        int result = ContextCompat.checkSelfPermission(AddMachineActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        return result == PackageManager.PERMISSION_GRANTED;
-    }
 
-    private void requestExternalPermission() {
-
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(AddMachineActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            ActivityCompat.requestPermissions(AddMachineActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_PERM_CODE);
-        }  //            Toast.makeText(AddMachineActivity.this, "NECESITAMOS QUE NOS CONCEDAS LOS PERMISOS DE ALMACENAMIENTO PARA GUARDAR NOTICIAS O RADIOS COMO FAVORITOS.", Toast.LENGTH_LONG).show();
-
-    }
-
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        switch (requestCode) {
+//            case 11:
+//                Map<String, Integer> perms = new HashMap<String, Integer>();
+//                // Initial
+//                perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+//                perms.put(Manifest.permission.CAMERA, PackageManager.PERMISSION_GRANTED);
+////                perms.put(Manifest.permission.READ_PHONE_STATE, PackageManager.PERMISSION_GRANTED);
+////                perms.put(Manifest.permission.READ_CONTACTS, PackageManager.PERMISSION_GRANTED);
+////                perms.put(Manifest.permission.RECEIVE_SMS, PackageManager.PERMISSION_GRANTED);
+//                // Fill with results
+//                for (int i = 0; i < permissions.length; i++) {
+//                    perms.put(permissions[i], grantResults[i]);
+//                }
+//                // Check for ACCESS_FINE_LOCATION
+//                if (perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+//                        perms.get(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+//                    // All Permissions Granted
+////                    startActivity(new Intent(PermissionsActivity.this, SplashActivity.class));
+////                    finish();
+//                } else {
+//                    // Permission Denied
+//                    Toast.makeText(this, "Some Permission is Denied.", Toast.LENGTH_SHORT)
+//                            .show();
+//                    isFirst = false;
+//                    askPermissions(true);
+//                }
+//                break;
+//            default:
+//                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//
+//        }
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -4744,7 +4992,7 @@ public class AddMachineActivity extends AppCompatActivity {
 
         }
 
-        if (requestCode == 0) {
+        if (requestCode == SCAN_QR_REQUEST_CODE) {
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (data != null) {
                     Log.e("Check", "Receiving data");
@@ -4797,6 +5045,8 @@ public class AddMachineActivity extends AppCompatActivity {
 
         tvMachineUnused = findViewById(R.id.tvMachineUnused);
 
+        tvWaterPumpUnit = findViewById(R.id.tvRateWaterPumpUnit);
+        spinWaterPumpUnit = findViewById(R.id.spinWaterPumpUnit);
 
         tvTypeOfMill = findViewById(R.id.tvTypeMill);
         spinTypeOfMill = findViewById(R.id.spinTypeMill);
@@ -4828,6 +5078,9 @@ public class AddMachineActivity extends AppCompatActivity {
         tvCustomUnit = findViewById(R.id.tvCustomUnitMain);
         edtCustomRate = findViewById(R.id.edtMainRent);
         spinCustomUnit = findViewById(R.id.spinMainRentUnit);
+        tvAveFuelConsMain = findViewById(R.id.tvAveFuelConsumptionMain);
+        edtAveFuelConsMain = findViewById(R.id.edtAveFuelConsumptionMain);
+
         tvPlowingRent = findViewById(R.id.tvPlowingRent);
         tvCustomUnitOther = findViewById(R.id.tvCustomUnitOther);
         edtPlowingRent = findViewById(R.id.edtPlowingRent);
@@ -4849,7 +5102,7 @@ public class AddMachineActivity extends AppCompatActivity {
         tvAveFuelConsFurr = findViewById(R.id.tvAveFuelConsumptionFurrowing);
         edtAveFuelConsFurr = findViewById(R.id.edtAveFuelConsumptionFurrowing);
 
-        edtCustomRateUnit = findViewById(R.id.edtCustomRateUnit);//TODO Remove this
+        edtCustomRateUnit = findViewById(R.id.edtCustomRateUnit);
         tvMachineAvailability = findViewById(R.id.tvMachineAvailability);
         spinAvailability = findViewById(R.id.spinAvailability);
         tvConditionPresent = findViewById(R.id.tvConditionPresent);
@@ -4944,13 +5197,17 @@ public class AddMachineActivity extends AppCompatActivity {
         tvAgency.setVisibility(View.INVISIBLE);
         rgLoanCash.setVisibility(View.INVISIBLE);
         edtCustomRateUnit.setVisibility(View.INVISIBLE);
-
+        tvWaterPumpUnit.setVisibility(View.INVISIBLE);
+        spinWaterPumpUnit.setVisibility(View.INVISIBLE);
 
         tvPlowingRent.setVisibility(View.INVISIBLE);
         tvHarrowingRent.setVisibility(View.INVISIBLE);
         tvFurrowingRent.setVisibility(View.INVISIBLE);
         tvOtherRent.setVisibility(View.INVISIBLE);
         tvCustomUnitOther.setVisibility(View.INVISIBLE);
+
+        tvAveFuelConsMain.setVisibility(View.INVISIBLE);
+        edtAveFuelConsMain.setVisibility(View.INVISIBLE);
 
         edtPlowingRent.setVisibility(View.INVISIBLE);
         edtFurrowingRent.setVisibility(View.INVISIBLE);

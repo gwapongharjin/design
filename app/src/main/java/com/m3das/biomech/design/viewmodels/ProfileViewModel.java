@@ -15,7 +15,6 @@ import com.m3das.biomech.design.profiledb.ProfileRepository;
 import java.util.List;
 
 public class ProfileViewModel extends AndroidViewModel {
-    // TODO: Implement the ViewModel
     public ProfileRepository repositoryProfile;
     public LiveData<List<Profile>> allProfileNames;
 

@@ -10,7 +10,7 @@
         android:id="@+id/tabLayoutMain"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imgCropSelected"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tabBackground="@drawable/custom_tab_color"
@@ -50,6 +50,16 @@
             android:text="Map" />
 
     </com.google.android.material.tabs.TabLayout>
+
+    <ImageView
+        android:id="@+id/imgCropSelected"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/tabLayoutMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tabLayoutMain"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"

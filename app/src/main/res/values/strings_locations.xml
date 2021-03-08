@@ -221,6 +221,7 @@
         <item>	CABANGLASAN	</item>
     </string-array>
     <string-array name="barangays">
+        <item>  ALL BARANGAYS </item>
         <item>	AGCABUGAO	</item>
         <item>	AGDAHON	</item>
         <item>	AGNAGA	</item>
@@ -1707,7 +1708,7 @@
         <item>	TU-OG	</item>
         <item>	ABAY	</item>
         <item>	ABILAY	</item>
-        <item>	AGROCEL POB. (AGUINALDO-ROXAS--CELSO MAYOR)	</item>
+        <item>	AGROCEL POB. (AGUINALDO-ROXAS-CELSO MAYOR)	</item>
         <item>	BAGACAY EAST	</item>
         <item>	BAGACAY WEST	</item>
         <item>	BUG-OT	</item>
@@ -1739,7 +1740,7 @@
         <item>	SINUBSUBAN	</item>
         <item>	SIWALO	</item>
         <item>	SUBOG	</item>
-        <item>	THTP POB. (TAFT-THOMPSON--HUGHES-DEL PILAR)	</item>
+        <item>	THTP POB. (TAFT-THOMPSON-HUGHES-DEL PILAR)	</item>
         <item>	TIGBAUAN	</item>
         <item>	TRANGKA	</item>
         <item>	TUBANG	</item>

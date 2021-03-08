@@ -37,22 +37,10 @@ public class ImplementAdapter extends RecyclerView.Adapter<ImplementAdapter.Impl
         holder.MachineAttachedto.setText(currentImplement.getUsed_on_machine());
 
         if (currentImplement.getOwnership().contains("Acquired") || currentImplement.getYear_acquired().contains("Acquired") || currentImplement.getCondition().contains("Acquired") ||
-                currentImplement.getCondition_present().contains("Acquired")) {
+                currentImplement.getCondition_present().contains("Acquired") || currentImplement.getAccuracy().contains("Acquired") || currentImplement.getImage_base64().contains("Acquired")) {
             holder.WarningItem.setVisibility(View.VISIBLE);
         } else {
             holder.WarningItem.setVisibility(View.INVISIBLE);
-        }
-
-        if (currentImplement.getImage_base64().contains("Acquired")) {
-            holder.ImageItem.setVisibility(View.VISIBLE);
-        } else {
-            holder.ImageItem.setVisibility(View.INVISIBLE);
-        }
-
-        if (currentImplement.getAccuracy().contains("Acquired")) {
-            holder.MapItem.setVisibility(View.VISIBLE);
-        } else {
-            holder.MapItem.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -73,7 +61,7 @@ public class ImplementAdapter extends RecyclerView.Adapter<ImplementAdapter.Impl
     class ImplementHolder extends RecyclerView.ViewHolder {
 
         private final TextView Type, ImpQr, LatLong, MachineAttachedto;
-        private final ImageView WarningItem, MapItem, ImageItem;
+        private final ImageView WarningItem;
 
         public ImplementHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,8 +71,6 @@ public class ImplementAdapter extends RecyclerView.Adapter<ImplementAdapter.Impl
             ImpQr = itemView.findViewById(R.id.tvImplmentQRCodeItem);
             MachineAttachedto = itemView.findViewById(R.id.tvAttachedToMachineItem);
             WarningItem = itemView.findViewById(R.id.imgWarningImplementItem);
-            MapItem = itemView.findViewById(R.id.imgMapImplementItem);
-            ImageItem = itemView.findViewById(R.id.imgImageImplementItem);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

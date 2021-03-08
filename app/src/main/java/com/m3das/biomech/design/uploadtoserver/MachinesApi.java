@@ -18,18 +18,21 @@ public interface MachinesApi {
             @Field("machineBrandSpecifyPost") String machineBrandSpecify,
             @Field("machineModelPost") String machineModel,
             @Field("machineModelSpecifyPost") String machineModelSpecify,
-            @Field("ratedPowerPost") String ratedPower,
 
+            @Field("ratedPowerPost") String ratedPower,
             @Field("serviceAreaPost") String serviceArea,
             @Field("newlyPlantedAreaPost") String newlyPlantedArea,
             @Field("ratoonedAreaPost") String ratoonedArea,
-
             @Field("averageOperatingHoursPost") String aveOpHours,
             @Field("averageOperatingDaysPost") String aveOpDays,
+            @Field("effectiveAreaPost") String effArea,
+            @Field("timeUsedPost") String timeUsed,
             @Field("capacityPost") String capacity,
             @Field("averageYieldPost") String averageYield,
-            @Field("numberOfLoadsPost") String numberLoads,
+//            @Field("numberOfLoadsPost") String numberLoads,
             @Field("ratePost") String rate,
+            @Field("waterPumpUnitPost") String waterpumpUnit,
+
             @Field("ownershipPost") String ownership,
             @Field("purchGrantDonoPost") String purchGrantDono,
             @Field("agencyPost") String agency,
@@ -42,6 +45,7 @@ public interface MachinesApi {
             @Field("mainRentPost") String mainRent,
             @Field("mainRentUnitPost") String mainRentUnit,
             @Field("mainRentUnitSpecifyPost") String mainRentUnitSpecify,
+            @Field("mainAveFuelPost") String mainAveFuel,
 
             @Field("plowRentPost") String plowRent,
             @Field("plowRentUnitPost") String plowRentUnit,

@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class CropSelectActivity extends AppCompatActivity {
-    public int cropSelected = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +37,8 @@ public class CropSelectActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 //                startActivity(intent);
-//                cropSelected = 1;
-//                Variable.setCrop(cropSelected);
+                int cropSelected = 1;
+                Variable.setCrop(cropSelected);
                 Toast.makeText(getApplicationContext(),"This option is unavailable", Toast.LENGTH_SHORT).show();
             }
         });
@@ -48,8 +47,8 @@ public class CropSelectActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 //                startActivity(intent);
-//                cropSelected = 2;
-//                Variable.setCrop(cropSelected);
+                int cropSelected = 2;
+                Variable.setCrop(cropSelected);
                 Toast.makeText(getApplicationContext(),"This option is unavailable", Toast.LENGTH_SHORT).show();
             }
         });
@@ -58,8 +57,8 @@ public class CropSelectActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
-                cropSelected = 3;
-//                Variable.setCrop(cropSelected);
+                int cropSelected = 3;
+                Variable.setCrop(cropSelected);
             }
         });
 

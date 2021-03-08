@@ -159,6 +159,16 @@
         <item>SHALLOW TUBEWELL</item>
         <item>DEEP WELL</item>
     </string-array>
+
+    <string-array name="waterpump_unit">
+        <item>Please Select...</item>
+        <item>l/s</item>
+        <item>l/m</item>
+        <item>l/h</item>
+        <item>gal/s</item>
+        <item>gal/m</item>
+        <item>gal/h</item>
+    </string-array>
     <string-array name="purchasing_method">
         <item>Please Select...</item>
         <item>PURCHASED</item>
@@ -272,6 +282,9 @@
         <item></item>
     </string-array>
 
+    <string-array name="select_all">
+        <item>SELECT ALL</item>
+    </string-array>
     <string-array name="rent_availablity">
         <item>Please Select...</item>
         <item>WITHIN BARANGAY</item>
@@ -329,7 +342,6 @@
     <string name="title_activity_get_location">Map</string>
     <string name="title_activity_location_maps">Map</string>
     <string name="ok">ok</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_privacy_and_consent">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>

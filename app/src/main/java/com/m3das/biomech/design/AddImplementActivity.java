@@ -82,7 +82,7 @@ public class AddImplementActivity extends AppCompatActivity {
             edtEffectiveAreaAccompFert, edtTimeUsedDuringOpFert, edtWeightOfFert,
             edtEffectiveAreaAccompHarvest, edtTimeUsedDuringOpHarvest, edtAveYieldHarvest,
             edtEffectiveAreaAccompGrab, edtTimeUsedDuringOpGrab, edtLoadCapacityGrab,
-            edtDepthOfCutDitch;
+            edtDepthOfCutDitch, edtEffectiveAreaAccompFertForWeight;
     TextView tvYearAcquired, tvYearInoperable, tvLat, tvLong, tvAcc, tvLocation, tvImplementUnused, tvOwnership, tvPurchGrantDono, tvAgency, tvConditionPresent,
             tvFieldCapHeader, tvFieldCapHeaderInfo, tvDelRateHeader, tvDelRateHeaderInfo, tvFieldCapHeaderPlant, tvFieldCapHeaderInfoPlant,
             tvHaEAMain, tvHoursPDayOpMain, tvFieldCapacityMain, tvFieldCapacityResultMain,
@@ -90,7 +90,7 @@ public class AddImplementActivity extends AppCompatActivity {
             tvHaEAFert, tvHoursPDayOpFert, tvFieldCapacityFert, tvFieldCapacityResultFert, tvWeightOfFert, tvDeliveryRateFert, tvDeliveryRateResultFert,
             tvHaEAHarvest, tvHoursPDayOpHarvest, tvFieldCapacityHarvest, tvFieldCapacityResultHarvest, tvTonCannesPHaHarvest,
             tvHaEAGrab, tvHoursPDayOpGrab, tvLoadCapacityGrab, tvFieldCapacityGrab, tvFieldCapacityResultGrab,
-            tvDepthCutDitch, tvPrevMachine, tvPrevious;
+            tvDepthCutDitch, tvPrevMachine, tvPrevious, tvHaEAFert2;
     CheckBox cbLandClear, cbPrePlant, cbPlant, cbFert, cbPest, cbIrriDrain, cbCult, cbRatoon, cbHarvest, cbPostHarvest, cbHaul;
     int bigMargin, smallMargin;
     Double fieldCap = null;
@@ -248,6 +248,22 @@ public class AddImplementActivity extends AppCompatActivity {
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, stringArrayList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinMachineUsing.setAdapter(adapter);
+
+
+                Log.d("ADMEDTRESC", "size" + machineArrayList.size());
+                Log.d("ADMEDTRESC", "extra" + getIntent().getStringExtra(EXTRA_USED_ON));
+                if (getIntent().hasExtra(EXTRA_IMP_ID)) {
+                    String comp = getIntent().getStringExtra(EXTRA_USED_ON);
+                    int position = 0;
+                    for (int i = 0; i < machineArrayList.size(); i++) {
+                        Log.d("ADMEDTRESC", "name" + machineArrayList.get(i).type);
+                        Log.d("ADMEDTRESC", "code" + machineArrayList.get(i).code);
+                        if (machineArrayList.get(i).code.equals(comp)) {
+                            position = i + 1;
+                        }
+                    }
+                    spinMachineUsing.setSelection(position);
+                }
             }
         });
 
@@ -605,16 +621,6 @@ public class AddImplementActivity extends AppCompatActivity {
                     tvFieldCapacityResultFert.setText(R.string.not_yet_acq);
 
                 }
-
-                if (!isNullOrEmpty(edtEffectiveAreaAccompFert.getText().toString()) && !isNullOrEmpty(edtWeightOfFert.getText().toString())) {
-
-                    tvDeliveryRateResultFert.setText(getFieldCapacity(edtWeightOfFert.getText().toString(), edtEffectiveAreaAccompFert.getText().toString()));
-
-                } else if (isNullOrEmpty(edtEffectiveAreaAccompFert.getText().toString()) || isNullOrEmpty(edtWeightOfFert.getText().toString())) {
-
-                    tvDeliveryRateResultFert.setText(R.string.not_yet_acq);
-
-                }
             }
 
             @Override
@@ -656,11 +662,36 @@ public class AddImplementActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!isNullOrEmpty(edtEffectiveAreaAccompFert.getText().toString()) && !isNullOrEmpty(edtWeightOfFert.getText().toString())) {
+                if (!isNullOrEmpty(edtEffectiveAreaAccompFertForWeight.getText().toString()) && !isNullOrEmpty(edtWeightOfFert.getText().toString())) {
 
-                    tvDeliveryRateResultFert.setText(getFieldCapacity(edtWeightOfFert.getText().toString(), edtEffectiveAreaAccompFert.getText().toString()));
+                    tvDeliveryRateResultFert.setText(getFieldCapacity(edtWeightOfFert.getText().toString(), edtEffectiveAreaAccompFertForWeight.getText().toString()));
 
-                } else if (isNullOrEmpty(edtEffectiveAreaAccompFert.getText().toString()) || isNullOrEmpty(edtWeightOfFert.getText().toString())) {
+                } else if (isNullOrEmpty(edtEffectiveAreaAccompFertForWeight.getText().toString()) || isNullOrEmpty(edtWeightOfFert.getText().toString())) {
+
+                    tvDeliveryRateResultFert.setText(R.string.not_yet_acq);
+
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        edtEffectiveAreaAccompFertForWeight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!isNullOrEmpty(edtEffectiveAreaAccompFertForWeight.getText().toString()) && !isNullOrEmpty(edtWeightOfFert.getText().toString())) {
+
+                    tvDeliveryRateResultFert.setText(getFieldCapacity(edtWeightOfFert.getText().toString(), edtEffectiveAreaAccompFertForWeight.getText().toString()));
+
+                } else if (isNullOrEmpty(edtEffectiveAreaAccompFertForWeight.getText().toString()) || isNullOrEmpty(edtWeightOfFert.getText().toString())) {
 
                     tvDeliveryRateResultFert.setText(R.string.not_yet_acq);
 
@@ -1237,6 +1268,7 @@ public class AddImplementActivity extends AppCompatActivity {
         edtEffectiveAreaAccompFert.setText(intent.getStringExtra(EXTRA_EFF_AREA_ACC_FERT));
         edtTimeUsedDuringOpFert.setText(intent.getStringExtra(EXTRA_TIME_USED_OP_FERT));
         tvFieldCapacityResultFert.setText(intent.getStringExtra(EXTRA_FIELD_CAP_FERT));
+//        edtEffectiveAreaAccompFertForWeight.setText(intent.getStringExtra(EXTRA_EFF_AREA_ACC_FERT_WEIGHT)); TODO ADD TO DB
         edtWeightOfFert.setText(intent.getStringExtra(EXTRA_WEIGHT_FERT));
         tvDeliveryRateResultFert.setText(intent.getStringExtra(EXTRA_DEL_RATE_FERT));
 
@@ -1572,8 +1604,8 @@ public class AddImplementActivity extends AppCompatActivity {
             dataAddImplement.putExtra(EXTRA_DATE, dateToStr);
             dataAddImplement.putExtra(EXTRA_USED_ON, temp1);
             dataAddImplement.putExtra(EXTRA_USED_COMPLETE, temp2);
-            dataAddImplement.putExtra(EXTRA_BRAND, edtBrand.getText().toString());
-            dataAddImplement.putExtra(EXTRA_MODEL, edtModel.getText().toString());
+            dataAddImplement.putExtra(EXTRA_BRAND, edtBrand.getText().toString().toUpperCase());
+            dataAddImplement.putExtra(EXTRA_MODEL, edtModel.getText().toString().toUpperCase());
             dataAddImplement.putExtra(EXTRA_LAND_CLEAR, landClear);
             dataAddImplement.putExtra(EXTRA_PRE_PLANT, prePlant);
             dataAddImplement.putExtra(EXTRA_PLANTING, planting);
@@ -1606,6 +1638,7 @@ public class AddImplementActivity extends AppCompatActivity {
             dataAddImplement.putExtra(EXTRA_EFF_AREA_ACC_FERT, edtEffectiveAreaAccompFert.getText().toString());
             dataAddImplement.putExtra(EXTRA_TIME_USED_OP_FERT, edtTimeUsedDuringOpFert.getText().toString());
             dataAddImplement.putExtra(EXTRA_FIELD_CAP_FERT, tvFieldCapacityResultFert.getText().toString());
+//            dataAddImplement.putExtra(EXTRA_EFF_AREA_ACC_FERT_WEIGHT, edtEffectiveAreaAccompFertForWeight.getText().toString()); TODO ADD THIS TO DB
             dataAddImplement.putExtra(EXTRA_WEIGHT_FERT, edtWeightOfFert.getText().toString());
             dataAddImplement.putExtra(EXTRA_DEL_RATE_FERT, tvDeliveryRateResultFert.getText().toString());
 //            dataAddImplement.putExtra(EXTRA_TSA_HARVEST, edtTotalServiceAreaHarvest.getText().toString());
@@ -1748,7 +1781,8 @@ public class AddImplementActivity extends AppCompatActivity {
             case "FERTILIZER APPLICATOR WITH CUTAWAY":
 
                 implementSpecsCheck = !isNullOrEmpty(edtEffectiveAreaAccompFert.getText().toString()) &&
-                        !isNullOrEmpty(edtTimeUsedDuringOpFert.getText().toString()) && !isNullOrEmpty(edtWeightOfFert.getText().toString());
+                        !isNullOrEmpty(edtTimeUsedDuringOpFert.getText().toString()) && !isNullOrEmpty(edtWeightOfFert.getText().toString()) &&
+                        !isNullOrEmpty(edtEffectiveAreaAccompFertForWeight.getText().toString());
 
                 break;
             case "MECHANICAL HARVESTER":
@@ -1760,8 +1794,6 @@ public class AddImplementActivity extends AppCompatActivity {
 
                 implementSpecsCheck = !isNullOrEmpty(edtEffectiveAreaAccompGrab.getText().toString()) && !isNullOrEmpty(edtTimeUsedDuringOpGrab.getText().toString()) &&
                         !isNullOrEmpty(edtLoadCapacityGrab.getText().toString());
-
-                //TODO add new edit texts
                 break;
             case "DITCHER":
 
@@ -1828,6 +1860,7 @@ public class AddImplementActivity extends AppCompatActivity {
                 break;
             //CoopCustomLgu
         }
+
 
         yearSelectCheck = spinYearAcquired.getSelectedItemPosition() != 0;
 
@@ -2061,6 +2094,9 @@ public class AddImplementActivity extends AppCompatActivity {
         edtTimeUsedDuringOpFert.setVisibility(View.VISIBLE);
         edtWeightOfFert.setVisibility(View.VISIBLE);
 
+        tvHaEAFert2.setVisibility(View.VISIBLE);
+        edtEffectiveAreaAccompFertForWeight.setVisibility(View.VISIBLE);
+
         tvDelRateHeader.setVisibility(View.VISIBLE);
         tvDelRateHeaderInfo.setVisibility(View.VISIBLE);
         tvHaEAFert.setVisibility(View.VISIBLE);
@@ -2188,6 +2224,7 @@ public class AddImplementActivity extends AppCompatActivity {
         edtEffectiveAreaAccompPlant.setVisibility(View.GONE);
         edtTimeUsedDuringOpPlant.setVisibility(View.GONE);
 
+        edtEffectiveAreaAccompFertForWeight.setVisibility(View.GONE);
         edtEffectiveAreaAccompFert.setVisibility(View.GONE);
         edtTimeUsedDuringOpFert.setVisibility(View.GONE);
         edtWeightOfFert.setVisibility(View.GONE);
@@ -2221,6 +2258,7 @@ public class AddImplementActivity extends AppCompatActivity {
         tvTypeofPlant.setVisibility(View.GONE);
 
         tvHaEAFert.setVisibility(View.GONE);
+        tvHaEAFert2.setVisibility(View.GONE);
         tvHoursPDayOpFert.setVisibility(View.GONE);
         tvFieldCapacityFert.setVisibility(View.GONE);
         tvFieldCapacityResultFert.setVisibility(View.GONE);
@@ -2364,7 +2402,9 @@ public class AddImplementActivity extends AppCompatActivity {
         edtEffectiveAreaAccompFert = findViewById(R.id.edtEffectiveAreaAccompFert);
         edtTimeUsedDuringOpFert = findViewById(R.id.edtTimeUsedDuringOpFert);
         edtWeightOfFert = findViewById(R.id.edtWeightOfFertFert);
+        edtEffectiveAreaAccompFertForWeight = findViewById(R.id.edtEffectiveAreaAccompFert2);
         tvHaEAFert = findViewById(R.id.tvHaEAFert);
+        tvHaEAFert2 = findViewById(R.id.tvHaEAFert2);
         tvHoursPDayOpFert = findViewById(R.id.tvHoursPDayOpFert);
         tvFieldCapacityFert = findViewById(R.id.tvFieldCapacityFert);
         tvFieldCapacityResultFert = findViewById(R.id.tvFieldCapacityResultFert);
@@ -2714,6 +2754,13 @@ public class AddImplementActivity extends AppCompatActivity {
                 return false;
             }
         });
+        edtEffectiveAreaAccompFertForWeight.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                setFocusOnEdt(edtEffectiveAreaAccompFertForWeight);
+                return false;
+            }
+        });
         edtTimeUsedDuringOpFert.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -2808,16 +2855,16 @@ public class AddImplementActivity extends AppCompatActivity {
         // Determine the constrained dimension, which determines both dimensions.
         int width;
         int height;
-        float widthRatio = (float) bitmap.getWidth() / 1440;
-        float heightRatio = (float) bitmap.getHeight() / 2560;
+        float widthRatio = (float) bitmap.getWidth() / 900;
+        float heightRatio = (float) bitmap.getHeight() / 1600;
         // Width constrained.
         if (widthRatio >= heightRatio) {
-            width = 1440;
+            width = 900;
             height = (int) (((float) width / bitmap.getWidth()) * bitmap.getHeight());
         }
         // Height constrained.
         else {
-            height = 2560;
+            height = 1600;
             width = (int) (((float) height / bitmap.getHeight()) * bitmap.getWidth());
         }
         Bitmap scaledBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);

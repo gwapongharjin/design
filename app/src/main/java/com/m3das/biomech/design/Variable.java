@@ -1,22 +1,10 @@
 package com.m3das.biomech.design;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.util.Base64;
-
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-
-import com.m3das.biomech.design.viewmodels.MachineListViewModel;
-
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Variable {
+
+    static int cropSelected = 0;
 
     static String image_string_global = "";
 
@@ -50,6 +38,14 @@ public class Variable {
 
     public static String getMachList() {
         return machine_list_global;
+    }
+
+    public static void setCrop(int crop) {
+        cropSelected = crop;
+    }
+
+    public static int getCrop() {
+        return cropSelected;
     }
 
     public static void setListResCode(ArrayList<String> profiles) {
