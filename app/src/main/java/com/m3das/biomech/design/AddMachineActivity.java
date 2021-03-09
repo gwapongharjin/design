@@ -1413,9 +1413,11 @@ public class AddMachineActivity extends AppCompatActivity {
     }
 
     private void sortUnavailable() {
+
         List<KeyPairBoolData> allMunicipalities = pairingOfList(Arrays.asList(getResources().getStringArray(R.array.municipalities)));
         List<KeyPairBoolData> allBarangays = pairingOfList(Arrays.asList(getResources().getStringArray(R.array.barangays)));
         multSpinMunRent.setEnabled(true);
+        Log.d("chestest", "All Municipalities");
         multSpinMunRent.setItems(allMunicipalities, new MultiSpinnerListener() {
             @Override
             public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
@@ -2292,6 +2294,12 @@ public class AddMachineActivity extends AppCompatActivity {
                     Log.d("MULTSPIN", pos);
                 }
                 provRent = pos;
+                Log.d("chestest", "provRent: " + provRent);
+                if (provRent.contains("BATANGAS")) {
+                    sortAdaptabilityBatangas();
+                } else {
+                    sortUnavailable();
+                }
             }
         });
         provRent = intent1.getStringExtra(EXTRA_RENT_PROV);
@@ -2299,6 +2307,7 @@ public class AddMachineActivity extends AppCompatActivity {
         stringCompare = intent1.getStringExtra(EXTRA_RENT_MUN);
         List<KeyPairBoolData> rentMunicipalities = null;
         rentMunicipalities = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.municipalities)), stringCompare, 3);
+        Log.d("chestest", "spec Municipalities");
         multSpinMunRent.setItems(rentMunicipalities, new MultiSpinnerListener() {
             @Override
             public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
@@ -4334,6 +4343,7 @@ public class AddMachineActivity extends AppCompatActivity {
 //        } else {
 //
 //        }m
+
 
     }
 

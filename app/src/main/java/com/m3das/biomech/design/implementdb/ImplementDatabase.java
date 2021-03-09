@@ -19,7 +19,7 @@ import com.m3das.biomech.design.Variable;
 
 import java.io.ByteArrayOutputStream;
 
-@Database(entities = {Implements.class}, version = 2)
+@Database(entities = {Implements.class}, version = 3)
 public abstract class ImplementDatabase extends RoomDatabase {
     private static ImplementDatabase instance;
 
