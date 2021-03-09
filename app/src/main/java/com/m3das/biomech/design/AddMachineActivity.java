@@ -666,6 +666,7 @@ public class AddMachineActivity extends AppCompatActivity {
 
             }
         });
+
         singlespinBarangay.setEnabled(false);
         singlespinMunicipality.setEnabled(false);
         List<KeyPairBoolData> allProvinces = pairingOfList(Arrays.asList(getResources().getStringArray(R.array.provinces)));

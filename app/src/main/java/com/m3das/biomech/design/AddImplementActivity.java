@@ -365,6 +365,18 @@ public class AddImplementActivity extends AppCompatActivity {
             }
         });
 
+        spinLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                clearCursor();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         spinTypeOfPlanter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1383,7 +1395,7 @@ public class AddImplementActivity extends AppCompatActivity {
         List<KeyPairBoolData> problems = null;
         Log.d("EDTIMPPRBLM", "This is problem " + stringCompare);
         if (spinConditionPresent.getSelectedItemPosition() == 3) {
-            problems = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.problems_unused)), stringCompare, 1);
+            problems = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.problems_unused_implement)), stringCompare, 1);
         } else if (spinConditionPresent.getSelectedItemPosition() == 4) {
             problems = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.problems_nonfunctional)), stringCompare, 1);
         } else {
@@ -1399,6 +1411,7 @@ public class AddImplementActivity extends AppCompatActivity {
             hasOtherProblems = false;
             edtOtherProblems.setVisibility(View.INVISIBLE);
         }
+
         multspinProblemsUnused.setItems(problems, new MultiSpinnerListener() {
             @Override
             public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
@@ -1408,6 +1421,7 @@ public class AddImplementActivity extends AppCompatActivity {
                     Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
                 }
                 listOfProblems = pos;
+
                 if (pos.contains("OTHERS")) {
                     edtOtherProblems.setVisibility(View.VISIBLE);
                     paramstvLocation.topToBottom = R.id.edtOtherProblems;
@@ -2589,7 +2603,7 @@ public class AddImplementActivity extends AppCompatActivity {
             KeyPairBoolData h = new KeyPairBoolData();
             h.setId(i + 1);
             h.setName(stringList.get(i));
-            if (stringList.get(i).contains(compare)) {
+            if (compare.contains(stringList.get(i))) {
                 h.setSelected(true);
                 Log.d("Selected item", "Item is: " + compare + " = " + stringList.get(i));
                 if (valueOfString == 1) {

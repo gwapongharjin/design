@@ -472,16 +472,6 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             });
             implementViewModel.deleteAll();
             dialogUpload.dismissDialog();
-
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Upload Complete")
-                    .setMessage("You have uploaded all your data. Now the app will Exit")
-                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                        }
-                    }).show();
         } else {
             Toast.makeText(getContext(), "TOAST no upload", Toast.LENGTH_LONG).show();
         }
@@ -494,8 +484,16 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             @Override
             public void run() {
                 dialogUpload.dismissDialog();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Upload Complete")
+                        .setMessage("You have uploaded all your data.")
+                        .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                            }
+                        }).show();
             }
-        }, 20000);
+        }, 45000);
     }
 
     private void uploadingProfiles(boolean status) {
