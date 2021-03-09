@@ -42,6 +42,7 @@ public class Implements {
     private final String effective_area_accomplished_fertilizer;
     private final String time_used_during_operation_fertilizer;
     private final String field_capacity_fertilizer;
+    private final String effective_area_accomplished_fetilizer2;
     private final String weight_fertilizer;
     private final String delivery_rate_fetilizer;
 
@@ -84,7 +85,7 @@ public class Implements {
                       String land_clearing, String pre_planting, String planting, String fertilizer_application, String pesticide_application, String irrigation_drainage, String cultivation,
                       String ratooning, String harvest, String post_harvest, String hauling, String effective_area_accomplished_main, String time_used_during_operation_main,
                       String field_capacity_main, String type_of_planter, String number_of_rows_planter, String distance_of_materials_planter, String effective_area_accomplished_planter, String time_used_during_operation_planter, String field_capacity_planter, String effective_area_accomplished_fertilizer,
-                      String time_used_during_operation_fertilizer, String field_capacity_fertilizer, String weight_fertilizer, String delivery_rate_fetilizer,
+                      String time_used_during_operation_fertilizer, String field_capacity_fertilizer, String effective_area_accomplished_fetilizer2, String weight_fertilizer, String delivery_rate_fetilizer,
                       String effective_area_accomplished_harvester, String time_used_during_operation_harvester, String field_capacity_harvester, String average_yield_harvester,
                       String effective_area_accomplished_cane_grab_loader, String time_used_during_operation_cane_grab_loader, String loading_capacity_cane_grab_loader,
                       String field_capacity_cane_grab_loader, String depth_cut_ditcher, String ownership, String purchase_grant_donation, String agency, String agency_specify,
@@ -120,6 +121,7 @@ public class Implements {
         this.effective_area_accomplished_fertilizer = effective_area_accomplished_fertilizer;
         this.time_used_during_operation_fertilizer = time_used_during_operation_fertilizer;
         this.field_capacity_fertilizer = field_capacity_fertilizer;
+        this.effective_area_accomplished_fetilizer2 = effective_area_accomplished_fetilizer2;
         this.weight_fertilizer = weight_fertilizer;
         this.delivery_rate_fetilizer = delivery_rate_fetilizer;
         this.effective_area_accomplished_harvester = effective_area_accomplished_harvester;
@@ -282,6 +284,10 @@ public class Implements {
 
     public String getField_capacity_fertilizer() {
         return field_capacity_fertilizer;
+    }
+
+    public String getEffective_area_accomplished_fetilizer2() {
+        return effective_area_accomplished_fetilizer2;
     }
 
     public String getWeight_fertilizer() {

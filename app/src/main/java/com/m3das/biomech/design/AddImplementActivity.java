@@ -123,6 +123,7 @@ public class AddImplementActivity extends AppCompatActivity {
     public static final String EXTRA_POST_HARVEST = "ADDIMPLEMENT_EXTRA_POST_HARVEST";
     public static final String EXTRA_HAULING = "ADDIMPLEMENT_EXTRA_HAULING";
 
+    public static final String EXTRA_EFF_AREA_ACC_FERT_WEIGHT = "ADDIMPLEMENT_EXTRA_EFF_AREA_ACC_FERT_WEIGHT";
     public static final String EXTRA_EFF_AREA_ACC_MAIN = "ADDIMPLEMENT_EXTRA_EFF_AREA_ACC_MAIN";
     public static final String EXTRA_TIME_USED_OP_MAIN = "ADDIMPLEMENT_EXTRA_TIME_USED_OP_MAIN";
     public static final String EXTRA_FIELD_CAP_MAIN = "ADDIMPLEMENT_EXTRA_FIELD_CAP_MAIN";
@@ -1268,7 +1269,7 @@ public class AddImplementActivity extends AppCompatActivity {
         edtEffectiveAreaAccompFert.setText(intent.getStringExtra(EXTRA_EFF_AREA_ACC_FERT));
         edtTimeUsedDuringOpFert.setText(intent.getStringExtra(EXTRA_TIME_USED_OP_FERT));
         tvFieldCapacityResultFert.setText(intent.getStringExtra(EXTRA_FIELD_CAP_FERT));
-//        edtEffectiveAreaAccompFertForWeight.setText(intent.getStringExtra(EXTRA_EFF_AREA_ACC_FERT_WEIGHT)); TODO ADD TO DB
+        edtEffectiveAreaAccompFertForWeight.setText(intent.getStringExtra(EXTRA_EFF_AREA_ACC_FERT_WEIGHT));
         edtWeightOfFert.setText(intent.getStringExtra(EXTRA_WEIGHT_FERT));
         tvDeliveryRateResultFert.setText(intent.getStringExtra(EXTRA_DEL_RATE_FERT));
 
@@ -1378,6 +1379,47 @@ public class AddImplementActivity extends AppCompatActivity {
 //        });
 //        listOfProblems = intent.getStringExtra(EXTRA_PROBLEMS);
 
+        stringCompare = intent.getStringExtra(EXTRA_PROBLEMS);
+        List<KeyPairBoolData> problems = null;
+        Log.d("EDTIMPPRBLM", "This is problem " + stringCompare);
+        if (spinConditionPresent.getSelectedItemPosition() == 3) {
+            problems = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.problems_unused)), stringCompare, 1);
+        } else if (spinConditionPresent.getSelectedItemPosition() == 4) {
+            problems = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.problems_nonfunctional)), stringCompare, 1);
+        } else {
+            problems = pairBoolDataSelectMulti(Arrays.asList(getResources().getStringArray(R.array.problems_unused)), stringCompare, 1);
+        }
+
+        if (stringCompare.contains("OTHERS")) {
+            edtOtherProblems.setVisibility(View.VISIBLE);
+            paramstvLocation.topToBottom = R.id.edtOtherProblems;
+            hasOtherProblems = true;
+            edtOtherProblems.setText(intent.getStringExtra(EXTRA_PROBLEMS_SPECIFY));
+        } else {
+            hasOtherProblems = false;
+            edtOtherProblems.setVisibility(View.INVISIBLE);
+        }
+        multspinProblemsUnused.setItems(problems, new MultiSpinnerListener() {
+            @Override
+            public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
+                String pos = "";
+                for (int i = 0; i < selectedItems.size(); i++) {
+                    pos = selectedItems.get(i).getName() + " : " + pos;
+                    Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
+                }
+                listOfProblems = pos;
+                if (pos.contains("OTHERS")) {
+                    edtOtherProblems.setVisibility(View.VISIBLE);
+                    paramstvLocation.topToBottom = R.id.edtOtherProblems;
+                    hasOtherProblems = true;
+                } else {
+                    hasOtherProblems = false;
+                    edtOtherProblems.setVisibility(View.INVISIBLE);
+                    edtOtherProblems.setText("");
+                }
+            }
+        });
+        listOfProblems = intent.getStringExtra(EXTRA_PROBLEMS);
 
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
         stringCompare = intent.getStringExtra(EXTRA_YEAR_INOPERABLE);
@@ -1638,7 +1680,7 @@ public class AddImplementActivity extends AppCompatActivity {
             dataAddImplement.putExtra(EXTRA_EFF_AREA_ACC_FERT, edtEffectiveAreaAccompFert.getText().toString());
             dataAddImplement.putExtra(EXTRA_TIME_USED_OP_FERT, edtTimeUsedDuringOpFert.getText().toString());
             dataAddImplement.putExtra(EXTRA_FIELD_CAP_FERT, tvFieldCapacityResultFert.getText().toString());
-//            dataAddImplement.putExtra(EXTRA_EFF_AREA_ACC_FERT_WEIGHT, edtEffectiveAreaAccompFertForWeight.getText().toString()); TODO ADD THIS TO DB
+            dataAddImplement.putExtra(EXTRA_EFF_AREA_ACC_FERT_WEIGHT, edtEffectiveAreaAccompFertForWeight.getText().toString());
             dataAddImplement.putExtra(EXTRA_WEIGHT_FERT, edtWeightOfFert.getText().toString());
             dataAddImplement.putExtra(EXTRA_DEL_RATE_FERT, tvDeliveryRateResultFert.getText().toString());
 //            dataAddImplement.putExtra(EXTRA_TSA_HARVEST, edtTotalServiceAreaHarvest.getText().toString());
@@ -2517,7 +2559,7 @@ public class AddImplementActivity extends AppCompatActivity {
             public void onItemsSelected(List<KeyPairBoolData> selectedItems) {
                 String pos = "";
                 for (int i = 0; i < selectedItems.size(); i++) {
-                    pos = pos + " : " + selectedItems.get(i).getName();
+                    pos = selectedItems.get(i).getName() + " : " + pos;
                     Log.d("MULT SPIN", i + " : " + selectedItems.get(i).getName() + " : " + selectedItems.get(i).isSelected());
                 }
                 listOfProblems = pos;

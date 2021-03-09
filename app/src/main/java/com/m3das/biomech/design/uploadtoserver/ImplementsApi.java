@@ -46,6 +46,7 @@ public interface ImplementsApi {
             @Field("impEFFAAFertPost") String implementEFFAAFert,
             @Field("impTUDOpFertPost") String implementTUDOpFert,
             @Field("impFieldCapFertPost") String implementFieldCapFert,
+            @Field("impEFFAAFertWeightPost") String implementEFFAAFertWeight,
             @Field("impWeightFertPost") String implementWeightFert,
             @Field("impDelRateFertPost") String implementDelRateFert,
 

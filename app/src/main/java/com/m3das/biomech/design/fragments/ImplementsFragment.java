@@ -154,6 +154,9 @@ public class ImplementsFragment extends Fragment {
                 editImplement.putExtra(AddImplementActivity.EXTRA_YEAR_INOPERABLE, implement.getYear_inoperable());
                 editImplement.putExtra(AddImplementActivity.EXTRA_MODIFICATIONS, implement.getModifications());
 
+                editImplement.putExtra(AddImplementActivity.EXTRA_PROBLEMS, implement.getProblems());
+                editImplement.putExtra(AddImplementActivity.EXTRA_PROBLEMS_SPECIFY, implement.getProblems_specify());
+
                 editImplement.putExtra(AddImplementActivity.EXTRA_YEAR_ACQUIRED, implement.getYear_acquired());
                 editImplement.putExtra(AddImplementActivity.EXTRA_CONDITION_PRESENT, implement.getCondition_present());
                 editImplement.putExtra(AddImplementActivity.EXTRA_CONDITION_ACQUIRED, implement.getCondition());
@@ -296,6 +299,7 @@ public class ImplementsFragment extends Fragment {
             String effective_area_accomplished_fertilizer = data.getStringExtra(AddImplementActivity.EXTRA_EFF_AREA_ACC_FERT);
             String time_used_during_operation_fertilizer = data.getStringExtra(AddImplementActivity.EXTRA_TIME_USED_OP_FERT);
             String field_capacity_fertilizer = data.getStringExtra(AddImplementActivity.EXTRA_FIELD_CAP_FERT);
+            String effective_area_accomplished_fetilizer2 = data.getStringExtra(AddImplementActivity.EXTRA_EFF_AREA_ACC_FERT_WEIGHT);
             String weight_fertilizer = data.getStringExtra(AddImplementActivity.EXTRA_WEIGHT_FERT);
             String delivery_rate_fetilizer = data.getStringExtra(AddImplementActivity.EXTRA_DEL_RATE_FERT);
 
@@ -338,7 +342,7 @@ public class ImplementsFragment extends Fragment {
             Implements imp = new Implements(implement_type, implement_qr_code, date_of_survey, used_on_machine, used_on_machine_complete, brand, model, land_clearing, pre_planting, planting, fertilizer_application,
                     pesticide_application, irrigation_drainage, cultivation, ratooning, harvest, post_harvest, hauling, effective_area_accomplished_main, time_used_during_operation_main, field_capacity_main,
                     type_of_planter, number_of_rows_planter, distance_of_materials_planter, effective_area_accomplished_planter, time_used_during_operation_planter, field_capacity_planter, effective_area_accomplished_fertilizer,
-                    time_used_during_operation_fertilizer, field_capacity_fertilizer, weight_fertilizer, delivery_rate_fetilizer, effective_area_accomplished_harvester, time_used_during_operation_harvester,
+                    time_used_during_operation_fertilizer, field_capacity_fertilizer, effective_area_accomplished_fetilizer2, weight_fertilizer, delivery_rate_fetilizer, effective_area_accomplished_harvester, time_used_during_operation_harvester,
                     field_capacity_harvester, average_yield_harvester, effective_area_accomplished_cane_grab_loader, time_used_during_operation_cane_grab_loader, loading_capacity_cane_grab_loader,
                     field_capacity_cane_grab_loader, depth_cut_ditcher, ownership, purchase_grant_dono, agency, agency_specify, year_acquired, condition_acquired, condition_present, modifications, problems, problems_specify, year_inoperable,
                     location, province, city, barangay, image_base64, latitude, longitude, accuracy);
@@ -388,6 +392,7 @@ public class ImplementsFragment extends Fragment {
             String effective_area_accomplished_fertilizer = data.getStringExtra(AddImplementActivity.EXTRA_EFF_AREA_ACC_FERT);
             String time_used_during_operation_fertilizer = data.getStringExtra(AddImplementActivity.EXTRA_TIME_USED_OP_FERT);
             String field_capacity_fertilizer = data.getStringExtra(AddImplementActivity.EXTRA_FIELD_CAP_FERT);
+            String effective_area_accomplished_fetilizer2 = data.getStringExtra(AddImplementActivity.EXTRA_EFF_AREA_ACC_FERT_WEIGHT);
             String weight_fertilizer = data.getStringExtra(AddImplementActivity.EXTRA_WEIGHT_FERT);
             String delivery_rate_fetilizer = data.getStringExtra(AddImplementActivity.EXTRA_DEL_RATE_FERT);
 
@@ -429,7 +434,7 @@ public class ImplementsFragment extends Fragment {
             Implements imp = new Implements(implement_type, implement_qr_code, date_of_survey, used_on_machine, used_on_machine_complete, brand, model, land_clearing, pre_planting, planting, fertilizer_application,
                     pesticide_application, irrigation_drainage, cultivation, ratooning, harvest, post_harvest, hauling, effective_area_accomplished_main, time_used_during_operation_main, field_capacity_main,
                     type_of_planter, number_of_rows_planter, distance_of_materials_planter, effective_area_accomplished_planter, time_used_during_operation_planter, field_capacity_planter, effective_area_accomplished_fertilizer,
-                    time_used_during_operation_fertilizer, field_capacity_fertilizer, weight_fertilizer, delivery_rate_fetilizer, effective_area_accomplished_harvester, time_used_during_operation_harvester,
+                    time_used_during_operation_fertilizer, field_capacity_fertilizer, effective_area_accomplished_fetilizer2, weight_fertilizer, delivery_rate_fetilizer, effective_area_accomplished_harvester, time_used_during_operation_harvester,
                     field_capacity_harvester, average_yield_harvester, effective_area_accomplished_cane_grab_loader, time_used_during_operation_cane_grab_loader, loading_capacity_cane_grab_loader,
                     field_capacity_cane_grab_loader, depth_cut_ditcher, ownership, purchase_grant_dono, agency, agency_specify, year_acquired, condition_acquired, condition_present, modifications, problems, problems_specify, year_inoperable,
                     location, province, city, barangay, image_base64, latitude, longitude, accuracy);

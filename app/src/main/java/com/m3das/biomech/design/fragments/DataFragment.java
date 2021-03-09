@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -69,7 +70,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
         return new DataFragment();
     }
 
-    private String countImplement, countProf, countMachine;
+    private Integer countImplement, countProf, countMachine;
 
     private Button btnExport, btnUpload, btnViewMachines, btnViewImplements, btnDelete;
     private String machineType, machineQRCode, datesurvey, brand, brand_specify, model, model_specify, rated_power, service_area, ave_op_hours, ave_op_days, capacity, ave_yield, rate,
@@ -83,7 +84,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             implementLocation, implementProvince, implementMunicipality, implementBrgy, implementImgBase64, implementLatitude, implementLongitude, implementAccuracy, enumCode, plow_rate,
             plow_unit, plow_unit_specify, harr_rate, harr_unit, harr_unit_specify, furr_rate, furr_unit, furr_unit_specify, othr_rent_operation, othr_rate, othr_unit, othr_unit_specify,
             ave_fuel_plow, ave_fuel_harr, ave_fuel_furr, year_inoperable, implementBrand, implementModel, newly_planted_area, ratooned_area, implementAgency, implementOwnership,
-            implementPurch_grant_dono, waterpump_unit, ave_fuel_main,
+            implementPurch_grant_dono, waterpump_unit, ave_fuel_main, implementEFFAAFert2,
             implementAgency_specify, implementModifications, implementProblems, implementProblemsSpecify, implementYearInoperable, time_used_harvester, effaa_harvester;
     private String profileResCode, profileProfile, profileProfileSpecify, profileOwnerType, profileNameRespondent, profileAddress, profileAge, profileSex, profileContactNumber, profileMobNum1,
             profileMobNum2, profileTelNum1, profileTelNum2, profileEducAttain;
@@ -101,9 +102,9 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
         btnDelete = v.findViewById(R.id.btnDelete);
 
         enumCode = "";
-        countImplement = "";
-        countMachine = "";
-        countProf = "";
+//        countImplement = "";
+//        countMachine = "";
+//        countProf = "";
 
 //        exportDbUtil = new ExportDbUtil(getActivity(), "sampleDbExporter", "library Test", getContext());
 
@@ -228,7 +229,6 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
 
         if (status) {
             DialogUpload dialogUpload = new DialogUpload(getActivity());
-
             dialogUpload.startLoadingDialog();
             machineListViewModel.getAllMachines().observe(this, new Observer<List<Machines>>() {
                 @Override
@@ -358,7 +358,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             DialogUpload dialogUpload = new DialogUpload(getActivity());
 
             dialogUpload.startLoadingDialog();
-
+            countImplement = 0;
             implementViewModel.getAllImplements().observe(this, new Observer<List<Implements>>() {
                 @Override
                 public void onChanged(List<Implements> anImplements) {
@@ -397,6 +397,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
 
                         implementEFFAAFert = anImplements.get(i).getEffective_area_accomplished_fertilizer();
                         implementTUDOpFert = anImplements.get(i).getTime_used_during_operation_fertilizer();
+                        implementEFFAAFert2 = anImplements.get(i).getEffective_area_accomplished_fetilizer2();
                         implementFieldCapFert = anImplements.get(i).getField_capacity_fertilizer();
                         implementWeightFert = anImplements.get(i).getWeight_fertilizer();
                         implementDelRateFert = anImplements.get(i).getDelivery_rate_fetilizer();
@@ -439,7 +440,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                                 implementUsedOnMachineComplete, implementBrand, implementModel, implementLandClearing, implementPrePlant, implementPlanting, implementFertApp, implementPestApp,
                                 implementIrriDrain, implementCult, implementRatoon, implementHarvest, implementPostHarvest, implementHaul, implementEFFAAMain, implementTUDOpMain,
                                 implementFieldCapMain, implementTypePlant, implementNumRowsPlant, implementDistMatPlant, implementEFFAAPlant, implementTUDOpPlant, implementFieldCapPlant,
-                                implementEFFAAFert, implementTUDOpFert, implementFieldCapFert, implementWeightFert, implementDelRateFert, implementEFFAAHarvest, implementTUDOpHarvest,
+                                implementEFFAAFert, implementTUDOpFert, implementFieldCapFert, implementEFFAAFert2, implementWeightFert, implementDelRateFert, implementEFFAAHarvest, implementTUDOpHarvest,
                                 implementFieldCapHarvest, implementAveYieldHarvest, implementEFFAAGrab, implementTUDOGrab, implementLoadCapGrab, implementFieldCapGrab, implementDepthCutDitch,
                                 implementOwnership, implementPurch_grant_dono, implementAgency, implementAgency_specify, implementYearAcq, implementCondition, implementModifications,
                                 implementProblems, implementProblemsSpecify, implementYearInoperable, implementLocation, implementProvince, implementMunicipality, implementBrgy, implementImgBase64,
@@ -450,8 +451,8 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                             public void onResponse(Call<ResponsePojo> call, Response<ResponsePojo> response) {
 
                                 Toast.makeText(getContext(), response.body().getRemarks() + ": For Implements", Toast.LENGTH_SHORT).show();
-                                countImplement = countImplement + ": " + implementQR;
                                 if (response.body().isStatus()) {
+                                    countImplement++;
                                 } else {
                                 }
                             }
@@ -461,26 +462,40 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
 //                            Toast.makeText(getActivity(), "Network Failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
+
+                        Log.d("DFUPLIMP", anImplements.size() + ", " + countImplement.toString());
+//                        if (anImplements.size() == countImplement) {
+//
+//                        }
                     }
-                    Log.d("Count FORLOOP", anImplements.size() + ", " + countImplement);
-                    implementViewModel.deleteAll();
-                    dialogUpload.dismissDialog();
                 }
             });
+            implementViewModel.deleteAll();
+            dialogUpload.dismissDialog();
 
-//            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//            builder.setTitle("Upload Complete")
-//                    .setMessage("You have uploaded all your data. Now the app will Exit")
-//                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialogInterface, int i) {
-//                            getActivity().finishAffinity();
-//                            System.exit(0);
-//                        }
-//                    }).show();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Upload Complete")
+                    .setMessage("You have uploaded all your data. Now the app will Exit")
+                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    }).show();
         } else {
             Toast.makeText(getContext(), "TOAST no upload", Toast.LENGTH_LONG).show();
         }
+
+        DialogUpload dialogUpload = new DialogUpload(getActivity());
+
+        dialogUpload.startLoadingDialog();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialogUpload.dismissDialog();
+            }
+        }, 20000);
     }
 
     private void uploadingProfiles(boolean status) {
@@ -489,7 +504,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             DialogUpload dialogUpload = new DialogUpload(getActivity());
 
             dialogUpload.startLoadingDialog();
-
+            countProf = 0;
             profileViewModel.getAllProfiles().observe(this, new Observer<List<Profile>>() {
                 @Override
                 public void onChanged(List<Profile> profiles) {
@@ -530,11 +545,15 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                             }
                         });
                     }
-                    Log.d("CountFORLOOPPROF", profiles.size() + ", " + countProf);
-                    profileViewModel.deleteAll();
-                    dialogUpload.dismissDialog();
+                    Log.d("DFUPLIMP", profiles.size() + ", " + countProf.toString());
+//                    if (profiles.size() == countProf) {
+//                        implementViewModel.deleteAll();
+//                        dialogUpload.dismissDialog();
+//                    }
                 }
             });
+            profileViewModel.deleteAll();
+            dialogUpload.dismissDialog();
             uploadMachines(status);
         } else {
             Toast.makeText(getContext(), "TOAST no upload", Toast.LENGTH_LONG).show();
@@ -856,7 +875,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                 "Harvesting", "PostHarvesting", "Hauling", "EffectiveAreaAccomplishedMain", "TimeUsedDuringOperationMain",
                 "FieldCapacityMain", "TypeOfPlanter", "NumberOfRowsPlanter", "DistanceOfMaterialsPlanter", "EffectiveAreaAccomplishedPlanter",
                 "TimeUsedDuringOperationPlanter", "FieldCapacityPlanter", "EffectiveAreaAccomplishedFertilizerApplicator", "TimeUsedDuringOperationFertilizerApplicator", "FieldCapacityFertilizerApplicator",
-                "WeightOfFertilizer", "DeliveryRateOfFertilizerApplicator", "EffectiveAreaAccomplishedHarvester", "TimeUsedDuringOperationHarvester", "FieldCapacityHarvester",
+                "EffectiveAreaAccomplishedFertilizerApplicatorForWeight", "WeightOfFertilizer", "DeliveryRateOfFertilizerApplicator", "EffectiveAreaAccomplishedHarvester", "TimeUsedDuringOperationHarvester", "FieldCapacityHarvester",
                 "AverageYieldHarvester", "EffectiveAreaAccomplishedCaneGrabLoader", "TimeUsedDuringOperationCaneGrabLoader", "LoadCapacityCaneGrabLoader", "FieldCapacityCaneGrabLoader",
                 "DepthOfCutDitcher", "ownership", "purchGrantDono", "agency", "agencySpecify",
                 "YearAcquired", "ConditionPresentImplement", "modifications", "problems", "problemsSpecify",
@@ -904,6 +923,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     implementEFFAAFert = anImplements.get(i).getEffective_area_accomplished_fertilizer();
                     implementTUDOpFert = anImplements.get(i).getTime_used_during_operation_fertilizer();
                     implementFieldCapFert = anImplements.get(i).getField_capacity_fertilizer();
+                    implementEFFAAFert2 = anImplements.get(i).getEffective_area_accomplished_fetilizer2();
                     implementWeightFert = anImplements.get(i).getWeight_fertilizer();
                     implementDelRateFert = anImplements.get(i).getDelivery_rate_fetilizer();
 
@@ -943,7 +963,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     implementListSend.add(new String[]{implementType, implementQR, implementUsedOnMachine, implementUsedOnMachineComplete, implementDateSurvey, implementBrand, implementModel, implementLandClearing, implementPrePlant, implementPlanting,
                             implementFertApp, implementPestApp, implementIrriDrain, implementCult, implementRatoon, implementHarvest, implementPostHarvest, implementHaul, implementEFFAAMain, implementTUDOpMain,
                             implementFieldCapMain, implementTypePlant, implementNumRowsPlant, implementDistMatPlant, implementEFFAAPlant, implementTUDOpPlant, implementFieldCapPlant, implementEFFAAFert, implementTUDOpFert, implementFieldCapFert,
-                            implementWeightFert, implementDelRateFert, implementEFFAAHarvest, implementTUDOpHarvest, implementFieldCapHarvest, implementAveYieldHarvest, implementEFFAAGrab, implementTUDOGrab, implementLoadCapGrab, implementFieldCapGrab,
+                            implementEFFAAFert2, implementWeightFert, implementDelRateFert, implementEFFAAHarvest, implementTUDOpHarvest, implementFieldCapHarvest, implementAveYieldHarvest, implementEFFAAGrab, implementTUDOGrab, implementLoadCapGrab, implementFieldCapGrab,
                             implementDepthCutDitch, implementOwnership, implementPurch_grant_dono, implementAgency, implementAgency_specify, implementYearAcq, implementCondition, implementModifications, implementProblems, implementProblemsSpecify,
                             implementYearInoperable, implementLocation, implementProvince, implementMunicipality, implementBrgy, implementLatitude, implementLongitude, implementAccuracy, implementImgBase64});
                     Log.d("DFEXVALIMPVM", String.valueOf(implementListSend.size()));
