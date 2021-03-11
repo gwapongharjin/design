@@ -58,36 +58,13 @@
             app:layout_constraintTop_toBottomOf="@+id/tvOwnerMachine" />
 
         <TextView
-            android:id="@+id/tvPrevious"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Previous Respondent:"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@+id/textView5"
-            app:layout_constraintStart_toStartOf="@+id/tvOwnerMachine"
-            app:layout_constraintTop_toBottomOf="@+id/spinRespondentName" />
-
-        <TextView
-            android:id="@+id/tvPrevResp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="TextView"
-            android:textStyle="bold"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@+id/spinRespondentName"
-            app:layout_constraintStart_toEndOf="@+id/tvPrevious"
-            app:layout_constraintTop_toTopOf="@+id/tvPrevious" />
-
-        <TextView
             android:id="@+id/tvQRCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:text="QR Code"
             app:layout_constraintStart_toStartOf="@+id/tvOwnerMachine"
-            app:layout_constraintTop_toBottomOf="@+id/tvPrevious" />
+            app:layout_constraintTop_toBottomOf="@+id/spinRespondentName" />
 
         <EditText
             android:id="@+id/edtQRCode"
@@ -107,7 +84,7 @@
         <ImageButton
             android:id="@+id/btnScanQRCodeMach"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:background="@drawable/custom_image_button"
             app:layout_constraintBottom_toBottomOf="@+id/edtQRCode"
@@ -384,7 +361,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="Ave. Operating Hours"
+            android:text="Ave. Operating Hours\n(hours/day)"
             android:tooltipText="Karaniwang oras ng operasyon ng makinarya kada araw"
             app:layout_constraintStart_toStartOf="@+id/tvNewlyPlantedArea"
             app:layout_constraintTop_toBottomOf="@+id/tvRatoonArea" />
@@ -395,7 +372,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="@drawable/custom_edit_text"
-            android:digits="0123456789."
             android:ems="10"
             android:hint="Hours/Day"
             android:inputType="numberDecimal"
@@ -408,7 +384,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="Ave. Operating Days"
+            android:text="Ave. Operating Days\n(days/season)"
             android:tooltipText="Sumatutal na araw na ginagamit ang makinarya sa lahat ng operasyon sa bukid"
             app:layout_constraintStart_toStartOf="@+id/tvNewlyPlantedArea"
             app:layout_constraintTop_toBottomOf="@+id/edtAverageOperatingHours" />
@@ -487,11 +463,21 @@
             android:id="@+id/tvCapacity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="9dp"
+            android:layout_marginStart="8dp"
             android:text="Capacity (ha/hour)"
             app:layout_constraintEnd_toEndOf="@+id/tvAveOpDays"
             app:layout_constraintStart_toStartOf="@+id/tvAveOpDays"
             app:layout_constraintTop_toTopOf="@+id/edtCapacity" />
+
+        <TextView
+            android:id="@+id/tvCapacityInfoMachine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="ⓘ"
+            android:textColor="@color/ColorMaroon"
+            app:layout_constraintStart_toEndOf="@+id/tvCapacity"
+            app:layout_constraintTop_toTopOf="@+id/tvCapacity" />
 
         <EditText
             android:id="@+id/edtCapacity"
@@ -504,7 +490,7 @@
             android:inputType="numberDecimal"
             app:layout_constraintEnd_toEndOf="@+id/edtAverageOperatingDays"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/tvCapacity"
+            app:layout_constraintStart_toEndOf="@id/tvCapacityInfoMachine"
             tools:layout_editor_absoluteY="1017dp" />
 
         <TextView
@@ -575,6 +561,7 @@
             android:id="@+id/tvRateWaterPumpUnit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="Unit"
             app:layout_constraintStart_toStartOf="@+id/tvAveOpDays"
             app:layout_constraintTop_toTopOf="@id/spinWaterPumpUnit" />

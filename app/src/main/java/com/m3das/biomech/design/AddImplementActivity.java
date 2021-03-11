@@ -52,6 +52,8 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.m3das.biomech.design.machinedb.Machines;
 import com.m3das.biomech.design.viewmodels.MachineListViewModel;
 
+import org.apache.commons.lang3.math.NumberUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -90,9 +92,10 @@ public class AddImplementActivity extends AppCompatActivity {
             tvHaEAFert, tvHoursPDayOpFert, tvFieldCapacityFert, tvFieldCapacityResultFert, tvWeightOfFert, tvDeliveryRateFert, tvDeliveryRateResultFert,
             tvHaEAHarvest, tvHoursPDayOpHarvest, tvFieldCapacityHarvest, tvFieldCapacityResultHarvest, tvTonCannesPHaHarvest,
             tvHaEAGrab, tvHoursPDayOpGrab, tvLoadCapacityGrab, tvFieldCapacityGrab, tvFieldCapacityResultGrab,
-            tvDepthCutDitch, tvPrevMachine, tvPrevious, tvHaEAFert2;
+            tvDepthCutDitch, tvHaEAFert2;
     CheckBox cbLandClear, cbPrePlant, cbPlant, cbFert, cbPest, cbIrriDrain, cbCult, cbRatoon, cbHarvest, cbPostHarvest, cbHaul;
     int bigMargin, smallMargin;
+    View topLine, botLineMain, topLinePlant, botLinePlant, botLineFertDR, botLineFert, botLineHarvest, botLineGrab;
     Double fieldCap = null;
     Double deliveryCap = null;
     public static final int CAMERA_PERM_CODE = 101;
@@ -100,7 +103,7 @@ public class AddImplementActivity extends AppCompatActivity {
     public static final int GALLERY_REQUEST_CODE = 105;
     public static final int LOCATION_REQUEST_CODE = 127;
     public static final int WRITE_PERM_CODE = 279;
-    static Uri capturedImageUri = null;
+    static Uri capturedImageUri;
     public static final String EXTRA_IMP_ID = "ADDIMPLEMENT_EXTRA_ID";
     public static final String EXTRA_IMP_TYPE = "ADDIMPLEMENT_EXTRA_IMP_TYPE";
     public static final String EXTRA_IMP_QR = "ADDIMPLEMENT_EXTRA_IMP_QR";
@@ -178,7 +181,7 @@ public class AddImplementActivity extends AppCompatActivity {
     ArrayList<MachineClass> machineArrayList = new ArrayList<>();
     String temp1, temp2;
     private boolean implementSpecsCheck, qrCheck, machineUsingCheck, operationCheck, locationGarageCheck, locationImplementCheck, conditionPresentCheck, yearSelectCheck,
-            hasOtherProblems, ownershipCheck, purchGrantDonoCheck, agencyCheck, conditionAcquiredCheck, otherProblemsCheck;
+            hasOtherProblems, ownershipCheck, purchGrantDonoCheck, agencyCheck, conditionAcquiredCheck, otherProblemsCheck, brandCheck, modelCheck, fieldCapCheck, qrFormatCheck;
     ;
 
 
@@ -218,8 +221,6 @@ public class AddImplementActivity extends AppCompatActivity {
         initAllLayoutParameters();
         setMarginSize();
         hideAll();
-        tvPrevious.setVisibility(View.INVISIBLE);
-        tvPrevMachine.setVisibility(View.INVISIBLE);
         setCheckBoxData();
         initTextViewData();
         setOnTouchEditText();
@@ -264,6 +265,7 @@ public class AddImplementActivity extends AppCompatActivity {
                         }
                     }
                     spinMachineUsing.setSelection(position);
+                    spinMachineUsing.setEnabled(false);
                 }
             }
         });
@@ -280,10 +282,12 @@ public class AddImplementActivity extends AppCompatActivity {
                 //Camera intent
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, capturedImageUri);
+                cameraIntent.putExtra(MediaStore.EXTRA_SIZE_LIMIT, "720000");
                 startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
                 Toast.makeText(AddImplementActivity.this, "Camera Clicked", Toast.LENGTH_SHORT).show();
             }
         });
+
         gallery.setOnClickListener(view -> {
             Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(gallery, GALLERY_REQUEST_CODE);
@@ -330,7 +334,6 @@ public class AddImplementActivity extends AppCompatActivity {
 
             }
         });
-
 
         singlespinMunicipalities.setEnabled(false);
         singlespinBarangays.setEnabled(false);
@@ -525,6 +528,7 @@ public class AddImplementActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
                 if (!isNullOrEmpty(edtEffectiveAreaAccompMain.getText().toString()) && !isNullOrEmpty(edtTimeUsedDuringOpMain.getText().toString())) {
 
                     tvFieldCapacityResultMain.setText(getFieldCapacity(edtEffectiveAreaAccompMain.getText().toString(), edtTimeUsedDuringOpMain.getText().toString()));
@@ -550,10 +554,9 @@ public class AddImplementActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
                 if (!isNullOrEmpty(edtEffectiveAreaAccompMain.getText().toString()) && !isNullOrEmpty(edtTimeUsedDuringOpMain.getText().toString())) {
-
                     tvFieldCapacityResultMain.setText(getFieldCapacity(edtEffectiveAreaAccompMain.getText().toString(), edtTimeUsedDuringOpMain.getText().toString()));
-
                 } else if (isNullOrEmpty(edtEffectiveAreaAccompMain.getText().toString()) || isNullOrEmpty(edtTimeUsedDuringOpMain.getText().toString())) {
 
                     tvFieldCapacityResultMain.setText(R.string.not_yet_acq);
@@ -909,54 +912,74 @@ public class AddImplementActivity extends AppCompatActivity {
             }
         });
 
+        edtQRCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().length() == 12) {
+                    if (!(s.toString().matches("^[R]\\d{2}[A-Z]{3}[I]\\d{5}"))) {
+                        Toast.makeText(getApplicationContext(), "Invalid QR Code format. Please Check!", Toast.LENGTH_SHORT).show();
+                        qrFormatCheck = false;
+                    } else {
+                        qrFormatCheck = true;
+                    }
+                } else {
+                    qrFormatCheck = false;
+                }
+            }
+        });
+
         tvFieldCapHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toolTipShow("Ilang extarya ang natapos ng makinarya/implement sa itinakdang oras?", v);
+                toolTipShow("Ilang ektarya ang natapos ng implement sa itinakdang oras?", v);
             }
         });
         tvFieldCapHeaderInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toolTipShow("Ilang extarya ang natapos ng makinarya/implement sa itinakdang oras?", v);
+                toolTipShow("Ilang ektarya ang natapos ng implement sa itinakdang oras?", v);
             }
         });
         tvFieldCapHeaderPlant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toolTipShow("Ilang extarya ang natapos ng makinarya/implement sa itinakdang oras?", v);
+                toolTipShow("Ilang ektarya ang natapos ng implement sa itinakdang oras?", v);
             }
         });
         tvFieldCapHeaderInfoPlant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toolTipShow("Ilang extarya ang natapos ng makinarya/implement sa itinakdang oras?", v);
+                toolTipShow("Ilang ektarya ang natapos ng implement sa itinakdang oras?", v);
             }
         });
 
         tvDelRateHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toolTipShow("Ilang kila ng abono ang nagagamit para sa itinakdang ektarya?", v);
+                toolTipShow("Ilang kilo ng abono ang nagagamit para sa itinakdang ektarya?", v);
             }
         });
 
         tvDelRateHeaderInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toolTipShow("Ilang kila ng abono ang nagagamit para sa itinakdang ektarya", v);
+                toolTipShow("Ilang kilo ng abono ang nagagamit para sa itinakdang ektarya", v);
             }
         });
 
 
         Intent intent = getIntent();
-
         if (intent.hasExtra(EXTRA_IMP_ID)) {
-
-            tvPrevMachine.setVisibility(View.VISIBLE);
-            tvPrevious.setVisibility(View.VISIBLE);
-            tvPrevMachine.setText(intent.getStringExtra(EXTRA_USED_COMPLETE));
-
             editItemSelected(intent);
 
         } else {
@@ -979,6 +1002,7 @@ public class AddImplementActivity extends AppCompatActivity {
     }
 
     private void sortUnavailableSingle() {
+        clearCursor();
         List<KeyPairBoolData> allMunicipalities = pairingOfList(Arrays.asList(getResources().getStringArray(R.array.municipalities)));
         List<KeyPairBoolData> allBarangays = pairingOfList(Arrays.asList(getResources().getStringArray(R.array.barangays)));
 
@@ -994,6 +1018,7 @@ public class AddImplementActivity extends AppCompatActivity {
 
             @Override
             public void onClear() {
+                locMunicipality = "";
             }
         });
 
@@ -1006,7 +1031,7 @@ public class AddImplementActivity extends AppCompatActivity {
 
             @Override
             public void onClear() {
-
+                locBarangay = "";
             }
         });
     }
@@ -1023,7 +1048,7 @@ public class AddImplementActivity extends AppCompatActivity {
             public void onItemsSelected(KeyPairBoolData selectedItem) {
                 Log.d("Single Brgy", selectedItem.getName());
                 locMunicipality = selectedItem.getName();
-
+                clearCursor();
                 if (selectedItem.getName().contains("AGONCILLO")) {
                     barangaysStringList.addAll(Arrays.asList(getResources().getStringArray(R.array.batangas_agoncillo_brgy)));
                 }
@@ -1130,19 +1155,21 @@ public class AddImplementActivity extends AppCompatActivity {
                 singlespinBarangays.setItems(pairingOfList(barangaysStringList), new SingleSpinnerListener() {
                     @Override
                     public void onItemsSelected(KeyPairBoolData selectedItem) {
+                        clearCursor();
                         Log.d("Single Brgy", selectedItem.getName());
                         locBarangay = selectedItem.getName();
                     }
 
                     @Override
                     public void onClear() {
-
+                        locBarangay = "";
                     }
                 });
             }
 
             @Override
             public void onClear() {
+                locMunicipality = "";
             }
         });
     }
@@ -1164,6 +1191,7 @@ public class AddImplementActivity extends AppCompatActivity {
         }
         Log.d("DEBEDTIMPTYPE", "Position is: " + intent.getStringExtra(EXTRA_IMP_TYPE) + " " + position);
         spinImplementType.setSelection(position);
+        spinImplementType.setEnabled(false);
 
         edtQRCode.setText(intent.getStringExtra(EXTRA_IMP_QR));
 
@@ -1264,8 +1292,9 @@ public class AddImplementActivity extends AppCompatActivity {
             position = adaptercompare.getPosition(stringCompare);
         }
         Log.d("DEBEDTPLANTTYPE", "Position is: " + intent.getStringExtra(EXTRA_TYPE_PLANT) + " " + position);
-
         spinTypeOfPlanter.setSelection(position);
+
+
         edtNumberofRowsPlant.setText(intent.getStringExtra(EXTRA_NUM_ROWS_PLANT));
         edtDistanceofPlantMat.setText(intent.getStringExtra(EXTRA_DIST_MAT_PLANT));
 //        edtTotalServiceAreaPlant.setText(intent.getStringExtra(EXTRA_TSA_PLANT));
@@ -1435,6 +1464,11 @@ public class AddImplementActivity extends AppCompatActivity {
         });
         listOfProblems = intent.getStringExtra(EXTRA_PROBLEMS);
 
+        years = new ArrayList<String>();
+        years.add("Please Select...");
+        for (int i = 1960; i <= Calendar.getInstance().get(Calendar.YEAR); i++) {
+            years.add(Integer.toString(i));
+        }
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
         stringCompare = intent.getStringExtra(EXTRA_YEAR_INOPERABLE);
         if (!isNullOrEmpty(stringCompare)) {
@@ -1584,17 +1618,30 @@ public class AddImplementActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
         spinYearAcquired.setAdapter(adapter);
+
+        years = new ArrayList<String>();
+        years.add("Please Select...");
+        for (int i = 1960; i <= Calendar.getInstance().get(Calendar.YEAR); i++) {
+            years.add(Integer.toString(i));
+        }
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
         spinYearInoperable.setAdapter(adapter);
     }
 
     private void setMarginSize() {
         smallMargin = (int) pxFromDp(this, 16);
-        bigMargin = (int) pxFromDp(this, 40);
+        bigMargin = (int) pxFromDp(this, 50);
     }
 
     private String getFieldCapacity(String area, String time) {
         String fieldCapacity;
         if (!isNullOrEmpty(area) && !isNullOrEmpty(time)) {
+            if (area.startsWith(".")) {
+                area = "0" + area + "0";
+            }
+            if (time.startsWith(".")) {
+                time = "0" + time + "0";
+            }
             fieldCapacity = String.valueOf(Double.parseDouble(area) / Double.parseDouble(time));
         } else {
             fieldCapacity = "0.0";
@@ -1751,11 +1798,23 @@ public class AddImplementActivity extends AppCompatActivity {
             if (!machineUsingCheck) {
                 listIncomplete.add("Machine Using this Implement");
             }
+            if (!brandCheck) {
+                listIncomplete.add("Brand");
+            }
+            if (!modelCheck) {
+                listIncomplete.add("Model");
+            }
             if (!qrCheck) {
                 listIncomplete.add("QR Code");
             }
+            if(!qrFormatCheck){
+                listIncomplete.add("QR Code Format");
+            }
             if (!implementSpecsCheck) {
                 listIncomplete.add("Implement Specifications");
+            }
+            if (!fieldCapCheck) {
+                listIncomplete.add("Field Capacity is Invalid");
             }
             if (!operationCheck) {
                 listIncomplete.add("Operations");
@@ -1779,7 +1838,7 @@ public class AddImplementActivity extends AppCompatActivity {
                 listIncomplete.add("Location of Implement");
             }
             if (!locationGarageCheck) {
-                listIncomplete.add("Locatiton of Garage");
+                listIncomplete.add("Location of Garage");
             }
             if (!yearSelectCheck) {
                 listIncomplete.add("Year Acquired");
@@ -1790,7 +1849,6 @@ public class AddImplementActivity extends AppCompatActivity {
             if (!otherProblemsCheck) {
                 listIncomplete.add("Problems with Machine");
             }
-
 
             String inc = "";
             for (int i = 0; i < listIncomplete.size(); i++) {
@@ -1824,13 +1882,17 @@ public class AddImplementActivity extends AppCompatActivity {
 
                 implementSpecsCheck = !isNullOrEmpty(edtEffectiveAreaAccompMain.getText().toString()) &&
                         !isNullOrEmpty(edtTimeUsedDuringOpMain.getText().toString());
-
+                fieldCapCheck = !tvFieldCapacityResultMain.getText().toString().contains("NaN") && !tvFieldCapacityResultMain.getText().toString().contains("Infinity") &&
+                        Double.parseDouble(isNumberOrString(tvFieldCapacityResultMain)) != 0;
                 break;
             case "MECHANICAL PLANTER":
 
-                implementSpecsCheck = !isNullOrEmpty(spinTypeOfPlanter.getSelectedItem().toString()) && !isNullOrEmpty(edtNumberofRowsPlant.getText().toString()) &&
+                implementSpecsCheck = spinTypeOfPlanter.getSelectedItemPosition() != 0 && !isNullOrEmpty(edtNumberofRowsPlant.getText().toString()) &&
                         !isNullOrEmpty(edtDistanceofPlantMat.getText().toString()) && !isNullOrEmpty(edtEffectiveAreaAccompPlant.getText().toString()) &&
                         !isNullOrEmpty(edtTimeUsedDuringOpPlant.getText().toString());
+
+                fieldCapCheck = !tvFieldCapacityResultPlant.getText().toString().contains("NaN") && !tvFieldCapacityResultPlant.getText().toString().contains("Infinity") &&
+                        Double.parseDouble(isNumberOrString(tvFieldCapacityResultPlant)) != 0;
 
                 break;
             case "GRANULAR FERTILIZER APPLICATOR":
@@ -1840,27 +1902,40 @@ public class AddImplementActivity extends AppCompatActivity {
                         !isNullOrEmpty(edtTimeUsedDuringOpFert.getText().toString()) && !isNullOrEmpty(edtWeightOfFert.getText().toString()) &&
                         !isNullOrEmpty(edtEffectiveAreaAccompFertForWeight.getText().toString());
 
+                fieldCapCheck = !tvFieldCapacityResultFert.getText().toString().contains("NaN") && !tvFieldCapacityResultFert.getText().toString().contains("Infinity") &&
+                        Double.parseDouble(isNumberOrString(tvFieldCapacityResultFert)) != 0;
+
+
                 break;
             case "MECHANICAL HARVESTER":
 
                 implementSpecsCheck = !isNullOrEmpty(edtEffectiveAreaAccompHarvest.getText().toString()) &&
                         !isNullOrEmpty(edtTimeUsedDuringOpHarvest.getText().toString()) && !isNullOrEmpty(edtAveYieldHarvest.getText().toString());
+
+                fieldCapCheck = !tvFieldCapacityResultHarvest.getText().toString().contains("NaN") && !tvFieldCapacityResultHarvest.getText().toString().contains("Infinity") &&
+                        Double.parseDouble(isNumberOrString(tvFieldCapacityResultHarvest)) != 0;
+
                 break;
             case "CANE GRAB LOADERS":
 
                 implementSpecsCheck = !isNullOrEmpty(edtEffectiveAreaAccompGrab.getText().toString()) && !isNullOrEmpty(edtTimeUsedDuringOpGrab.getText().toString()) &&
                         !isNullOrEmpty(edtLoadCapacityGrab.getText().toString());
+
+                fieldCapCheck = !tvFieldCapacityResultGrab.getText().toString().contains("NaN") && !tvFieldCapacityResultGrab.getText().toString().contains("Infinity") &&
+                        Double.parseDouble(isNumberOrString(tvFieldCapacityResultGrab)) != 0;
+
                 break;
             case "DITCHER":
 
                 implementSpecsCheck = !isNullOrEmpty(edtDepthOfCutDitch.getText().toString());
+                fieldCapCheck = true;
                 break;
             default:
                 implementSpecsCheck = false;
                 break;
         }
 
-        qrCheck = !isNullOrEmpty(edtQRCode.getText().toString()) && edtQRCode.getText().toString().length() == 12;
+        qrCheck = !isNullOrEmpty(edtQRCode.getText().toString()) && qrFormatCheck;
 
         machineUsingCheck = spinMachineUsing.getSelectedItemPosition() != 0;
 
@@ -1901,7 +1976,7 @@ public class AddImplementActivity extends AppCompatActivity {
                             case 0:
                                 agencyCheck = false;
                                 break;
-                            case 5:
+                            case 4:
                                 agencyCheck = !isNullOrEmpty(edtOtherAgency.getText().toString());
                                 break;
                             default:
@@ -1917,6 +1992,8 @@ public class AddImplementActivity extends AppCompatActivity {
             //CoopCustomLgu
         }
 
+        brandCheck = !isNullOrPleaseSelect(edtBrand.getText().toString());
+        modelCheck = !isNullOrPleaseSelect(edtModel.getText().toString());
 
         yearSelectCheck = spinYearAcquired.getSelectedItemPosition() != 0;
 
@@ -1925,17 +2002,15 @@ public class AddImplementActivity extends AppCompatActivity {
                 conditionAcquiredCheck = false;
                 break;
             case 3:
-                if (isNullOrEmpty(edtModifications.getText().toString())) {
-                    conditionAcquiredCheck = false;
-                } else {
-                    conditionAcquiredCheck = true;
-                }
-            default:
+                conditionAcquiredCheck = !isNullOrEmpty(edtModifications.getText().toString());
+                break;
+            case 1:
+            case 2:
+            case 4:
+            case 5:
                 conditionAcquiredCheck = true;
                 break;
         }
-
-        conditionAcquiredCheck = spinConditionAcquired.getSelectedItemPosition() != 0;
 
         switch (spinConditionPresent.getSelectedItemPosition()) {
             case 0:
@@ -1947,15 +2022,8 @@ public class AddImplementActivity extends AppCompatActivity {
                 otherProblemsCheck = true;
                 break;
             case 3:
-                conditionPresentCheck = listOfProblems.length() >= 5 && spinYearInoperable.getSelectedItemPosition() != 0;
-                if (hasOtherProblems) {
-                    otherProblemsCheck = !isNullOrEmpty(edtOtherProblems.getText().toString());
-                } else {
-                    otherProblemsCheck = true;
-                }
-                break;
             case 4:
-                conditionPresentCheck = listOfProblems.length() >= 5;
+                conditionPresentCheck = listOfProblems.length() >= 5 && spinYearInoperable.getSelectedItemPosition() != 0;
                 if (hasOtherProblems) {
                     otherProblemsCheck = !isNullOrEmpty(edtOtherProblems.getText().toString());
                 } else {
@@ -1966,8 +2034,8 @@ public class AddImplementActivity extends AppCompatActivity {
 
         locationImplementCheck = spinLocation.getSelectedItemPosition() != 0;
 
-        locationGarageCheck = !isNullOrPleaseSelect(locProvince) && !isNullOrPleaseSelect(locMunicipality) &&
-                !isNullOrPleaseSelect(locBarangay);
+        locationGarageCheck = !isNullOrPleaseSelect(singlespinProvinces.getSelectedItem().toString()) && !isNullOrPleaseSelect(singlespinMunicipalities.getSelectedItem().toString()) &&
+                !isNullOrPleaseSelect(singlespinBarangays.getSelectedItem().toString());
         Log.d("IMXCH", "Machine Using: " + machineUsingCheck);
         Log.d("IMXCH", "QR Code: " + qrCheck);
         Log.d("IMXCH", "Machine Specs: " + implementSpecsCheck);
@@ -1977,8 +2045,23 @@ public class AddImplementActivity extends AppCompatActivity {
         Log.d("IMXCH", "Machine Loc: " + locationImplementCheck);
         Log.d("IMXCH", "Garage Loc: " + locationGarageCheck);
 
-        return machineUsingCheck && implementSpecsCheck && qrCheck && operationCheck && yearSelectCheck && conditionPresentCheck && locationImplementCheck && locationGarageCheck &&
+        return brandCheck && modelCheck && machineUsingCheck && implementSpecsCheck && fieldCapCheck && qrCheck && operationCheck && yearSelectCheck && conditionPresentCheck && locationImplementCheck && locationGarageCheck &&
                 ownershipCheck && purchGrantDonoCheck && agencyCheck && conditionAcquiredCheck && otherProblemsCheck;
+    }
+
+    private String isNumberOrString(TextView textView) {
+        String string = textView.getText().toString();
+
+        try
+        {
+            Double.parseDouble(string);
+        }
+        catch(NumberFormatException e)
+        {
+            string = "0";
+        }
+
+        return string;
     }
 
     public static boolean isNullOrPleaseSelect(String str) {
@@ -2026,17 +2109,15 @@ public class AddImplementActivity extends AppCompatActivity {
                 paramsEAMain.topToBottom = R.id.tvFieldCapHeader;
                 paramsEAMain.topMargin = smallMargin;
                 tvHaEAMain.setLayoutParams(paramsEAMain);
-                paramstvOwnership.topToBottom = R.id.tvFieldCapacityResultMain;
+                paramstvOwnership.topToBottom = R.id.botLineMain;
                 break;
             case "MECHANICAL PLANTER":
                 hideAll();
                 showPlanter();
-
-
                 paramstvPlanter.topToBottom = R.id.cbHauling;
                 paramstvPlanter.topMargin = bigMargin;
                 tvTypeofPlant.setLayoutParams(paramstvPlanter);
-                paramstvOwnership.topToBottom = R.id.tvFieldCapacityResultPlant;
+                paramstvOwnership.topToBottom = R.id.botLinePlant;
                 break;
             case "GRANULAR FERTILIZER APPLICATOR":
             case "FERTILIZER APPLICATOR WITH CUTAWAY":
@@ -2045,7 +2126,7 @@ public class AddImplementActivity extends AppCompatActivity {
                 paramsEAFert.topToBottom = R.id.tvFieldCapHeader;
                 paramsEAFert.topMargin = smallMargin;
                 tvHaEAFert.setLayoutParams(paramsEAFert);
-                paramstvOwnership.topToBottom = R.id.tvDeliveryRateResultFert;
+                paramstvOwnership.topToBottom = R.id.botLineFert;
                 break;
             case "MECHANICAL HARVESTER":
                 hideAll();
@@ -2053,7 +2134,7 @@ public class AddImplementActivity extends AppCompatActivity {
                 paramsEAHarvest.topToBottom = R.id.tvFieldCapHeader;
                 paramsEAHarvest.topMargin = smallMargin;
                 tvHaEAHarvest.setLayoutParams(paramsEAHarvest);
-                paramstvOwnership.topToBottom = R.id.tvFieldCapacityHarvest;
+                paramstvOwnership.topToBottom = R.id.edtAveYieldHarvest;
                 break;
             case "CANE GRAB LOADERS":
                 hideAll();
@@ -2061,7 +2142,7 @@ public class AddImplementActivity extends AppCompatActivity {
                 paramsEAGrab.topToBottom = R.id.tvFieldCapHeader;
                 paramsEAGrab.topMargin = smallMargin;
                 tvHaEAGrab.setLayoutParams(paramsEAGrab);
-                paramstvOwnership.topToBottom = R.id.tvFieldCapacityGrab;
+                paramstvOwnership.topToBottom = R.id.edtLoadCapacityGrab;
                 break;
             case "DITCHER":
                 hideAll();
@@ -2114,6 +2195,9 @@ public class AddImplementActivity extends AppCompatActivity {
         tvLoadCapacityGrab.setVisibility(View.VISIBLE);
         tvFieldCapacityGrab.setVisibility(View.VISIBLE);
         tvFieldCapacityResultGrab.setVisibility(View.VISIBLE);
+
+        topLine.setVisibility(View.VISIBLE);
+        botLineGrab.setVisibility(View.VISIBLE);
     }
 
     private void showHarvest() {
@@ -2135,6 +2219,9 @@ public class AddImplementActivity extends AppCompatActivity {
         tvFieldCapacityHarvest.setVisibility(View.VISIBLE);
         tvFieldCapacityResultHarvest.setVisibility(View.VISIBLE);
         tvTonCannesPHaHarvest.setVisibility(View.VISIBLE);
+
+        topLine.setVisibility(View.VISIBLE);
+        botLineHarvest.setVisibility(View.VISIBLE);
     }
 
     private void showFert() {
@@ -2162,6 +2249,10 @@ public class AddImplementActivity extends AppCompatActivity {
         tvWeightOfFert.setVisibility(View.VISIBLE);
         tvDeliveryRateFert.setVisibility(View.VISIBLE);
         tvDeliveryRateResultFert.setVisibility(View.VISIBLE);
+
+        topLine.setVisibility(View.VISIBLE);
+        botLineFert.setVisibility(View.VISIBLE);
+        botLineFertDR.setVisibility(View.VISIBLE);
     }
 
     private void showPlanter() {
@@ -2188,6 +2279,9 @@ public class AddImplementActivity extends AppCompatActivity {
         tvNumRowsPlant.setVisibility(View.VISIBLE);
         tvDistanceofPlant.setVisibility(View.VISIBLE);
         tvTypeofPlant.setVisibility(View.VISIBLE);
+
+        topLinePlant.setVisibility(View.VISIBLE);
+        botLinePlant.setVisibility(View.VISIBLE);
     }
 
     private void showMainImplements() {
@@ -2206,6 +2300,9 @@ public class AddImplementActivity extends AppCompatActivity {
         tvHoursPDayOpMain.setVisibility(View.VISIBLE);
         tvFieldCapacityMain.setVisibility(View.VISIBLE);
         tvFieldCapacityResultMain.setVisibility(View.VISIBLE);
+
+        topLine.setVisibility(View.VISIBLE);
+        botLineMain.setVisibility(View.VISIBLE);
     }
 
     private void hideAll() {
@@ -2329,6 +2426,15 @@ public class AddImplementActivity extends AppCompatActivity {
         tvTonCannesPHaHarvest.setVisibility(View.GONE);
 
         tvDepthCutDitch.setVisibility(View.GONE);
+
+        topLine.setVisibility(View.GONE);
+        botLineMain.setVisibility(View.GONE);
+        topLinePlant.setVisibility(View.GONE);
+        botLinePlant.setVisibility(View.GONE);
+        botLineFertDR.setVisibility(View.GONE);
+        botLineFert.setVisibility(View.GONE);
+        botLineHarvest.setVisibility(View.GONE);
+        botLineGrab.setVisibility(View.GONE);
 
     }
 
@@ -2492,8 +2598,15 @@ public class AddImplementActivity extends AppCompatActivity {
         edtDepthOfCutDitch = findViewById(R.id.edtDepthOfCutDitch);
         tvDepthCutDitch = findViewById(R.id.tvDepthCutDitch);
 
-        tvPrevMachine = findViewById(R.id.tvPrevMachine);
-        tvPrevious = findViewById(R.id.tvPreviousImp);
+
+        topLine = findViewById(R.id.topLine);
+        botLineMain = findViewById(R.id.botLineMain);
+        topLinePlant = findViewById(R.id.topLinePlant);
+        botLinePlant = findViewById(R.id.botLinePlant);
+        botLineFertDR = findViewById(R.id.botLineFertDR);
+        botLineFert = findViewById(R.id.botLineFert);
+        botLineHarvest = findViewById(R.id.botLineHarvest);
+        botLineGrab = findViewById(R.id.botLineGrab);
     }
 
     private void initAllLayoutParameters() {
@@ -2619,10 +2732,14 @@ public class AddImplementActivity extends AppCompatActivity {
         String pos = spinOwnership.getItemAtPosition(position).toString();
         List<String> stringListAgency = Arrays.asList(getResources().getStringArray(R.array.blank));
 
+        Intent intent = intentFromDb;
         Log.d("GOT TO OWNERSHIP", pos);
         switch (pos) {
 
             case "PRIVATELY OWNED":
+                if (intent == null || !intent.hasExtra(EXTRA_IMP_ID)) {
+                    spinPurchGrantDono.setSelection(0);
+                }
                 spinPurchGrantDono.setVisibility(View.GONE);
                 tvPurchGrantDono.setVisibility(View.VISIBLE);
                 spinAgency.setVisibility(View.GONE);
@@ -2640,6 +2757,9 @@ public class AddImplementActivity extends AppCompatActivity {
                 stringListAgency = Arrays.asList(getResources().getStringArray(R.array.agency));
                 break;
             default:
+                if (intent == null || !intent.hasExtra(EXTRA_IMP_ID)) {
+                    spinPurchGrantDono.setSelection(0);
+                }
                 spinPurchGrantDono.setVisibility(View.GONE);
                 spinAgency.setVisibility(View.GONE);
                 tvPurchGrantDono.setVisibility(View.GONE);
@@ -2655,7 +2775,6 @@ public class AddImplementActivity extends AppCompatActivity {
         paramsYearAcquired.topMargin = bigMargin;
         tvYearAcquired.setLayoutParams(paramsYearAcquired);
 
-        Intent intent = intentFromDb;
         if (intent != null && intent.hasExtra(EXTRA_IMP_ID)) {
             String stringCompare = intent.getStringExtra(EXTRA_AGENCY);
 
@@ -2672,6 +2791,7 @@ public class AddImplementActivity extends AppCompatActivity {
         switch (pos) {
             case "PURCHASED":
             default:
+                spinAgency.setSelection(0);
                 Log.d("INSIDE PURCHASE", pos);
                 purchGrantDono = "PURCHASED";
                 spinAgency.setVisibility(View.GONE);
@@ -2717,6 +2837,7 @@ public class AddImplementActivity extends AppCompatActivity {
         edtEffectiveAreaAccompFert.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
         edtEffectiveAreaAccompHarvest.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
         edtEffectiveAreaAccompGrab.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
+        edtAveYieldHarvest.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
 
         edtTimeUsedDuringOpMain.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(3, 2)});
         edtTimeUsedDuringOpPlant.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(3, 2)});
@@ -2911,16 +3032,16 @@ public class AddImplementActivity extends AppCompatActivity {
         // Determine the constrained dimension, which determines both dimensions.
         int width;
         int height;
-        float widthRatio = (float) bitmap.getWidth() / 900;
-        float heightRatio = (float) bitmap.getHeight() / 1600;
+        float widthRatio = (float) bitmap.getWidth() / 1440;
+        float heightRatio = (float) bitmap.getHeight() / 2560;
         // Width constrained.
         if (widthRatio >= heightRatio) {
-            width = 900;
+            width = 1440;
             height = (int) (((float) width / bitmap.getWidth()) * bitmap.getHeight());
         }
         // Height constrained.
         else {
-            height = 1600;
+            height = 2560;
             width = (int) (((float) height / bitmap.getHeight()) * bitmap.getWidth());
         }
         Bitmap scaledBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -2982,9 +3103,9 @@ public class AddImplementActivity extends AppCompatActivity {
                 Bitmap bitmap = null;
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), capturedImageUri);
-
                 } catch (IOException e) {
                     e.printStackTrace();
+                    bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.no_image_icon);
                 }
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 bitmap = scale(bitmap);

@@ -66,36 +66,12 @@
         <ImageButton
             android:id="@+id/btnScanQRCodeImp"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:background="@drawable/custom_image_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/edtQRCodeImp"
             app:srcCompat="@drawable/ic_outline_center_focus_strong_24" />
-
-        <TextView
-            android:id="@+id/tvPreviousImp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:text="Previously Attached to Machine:"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@+id/tvImplementType"
-            app:layout_constraintStart_toStartOf="@+id/tvQRCodeImp"
-            app:layout_constraintTop_toBottomOf="@+id/spinMachineUsing" />
-
-        <TextView
-            android:id="@+id/tvPrevMachine"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text=""
-            android:textStyle="bold"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@+id/edtQRCodeImp"
-            app:layout_constraintStart_toEndOf="@+id/tvPreviousImp"
-            app:layout_constraintTop_toTopOf="@+id/tvPreviousImp" />
 
         <TextView
             android:id="@+id/tvSelectMachine"
@@ -120,10 +96,10 @@
             android:id="@+id/tvBrandImp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:text="Brand:"
             app:layout_constraintStart_toStartOf="@+id/tvSelectMachine"
-            app:layout_constraintTop_toBottomOf="@+id/tvPreviousImp" />
+            app:layout_constraintTop_toBottomOf="@+id/spinMachineUsing" />
 
         <EditText
             android:id="@+id/edtBrandImp"
@@ -390,11 +366,11 @@
         <!--            app:layout_constraintTop_toBottomOf="@+id/edtHoursPDayMain" />-->
 
         <View
-            android:id="@+id/topLineView"
+            android:id="@+id/topLine"
             android:layout_width="0dp"
-            android:layout_height="6dp"
+            android:layout_height="3dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="39dp"
             android:layout_marginEnd="16dp"
             android:background="#004D40"
             app:layout_constraintEnd_toEndOf="parent"
@@ -480,9 +456,9 @@
             app:layout_constraintTop_toBottomOf="@+id/edtTimeUsedDuringOpMain" />
 
         <View
-            android:id="@+id/topLineView2"
+            android:id="@+id/botLineMain"
             android:layout_width="0dp"
-            android:layout_height="6dp"
+            android:layout_height="3dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
@@ -537,7 +513,7 @@
             android:background="@drawable/custom_edit_text"
             android:ems="10"
             android:hint="Number of Rows"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             app:layout_constraintEnd_toEndOf="@+id/tvSelectMachine"
             app:layout_constraintStart_toStartOf="@+id/spinTypeOfPlanterPlant"
             app:layout_constraintTop_toBottomOf="@+id/tvNumRowsPlant" />
@@ -629,6 +605,18 @@
         <!--            android:text="Average Operating Days"-->
         <!--            app:layout_constraintStart_toStartOf="@+id/tvHoursPDayPlant"-->
         <!--            app:layout_constraintTop_toBottomOf="@+id/edtHoursPDayPlant" />-->
+
+        <View
+            android:id="@+id/topLinePlant"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="#004D40"
+            app:layout_constraintBottom_toTopOf="@+id/tvFieldCapHeaderPlanter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tvFieldCapHeaderPlanter"
@@ -786,6 +774,18 @@
         <!--            app:layout_constraintStart_toStartOf="@id/tvHoursPDayFert"-->
         <!--            app:layout_constraintTop_toBottomOf="@+id/edtHoursPDayFert" />-->
 
+        <View
+            android:id="@+id/botLinePlant"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="#004D40"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFieldCapacityPlant" />
+
         <TextView
             android:id="@+id/tvHaEAFert"
             android:layout_width="wrap_content"
@@ -852,6 +852,18 @@
             app:layout_constraintBottom_toBottomOf="@+id/tvFieldCapacityFert"
             app:layout_constraintStart_toEndOf="@+id/tvFieldCapacityFert"
             app:layout_constraintTop_toTopOf="@+id/tvFieldCapacityFert" />
+
+        <View
+            android:id="@+id/botLineFertDR"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="#004D40"
+            app:layout_constraintBottom_toTopOf="@+id/tvDelRateHeader"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tvDelRateHeader"
@@ -1005,6 +1017,18 @@
         <!--            app:layout_constraintStart_toStartOf="@+id/tvHoursPDayHarvest"-->
         <!--            app:layout_constraintTop_toBottomOf="@+id/edtHoursPDayHarvest" />-->
 
+        <View
+            android:id="@+id/botLineFert"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="#004D40"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDeliveryRateFert" />
+
         <TextView
             android:id="@+id/tvHaEAHarvest"
             android:layout_width="wrap_content"
@@ -1056,10 +1080,10 @@
             android:id="@+id/tvTonCannesPHaHarvest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="8dp"
             android:text="Average Yield (ton cannes/ha)"
             app:layout_constraintStart_toStartOf="@+id/tvHoursPDayOpHarvest"
-            app:layout_constraintTop_toBottomOf="@+id/edtTimeUsedDuringOpHarvest" />
+            app:layout_constraintTop_toBottomOf="@+id/botLineHarvest" />
 
         <EditText
             android:id="@+id/edtAveYieldHarvest"
@@ -1067,6 +1091,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/custom_edit_text"
+            android:inputType="numberDecimal"
             android:hint="Ton of cannes/Hectare"
             app:layout_constraintEnd_toEndOf="@+id/edtTimeUsedDuringOpHarvest"
             app:layout_constraintStart_toStartOf="@+id/edtTimeUsedDuringOpHarvest"
@@ -1076,11 +1101,23 @@
             android:id="@+id/tvFieldCapacityHarvest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="24dp"
             android:text="Field Capacity: "
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/tvTonCannesPHaHarvest"
-            app:layout_constraintTop_toBottomOf="@+id/edtAveYieldHarvest" />
+            app:layout_constraintTop_toBottomOf="@+id/edtTimeUsedDuringOpHarvest" />
+
+        <View
+            android:id="@+id/botLineHarvest"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="#004D40"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvFieldCapacityHarvest" />
 
         <TextView
             android:id="@+id/tvFieldCapacityResultHarvest"
@@ -1100,7 +1137,7 @@
             android:layout_marginTop="108dp"
             android:text="Effective Area Accomplished (ha)"
             app:layout_constraintStart_toStartOf="@+id/tvTonCannesPHaHarvest"
-            app:layout_constraintTop_toBottomOf="@+id/tvFieldCapacityHarvest" />
+            app:layout_constraintTop_toBottomOf="@+id/edtAveYieldHarvest" />
 
         <EditText
             android:id="@+id/edtEffectiveAreaAccompGrab"
@@ -1120,7 +1157,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Time Used During Operation"
+            android:text="Time Used During Operation (hours)"
             android:tooltipText="GRAB"
             app:layout_constraintStart_toStartOf="@+id/tvHaEAGrab"
             app:layout_constraintTop_toBottomOf="@+id/edtEffectiveAreaAccompGrab" />
@@ -1142,10 +1179,10 @@
             android:id="@+id/tvLoadCapGrab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="Loading Capacity (tons/load)"
             app:layout_constraintStart_toStartOf="@+id/tvHoursPdayOpGrab"
-            app:layout_constraintTop_toBottomOf="@id/edtTimeUsedDuringOpGrab" />
+            app:layout_constraintTop_toBottomOf="@+id/botLineGrab" />
 
         <EditText
             android:id="@+id/edtLoadCapacityGrab"
@@ -1164,11 +1201,11 @@
             android:id="@+id/tvFieldCapacityGrab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="8dp"
             android:text="Field Capacity:"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/tvOperations2"
-            app:layout_constraintTop_toBottomOf="@+id/edtLoadCapacityGrab" />
+            app:layout_constraintTop_toBottomOf="@+id/edtTimeUsedDuringOpGrab" />
 
         <TextView
             android:id="@+id/tvFieldCapacityResultGrab"
@@ -1179,6 +1216,18 @@
             app:layout_constraintStart_toEndOf="@+id/tvFieldCapacityGrab"
             app:layout_constraintTop_toTopOf="@+id/tvFieldCapacityGrab" />
 
+
+        <View
+            android:id="@+id/botLineGrab"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="#004D40"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvFieldCapacityGrab" />
 
         <TextView
             android:id="@+id/tvDepthCutDitch"

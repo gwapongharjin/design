@@ -24,6 +24,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.m3das.biomech.design.BuildConfig;
 import com.m3das.biomech.design.DialogEnumName;
 import com.m3das.biomech.design.DialogUpload;
@@ -52,6 +54,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -85,10 +88,12 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             plow_unit, plow_unit_specify, harr_rate, harr_unit, harr_unit_specify, furr_rate, furr_unit, furr_unit_specify, othr_rent_operation, othr_rate, othr_unit, othr_unit_specify,
             ave_fuel_plow, ave_fuel_harr, ave_fuel_furr, year_inoperable, implementBrand, implementModel, newly_planted_area, ratooned_area, implementAgency, implementOwnership,
             implementPurch_grant_dono, waterpump_unit, ave_fuel_main, implementEFFAAFert2,
-            implementAgency_specify, implementModifications, implementProblems, implementProblemsSpecify, implementYearInoperable, time_used_harvester, effaa_harvester;
+            implementAgency_specify, implementModifications, implementProblems, implementProblemsSpecify, implementYearInoperable, time_used_harvester, effaa_harvester,
+            operationsSelected;
     private String profileResCode, profileProfile, profileProfileSpecify, profileOwnerType, profileNameRespondent, profileAddress, profileAge, profileSex, profileContactNumber, profileMobNum1,
             profileMobNum2, profileTelNum1, profileTelNum2, profileEducAttain;
     private ArrayList<Uri> uriArrayList;
+
     private int profileID;
 
     @Override
@@ -215,6 +220,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
     }
 
     private void uploadData(boolean status) {
+
         if (status) {
             Log.d("DFUPLNEWERR", "UPLOADING DATA");
             Log.d("ENUM", enumCode);
@@ -493,7 +499,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                             }
                         }).show();
             }
-        }, 45000);
+        }, 60000);
     }
 
     private void uploadingProfiles(boolean status) {
@@ -716,6 +722,8 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             @Override
             public void onChanged(List<Profile> profiles) {
                 for (int i = 0; i < profiles.size(); i++) {
+                    Gson gson = new Gson();
+                    String json = gson.toJson(profiles.get(i));
                     profileResCode = profiles.get(i).getResCode();
                     profileProfile = profiles.get(i).getProfile();
                     profileProfileSpecify = profiles.get(i).getProfile_specify();
@@ -739,16 +747,16 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
             }
         });
 
-        machineListSend.add(new String[]{"machineType", "machineQRCode", "typeOfTubewells", "typeOfMill", "Date of Survey",
-                "machineBrand", "machineBrandSpecify", "machineModel", "machineModelSpecify", "ratedPower",
-                "serviceArea", "newlyPlantedArea", "ratoonedArea", "Average Operating Hours", "Average Operating Days",
-                "Effective Area Accomplished", "Time Used Working", "Capacity", "averageYield", "rate",
+        machineListSend.add(new String[]{"machineType", "machineQRCode", "typeOfTubewells", "Date of Survey",
+                "machineBrand", "machineBrandSpecify", "machineModel", "machineModelSpecify", "ratedPower (hp)",
+                "serviceArea (ha)", "newlyPlantedArea (ha)", "ratoonedArea (ha)", "Average Operating Hours (hours/day)", "Average Operating Days (days/season)",
+                "Effective Area Accomplished (ha)", "Time Used Working (hours)", "Capacity", "Capacity Unit", "averageYield (ton/ha)", "rate",
                 "waterpumpUnit", "ownership", "purchGrantDono", "agency", "agency_specify",
                 "nameOwnerOrg", "yearAcquired", "conditionAcquired", "rental", "mainRent",
-                "mainRateRentUnit", "mainRateRentUnitSpecify", "Main Ave Fuel Consumption", "plowingRent", "plowingRentUnit",
+                "mainRateRentUnit", "mainRateRentUnitSpecify", "Main Ave Fuel Consumption (L/ha)", "plowingRent", "plowingRentUnit",
                 "plowingRentUnitSpecify", "harrowingRent", "harrowingRentUnit", "harrowingRentUnitSpecify", "furrowingRent",
                 "furrowingRentUnit", "furrowingRentUnitSpecify", "otherRentOperation", "otherOperationRent", "otherOperationRentUnit",
-                "otherOperationRentUnitSpecify", "Plowing Ave Fuel Consumption", "Harrowing Ave Fuel Consumption", "Furrowing Ave Fuel Consumption", "availability",
+                "otherOperationRentUnitSpecify", "Plowing Ave Fuel Consumption (L/ha)", "Harrowing Ave Fuel Consumption (L/ha)", "Furrowing Ave Fuel Consumption (L/ha)", "availability",
                 "rentProvince", "rentMunicipality", "rentBarangay", "problems", "problemsSpecify",
                 "yearInoperable", "ConditionPresent", "Location", "Province", "Municipality",
                 "Barangay", "Latitude", "Longitude", "Accuracy", "Respondent Code",
@@ -758,7 +766,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
         machineListViewModel.getAllMachines().observe(getActivity(), new Observer<List<Machines>>() {
             @Override
             public void onChanged(List<Machines> machines) {
-
+                String capUnit;
                 for (int i = 0; i < machines.size(); i++) {
 
                     machineType = machines.get(i).getMachine_type();
@@ -771,6 +779,34 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     model = machines.get(i).getMachine_model();
                     model_specify = machines.get(i).getMachine_model_specify();
                     rated_power = machines.get(i).getRated_power();
+
+                    switch (machineType) {
+                        case "BOOM SPRAYER":
+                        case "POWER SPRAYER":
+                            capUnit = "Liters";
+                            break;
+
+                        case "CANE GRAB LOADER":
+                        case "INFIELD HAULER":
+                            capUnit = "Tons/Load";
+                            break;
+                        case "MECHANICAL PLANTER":
+                        case "REAPER":
+                        case "PICKER":
+                        case "COMBINE HARVESTER":
+                        case "HARVESTER":
+                            capUnit = "Hectare/Hour";
+                            break;
+                        case "MILL":
+                        case "SHELLER":
+                        case "THRESHER":
+                        case "DRYER":
+                            capUnit = "kilogram";
+                            break;
+                        default:
+                            capUnit = "";
+                            break;
+                    }
 
                     service_area = machines.get(i).getService_area();
                     newly_planted_area = machines.get(i).getNewly_planted_area();
@@ -847,10 +883,10 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     }
 
                     machineListSend.add(new String[]{
-                            machineType, machineQRCode, tubewells, type_mill, datesurvey,
+                            machineType, machineQRCode, tubewells, datesurvey,
                             brand, brand_specify, model, model_specify, rated_power,
                             service_area, newly_planted_area, ratooned_area, ave_op_hours, ave_op_days,
-                            effaa_harvester, time_used_harvester, capacity, ave_yield, rate,
+                            effaa_harvester, time_used_harvester, capacity, capUnit, ave_yield, rate,
                             waterpump_unit, ownership, purch_grant_dono, agency, agency_specify,
                             name_owner, year_acquired, condition_acquired, rental, custom_rate,
                             custom_unit, custom_unit_specify, ave_fuel_main, plow_rate, plow_unit,
@@ -868,14 +904,14 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
 
 
         implementListSend.add(new String[]{"implementType", "implementQRCode", "implementUsedOnMachine", "implementUsedOnMachineComplete", "dateOfSurvey",
-                "Brand", "Model", "LandClearing", "PrePlanting", "Planting",
+                "Brand", "Model", "Operations", "LandClearing", "LandPreparation", "Planting",
                 "FertilizerApplication", "PesticideApplication", "IrrigationDrainage", "Cultivation", "Ratooning",
-                "Harvesting", "PostHarvesting", "Hauling", "EffectiveAreaAccomplishedMain", "TimeUsedDuringOperationMain",
-                "FieldCapacityMain", "TypeOfPlanter", "NumberOfRowsPlanter", "DistanceOfMaterialsPlanter", "EffectiveAreaAccomplishedPlanter",
-                "TimeUsedDuringOperationPlanter", "FieldCapacityPlanter", "EffectiveAreaAccomplishedFertilizerApplicator", "TimeUsedDuringOperationFertilizerApplicator", "FieldCapacityFertilizerApplicator",
-                "EffectiveAreaAccomplishedFertilizerApplicatorForWeight", "WeightOfFertilizer", "DeliveryRateOfFertilizerApplicator", "EffectiveAreaAccomplishedHarvester", "TimeUsedDuringOperationHarvester", "FieldCapacityHarvester",
-                "AverageYieldHarvester", "EffectiveAreaAccomplishedCaneGrabLoader", "TimeUsedDuringOperationCaneGrabLoader", "LoadCapacityCaneGrabLoader", "FieldCapacityCaneGrabLoader",
-                "DepthOfCutDitcher", "ownership", "purchGrantDono", "agency", "agencySpecify",
+                "Harvesting", "PostHarvesting", "Hauling", "EffectiveAreaAccomplishedMain (ha)", "TimeUsedDuringOperationMain (hours)",
+                "FieldCapacityMain (ha/hours)", "TypeOfPlanter", "NumberOfRowsPlanter", "DistanceOfMaterialsPlanter (cm)", "EffectiveAreaAccomplishedPlanter (ha)",
+                "TimeUsedDuringOperationPlanter (hours)", "FieldCapacityPlanter (ha/hours)", "EffectiveAreaAccomplishedFertilizerApplicator (ha)", "TimeUsedDuringOperationFertilizerApplicator (hours)", "FieldCapacityFertilizerApplicator (ha/hours)",
+                "EffectiveAreaAccomplishedFertilizerApplicatorForWeight (ha)", "WeightOfFertilizer (kg)", "DeliveryRateOfFertilizerApplicator (kg/ha)", "EffectiveAreaAccomplishedHarvester (ha)", "TimeUsedDuringOperationHarvester (hours)", "FieldCapacityHarvester (ha/hours)",
+                "AverageYieldHarvester (ton of cannes/ha)", "EffectiveAreaAccomplishedCaneGrabLoader (ha)", "TimeUsedDuringOperationCaneGrabLoader (hours)", "LoadCapacityCaneGrabLoader (tons/load)", "FieldCapacityCaneGrabLoader (ha/hours)",
+                "DepthOfCutDitcher (cm)", "ownership", "purchGrantDono", "agency", "agencySpecify",
                 "YearAcquired", "ConditionPresentImplement", "modifications", "problems", "problemsSpecify",
                 "yearInoperable", "Location", "Province", "Munincipality", "Barangay",
                 "Latitude", "Longitude", "Accuracy", "Image"});
@@ -886,6 +922,19 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
 
                 for (int i = 0; i < anImplements.size(); i++) {
                     Log.d("DFEXVALIMPVM", anImplements.get(i).getImplement_type() + ":" + i);
+
+                    implementLandClearing = "";
+                    implementPrePlant = "";
+                    implementPlanting = "";
+                    implementFertApp = "";
+                    implementPestApp = "";
+                    implementIrriDrain = "";
+                    implementCult = "";
+                    implementRatoon = "";
+                    implementHarvest = "";
+                    implementPostHarvest = "";
+                    implementHaul = "";
+
                     implementType = anImplements.get(i).getImplement_type();
                     implementQR = anImplements.get(i).getImplement_qrcode();
                     implementUsedOnMachine = anImplements.get(i).getUsed_on_machine();
@@ -906,6 +955,49 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     implementHarvest = anImplements.get(i).getHarvest();
                     implementPostHarvest = anImplements.get(i).getPost_harvest();
                     implementHaul = anImplements.get(i).getHauling();
+
+                    List<String> listOperations = new ArrayList<>();
+                    String ops = "";
+
+                    if (implementLandClearing.equals("LAND CLEAR")) {
+                        listOperations.add("LAND CLEAR");
+                    }
+
+                    if (implementPrePlant.equals("LAND PREPARATION")) {
+                        listOperations.add("LAND PREPARATION");
+                    }
+                    if (implementPlanting.equals("PLANTING")) {
+                        listOperations.add("PLANTING");
+                    }
+                    if (implementFertApp.equals("FERTILIZER APPLICATION")) {
+                        listOperations.add("FERTILIZER APPLICATION");
+                    }
+                    if (implementPestApp.equals("PESTICIDE APPLICATION")) {
+                        listOperations.add("PESTICIDE APPLICATION");
+                    }
+                    if (implementIrriDrain.equals("IRRIGATION & DRAINAGE")) {
+                        listOperations.add("IRRIGATION & DRAINAGE");
+                    }
+                    if (implementCult.equals("CULTIVATION")) {
+                        listOperations.add("CULTIVATION");
+                    }
+                    if (implementRatoon.equals("RATOONING")) {
+                        listOperations.add("RATOONING");
+                    }
+                    if (implementHarvest.equals("HARVESTING")) {
+                        listOperations.add("HARVESTING");
+                    }
+                    if (implementPostHarvest.equals("POST HARVEST")) {
+                        listOperations.add("POST HARVEST");
+                    }
+                    if (implementHaul.equals("HAULING")) {
+                        listOperations.add("HAULING");
+                    }
+
+
+                    for (int j = 0; j < listOperations.size(); j++) {
+                        ops = listOperations.get(j) + "\n" + ops;
+                    }
 
                     implementEFFAAMain = anImplements.get(i).getEffective_area_accomplished_main();
                     implementTUDOpMain = anImplements.get(i).getTime_used_during_operation_main();
@@ -958,7 +1050,7 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
                     implementImgBase64 = anImplements.get(i).getImage_base64().substring(0, 16);
 
 
-                    implementListSend.add(new String[]{implementType, implementQR, implementUsedOnMachine, implementUsedOnMachineComplete, implementDateSurvey, implementBrand, implementModel, implementLandClearing, implementPrePlant, implementPlanting,
+                    implementListSend.add(new String[]{implementType, implementQR, implementUsedOnMachine, implementUsedOnMachineComplete, implementDateSurvey, implementBrand, implementModel, ops, implementLandClearing, implementPrePlant, implementPlanting,
                             implementFertApp, implementPestApp, implementIrriDrain, implementCult, implementRatoon, implementHarvest, implementPostHarvest, implementHaul, implementEFFAAMain, implementTUDOpMain,
                             implementFieldCapMain, implementTypePlant, implementNumRowsPlant, implementDistMatPlant, implementEFFAAPlant, implementTUDOpPlant, implementFieldCapPlant, implementEFFAAFert, implementTUDOpFert, implementFieldCapFert,
                             implementEFFAAFert2, implementWeightFert, implementDelRateFert, implementEFFAAHarvest, implementTUDOpHarvest, implementFieldCapHarvest, implementAveYieldHarvest, implementEFFAAGrab, implementTUDOGrab, implementLoadCapGrab, implementFieldCapGrab,
@@ -971,6 +1063,10 @@ public class DataFragment extends Fragment implements DialogEnumName.DialogEnumN
         });
 
 //        exportData(machineListSend, implementListSend, profileListSend);
+    }
+
+    public static boolean isNullOrEmpty(String str) {
+        return str == null || str.isEmpty();
     }
 
 }

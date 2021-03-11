@@ -62,7 +62,6 @@
         <item>Please Select...</item>
         <item>2 WHEEL TRACTOR</item>
         <item>4 WHEEL TRACTOR</item>
-        <item>BOOM SPRAYER</item>
         <item>CANE GRAB LOADER</item>
         <item>COMBINE HARVESTER	</item>
         <item>DRYER</item>
@@ -82,7 +81,6 @@
         <item>Please Select...</item>
         <item>2 WHEEL TRACTOR</item>
         <item>4 WHEEL TRACTOR</item>
-        <item>BOOM SPRAYER</item>
         <item>CANE GRAB LOADER</item>
         <item>HARVESTER</item>
         <item>INFIELD HAULER</item>
@@ -93,13 +91,13 @@
         <item>Please Select...</item>
         <item>	2 WHEEL TRACTOR	</item>
         <item>	4 WHEEL TRACTOR	</item>
-        <item>	MECHANICAL PLANTER	</item>
         <item>	COMBINE-HARVESTER	</item>
-        <item>	WATER PUMP	</item>
-        <item>	SHELLER	</item>
-        <item>	PICKER	</item>
+        <item>	MECHANICAL PLANTER	</item>
         <item>	MILL	</item>
+        <item>	PICKER	</item>
         <item>	POWER SPRAYER	</item>
+        <item>	SHELLER	</item>
+        <item>	WATER PUMP	</item>
     </string-array>
 
     <string-array name="machine_types_rice">
